@@ -99,7 +99,8 @@ sonarqube {
 
 afterEvaluate {
     if (!project.hasProperty("usePrebuiltRust")) {
-        val bindingsDirectory = "../build/generated/source/libthreema"
+        val bindingsDirectory = "${project.buildDir}/generated/source/libthreema"
+        file(bindingsDirectory).mkdirs()
 
         // Define the task to generate libthreema library (only used to generate bindings for it)
         val generateLibthreema = tasks.register<Exec>("generateLibthreema") {
