@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/top_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:clipToPadding="false"
+    android:paddingHorizontal="@dimen/grid_unit_x2">
+
+    <RelativeLayout
+        android:id="@+id/layout_parent_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/grid_unit_x3">
+
+        <TextView
+            android:id="@+id/unlock_masterkey_title"
+            style="@style/Threema.TextAppearance.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="@string/masterkey_title"
+            android:textColor="?attr/colorOnBackground" />
+
+        <TextView
+            android:id="@+id/layout_top"
+            style="@style/Threema.TextAppearance.BodyLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/unlock_masterkey_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/grid_unit_x2"
+            android:gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:text="@string/masterkey_body" />
+
+        <LinearLayout
+            android:id="@+id/unlock_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_top"
+            android:layout_marginTop="@dimen/grid_unit_x1_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/unlock_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/grid_unit_x1"
+                android:layout_marginBottom="3dp"
+                app:srcCompat="@drawable/ic_key_outline"
+                app:tint="?attr/colorOnSurface" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passphrase_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_weight="2"
+                android:hint="@string/masterkey_passphrase_hint"
+                android:paddingBottom="@dimen/grid_unit_x0_5"
+                android:paddingTop="@dimen/grid_unit_x0_5"
+                app:counterEnabled="false"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true">
+
+                <ch.threema.app.ui.ThreemaTextInputEditText
+                    android:id="@+id/passphrase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionGo"
+                    android:inputType="textPassword|textNoSuggestions"
+                    android:singleLine="true">
+
+                    <requestFocus />
+                </ch.threema.app.ui.ThreemaTextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/unlock_button"
+                style="@style/Threema.MaterialButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/grid_unit_x1"
+                android:layout_marginBottom="2dp"
+                android:contentDescription="@string/label_continue"
+                android:enabled="false"
+                android:rotation="180"
+                app:icon="@drawable/ic_arrow_left" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/unlock_info"
+            style="@style/Threema.TextAppearance.BodyMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/unlock_layout"
+            android:layout_marginTop="@dimen/grid_unit_x1"
+            android:layout_marginBottom="5dp"
+            android:drawablePadding="10dp"
+            android:text="@string/masterkey_lock_explain"
+            app:drawableLeftCompat="@drawable/ic_info_outline" />
+
+    </RelativeLayout>
+
+</ScrollView>

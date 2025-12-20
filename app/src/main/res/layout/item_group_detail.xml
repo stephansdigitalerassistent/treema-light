@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/group_detail_list_item_size"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <ch.threema.app.ui.AvatarView
+        android:id="@+id/avatar_view"
+        android:layout_width="@dimen/avatar_size_small"
+        android:layout_height="@dimen/avatar_size_small"
+        android:layout_centerVertical="true"
+        android:visibility="visible"
+        tools:background="@drawable/ic_profile" />
+
+    <ch.threema.app.emojis.EmojiTextView
+        android:id="@+id/group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="5dip"
+        android:layout_toLeftOf="@+id/info_container"
+        android:layout_toRightOf="@id/avatar_view"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Name"
+        android:textAppearance="@style/Threema.TextAppearance.List.FirstLine" />
+
+    <FrameLayout
+        android:id="@+id/info_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:id="@+id/threemaid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="2dp"
+            android:singleLine="true"
+            android:textAppearance="@style/Threema.TextAppearance.List.SecondLine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/admin_chip"
+            style="@style/Widget.Material3.Chip.Suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:contentDescription="@string/add_group_owner"
+            android:text="@string/add_group_owner"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+</RelativeLayout>
+

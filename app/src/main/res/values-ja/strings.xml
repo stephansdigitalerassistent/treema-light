@@ -1,0 +1,1704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="title_section2">連絡先</string>
+    <!-- Label on first tab on app's main screen, selecting it leads to the list of chats -->
+    <string name="title_section1">トーク</string>
+    <string name="title_compose_message">トークを作成</string>
+    <string name="title_choose_recipient">受信者の選択</string>
+    <string name="title_keyfingerprint">フィンガープリントキー</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="title_mythreemaid">自分の${app_name_short} ID</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="title_threemaid">${app_name_short} ID</string>
+    <string name="title_adduser">連絡先を追加</string>
+    <string name="title_enter_id">IDを入力</string>
+    <string name="title_invite_friend">友達を招待する</string>
+    <string name="invite_via">共有先を選択…</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invite_email_body">こんにちは！\n\nこれはユーザーのプライバシーを守る安全なインスタントメッセンジャーの %1$s の招待です。\n\n${app_name_short} ID: https://threema.id/%2$s\n\nそれではまた %1$s で！\n\n良い一日を！\n</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invite_sms_body">こんにちは！%1$sを使って安全にプライベートな会話をしましょう！${app_name_short} ID: https://threema.id/%2$s</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invite_email_subject">${app_name_short}。プライバシーを守る安全なメッセンジャー</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="enter_id_hint">${app_name_short} IDを入力</string>
+    <string name="account_links">紐付けされたアカウント</string>
+    <string name="menu_settings">設定</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="menu_about">${app_name} について</string>
+    <string name="menu_add_contact">新しい連絡先</string>
+    <string name="menu_done">完了</string>
+    <string name="compose_message_and_enter">タップで入力</string>
+    <string name="title_job_title">役職</string>
+    <string name="title_department">部門</string>
+    <string name="send">送信</string>
+    <string name="prefs_privacy">プライバシー</string>
+    <string name="prefs_notifications">サウンドと通知</string>
+    <string name="prefs_chatdisplay">トーク</string>
+    <string name="prefs_security">セキュリティ</string>
+    <string name="prefs_sum_privacy">プライバシーに関する設定</string>
+    <string name="prefs_sum_notifications">音とバイブレーションの設定</string>
+    <string name="prefs_sum_chatdisplay">トーク設定</string>
+    <string name="prefs_masterkey">端末に保存されるデータの暗号化</string>
+    <string name="prefs_header_contacts">連絡先</string>
+    <string name="prefs_header_chat">トーク</string>
+    <string name="prefs_header_reset">リセット</string>
+    <string name="prefs_header_keyboard">キーボード</string>
+    <string name="prefs_sum_sync_contacts_on">%sと端末の連絡先は同期されます</string>
+    <string name="prefs_sum_sync_contacts_off">%sと端末の連絡先は同期されません</string>
+    <string name="prefs_title_sync_contacts">連絡先の同期</string>
+    <string name="prefs_sum_block_unknown_off">誰でもメッセージを送ることができます。
+新しいユーザーからメッセージが届くと、自動的に連絡先に追加されます。</string>
+    <string name="prefs_sum_block_unknown_on">連絡先に追加されているユーザーのみがメッセージを送ることができます。</string>
+    <string name="prefs_title_block_unknown">不明な連絡先をブロック</string>
+    <string name="prefs_title_read_receipts">「既読」の送信</string>
+    <string name="prefs_title_typing_indicator">\"入力中\"の送信</string>
+    <string name="prefs_media_title">メディアとストレージ</string>
+    <string name="prefs_sum_media_title">メディアとストレージ設定</string>
+    <string name="prefs_image_size">画像サイズ</string>
+    <string name="prefs_notification_sound">通知音</string>
+    <string name="prefs_sum_notification_sound">システム設定</string>
+    <string name="prefs_vibrate">バイブレーション</string>
+    <string name="prefs_sum_vibrate">メッセージを受信するとバイブレーションを鳴らします</string>
+    <!-- Label on checkbox in notification settings screen, to let the user enable/disable the use of the device's color LED for notifications. Only relevant on Android 7 -->
+    <string name="prefs_notification_light">通知ライト</string>
+    <!-- Summary on checkbox in notification settings screen, to let the user enable/disable the use of the device's color LED for notifications. Only relevant on Android 7 -->
+    <string name="prefs_sum_light">白</string>
+    <string name="prefs_title_wallpaper">壁紙を選ぶ</string>
+    <string name="prefs_sum_wallpaper">壁紙の選択</string>
+    <string name="prefs_title_wallpaper_switch">壁紙</string>
+    <string name="prefs_title_enter">改行キーで送信</string>
+    <string name="prefs_sum_enter_on">改行キーが送信キーになります</string>
+    <string name="prefs_sum_enter_off">改行キーで改行が実行されます</string>
+    <string name="prefs_system_notifications">個人トーク</string>
+    <string name="prefs_inapp">アプリ内</string>
+    <string name="prefs_inapp_sounds">アプリ内でのサウンド</string>
+    <string name="prefs_inapp_sounds_on">送受信時に音を鳴らします</string>
+    <string name="prefs_inapp_sounds_off">アプリ内で音を鳴らさない</string>
+    <string name="prefs_inapp_vibrate">アプリ内でのバイブレーション</string>
+    <string name="prefs_inapp_vibrate_on">メッセージを受信するとバイブレーションを鳴らします</string>
+    <string name="prefs_inapp_vibrate_off">メッセージを受信してもバイブレーションを鳴らしません</string>
+    <string name="workarounds">回避策</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_title_threema_push_switch">${app_name_short}プッシュを使用</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_threema_push_on">${app_name_short}プッシュを使用して新しいメッセージの通知を受ける</string>
+    <string name="prefs_sum_threema_push_off">システムのプッシュサービスを使用して新しいメッセージを確認する</string>
+    <string name="prefs_logging">ログ</string>
+    <string name="prefs_title_message_log_switch">ファイルにログを記録</string>
+    <string name="prefs_title_sum_message_log_on">イベントとネットワーク情報は debug_log.txt ファイルに記録されます</string>
+    <string name="prefs_title_sum_message_log_off">イベントはログに記録されません</string>
+    <string name="prefs_reset_push">プッシュトークンを初期化</string>
+    <string name="prefs_sum_reset_push">FCMにプッシュ通知用のデバイスを再登録する</string>
+    <string name="prefs_notification_preview">メッセージのプレビューを表示</string>
+    <string name="prefs_sum_reset_ringtones">システムのデフォルトに戻す</string>
+    <string name="prefs_title_reset_ringtones">通知音の設定をリセットする</string>
+    <string name="image_size_small">低 (640x640)</string>
+    <string name="image_size_medium">中 (1024x1024)</string>
+    <string name="image_size_large">大 (1600x1600)</string>
+    <string name="image_size_xlarge">最大 (2592x2592)</string>
+    <string name="image_size_original">元の画質</string>
+    <string name="next">次</string>
+    <string name="finish">完了</string>
+    <string name="please_wait">お待ちください…</string>
+    <!-- Text shown when a task which shows a loading spinner takes longer than expected (e.g. creating a group) -->
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="wizard_first_create_id">${app_name_short} IDを作成中…</string>
+    <string name="wizard1_sync_contacts">連絡先の同期中…</string>
+    <string name="wizard2_email_hint">メールアドレスを入力</string>
+    <string name="wizard2_email_linking">IDにメールアドレスを紐付け</string>
+    <string name="wizard2_phone_hint">電話番号を入力</string>
+    <string name="wizard2_phone_number_confirm_title">もう一度電話番号を入力する</string>
+    <string name="wizard2_phone_number_confirm">次の電話番号にSMSを送信します: \n\n%1$sは正しいですか？</string>
+    <string name="wizard2_phone_linking">IDに電話番号を紐付け</string>
+    <string name="wizard3_nickname_hint">ユーザー名を入力</string>
+    <string name="set_nickname_title">ユーザー名を設定</string>
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="copy_message_action">コピー</string>
+    <string name="delete_contact_action">連絡先を削除する</string>
+    <string name="delete_multiple_contact_action">連絡先を削除する</string>
+    <string name="scan_id">IDをスキャン</string>
+    <string name="id_scanned">IDをスキャンしました</string>
+    <string name="id_mismatch">スキャンした公開鍵が、サーバーが保存しているこのIDの鍵と一致しません。
+これは、誰かがスキャンしたコードを操作したことを意味し、その鍵を信用してはいけないということになります。</string>
+    <string name="scan_successful">IDが正常にスキャンされ、連絡先が確認されました。</string>
+    <string name="scan_duplicate">このIDはすでにスキャンされ、検証されています。</string>
+    <string name="linked_email">メールアドレス</string>
+    <string name="linked_mobile">電話番号</string>
+    <string name="public_nickname">ユーザー名</string>
+    <string name="share_via">共有…</string>
+    <string name="share_subject">%sの会話</string>
+    <string name="message_delete_undo">元に戻す</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="mobile_already_linked">あなたの${app_name_short} IDは既にこの電話番号に紐付けされています</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="email_already_linked">あなたの${app_name_short} IDは既にこのEメールアドレスに紐付けされています</string>
+    <string name="whoaaa">${app_name_short}の通知</string>
+    <string name="really_delete_message_title">メッセージを削除</string>
+    <string name="really_delete_thread">トークを削除</string>
+    <string name="really_delete_multiple_threads">トークを削除</string>
+    <string name="really_delete_contact">本当にこの連絡先と関連するすべてのメッセージを削除しますか？</string>
+    <string name="image_placeholder">画像</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invalid_threema_id">無効な${app_name_short} ID</string>
+    <string name="contact_already_exists">連絡先がすでに存在しています</string>
+    <string name="close">閉じる</string>
+    <string name="creating_contact">新しい連絡先を追加</string>
+    <string name="creating_contact_successful">連絡先の追加に成功しました</string>
+    <string name="invalid_threema_qr_code">無効なQRコードです</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="threema_contact">${app_name_short}の連絡先</string>
+    <string name="first_name">名前</string>
+    <string name="last_name">姓名</string>
+    <string name="os_licenses">ライセンス</string>
+    <string name="verify_title">電話番号を認証中</string>
+    <string name="verify_success_text">あなたの電話番号の認証が成功しました。</string>
+    <string name="verify_failed">失敗</string>
+    <string name="verify_failed_summary">電話番号の確認に失敗しました。
+入力した番号が正しく、携帯電話ネットワークに接続されていることを確認してから、再度お試しください。</string>
+    <string name="verify_failed_not_linked">あなたの電話番号の認証に失敗しました。認証処理が中止されました。</string>
+    <string name="check_incoming_sms">SMSの着信を確認しています</string>
+    <string name="backup_title">IDをエクスポート</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_sum">あなたの${app_name_short} IDをエクスポート</string>
+    <string name="backup_and_delete">バックアップと削除</string>
+    <string name="delete_id_title">IDを削除</string>
+    <string name="delete_id_message">バックアップを取ったり、エクスポートして保存しておかないと、このIDでメッセージを送受信することはできません。
+\n\nこのIDを使用する予定がない場合は、このIDを削除する前に、紐付けしているEメールアドレスや電話番号を解除してください。</string>
+    <string name="delete_id_message2">最終警告: 本当にあなたの端末にあるIDを削除しますか？</string>
+    <string name="delete_id_sum">あなたのIDとこの端末上のすべてのデータを永久に削除する</string>
+    <string name="delete_all_data_prompt">すべてのアプリデータを消去しますか？</string>
+    <string name="backup_password_summary">あなたのIDエクスポートは、パスワードで暗号化されます。アルファベット、数字、記号を組み合わせてください。そして、ここで入力した内容を忘れないようにしてください！</string>
+    <string name="backup_password_again_summary">パスワードの確認</string>
+    <string name="password_hint">パスワード</string>
+    <string name="generating_backup_data">バックアップデータを作成中</string>
+    <string name="backup_id_title">あなたのIDをエクスポート</string>
+    <string name="backup_id_summary">上に表示されている文字列またはQRコードと、あなたが選択したパスワードを使って、別の端末でIDを復元することができます。どこかにコピーしたり、メールで共有したり、QRコードを別の機器で読み取ったりするとよいでしょう。
+メールで共有したり、QRコードを別の機器で読み取ったりしてください。</string>
+    <string name="support">ヘルプ</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_share_content">以下の文字列は、入力したパスワードと合わせて、${app_name_short} IDの復元に使用できます。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_share_subject">${app_name_short} IDをエクスポート</string>
+    <string name="add_attachment">新しい添付ファイル</string>
+    <string name="invalid_passphrase">パスフレーズが無効です</string>
+    <string name="master_key_locked">マスターキーはロックされています</string>
+    <string name="master_key_locked_notify_description">タップでパスフレーズを入力します</string>
+    <string name="prefs_masterkey_passphrase">パスフレーズが設定されていません</string>
+    <string name="prefs_title_masterkey_passphrase">パスフレーズ</string>
+    <string name="setting_masterkey_passphrase">マスターキーを設定中</string>
+    <string name="masterkey_passphrase_title">マスターキー</string>
+    <string name="masterkey_passphrase_summary">マスターキーを守るためのパスフレーズを設定してください。パスフレーズはアプリの毎起動時に要求されます。</string>
+    <string name="masterkey_passphrase_again_summary">パスフレーズの確認</string>
+    <string name="masterkey_passphrase_hint">パスフレーズ</string>
+    <string name="master_key_locked_want_exit">マスターキーはまだロックされています。もう一度試しますか？</string>
+    <string name="click_here_to_change_passphrase">タップでパスフレーズを変更します</string>
+    <string name="attach_camera">システムカメラ</string>
+    <string name="menu_restore">バックアップから復元する</string>
+    <string name="restore_id_hint">復元するIDの文字列を入力または貼り付けしてください</string>
+    <string name="location_placeholder">位置情報</string>
+    <string name="video_placeholder">動画</string>
+    <string name="audio_placeholder">音声</string>
+    <string name="restoring_backup">バックアップを復元中</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="server_message_title">サーバーからのメッセージ</string>
+    <string name="error">エラー</string>
+    <!-- Empty state text for Contacts tab, shown when there are no contacts and Contact Synchronization is disabled -->
+    <string name="no_contacts"><![CDATA[まだ連絡先がありません。同期をオン（「設定」>「プライバシー」）にするか、手動で連絡先を追加してください。]]></string>
+    <!-- Empty state text for Contacts tab, shown when there are no contacts and Contact Synchronization is enabled -->
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="masterkey_title">パスフレーズを入力</string>
+    <string name="masterkey_body">${app_name_short}のマスターキーはパスフレーズで保護されています。
+キーのロックを解除するためのパスフレーズを入力してください。</string>
+    <string name="masterkey_unlocking">マスターキーの解除</string>
+    <string name="verify_phonecall_text">電話を掛ける</string>
+    <string name="prepare_call_message">電話番号を送信したら、すぐにお電話を差し上げます。あなたの認証コードが2回読み上げられます。1度しか試みませんので、準備ができたら続行してください。</string>
+    <string name="enter_code_hint">コードを入力</string>
+    <string name="enter_code_sum">認証用SMSに記載されているコード、または音声電話で読み上げられたコードを入力してください。</string>
+    <string name="no_matching_contacts">連絡先が見つかりません</string>
+    <string name="code_invalid">あなたの入力したコードは有効ではありません</string>
+    <string name="try_again">再試行</string>
+    <string name="decoding_message">メッセージの復号</string>
+    <string name="expired_barcode">このコードは期限切れです。再度他のユーザーのアプリから直接スキャンしてください。</string>
+    <string name="pending">保留</string>
+    <string name="unlinking_email">Eメールのリンク解除</string>
+    <string name="unlink">リンク解除</string>
+    <string name="threema_version">バージョン</string>
+    <string name="threema_version_code">バージョンコード</string>
+    <!-- Section title on "About" screen, for section which shows information about the (on prem) server and user credentials -->
+    <string name="wrong_backupid_or_password_or_no_internet_connection">インターネットに接続されていない、無効なIDエクスポートデータ、または誤ったパスワードの可能性があります。</string>
+    <string name="prefs_header_other">その他</string>
+    <string name="an_error_occurred">エラーが発生しました</string>
+    <string name="an_error_occurred_more">エラーが発生しました: «%1$s»</string>
+    <string name="acknowledge">賛成</string>
+    <string name="decline">反対</string>
+    <string name="forward_message">メッセージを転送する</string>
+    <string name="file_is_not_a_image">選択したファイルは画像ではないです</string>
+    <string name="connection_error">接続エラーが発生しました。後でもう一度お試しください。</string>
+    <string name="me_myself_and_i">自分</string>
+    <string name="really_forward">«%1$s» に転送しますか？</string>
+    <string name="really_send">«%1$s» に送信しますか？</string>
+    <string name="ringtone_none">消音</string>
+    <string name="no_camera_installed">使用可能なカメラがありません</string>
+    <string name="save_message_action">保存</string>
+    <string name="file_is_not_a_video">選択されたファイルは動画ではありません</string>
+    <string name="masterkey_is_unlocked">マスターキーが解除されました</string>
+    <string name="file_too_large">ファイルが最大容量の %1$d MB を超えています</string>
+    <string name="deleting_thread">トークを削除する</string>
+    <string name="enter_serial_body"><![CDATA[ショップライセンスキーを入力するか、ここをクリックしてキーを取得してください。
+https://shop.threema.ch/retrieve_keys]]></string>
+    <!-- ${app_name_short} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="enter_serial_title">${app_name}のロック解除</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="serial_required_want_exit">ライセンスキーが無効です。再度お試しいただくか、${app_name}を終了しますか？</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <!-- Message shown on progress dialog that shows while checking whether the user has a valid license -->
+    <string name="checking_serial">ライセンスの確認</string>
+    <!-- Message shown on progress dialog that shows while the credentials that the user entered are being checked for their validity -->
+    <string name="update_available">アップデートが可能です</string>
+    <!-- Message shown in Update dialog to inform the user that a new version of the app is available -->
+    <string name="no_update_available">アップデートはありません</string>
+    <string name="download">ダウンロード</string>
+    <string name="not_now">後で通知する</string>
+    <string name="preparing_messages">メッセージの作成</string>
+    <string name="select_emoji">絵文字</string>
+    <string name="search_contact">連絡先の検索</string>
+    <string name="push_reset_title">プッシュトークンをリセット</string>
+    <string name="push_reset_text">プッシュトークンはリセットされました</string>
+    <string name="emoji_recent">最近</string>
+    <string name="emoji_smileys">スマイリーと感情</string>
+    <string name="emoji_people">人体</string>
+    <string name="emoji_nature">動物と自然</string>
+    <string name="emoji_food">飲み物・食べ物</string>
+    <string name="emoji_travel">旅行・場所</string>
+    <string name="emoji_activity">有効化</string>
+    <string name="emoji_objects">オブジェクト</string>
+    <string name="emoji_symbols">シンボル</string>
+    <string name="emoji_flags">フラグ</string>
+    <string name="emoji_search">絵文字を探す</string>
+    <string name="emoji_search_no_result">検索結果が見つかりません</string>
+    <string name="title_lock">ロック</string>
+    <string name="new_messages_locked">利用可能な新しいメッセージ</string>
+    <string name="new_messages_locked_description">タッチして新しいメッセージを見る</string>
+    <string name="new_unprocessed_messages">利用可能な新しいメッセージ</string>
+    <string name="new_unprocessed_messages_description">タッチすると、新しい着信メッセージを取得して表示します。</string>
+    <string name="prefs_title_masterkey_notification_newmsg">新しいメッセージの通知</string>
+    <string name="prefs_masterkey_notification_newmsg_off">マスターキーでロックされているときに、新しいメッセージを通知しない</string>
+    <string name="prefs_masterkey_notification_newmsg_on">マスターキーでロックされているときに、一般的な通知で新しいメッセージを通知します</string>
+    <string name="chat_history_attached">会話のログを添付します。</string>
+    <string name="backup_data_title">データのバックアップ</string>
+    <string name="backup_data_password_msg">データは ZIP ファイルで内部 USB ストレージに保存され、どの Android 端末でも復元が行なえます。
+データのバックアップを暗号化するためのパスワードを入力してください。</string>
+    <string name="restore_data_password_msg">このバックアップを作成する際に使用したパスワードを入力してください</string>
+    <string name="backup_data_media">大きい容量のメディアを含む (動画・書類・未圧縮の写真)</string>
+    <string name="backup_data_new">データのバックアップを作成</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="pinentry_enter_pin">続けるにはあなたの${app_name} PINを入力してください</string>
+    <string name="pinentry_wrong_pin">PINが正しくありません</string>
+    <string name="prefs_sum_security_pin">${app_name_short}のUIへのアクセスをロックします</string>
+    <string name="prefs_title_pin_switch">アプリのロック</string>
+    <string name="prefs_title_pin_code">PIN を設定</string>
+    <string name="prefs_pin_grace">ロックするまでの時間</string>
+    <string name="prefs_sum_pin_grace">画面ロックが有効になるまでの時間</string>
+    <string name="click_here_to_change_pin">PINが設定されました。変更するにはタップしてください。</string>
+    <string name="set_pin_menu_title">新しいPINを設定</string>
+    <string name="set_pin_summary_intro">PIN（数字のみ）を設定することで、プライバシーを守ることができます。このPINは、一定時間経過後に${app_name_short}へのアクセスをロックしたり、プライベートなトークを保護するために使用できます。</string>
+    <string name="set_pin_again_summary">PINの確認</string>
+    <string name="set_pin_hint">PIN</string>
+    <string name="title_addgroup">グループを作成</string>
+    <string name="search_group">グループを検索</string>
+    <string name="updating_system">システムをアップデートしています</string>
+    <string name="title_select_contacts">メンバーを選択</string>
+    <string name="pin_invalid_not_set">PINが無効です。設定されていません。</string>
+    <string name="prefs_group_notifications">グループトーク</string>
+    <string name="group_select_at_least_two">継続するためには、少なくとも1名のメンバーを選択する必要があります。</string>
+    <string name="group_select_max">グループメンバーを %1$d 人以上選択することはできません</string>
+    <string name="search">検索</string>
+    <string name="hint_search_keyword">キーワードを検索</string>
+    <string name="add_group_owner">グループの作成者</string>
+    <string name="title_tab_users">連絡先</string>
+    <string name="title_tab_groups">グループ</string>
+    <string name="no_matching_groups">グループが見つかりません</string>
+    <string name="action_leave_group">グループから退会する</string>
+    <string name="group_edit_title">グループを編集</string>
+    <string name="really_leave_group_message">本当にこのグループから退会しますか？</string>
+    <string name="search_no_matches">該当するものはありませんでした</string>
+    <string name="search_no_more_matches">結果はこれ以上ありません</string>
+    <string name="backup_share">バックアップを共有</string>
+    <string name="my_backups_title">バックアップ</string>
+    <string name="backup_delete_confirm">バックアップファイルは削除されました</string>
+    <string name="message_log_title">メッセージの詳細</string>
+    <string name="state_read">既読</string>
+    <string name="state_ack">賛成</string>
+    <string name="state_dec">反対</string>
+    <string name="state_delivered">送信済み</string>
+    <string name="state_sending">送信中</string>
+    <string name="state_pending">保留中</string>
+    <string name="state_failed">失敗</string>
+    <string name="state_sent">送信済</string>
+    <string name="state_dialog_created">作成</string>
+    <string name="state_dialog_posted">送信</string>
+    <string name="state_dialog_modified">更新</string>
+    <string name="state_dialog_edited">編集済</string>
+    <string name="state_dialog_deleted">削除済</string>
+    <string name="state_dialog_status">状態</string>
+    <string name="title_tab_recent">最近</string>
+    <string name="no_recent_conversations">トークが見つかりません</string>
+    <string name="save_changes">保存</string>
+    <string name="creating_group">グループを作成中です</string>
+    <string name="updating_group">グループを更新中です</string>
+    <string name="leaving_group">グループを退会</string>
+    <string name="removing_group">グループを削除</string>
+    <string name="status_create_group">グループが作成されました</string>
+    <string name="status_rename_group">グループ名が «%1$s» に変更されました</string>
+    <string name="status_group_new_photo">グループ画像が更新されました。</string>
+    <string name="status_group_new_member">«%1$s» がグループに追加されました。</string>
+    <string name="status_group_member_left">«%1$s» がグループから退会しました。</string>
+    <string name="status_group_member_kicked">«%1$s» がグループから削除されました。</string>
+    <string name="can_not_send_no_group_members">空のグループにメッセージを送信することはできません</string>
+    <string name="you_are_not_a_member_of_this_group">あなたはこのグループのメンバーではありません</string>
+    <string name="can_not_delete_not_valid">無効なオブジェクトを削除できません</string>
+    <string name="can_not_delete_contact_until_in_group">この連絡先はまだグループ会話のメンバーまたは作成者であるため、削除することはできません。この連絡先を含むすべてのグループを退会または削除してから、もう一度やり直してください。</string>
+    <string name="can_not_delete_contact">連絡先を削除できません</string>
+    <string name="title_public_nickname">ユーザー名</string>
+    <string name="prefs_sum_excluded_sync_identities">連絡先を同期する際に指定の ID を除外します</string>
+    <string name="prefs_title_excluded_sync_identities">除外リスト</string>
+    <string name="synchronize_contact">接続する端末の連絡先</string>
+    <string name="exclude_contact">自動同期から除外する</string>
+    <string name="prefs_header_lists">リスト</string>
+    <string name="prefs_title_blocked_contacts">ブロックした連絡先</string>
+    <string name="prefs_sum_blocked_contacts">指定の ID からのメッセージを無視します</string>
+    <string name="verified">認証済み</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="want_to_add_to_exclude_list">この連絡先は、携帯電話のアドレス帳に紐付けされています。${app_name_short}で削除しても、連絡先の同期後に再び表示されます。</string>
+    <string name="no">いいえ</string>
+    <string name="yes">はい</string>
+    <string name="deleting_contact">連絡先を削除</string>
+    <string name="prefs_contact_soring">並び替え</string>
+    <string name="prefs_sum_contact_soring">連絡先リストの並び順を設定する</string>
+    <string name="prefs_contact_format">連絡先の名前の表示</string>
+    <string name="prefs_sum_contact_format">連絡先の名前の形式を設定する</string>
+    <string name="prefs_contact_list_title">連絡先の一覧</string>
+    <string name="prefs_default_contact_picture_colored">デフォルトのプロフィール写真</string>
+    <string name="prefs_show_inactive_contacts">非アクティブなIDの表示</string>
+    <string name="prefs_sum_default_contact_picture_colored_on">この連絡先はまだグループ会話のメンバーまたは作成者であるため、削除することはできません。この連絡先を含むすべてのグループを退会または削除してから、もう一度やり直してください。</string>
+    <string name="prefs_sum_default_contact_picture_colored_off">連絡先の写真がない場合、グレーのプレースホルダーを使用</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_show_inactive_contacts_on">連絡先リストにすべての${app_name_short} IDを表示する</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_show_inactive_contacts_off">非アクティブ/失効した${app_name_short} IDを隠す</string>
+    <string name="contact_sorting_first_name">名前 - 名字</string>
+    <string name="contact_sorting_last_name">名字 - 名前</string>
+    <string name="contact_format_first_name_last_name">名前 - 名字</string>
+    <string name="contact_format_last_name_first_name">名字 - 名前</string>
+    <string name="block_contact">連絡先をブロック</string>
+    <string name="unblock_contact">連絡先のブロックを解除</string>
+    <string name="one_unread_message">1件の未読のメッセージ</string>
+    <string name="really_unlink_contact_title">連絡先の紐付けを解除</string>
+    <string name="really_unlink_contact">本当に連絡先の紐付けを解除しますか？</string>
+    <string name="do_unlink_contact">連絡先の紐付けを解除</string>
+    <string name="do_choose_other_contact">他の連絡先を選択</string>
+    <string name="touch_to_link">(なし)</string>
+    <string name="prefs_validate_contacts">連絡先のリンクを検証</string>
+    <string name="prefs_validate_contacts_loading">連絡先のリンクを検証</string>
+    <string name="prefs_title_fullscreen_ime">フルスクリーンキーボード</string>
+    <string name="prefs_sum_fullscreen_ime_on">端末を横向きにすると、キーボードがアプリケーションを覆います</string>
+    <string name="prefs_sum_fullscreen_ime_off">余裕があればキーボードの上にトークのプレビューを表示する</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="add_acount_from_within_threema">${app_name_short}の中で${app_name_short} IDを管理する</string>
+    <string name="save_image">画像を保存</string>
+    <string name="share_image">画像を共有</string>
+    <string name="view_in_gallery">ギャラリーで見る</string>
+    <string name="token_register_failed">プッシュトークンの更新に失敗しました。後でもう一度お試しください。</string>
+    <string name="internet_connection_required">インターネットに接続できません</string>
+    <string name="prefs_sum_save_media">受信した写真やビデオ、送信したカメラ画像を保存する</string>
+    <string name="prefs_save_media">ギャラリーに自動的に保存</string>
+    <string name="title_add_distribution_list">新規配信リスト</string>
+    <string name="title_edit_distribution_list">配信リストを編集する</string>
+    <string name="really_delete_distribution_list">配信リストを削除する</string>
+    <string name="really_delete_distribution_list_message">本当にこのリストと関連するメッセージを削除しますか？</string>
+    <string name="enter_distribution_list_name">このリストの名前を決める</string>
+    <string name="distribution_list">配信リスト</string>
+    <string name="title_tab_distribution_list">配信リスト</string>
+    <string name="no_matching_distribution_lists">該当する配信リストはありません</string>
+    <string name="is_typing">は入力中です…</string>
+    <string name="push_not_available_title">プッシュサービスが見つかりませんでした</string>
+    <string name="push_not_available_text1">Google Playサービスがインストールされていないか、古いため、お使いの端末でプッシュサービスが見つかりませんでした。</string>
+    <string name="push_not_available_text2">%sはサーバーへの持続的なバックグラウンド接続を開こうとしています。デバイスのバッテリー節約機能がバックグラウンド接続に干渉する場合、確実に動作しなくなる可能性があります。ご注意ください。</string>
+    <string name="backup_in_progress">バックアップ実行中</string>
+    <string name="backup_or_restore_success_body">データのバックアップが終了しました</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_or_restore_error">${app_name_short}バックアップ</string>
+    <string name="backup_or_restore_error_body">バックアップが失敗しました</string>
+    <string name="could_not_download_message">メッセージをダウンロードできませんでした</string>
+    <string name="info">情報</string>
+    <string name="resync_group">グループを再同期する</string>
+    <string name="edit_name">名前と写真の変更</string>
+    <string name="edit_name_only">名前を編集</string>
+    <string name="group_was_synchronized">グループは同期されました</string>
+    <string name="verification_level2_work_explain">社内の連絡先で、組織により事前に登録されています。</string>
+    <string name="verification_level3_work_explain">QRコードをスキャンして個人的にIDと公開鍵を確認した連絡先。</string>
+    <string name="verification_level3_explain">自分がQRコードをスキャンして身元と公開鍵を認証している連絡先です。</string>
+    <string name="verification_level2_explain">自分の連絡帳に電話番号とメールアドレスが含まれている連絡先です。</string>
+    <string name="verification_level1_explain">不明な連絡先：この連絡先が自分のIDに電話番号やメールアドレスを紐付けしていないか、または連絡帳にこれらの連絡先の詳細が含まれていません。</string>
+    <string name="state_dialog_received">受信済</string>
+    <string name="prefs_title_hide_screenshots">プレビューとスクリーンショットを無効化</string>
+    <string name="prefs_summary_hide_screenshots">アプリ切り替え時のプレビューを非表示にし、アプリ内のスクリーンショットを無効化します。</string>
+    <string name="media_gallery">メディアギャラリー</string>
+    <string name="media_file_not_found">メディアファイルを開くことができませんでした。 サーバーから削除されたか、ダウンロードされませんでした。</string>
+    <string name="no_media_found">このトークで %s は見つかりませんでした。</string>
+    <string name="media_gallery_all">すべて</string>
+    <string name="media_gallery_pictures">写真</string>
+    <string name="media_gallery_videos">動画</string>
+    <string name="group_membership_title">これらのグループのメンバー</string>
+    <string name="group_description">グループの説明</string>
+    <string name="change_group_description">グループの説明を変更</string>
+    <string name="add_group_description">グループの説明を追加</string>
+    <string name="read_more">続きを読む</string>
+    <string name="read_less">軽く把握する</string>
+    <string name="changed_group_desc_date">最終変更: \u0020</string>
+    <string name="num_items_sected">%s 件を選択中</string>
+    <string name="really_delete_media">本当に %d メディアメッセージを削除したいですか？</string>
+    <string name="check_updates">アップデートを確認する</string>
+    <!-- ${app_name} and ${app_name_short} are placeholders for the app's name, e.g. "Threema". They must be left as-is and not translated. -->
+    <string name="masterkey_lock_explain">${app_name}はメモリ内にパスフレーズを保持します。\nもしパスフレーズを何度も要求される場合は、${app_name_short}を停止するタスクキラーまたはバッテリーセーバーが無効になっているかを確認してください。</string>
+    <string name="identity_already_exists">このIDは既に連絡先にあります</string>
+    <string name="share_contact">連絡先を共有</string>
+    <string name="add_shortcut">ショートカットを追加</string>
+    <string name="group_not_found">そのようなグループは見つかりませんでした。</string>
+    <string name="contact_not_found">そのような連絡先はありません</string>
+    <string name="contact_now_blocked">連絡先はブロックされています</string>
+    <string name="contact_now_unblocked">連絡先のブロックを解除しました</string>
+    <string name="sending_images">画像を送信中</string>
+    <string name="share_conversation_body">ファイルを解凍するには、AESをサポートする最新のZIPツールが必要です。
+http://www.7-zip.org または https://itunes.apple.com/us/app/the-unarchiver/id425424353 などから入手してください。</string>
+    <string name="enter_zip_password_body">トークは暗号化されたzipファイルとして送信されます。 パスワードを選択してください：</string>
+    <string name="ballot_create">投票を作成</string>
+    <string name="ballot_choice_add">選択を追加</string>
+    <string name="ballot_state_closed">終了</string>
+    <string name="ballot_vote">投票</string>
+    <string name="ballot_placeholder">投票</string>
+    <string name="ballot_close">この投票を閉じる</string>
+    <string name="ballot_really_close">本当にこの投票を閉じますか？</string>
+    <string name="ballot_multiple_choice">複数選択可</string>
+    <string name="ballot_result_intermediate">途中経過</string>
+    <string name="ballot_error_more_than_x_choices">少なくとも2つの選択肢を定義する必要があります</string>
+    <string name="ballot_message_closed">結果はこちら</string>
+    <string name="ballot_vote_posted_successfully">投票に成功しました</string>
+    <string name="ballot_vote_posted_failed">投票が失敗しました</string>
+    <string name="attach_ballot">投票</string>
+    <string name="ballot_overview">すべての投票</string>
+    <string name="ballot_copy">投票を複製</string>
+    <string name="ballot_remove">投票を削除</string>
+    <string name="ballot_not_exist">投票が存在しません</string>
+    <string name="ballot_tap_to_vote">タップで投票</string>
+    <string name="ballot_tap_to_view_results">投票は終了しました。タップして結果を表示する。</string>
+    <string name="ballot_subject_hint">投票のタイトルを入力</string>
+    <string name="ballot_no_ballots_yet">投票はまだありません。</string>
+    <string name="print">印刷</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="ballot_wizard0_explain">${app_name_short}で投票を行いましょう。イベントのスケジュール、アンケートの作成、友達に聞きたいことなど用途は様々です。</string>
+    <string name="ballot_add_choices">回答を追加</string>
+    <string name="blocked_cannot_send">連絡先にブロックされているため、メッセージを送信できません</string>
+    <string name="invalid_some_cannot_send">何名かの受信者の選択ができませんでした</string>
+    <string name="really_block_contact">これからこの連絡先から送られてくるメッセージは破棄されます。続行しますか？</string>
+    <string name="ballot_result_final">最終結果</string>
+    <string name="invalid_cannot_send">連絡先が非アクティブのため、メッセージを送信できません</string>
+    <string name="ballot_answer_count_error">投票を作成するには2つ以上の選択肢を追加してください</string>
+    <string name="ballot_one_contact_not_supported">警告: %1$sは投票に参加できなくなります。</string>
+    <string name="ballot_x_contact_not_supported">警告: %1$dの連絡先は投票に参加できなくなります。</string>
+    <string name="contact_state_inactive">非アクティブ</string>
+    <string name="contact_state_invalid">無効</string>
+    <string name="back">戻る</string>
+    <string name="wearable_reply">返信</string>
+    <string name="wearable_reply_label">%s に返信</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="push_disable_text">続行すると、システムのプッシュサービスの代わりに、「${app_name_short}プッシュ」が使用されます。これはデジタルフットプリントを減らすのに役に立ちますが、アプリをバックグラウンドで実行できるように端末を設定する必要があります。端末の設定で対応するオプションが見つからない場合、端末の製造元のサポートと連絡を取り、設定のサポートを受けてください。</string>
+    <string name="ballot_intermediate_results_show">途中経過を表示</string>
+    <string name="converting_video">動画を処理中</string>
+    <string name="video_size_small">高 (省データ)</string>
+    <string name="video_size_large">低（多くのデータ通信量）</string>
+    <string name="video_size_original">非圧縮（多くのデータ通信の消費量）</string>
+    <string name="prefs_video_size">動画の圧縮</string>
+    <string name="menu_video_size_small">小サイズ</string>
+    <string name="menu_video_size_medium">中サイズ</string>
+    <string name="menu_video_size_large">オリジナルのサイズ</string>
+    <string name="show_contact">連絡先を表示</string>
+    <string name="chat_with">%1$s とトークする</string>
+    <string name="kick_user_from_group">%1$s をグループから削除する</string>
+    <string name="show_as_qrcode">QR コードで表示</string>
+    <string name="qr_code">QRコード</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="really_leave_id_export">まだ行っていない場合は、IDエクスポートのテキストか対応するQRコードを安全な場所に保存する、または印刷してください。バックアップがないと、あなたの${app_name_short} IDは復元できません。</string>
+    <string name="revocation_key_title">ID の遠隔削除</string>
+    <string name="revocation_key_not_set">パスワードが設定されていません</string>
+    <string name="revocation_key_set_at">パスワード設定 %1$s</string>
+    <string name="prefs_sum_remove_wallpapers">すべての壁紙を削除する</string>
+    <string name="prefs_title_remove_wallpapers">すべての壁紙を削除する</string>
+    <string name="really_remove_wallpapers">本当にすべての壁紙を削除しますか？</string>
+    <string name="wallpapers_removed">壁紙は削除されました</string>
+    <string name="invalid_backup">バックアップデータが無効です。復元できませんでした。</string>
+    <string name="invalid_zip_restore_failed">復元は失敗しました。無効なバックアップファイル: %1$s</string>
+    <string name="revocation_explain">ID を紛失したり、盗難された場合に、ここに入力したパスワードを
+https://myid.threema.ch/revoke に入力することで ID を削除することができます。</string>
+    <!-- Empty state text shown on home screen widget when there are no unread messages -->
+    <string name="no_unread_messages">未読のメッセージが無いか、PINロックがかかっています</string>
+    <string name="send_media">メディアを送信</string>
+    <string name="rotate">回転</string>
+    <string name="remove">削除</string>
+    <string name="item_already_added">このアイテムはすでに追加されています。</string>
+    <string name="password_too_short" tools:ignore="PluralsCandidate">%d 文字以上</string>
+    <string name="mark_read">既読にする</string>
+    <string name="attach_document">ファイル</string>
+    <string name="parent_directory">親</string>
+    <string name="file_placeholder">ファイル</string>
+    <string name="internal_storage">内部ストレージ</string>
+    <string name="no_activity_for_mime_type">このファイルを開くためのアプリが見つかりませんでした</string>
+    <string name="no_activity_for_intent">アプリが見つかりません</string>
+    <string name="open_from">で開く</string>
+    <string name="file_one_contact_not_supported">%1$sファイルを受信できません</string>
+    <string name="file_x_contact_not_supported">警告: %1$d 連絡先がファイルを受信できません。</string>
+    <string name="mime_android_apk">Androidパッケージ</string>
+    <string name="mime_audio">音声ファイル</string>
+    <string name="mime_certificate">電子証明書</string>
+    <string name="mime_codes">ソースコード</string>
+    <string name="mime_compressed">アーカイブ</string>
+    <string name="mime_contact">連絡先</string>
+    <string name="mime_event">カレンダーのイベント</string>
+    <string name="mime_font">フォント</string>
+    <string name="mime_image">画像ファイル</string>
+    <string name="mime_pdf">PDF文書</string>
+    <string name="mime_presentation">プレゼンテーション</string>
+    <string name="mime_spreadsheet">スプレッドシート</string>
+    <string name="mime_text">テキストファイル</string>
+    <string name="mime_video">動画ファイル</string>
+    <string name="mime_word">テキスト文書</string>
+    <string name="no_filename"><![CDATA[<名称未設定ファイル>]]></string>
+    <string name="send_as_files">ファイルとして送信</string>
+    <string name="send_as_files_warning">未圧縮のファイルや画像を送信することで大きなデータ通信量が使用され、場合によっては追加料金が発生することがあります。そのため、ファイルをアップロードやダウンロードをする場合は Wi-Fi のみで行うことを推奨します。</string>
+    <string name="prefs_theme">デザインテーマ</string>
+    <string name="list_theme_light">ライト</string>
+    <string name="list_theme_dark">ダーク</string>
+    <string name="prefs_header_appearance">外観</string>
+    <string name="prefs_sum_passphrase">端末に保存されるデータの復号化にパスフレーズを要求します</string>
+    <string name="prefs_title_masterkey_change_passphrase">パスフレーズを変更</string>
+    <string name="storage_total">内部ストレージの容量</string>
+    <string name="storage_threema">%sで使用</string>
+    <string name="storage_total_free">ストレージの空き容量</string>
+    <string name="storage_total_in_use">使用中</string>
+    <string name="one_year">1年</string>
+    <string name="six_months">6ヶ月</string>
+    <string name="three_months">3ヶ月</string>
+    <string name="one_month">1ヶ月</string>
+    <string name="one_week">1週間</string>
+    <string name="everything">すべて</string>
+    <string name="delete_media_files_time">より古いメディアとファイルを削除する</string>
+    <string name="storage_explain">空き容量が足りなくなった場合、古い暗号化されたメディアファイルを削除して空き容量を確保することができます。サムネイルはそのまま残ります。これは自動処理ではないことに注意してください。以下のボタンをクリックしない限り、何も削除されません。</string>
+    <string name="delete_data">データを削除する</string>
+    <string name="delete_date_confirm_message">続けると、ファイルは削除され、サムネイルだけが残ります。</string>
+    <string name="storage_management">ストレージ管理</string>
+    <string name="media">メディア</string>
+    <string name="prefs_storage_mgmt_title">メディア、ファイル、メッセージを削除</string>
+    <string name="num_messages">メッセージ数</string>
+    <string name="delete_messages_explain">より古いメッセージを削除</string>
+    <string name="delete_message">メッセージを削除</string>
+    <string name="really_delete_messages">続けると、メッセージは永久に削除されます。復元することはできません。</string>
+    <string name="messages_delete_explain">古いメッセージを完全に削除できます。</string>
+    <string name="backup_started">データバックアップが開始されました</string>
+    <string name="invalid_data">無効なデータです。送信できませんでした。</string>
+    <string name="prefs_emoji_style">絵文字スタイル</string>
+    <string name="prefs_android_emojis">システムの絵文字</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_default_emojis">${app_name_short}絵文字 (デフォルト)</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="android_emojis_warning">注意: システムの文字セットによっては、${app_name_short}がサポートするすべての絵文字を表示できない場合があります。</string>
+    <string name="crop">切り抜き</string>
+    <string name="scan_id_mismatch_title">IDが一致しません</string>
+    <string name="scan_id_mismatch_message">スキャンしたIDと保存した連絡先が一致しません。</string>
+    <string name="title_remove_picture">画像を削除</string>
+    <string name="blocked">ブロック</string>
+    <string name="name">名前</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="terms_of_service">利用規約</string>
+    <string name="eula">エンドユーザーライセンス合意書</string>
+    <string name="save_group_changes">グループの変更を保存しますか？</string>
+    <string name="prefs_title_fontsize">フォントサイズ</string>
+    <string name="fontsize_normal">標準</string>
+    <string name="fontsize_large">大</string>
+    <string name="fontsize_xlarge">特大</string>
+    <string name="no_app_for_location">インストール済みのマップアプリが見つかりませんでした</string>
+    <string name="prefs_sendlog">ログを送信する</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sendlog_summary">問題を分析するためにログファイルを${company_name}に送信します</string>
+    <string name="prefs_exportlog">ログを出力する</string>
+    <string name="prefs_exportlog_summary">ログファイルを他のアプリで共有</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_storage_required">メディアを保存したり送信したりするには、${app_name}にストレージへのアクセス許可をしてください。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_location_required">位置情報を送信するには、${app_name}に自分の位置情報へのアクセスを許可をしてください。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_contacts_required">連絡先を送信するには、${app_name}に自分の連絡先へのアクセスを許可する必要があります。</string>
+    <!-- "Thumbs up" should be translated by the name of the emoji 👍 -->
+    <string name="message_acknowledged">「いいね」が送信されました</string>
+    <!-- "Thumbs down" should be translated by the name of the emoji 👎 -->
+    <string name="message_declined">「よくないね」が送信されました</string>
+    <string name="notifications_settings">通知設定</string>
+    <string name="notifications_default">デフォルト設定</string>
+    <string name="notifications_until">%s まで</string>
+    <string name="notifications_mute">ミュート</string>
+    <string name="notifications_choose_sound">サウンドを選択</string>
+    <string name="error_video_conversion">ビデオの変換に失敗しました。</string>
+    <string name="confirm_your_pin">PINをもう一度入力</string>
+    <string name="too_many_incorrect_attempts">不適切な試行が多すぎます。%s秒後にもう一度試してください。</string>
+    <string name="no_lockscreen_set">システムの画面ロックが設定されていません。</string>
+    <string name="on">オン</string>
+    <string name="off">オフ</string>
+    <string name="new_wizard_select_country">あなたの国を選択</string>
+    <string name="new_wizard_lets_get_started">ようこそ！</string>
+    <string name="new_wizard_setup_threema">${app_name_short}を始める</string>
+    <!-- Label on call-to-action button in setup wizard when app is first opened, to allow the user to start setting up the app. ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="new_wizard_restore_id_backup">エクスポート済みの ID を復元</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="new_wizard_welcome">${app_name}にようこそ！</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_move_finger">画面上で指を動かしてみてください</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_this_is_your_id">これがあなたの${app_name_short} IDです:</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_works_like_phone_number">${app_name_short} IDは、電話番号のようなものです。\n友達は、このIDを使ってあなたに連絡を取ることができます。</string>
+    <string name="new_wizard_choose_nickname">ユーザー名を選ぶ</string>
+    <string name="new_wizard_nickname_explain">あなたの友達の通知画面であなたのユーザー名が表示されます</string>
+    <string name="new_wizard_hint_enter_nickname">ユーザー名の入力</string>
+    <string name="new_wizard_help_your_friends_find_you">友達にあなたを見つけてもらおう！</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_link_mobile">携帯電話やEメールアドレスを${app_name_short} IDに紐付けしてください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_link_mobile_only">電話番号を${app_name_short} IDに紐付けしてください。</string>
+    <string name="new_wizard_hint_mobile_number">電話番号（任意）</string>
+    <string name="new_wizard_hint_email">Eメールアドレス（任意）</string>
+    <string name="new_wizard_done_title">終了です！</string>
+    <string name="new_wizard_linked_to">接続済み</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_need_internet">${app_name_short} IDの作成には、安定したインターネット環境が必要です。もう一度お試しください。</string>
+    <string name="new_wizard_more_information">詳細情報</string>
+    <string name="message_details_message_id_copied">メッセージIDがクリップボードにコピーされました</string>
+    <string name="contact_details_id_copied">IDをクリップボードにコピーしました</string>
+    <string name="contact_details_nickname_copied">ユーザー名をクリップボードにコピーしました</string>
+    <string name="generic_copied_to_clipboard_hint">クリップボードにコピーしました</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_use_id_as_nickname">あなたの${app_name_short} IDをユーザー名として表示させますか？</string>
+    <string name="new_wizard_phone_email_invalid">入力された電話番号またはメールアドレスのどちらかが有効ではありません。進む前に修正してください。</string>
+    <string name="new_wizard_phone_invalid">入力された電話番号は有効ではありません。続行する前に修正してください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_fingerprint">指を動かすことで、ランダムなデータ（エントロピーと呼ばれます）が生成され、それをもとに、あなたの新しいユニークな${app_name_short} IDに関連付けられた鍵ペアが生成されます。鍵ペアは、友達に配布される<b>公開鍵</b>と、あなたの携帯電話に安全に保存される<b>秘密鍵</b>で構成されています。友達は、あなたへのメッセージを公開鍵で暗号化します。これらのメッセージを解読できるのは、秘密鍵の所有者だけです。</string>
+    <string name="new_wizard_info_id">キーペアを作成しました。公開鍵は当社のサーバーに安全に送信されています。秘密鍵は、あなたの端末から離れることはありません。これにより、他の誰もあなたのメッセージを読むことができません。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_sync_contacts">このオプションを有効にすると、${app_name_short}は電子メールアドレスと電話番号を一方的に暗号化（ハッシュ化）してからサーバーに送信し、一致する連絡先を探します。アドレス帳のデータは一切保存されません。</string>
+    <string name="new_wizard_info_sync_contacts_dialog">連絡先の同期を行うと、あなたの友達を自動的に見つけることができます。同意を行うと、あなたの連絡帳から電話番号とメールアドレスが暗号化されたのちに当社のサーバーに送信され、一致する連絡先を探します。データが保存されたり共有されたりすることは絶対にありません。\n\n連絡先の同期を有効にしますか？</string>
+    <!-- Instructions shown during the setup wizard. Only used for work builds (i.e., Threema Work or OnPrem). ${app_name_short} is a placeholders for the app's name, it must be kept as-is and should not be translated. -->
+    <string name="new_wizard_info_link">${app_name}は、あなたの電話番号とメールアドレスを提供することで、あなたの友達が携帯電話のアドレス帳にあなたを登録している場合、自動的にあなたを見つけることができます。これらのデータは、暗号化（ハッシュ化）された状態で、私たちのサーバーに保存されます。完全に匿名で利用したい場合には、このステップを省略することができます。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_link_phone_only">電話番号を提供することで、友達があなたを自動的に見つけることができます。電話番号は暗号化（ハッシュ化）された状態で、私たちのサーバーに保存されます。完全に匿名で利用したい場合には、このステップを省略することができます。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_nickname">ユーザー名は、一部の端末のプッシュ通知や、アドレス帳に登録されていないユーザーに対して、あなたを識別するための追加手段として使用されます。
+下の名前のみか仮名での記入をお勧めします。ユーザー名を設定しない場合は、デフォルトで${app_name_short} IDが使用されます。</string>
+    <string name="not_linked">接続されていません</string>
+    <string name="linked">接続済み</string>
+    <string name="pending_sms_verification_notice">あなたの電話番号はまだ認証されていません。</string>
+    <string name="no_sms_received">SMSを受け取っていないですか？</string>
+    <string name="really_cancel_verify">本当に電話番号の認証を中止しますか？</string>
+    <string name="verification_of">%sの認証</string>
+    <string name="status_ballot_voting_changed">投票 «%1$s» に新しい票が入りました。</string>
+    <string name="status_ballot_user_first_vote">«%1$s»が«%2$s»に投票しました</string>
+    <string name="status_ballot_user_modified_vote">«%1$s»が«%2$s»への投票を変更しました</string>
+    <string name="status_ballot_all_votes">«%1$s» への投票が完了しました</string>
+    <string name="restore">復元</string>
+    <!-- Shown in prompt dialog during the setup wizard. Only used for work builds (i.e. Threema Work and OnPrem). ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="new_wizard_anonymous_confirm">${app_name_short} IDに登録する携帯電話番号やメールアドレスが入力されていません。友達の連絡先リストには表示されません。本当に匿名で${app_name}を利用しますか？</string>
+    <!-- ${app_name} and ${app_name_short} are placeholders for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_anonymous_confirm_phone_only">${app_name_short} IDと連携する携帯電話番号が入力されていません。友達の連絡先リストには表示されません。本当に匿名で${app_name}を利用しますか？</string>
+    <string name="new_wizard_scan_id_backup">QRコードをスキャンする</string>
+    <string name="error_saving_file">ファイル保存のエラー。権限を確認してください。</string>
+    <string name="wait_one_minute">SMSが届くまで10分以上待ってから、通話をリクエストしてください。</string>
+    <string name="backup_id">エクスポート済みの ID</string>
+    <string name="backup_data">データバックアップ</string>
+    <string name="action_delete_group">グループを削除</string>
+    <string name="action_leave_and_delete_group">グループを削除し退会する</string>
+    <string name="action_dissolve_and_delete_group">グループを解散して削除する</string>
+    <string name="delete_my_group_message">本当にこのグループを削除しますか？すべてのメッセージは削除され、残ったメンバーはもうこのグループを利用できません。</string>
+    <string name="error_out_of_memory">この操作を完了するための十分なメモリがありません</string>
+    <string name="configure">設定</string>
+    <string name="file_is_not_audio">音声ファイルではありません</string>
+    <string name="disabled_by_policy">一部の設定は管理者によって無効にされています</string>
+    <string name="select_all">すべて選択</string>
+    <string name="deleting_messages">メッセージを削除</string>
+    <string name="media_gallery_files">ファイル</string>
+    <string name="prefs_gif_autoplay">アニメーション画像を自動再生</string>
+    <string name="media_gallery_audio">ボイスメッセージ</string>
+    <string name="action_clone_group">グループを複製</string>
+    <string name="clone_group_message">これにより、あなたが管理者のこのグループが複製されます。続けますか？</string>
+    <string name="prefs_proximity_sensor">近接センサーを使用</string>
+    <string name="prefs_proximity_sensor_explain">近接センサーが覆われている場合、ボイスメッセージの再生にイヤホンを使用する</string>
+    <string name="no_media_found_generic">このトーク内でメディアは見つかりませんでした</string>
+    <string name="max_images_reached">最大で %d 個のアイテムを一度に編集できます</string>
+    <string name="enter_description">ここにバグ/問題の詳細を書いてください</string>
+    <string name="add_caption_hint">任意のキャプションの追加</string>
+    <string name="disable">無効化</string>
+    <string name="continue_anyway">このまま続ける</string>
+    <string name="invalid_input">入力が無効</string>
+    <string name="already_licensed">ライセンス取得済み</string>
+    <string name="hide_chat">プライベートトーク</string>
+    <string name="really_hide_chat_message">このトークをプライベートに設定しますか？メニューを使って、メッセージリストでのプライベートトークの 表示/非表示 を切り替えることができます。</string>
+    <string name="chat_hidden">プライベートに設定されたトーク</string>
+    <string name="title_show_private_chats">プライベートトークを表示</string>
+    <string name="title_hide_private_chats">プライベートトークを非表示</string>
+    <string name="chat_visible">トークはプライベートではありません</string>
+    <string name="prefs_title_locking_mechanism">ロック方法</string>
+    <string name="lock_option_none">なし</string>
+    <string name="lock_option_pin">PIN</string>
+    <string name="lock_option_screenlock">システムの画面ロック</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="hide_chat_message_explain">${app_name_short}では、特定のトークをPINで保護し、一時的にメッセージリストから隠すことができます。プライベートトークを有効にするには、PINを設定するか、設定でシステム画面ロック（Android 6.0+）を有効にしてください。</string>
+    <string name="set_lock">設定する</string>
+    <string name="prefs_title_access_protection">アプリの保護</string>
+    <string name="private_chat_subject">プライベート</string>
+    <string name="grace_thirty_seconds">30秒</string>
+    <string name="grace_one_minute">1分</string>
+    <string name="grace_two_minutes">2分</string>
+    <string name="grace_five_minutes">5分</string>
+    <string name="grace_ten_minutes">10分</string>
+    <string name="grace_thirty_minutes">30分</string>
+    <string name="grace_never">しない (手動)</string>
+    <string name="never">しない</string>
+    <string name="verification_started">認証が開始しました</string>
+    <string name="cannot_open_file">ファイルを開けませんでした</string>
+    <string name="prefs_title_image_attach_previews">メディアを選択</string>
+    <string name="prefs_sum_image_attach_previews">最近追加された画像のリストを添付ファイルのポップアップに表示する</string>
+    <string name="prefs_title_direct_share">ダイレクトシェア</string>
+    <string name="prefs_sum_direct_share">他のアプリからコンテンツを共有する際に最近使用したトークを表示します</string>
+    <string name="restore_disable_energy_saving">バックアップまたは復元の処理が中断されるのを防ぐために、端末を充電器に繋げ、バッテリーセーバーをすべて無効化してください。</string>
+    <string name="draft">下書き</string>
+    <string name="prefs_bigger_single_emojis">単一の絵文字を大きくする</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="wizard1_sync_work">${app_name}のデータを同期する…</string>
+    <string name="notification_hidden_text">連絡先を非表示</string>
+    <string name="really_reset_ringtones">通知音の設定をデフォルトに戻しますか？</string>
+    <string name="reset_ringtones_confirm">通知音の設定がリセットされました。</string>
+    <string name="prefs_language_override">言語</string>
+    <string name="threema_channel_intro">${app_name_short} Channelでは、${app_name_short}に関するあらゆるニュースを提供しています。${app_name_short} Channelを購読して、連絡先に追加してみませんか？登録は無料で、いつでも解除することができます。</string>
+    <string name="quote">引用</string>
+    <string name="contacts_deleted">連絡先は削除されました</string>
+    <string name="take_photo">写真を撮る</string>
+    <string name="select_from_gallery">ギャラリーから選択</string>
+    <string name="palette">パレット</string>
+    <string name="stickers">スタンプ</string>
+    <string name="text">テキスト</string>
+    <string name="undo">元に戻す</string>
+    <string name="android_backup_date">最後のバックアップ</string>
+    <string name="check_now">確認する</string>
+    <string name="discard">削除する</string>
+    <string name="android_backup_restart_threema">そのままお待ちください。数秒後にアプリが再起動されます。</string>
+    <string name="battery_optimizations_title">電池の最適化の無効化</string>
+    <string name="battery_optimizations_explain">「電池の最適化」は端末がスリープモードに入った際に、%1$sの処理を中断させる可能性があります。そのため、%2$s の「電池の最適化」を無効化してください。</string>
+    <string name="battery_optimizations_disable_guide">ドロップダウンメニューから «すべてのアプリ»を選択</string>
+    <string name="battery_optimizations_disable_guide_ctd">リスト内の%sを検索し、最適化を無効にする</string>
+    <string name="enter_text_hint">文字を入力</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_explain_text">デバイスを交換したり紛失したりした場合、バックアップがなければ誰もあなたの${app_name_short} IDやトークを復元できません。適切なバックアップオプションを使用してデータを保存してください。</string>
+    <string name="data_backup_explain">データのバックアップは以下を含みます。\n\n&#9679; あなたの ID とキーのペア\n&#9679; 連絡先と信頼度\n&#9679; グループのメンバー\n&#9679; トーク\n&#9679; メディアとファイル (オプション)\n\nデータは暗号化された ZIP ファイルで保存されます。バックアップが完了したら、端末から他の場所にファイルを移動することを推奨します。</string>
+    <string name="draw">描画</string>
+    <string name="edit">編集</string>
+    <string name="edit_message">メッセージを編集</string>
+    <string name="edited">編集済</string>
+    <string name="edit_history">履歴を編集</string>
+    <string name="discard_changes">変更を削除しますか？</string>
+    <string name="prefs_title_network">ネットワーク</string>
+    <string name="prefs_title_ipv6_preferred">メッセージに IPv6 を使用</string>
+    <string name="prefs_ipv6_preferred_off">IPv4 の接続のみが使用されます</string>
+    <string name="prefs_ipv6_preferred_on">IPv4 より IPv6 の接続を優先します</string>
+    <string name="prefs_title_ipv6_webrtc_allowed">通話とウェブに IPv6 を使用</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="ipv6_requires_restart">この設定を適用するには、アプリを再起動する必要があります。</string>
+    <string name="ipv6_restart_now">再起動する</string>
+    <string name="on_cap">オン</string>
+    <string name="off_cap">オフ</string>
+    <string name="share_chat">トークを共有</string>
+    <string name="flip">反転</string>
+    <string name="to_front">前へ</string>
+    <string name="play">再生</string>
+    <string name="pause">中断</string>
+    <string name="retry">もう一度</string>
+    <string name="voice_message_record">音声メッセージを録音</string>
+    <string name="open_navdrawer">ナビゲーション・ドロワーを開く</string>
+    <string name="profile_picture">プロフィール画像</string>
+    <string name="profile_picture_release">プロフィール写真を誰に表示しますか？</string>
+    <string name="picrelease_nobody">誰にもしない</string>
+    <string name="picrelease_selected">選択した連絡先</string>
+    <string name="picrelease_everyone">自分が送信をした全員</string>
+    <string name="prefs_title_receive_profilepics">プロフィール画像を表示</string>
+    <string name="prefs_sum_receive_profilepics_off">連絡先から提供されたプロフィール画像を非表示</string>
+    <string name="prefs_sum_receive_profilepics_on">連絡先から提供されたプロフィール画像を表示</string>
+    <string name="prefs_sum_receive_profilepics_recipients_list">このリストで選択された連絡先には、あなたがメッセージを送信したときに、あなたのプロフィール画像が届きます。</string>
+    <string name="menu_send_profilpic">プロフィール画像の受信者として追加</string>
+    <string name="menu_send_profilpic_off">プロフィール画像の受信者として削除</string>
+    <string name="menu_send_profilpic_now">プロフィール画像を送信する</string>
+    <string name="profile_picture_sent">プロフィール画像は送信されました</string>
+    <string name="sending_messages">送信中…</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_data_media_confirm">大きなメディアファイルをローカルのZIPバックアップに保存すると、デバイスのCPUやメモリーの容量を超えてしまい、非常に長い時間がかかる場合があります。バックアップの実行中は、${app_name}はメッセージの送受信を行いません。それでも続行しますか？</string>
+    <string name="backup_data_cancelled">バックアップはキャンセルされました</string>
+    <string name="message_sent">メッセージが送信されました</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_call">${app_name_short}通話</string>
+    <string name="threema_message_to">%sへのメッセージ</string>
+    <string name="threema_call_with">%s と通話する</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_title_voip">${app_name_short}通話</string>
+    <string name="prefs_title_force_turn">常にリレーコールを使用</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_force_turn_off">可能であれば直接接続を確立し、認証されていない連絡先には${company_name}のサーバーを介したリレーコールのみを使用します。直接接続では、IPアドレスが相手に知られる可能性があります。</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_force_turn_on">全通話で${company_name}のサーバーを経由し、IPアドレスを守ります。通話品質低下の可能性があります。</string>
+    <string name="permission_record_audio_required">通話や音声メッセージを送信するには、マイクへのアクセスを許可してください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_voice_call_notifications">${app_name_short}通話</string>
+    <string name="prefs_voice_call_sound">着信音</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_voice_call_sound">${app_name_short}通話の着信音を選択</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_voice_call_vibrate">${app_name_short}通話の着信時にバイブレーションを鳴らします</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_title_voip_enable">${app_name_short}通話を有効化</string>
+    <string name="webclient_invalid_push_token_message">手動起動が必要</string>
+    <string name="threema_work_contact">Threema Workの連絡先</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_phone_required">${app_name}通話を使用している間、電話の管理を許可する</string>
+    <string name="strikethrough">取り消し線</string>
+    <string name="italic">イタリック体</string>
+    <string name="bold">太字</string>
+    <string name="shortcut_choice_title">ショートカットを追加…</string>
+    <string name="prefs_title_device_info">端末情報</string>
+    <string name="notifications_disabled_title">通知を無効化しました</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="notifications_disabled_text">システム設定で${app_name}の通知が無効になっているため、新しいメッセージの通知ができません。</string>
+    <string name="notifications_disabled_settings">システム設定の変更</string>
+    <string name="error_attaching_files">添付ファイルの追加でエラーが発生しました</string>
+    <string name="prefs_fix_powermanager_problems">電源制限の解除</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_fix_powermanager_problems_desc">${app_name}がバックグラウンドで動作するようにして、アクティブでないときでもメッセージを受信できるようにする。</string>
+    <string name="disable_powermanager_explain">次の画面で、«%s» が保護されているか、端末の電源管理の制限から除外されていることを確認してください。終了したら «戻る» ボタンをタップしてください。</string>
+    <string name="disable_autostart_explain">次の画面で、自動起動できるアプリの一覧に«%s» が含まれていることを確認します。完了したら«戻る» ボタンをタップしてください。</string>
+    <string name="notification_priority_default">低</string>
+    <string name="notification_priority_high">高</string>
+    <string name="notification_priority_max">最高</string>
+    <string name="prefs_title_notification_priority">優先度</string>
+    <string name="pin">PIN</string>
+    <string name="unpin">PINを解除</string>
+    <string name="location_services_disabled">位置情報サービスが無効になっています。今すぐ有効にしますか？</string>
+    <string name="send_location">位置情報を送信</string>
+    <string name="forward_location">位置を転送</string>
+    <string name="unknown_address">不明な住所</string>
+    <string name="your_location">あなたの位置情報</string>
+    <string name="reply_later">あとで話す</string>
+    <string name="reply_on_my_way">私は我が道を行く</string>
+    <string name="reply_thank_you">ありがとうございます</string>
+    <string name="reply_youre_welcome">どういたしまして</string>
+    <string name="prefs_auto_download_title">メディアの自動ダウンロード</string>
+    <string name="prefs_auto_download_wifi">Wi-Fi 時</string>
+    <string name="prefs_auto_download_mobile">モバイルデータ時</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="rate_intro">${app_name}はいかがですか？</string>
+    <string name="rate_feedback_intro">サービスの改善点を教えてください (省略可)</string>
+    <string name="rate_positive">レビューを送信</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="rate_title">${app_name}を評価</string>
+    <string name="rate_thank_you">貴重なレビューをありがとうございます！</string>
+    <string name="disabled_by_policy_short">管理者により機能の無効化がされます</string>
+    <string name="rate_forward_to_play_store">Google Play でも評価しますか？</string>
+    <string name="rate_error">あなたのレビューをサーバーに送信できませんでした。インターネットに接続されていることを確認してから再度お試しください。</string>
+    <string name="off_unless_i_was_mentioned">言及されない限りオンにする</string>
+    <string name="dnd">マナーモード</string>
+    <string name="minus">マイナス</string>
+    <string name="plus">プラス</string>
+    <string name="switched_off">オフ</string>
+    <string name="switched_on">オン</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="title_tab_work_users">${app_name}ユーザー</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="no_matching_work_contacts">管理者が確認した${app_name}の連絡先は見つかりませんでした。</string>
+    <string name="all">すべて</string>
+    <string name="webclient_session_stop_all">すべて閉じる</string>
+    <string name="passphrase_service_name">パスフレーズサービス</string>
+    <string name="passphrase_service_description">パスフレーズが解除された時の通知</string>
+    <string name="webclient_service_description">${app_name_short} Webセッションが始まったときに通知</string>
+    <string name="prefs_title_accept_privacy_policy">プライバシーポリシーに同意する</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="privacy_policy_explain">${app_name} はどのメッセンジャーよりも厳密にあなたのプライバシーを守ります。詳しくは%1$sからご確認ください。</string>
+    <string name="privacy_policy_check_confirm">%s を使うには、プライバシーポリシーへの同意が必要です。\n\n(EU 規則 2016/679 より)</string>
+    <string name="prefs_title_incognito_keyboard">キーボードにシークレットモードを要求</string>
+    <string name="prefs_sum_incognito_keyboard">予測変換に使用されるデータ収集をアプリ内で無効化します (キーボードが対応している場合)</string>
+    <string name="tooltip_mentions">このグループのメンバーに直接声をかけたり、言及したりする場合は、キーボードの@を入力してください。</string>
+    <string name="tooltip_imagepaint">クリエイティブになろう！魔法の杖のボタンをタップして落書きをしたり、写真にスタンプや文字を追加して送信することができます。</string>
+    <string name="call_ongoing">継続中の通話</string>
+    <string name="ballot_received_votes">投票の数: %1$d/%2$d</string>
+    <string name="quote_not_found">引用されたメッセージが見つかりません</string>
+    <string name="ballot_secret">秘密</string>
+    <string name="password_too_short_generic">パスワードが短すぎます</string>
+    <string name="passwords_dont_match">パスワードが一致しません</string>
+    <string name="test_unsuccessful">テストが失敗しました</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="preparing_threema_safe">${app_name_short} Safeを準備中</string>
+    <string name="disable_powermanager_title">電源制限</string>
+    <string name="disable_autostart_title">自動的に開始</string>
+    <string name="unchanged">変更されていない</string>
+    <string name="safe_learn_more_button">詳細</string>
+    <string name="safe_enable_explain">トークに必要なものは、あなたの端末にのみ保存されます。携帯電話を紛失したり、誤ってデータを削除してしまった場合、私たちはあなたを助けることができません。\n\n${app_name_short} Safeは、あなたが選んだ安全なサーバーに、あなたのキー、連絡先リスト、グループメンバー（ただしメッセージ内容は除く）など、すべての重要なデータの自動バックアップを匿名で作成します。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_disable_confirm">本当に${app_name_short} Safeを有効にせずに続行しますか？</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_choose_password">強力なパスワードを選んでください。このパスワードは、${app_name_short} Safeのバックアップを復元する際に必要となります。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_choose_server">${app_name_short} Safeのサーバーを選択</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_server_explain">${company_name}のサーバーまたは、指定されたサードパーティーのバックアップサーバーを代わりに使用することができます。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_use_default_server">デフォルトのサーバーを使用</string>
+    <string name="safe_test_server">テストサーバー</string>
+    <string name="safe_advanced_options">詳細設定</string>
+    <string name="safe_enter_password">${app_name_short} Safeのパスワードを入力してください</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_threema_id">${app_name_short} ID</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_restore_enter_id">復元をする${app_name_short} IDを入力してください</string>
+    <string name="safe_search_id_title">ID に紐づけされている電話番号またはメールアドレスを入力してください</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_id_lookup">${app_name_short} IDを見る</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_no_id_found">${app_name_short} IDが見つかりませんでした</string>
+    <string name="safe_no_backup_found">サーバー上にバックアップが見つかりませんでした。IDとパスワードを確認してください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_select_id">複数の${app_name_short} IDが見つかりました。使用したいIDを選択してください。</string>
+    <string name="safe_backup_now">バックアップする</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_enable_explain_short">${app_name_short} Safeを有効にすると、すべての重要なデータを自動的に安全かつ匿名でバックアップすることができます。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_deleting">${app_name_short} Safeのバックアップを削除中</string>
+    <string name="safe_delete_error">バックアップの消去のエラー: %s</string>
+    <string name="safe_delete_success">バックアップのサーバーからの削除は成功しました</string>
+    <string name="safe_error_preparing">${app_name_short} Safeのバックアップの用意のエラー</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_choose_password_force">あなたの${app_name_short} IDを守るために、強力なパスワードを設定してください。ここに入力した内容を忘れないようにしてください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_deactivate">${app_name_short} Safeの無効化</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_deactivate_explain">${app_name_short} Safeを無効にすると、既存のバックアップはサーバー上で削除されます。続けますか？</string>
+    <string name="add_group_members">メンバーをさらに追加</string>
+    <string name="contact_add_confirm">新しい連絡先 «%1$s» を連絡先リストに追加しますか？</string>
+    <string name="password_bad">脆弱なパスワード</string>
+    <string name="prefs_fix_background_data">バックグラウンドデータの有効化</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_fix_background_data_desc">${app_name}がバックグラウンドで動作しているときにメッセージを受信するには、バックグラウンドデータとデータ使用制限なしの両方を有効にしてください。</string>
+    <string name="prefs_fix_device">端末の設定上の問題を修正</string>
+    <string name="safe_successful">成功</string>
+    <string name="safe_unsuccessful">失敗</string>
+    <string name="safe_upload_failed">アップロードに失敗しました</string>
+    <string name="safe_upload_size_exceeded">サーバーのアップロードサイズを超えました</string>
+    <string name="safe_connection_error">接続エラー</string>
+    <string name="safe_server_name">サーバー名</string>
+    <string name="safe_max_backup_size">バックアップのサイズ制限</string>
+    <string name="safe_retention">バックアップの保持期間</string>
+    <string name="safe_result">バックアップ結果</string>
+    <string name="number_of_days">%d 日</string>
+    <string name="backup_other_restore_options">他の復元方法</string>
+    <string name="safe_size">バックアップのサイズ</string>
+    <string name="backup_version_mismatch">このバックアップのバージョンは、サポートされているバージョンよりも高いです。最新のバージョンにアップデートしてください。</string>
+    <string name="safe_restore_failed">復元失敗</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_failed_notification">${app_name_short} Safeのバックアップが %d 日間連続して失敗しました。ここをタップして確認してください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_restore">${app_name_short} Safeから復元</string>
+    <string name="backup_restore_in_progress">バックアップまたは復元が進行中です。ステータス情報は通知を確認してください。</string>
+    <string name="restore_error_body">復元が正常に完了しませんでした</string>
+    <string name="forgot_your_id">ID をお忘れですか？</string>
+    <string name="restore_success_body">復元が完了しました</string>
+    <string name="work_data_sync">データを同期</string>
+    <string name="private_contact">プライベートな連絡先</string>
+    <string name="ringtone_selection_default">デフォルト (%s)</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="work_data_sync_desc">${app_name}の同期</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="ballot_not_connected">投票を閉じる前に、${app_name}がオンラインになっていることを確認してください。</string>
+    <string name="empty_chat_title">トークをクリア</string>
+    <string name="empty_chat_confirm">このトーク内のメッセージはすべて削除されます。続行しますか？</string>
+    <string name="emptying_chat">トークを空にする</string>
+    <string name="emptying_chat_deleting_messages">メッセージを削除中…</string>
+    <string name="delete_chat_title">トークを削除</string>
+    <string name="deleting_chat">トークを削除中…</string>
+    <string name="set_private">«プライベートトーク»としてマークする</string>
+    <string name="unset_private">«プライベートトーク»を無効化する</string>
+    <string name="delete_group_message">このグループを退会して完全に削除しますか？すべてのメッセージが削除されます。</string>
+    <string name="delete_left_group_message">本当にこのグループを削除してもいいですか？すべてのメッセージが削除されます。</string>
+    <string name="chats">トーク</string>
+    <string name="notification_setting_ignored">すべての変更は無効化されます！</string>
+    <string name="notification_channel_alerts">警告とエラー</string>
+    <string name="notification_channel_notices">通知</string>
+    <string name="chat_updates">トークのアップデート</string>
+    <string name="backup_or_restore_progress">バックアップと復元の実行</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="tooltip_export_id">暗号化された${app_name_short} IDを共有・印刷するには、ここをタップしてください。</string>
+    <string name="downloading">ダウンロード中</string>
+    <string name="today">今日</string>
+    <string name="restore_data_cancelled">復元はキャンセルされました</string>
+    <string name="safe_change_password">パスワードを変更</string>
+    <string name="safe_configure_choose_password_title">パスワードを入力</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="password_bad_explain">選択した${app_name_short} Safeのパスワードは安全ではなく、攻撃者に簡単に推測されてしまいます。別のパスワードを選択してください。ヒント：複数の単語を組み合わせたパスワードを使用してください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_password_updated">${app_name_short} Safeのパスワードは更新されました</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_activated">${app_name_short} Safeが有効化されました</string>
+    <string name="restore_zip_invalid_file">バックアップファイル無効です</string>
+    <string name="push_token_cleared">プッシュ・トークンがクリアされました</string>
+    <string name="insert_date">日付を入れる</string>
+    <string name="add_answer">回答を追加</string>
+    <string name="title_cannot_be_empty">投票のタイトルは空にできません</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="voip_disabled">${app_name_short}通話は無効です</string>
+    <string name="hide_chat_enter_message_explain">このトークはプライベートトークとして表示されています。これに入るには、まずアクセス保護を設定してください。</string>
+    <string name="unknown">不明</string>
+    <string name="miui_notification_title">MIUI 10の通知に関する重要なお知らせ</string>
+    <string name="miui_notification_body">MIUI 10では、新しく作成されたすべての通知チャンネルに対して、サウンドとライトがデフォルトで無効になっています（Xiaomiが«重要»と判断した一部のアプリを除く）。端末のアプリ別通知設定画面で、チャンネルごとに明示的に有効にする必要があります。詳しくは、お使いの端末のメーカーにお問い合わせください。</string>
+    <string name="miui12_notification_body">MIUIは、デフォルトですべてのアプリの通知音、通知ライト、フローティング通知を無効にします（Xiaomiが\"重要\"と判断した一部の超人気アプリを除く）。そのため、端末のアプリ別通知設定画面でこれらの設定を手動で有効にし、アプリのアップデートごとにこの手順を行う必要があります。詳細については、Xiaomiにお問い合わせください。</string>
+    <string name="dont_show_again">二度と表示させない</string>
+    <string name="miui_notification_prefs">MIUI設定</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_safe_upload_successful">${app_name_short} Safeのバックアップがアップロードされました</string>
+    <string name="time_remaining">残り %s</string>
+    <string name="safe_configure_server_credentials_title">認証 (省略可)</string>
+    <string name="username_hint">ユーザー名</string>
+    <string name="server_hint">サーバー</string>
+    <!-- Shown in "About" to indicate that the DualLock (a.k.a. "Remote Secret") feature is currently activated -->
+    <string name="about_screen_remote_secrets_activated">アーカイブ済</string>
+    <string name="lock_option_biometric">生体認証</string>
+    <string name="biometric_enter_authentication">ロックを解除するために認証してください</string>
+    <string name="biometric_authentication_failed">認証に失敗しました</string>
+    <string name="biometric_authentication_successful">認証に成功しました</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="work_safe_forced_explain">あなたの管理者は、あなたの端末に対して${app_name_short} Safeを有効にしました。</string>
+    <string name="pin_locked_cannot_send">アプリがロックされているため、送信できませんでした。</string>
+    <string name="prefs_summary_hide_screenshots_notice">プライバシーの観点から、セキュリティ設定で「アプリのロック」が有効になっている場合は、プレビューとスクリーンショットが常時無効化されます。</string>
+    <string name="work_select_categories">カテゴリーを選択</string>
+    <string name="my_profile">マイプロフィール</string>
+    <string name="message_too_long">メッセージが長すぎるため、送信できませんでした。</string>
+    <string name="database_migration_no_space">データベースの移行に失敗しました: 端末に十分なスペースが残っていません。</string>
+    <string name="advanced_options">上級者向けオプション</string>
+    <string name="url_warning_body">開こうとしているリンクのホスト名が不審です。\n\n表示されたホスト名: <b>%s</b>\n本当のホスト名: <b>%s</b>\n\nこれは、あなたを騙して、別のサイトのふりをしたサイトを開かせようとしている可能性があります。\n\nそれでも続行しますか？</string>
+    <string name="url_warning_title">警告: フィッシング</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_camera_qr_required">QRコードの読み取りには、カメラへのアクセス権が必要です。</string>
+    <string name="voice_action_title">ボイス・アクション</string>
+    <string name="voice_action_body">ボイスアクションの処理中</string>
+    <string name="permission_camera_photo_required">写真を撮るために、カメラへのアクセスを許可してください</string>
+    <string name="global_search">トークを検索</string>
+    <string name="global_search_empty_view_text">検索するメッセージの内容を2文字以上入力してください</string>
+    <string name="my_id">私のID</string>
+    <string name="profile_picture_and_nickname">プロフィール写真とユーザー名</string>
+    <string name="lp_select_this_place">この場所を選択</string>
+    <string name="lp_or_select_nearby">もしくは近場を選択</string>
+    <string name="lp_use_this_location">この位置情報を送信しますか？</string>
+    <string name="lp_search_place">都市を選択</string>
+    <string name="lp_no_nearby_places_found">近くの場所は見つかりませんでした</string>
+    <string name="select_directory_for_backup">ここに保存</string>
+    <string name="data_backup_headline">データのバックアップを作成してすべてのデータを保存しましょう。</string>
+    <string name="data_backup_save_path">バックアップのパス</string>
+    <string name="change">変更</string>
+    <string name="data_backup_last_date">最後に成功したデータのバックアップ</string>
+    <string name="archived">アーカイブ</string>
+    <string name="to_archive">アーカイブ</string>
+    <string name="archived_chats">アーカイブされたトーク</string>
+    <!-- Menu option in context menu when long-pressing a chat in the Chats tab, allows the user to move the selected chat to the archive -->
+    <string name="archive_chat">トークをアーカイブ</string>
+    <string name="unarchive">アーカイブを解除</string>
+    <string name="no_archived_chats">アーカイブされたチャットはありません。\nトークをアーカイブするには、メッセージリストでトークを左にスワイプします。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="add_contact_enter_id_hint">追加したい連絡先の${app_name_short} IDを入力してください。</string>
+    <string name="notification_channel_new_contact">新しい連絡先</string>
+    <string name="notification_channel_new_contact_desc">新しい連絡先の通知</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. %1$s is a placeholder for a person's name. -->
+    <string name="notification_contact_has_joined">%1$sが${app_name_short}に参加しました。メッセージを送るにはここをタップしてください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. %1$s is a placeholder for a number (of contacts). %2$s is a summary of people's names. -->
+    <string name="notification_contact_has_joined_multiple">%1$d人が${app_name_short}: %2$sに参加しました。ここをタップしてメッセージを送信してください。</string>
+    <string name="system_default">システム設定</string>
+    <string name="open_in_maps_app">マップアプリで開く</string>
+    <string name="delete">削除</string>
+    <string name="delete_from_this_device">この端末から削除</string>
+    <string name="delete_for_all">全員から削除</string>
+    <string name="message_was_deleted">このメッセージは削除されました</string>
+    <string name="continue_recording">録音を続ける</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". %1$s is a placeholder for the version number. They must not be translated. -->
+    <string name="whatsnew_title">${app_name} %1$sの新しい機能は何ですか？</string>
+    <string name="tap_to_start">タップして %s を始めましょう</string>
+    <string name="two_years">2年</string>
+    <string name="invalid_backup_path">バックアップのパスが無効です</string>
+    <string name="backup_data_no_permission">このディレクトリには書き込めません。別のディレクトリを選択してください。</string>
+    <string name="prefs_sum_show_unread_badge">下部のナビゲーションタブに未読メッセージの数を示すバッジを表示します</string>
+    <string name="prefs_title_show_unread_badge">未読バッジ</string>
+    <string name="open_myid_popup">クイックアクセス・ポップアップ・ウィンドウを開く</string>
+    <string name="logo">ロゴマーク / トップへスクロール</string>
+    <string name="quote_subj_end">引用終了</string>
+    <string name="quote_subj">引用</string>
+    <string name="duration">長さ</string>
+    <string name="seconds">秒</string>
+    <string name="minutes">分</string>
+    <string name="and">と</string>
+    <string name="edit_type_content_description">表示または編集 %1$s %2$s</string>
+    <string name="group">グループ</string>
+    <string name="play_services_not_installed_unable_to_use_push">Play Servicesがインストールされていません。«push»に切り替えることができません。</string>
+    <string name="unable_to_get_current_location">現在地を把握できません。</string>
+    <string name="lp_search_place_min_chars">場所を検索するには、3文字以上を入力してください。</string>
+    <string name="lp_search_place_no_matches">該当する場所が見つかりませんでした。検索条件を変更してください。</string>
+    <string name="wallpaper_default">デフォルトの壁紙</string>
+    <string name="wallpaper_gallery">ギャラリーから選択する</string>
+    <string name="wallpaper_none">表示しない</string>
+    <string name="wallpaper_threema">%sの壁紙</string>
+    <string name="message_id">メッセージID</string>
+    <string name="mime_type">MIMEタイプ</string>
+    <string name="password_does_not_comply">パスワードが、管理者が設定したガイドラインに準拠していません。</string>
+    <string name="audio_mute_due_to_focus_loss">フォーカスが失われたため、音声が一時的にミュートされました。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="restore_data_backup_explain">データバックアップを復元するには、まず「マイプロフィール」画面から${app_name_short} IDを削除します。\n\nアプリが再起動したら、「バックアップからの復元」→「その他の復元オプション」→「データバックアップ」を選択し、復元したいデータバックアップファイルを選択してください。</string>
+    <string name="audio_focus_loss_complete">オーディオフォーカスが完全に失われたため、通話が切断されました。</string>
+    <string name="tap_for_picture_hold_for_video">タップで写真、長押しで動画を撮影</string>
+    <string name="sending_media">メディアを送信中</string>
+    <string name="permission_record_video_audio_required">動画を撮るには、マイクへのアクセスを許可してください</string>
+    <string name="media_files">ファイル</string>
+    <string name="auto_download_limit_explain">%s を超える動画とファイルは常にダウンロードを尋ねます</string>
+    <string name="quoted_message_deleted">引用されたメッセージは利用できなくなりました</string>
+    <string name="searching">検索中…</string>
+    <string name="prefs_work_life_balance">マナーモード</string>
+    <string name="prefs_title_working_days">営業日</string>
+    <string name="prefs_working_days_sum">営業日を選択</string>
+    <string name="prefs_work_time_start">業務時間の開始</string>
+    <string name="prefs_work_time_start_sum">始業時間を設定</string>
+    <string name="prefs_work_time_end">終業時間</string>
+    <string name="prefs_work_time_end_sum">終了時間を設定</string>
+    <string name="prefs_working_days_enable_title">営業時間外ポリシー</string>
+    <string name="prefs_working_days_enable_sum">業務時間外の通知や着信を拒否することができます。</string>
+    <string name="work_life_dnd_active">時間外活動</string>
+    <string name="warning">警告</string>
+    <string name="password_remember_warning">この操作は慎重に行ってください！%s はサーバーにいかなるパスワードも保存しないため、もし PIN またはパスワードを忘れたとしても、私たちは助けになれません。</string>
+    <string name="safe_backup_tap_to_restart">「再起動する」と表示されている通知をタップしてアプリを再起動してください。通知がない場合は、通知バーを下までスワイプしてみてください。</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="send_to_support">${company_name}サポートに送信</string>
+    <string name="menu_legal">法的情報</string>
+    <string name="tooltip_work_hint">この連絡先はThreema Workを利用しています。</string>
+    <string name="video_camera_on">ビデオカメラが有効</string>
+    <string name="video_camera_off">ビデオカメラが無効</string>
+    <string name="enable_picture_in_picture">ピクチャ・イン・ピクチャ・モードを開始</string>
+    <string name="call_with">%s と通話する</string>
+    <string name="picture_in_picture_disabled_in_setting">%sのピクチャ・イン・ピクチャ・モードは無効になっています。システム設定で有効にしてください。</string>
+    <string name="delete_everything">すべて削除</string>
+    <string name="prefs_title_voip_video_enable">ビデオ通話を許可</string>
+    <string name="video_calls">ビデオ通話</string>
+    <string name="prefs_videocall_profile">優先する画質</string>
+    <string name="videocall_profile_auto">バランス (推奨)</string>
+    <string name="videocall_profile_low_bandwidth">低容量データ通信</string>
+    <string name="videocall_profile_max_quality">最高画質</string>
+    <string name="unable_to_play_video">動画を再生できません</string>
+    <string name="tooltip_voip_turn_on_camera">ここをタップしてカメラをオンにする</string>
+    <string name="prefs_videocall_profile_explain">実際の画質はネットワークと会話相手の設定により異なります</string>
+    <string name="permission_camera_videocall_required">ビデオ通話のために、カメラへのアクセスを許可してください</string>
+    <string name="tooltip_voip_enable_speakerphone">ここをタップしてスピーカーをオンにする</string>
+    <string name="ballot_open">受付中の投票</string>
+    <string name="ballot_window_hide">投票バーを隠す</string>
+    <string name="ballot_window_show">投票バーを表示</string>
+    <string name="single_ballot_really_delete">この投票を削除する</string>
+    <string name="single_ballot_really_delete_text">票の復元はできません。本当にこの投票を削除しますか？</string>
+    <string name="tooltip_voip_other_party_video_on">相手がビデオ通話を開始しました。ここをタップすると、あなたのカメラもオンになります。</string>
+    <string name="tooltip_voip_other_party_video_disabled">相手が現在のアプリのバージョンを使用していない、またはビデオ通話を許可しません。</string>
+    <string name="biometrics_not_enrolled">生体認証は登録されていません。</string>
+    <string name="biometrics_not_avilable">このシステムでは生体認証は利用できません。</string>
+    <string name="biometrics_no_permission">生体認証またはハードウェアにアクセスするための許可がありません。</string>
+    <string name="verification_settings_desc">3つの点は、連絡先の検証レベルを表しています。</string>
+    <string name="verification_levels_title">認証レベル</string>
+    <string name="work_verification_levels_title">組織内の連絡先</string>
+    <string name="external_verification_levels_title">その他の連絡先</string>
+    <string name="switch_flash">フラッシュモードの切り替え</string>
+    <string name="message_not_found">メッセージが見つかりませんでした</string>
+    <string name="insert_datetime">日付と時刻を入れる</string>
+    <string name="prefs_sum_disable_smart_replies">Android 通知からスマートリプライを無効化します</string>
+    <string name="prefs_title_disable_smart_replies">スマートリプライを無効化</string>
+    <string name="url_warning_body_alt">開こうとしているリンクのホスト名が怪しいです。\n\nこれは、別のサイトを装ってあなたを騙そうとしている可能性があります。\n\nそれでも続行しますか？</string>
+    <string name="read_on">続きを読む…</string>
+    <string name="forward_text">テキストを転送</string>
+    <string name="an_error_occurred_during_send">1つ以上のメッセージの送信でエラーが発生しました。</string>
+    <string name="state_processing">処理中</string>
+    <string name="passphrase_locked">パスフレーズはロックされています</string>
+    <string name="selected_media">あなたの選択</string>
+    <string name="attach_gif">Gif画像</string>
+    <string name="attach_gallery">ギャラリー</string>
+    <string name="attach_picture">画像</string>
+    <string name="attach_video">動画</string>
+    <string name="attach_location">位置情報</string>
+    <string name="filter_by_album">アルバムによるフィルター</string>
+    <string name="media_date_taken">撮影日: %s</string>
+    <string name="media_date_added">追加日: %s</string>
+    <string name="media_date_modified">更新日: %s</string>
+    <string name="media_date_unknown">日付不明</string>
+    <string name="max_selectable_media_exceeded">一度に%d以上のオブジェクトを送信できません。</string>
+    <string name="error_unable_loading_media_thumb">エラーが発生しました。メディアサムネイルを読み込めませんでした。</string>
+    <string name="select">選択</string>
+    <string name="filter_list">リストをフィルター</string>
+    <string name="hint_filter_list">フィルターする文字を入力</string>
+    <string name="add">追加</string>
+    <string name="threema_message_from">%sからのメッセージ</string>
+    <string name="show_text">テキストを表示</string>
+    <string name="only_images_or_videos">画像か動画のみ選択できます</string>
+    <string name="media_gallery_gifs">GIF画像</string>
+    <string name="no_media_found_global">この端末ではメディアが見つかりません</string>
+    <string name="original_file_no_longer_avilable">元のファイルにはもうアクセスできません。再送してください。</string>
+    <string name="state_transcoding">トランスコーディング</string>
+    <string name="importing_files">ファイルの読み込み</string>
+    <string name="tooltip_image_resolution_hint">ここをタップすると、画像の解像度を調整できます。</string>
+    <string name="ballot_created_successfully">投票を作成しました。</string>
+    <string name="file_size">ファイルサイズ</string>
+    <string name="thirty_days_abbrev">30日</string>
+    <string name="show_in_chat">トークで表示</string>
+    <string name="group_create_no_members">本当に他のメンバーがいない空のグループを作成しますか？</string>
+    <string name="notes">備考</string>
+    <string name="blur_faces">顔をぼかす</string>
+    <string name="brush">ブラシ</string>
+    <string name="pencil">ペンシル</string>
+    <string name="highlighter">蛍光ペン</string>
+    <string name="error_detecting_faces">顔の検出エラー</string>
+    <string name="no_faces_detected">顔が検出されません</string>
+    <string name="smiley">絵文字</string>
+    <string name="blur">ぼかし</string>
+    <string name="face_blur_tooltip_title">顔認識</string>
+    <string name="face_blur_tooltip_text">画像の中から顔を見つけてぼかしたり、絵文字をかぶせたりします。</string>
+    <string name="listened_to">聞いた</string>
+    <string name="transcoder_unsupported_audio_format">システムで対応していないため、オーディオをトランスコードできませんでした。</string>
+    <string name="transcoder_unknown_audio_error">不明なオーディオトランスコーディングエラーが発生しました。</string>
+    <string name="video_size_explain">非常に大きなサイズの動画は、この設定にかかわらず圧縮されることがあります。</string>
+    <string name="status_create_notes">*ここはあなた一人です*\nこのトークは安全なノート・メディア・文書として使ってください。</string>
+    <string name="status_create_notes_off">*ここはあなた一人ではなくなります*\n新しいメッセージはすべてのグループメンバーに送信されます。</string>
+    <string name="note_group_howto">ヒント: あなたがメンバーを誰も追加しなかったら、このグループはローカルになります。メモやメディア、ドキュメントを安全に保存したり、パソコンに転送したりするのに最適です。</string>
+    <string name="mark_unread">未読にする</string>
+    <string name="mark_read_short">既読</string>
+    <string name="unread">未読</string>
+    <string name="missing_app_licence">有効なアプリのライセンスが見つからないため、新しい身元作成リクエストが出来ませんでした。</string>
+    <string name="set_backup_path">バックアップのパスを設定</string>
+    <string name="set_backup_path_intro">バックアップの保存場所を選んでください</string>
+    <string name="discard_changes_title">変更の破棄</string>
+    <string name="accept">承認する</string>
+    <string name="tap_here_for_more">詳しい情報はこちら</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="another_connection_instructions"><![CDATA[サーバーは複数の異なるデバイスから同じ${app_name_short} IDへの接続を検出しました。
+
+複数のデバイスで同じ${app_name_short} IDを同時に使用することはできません。新しいメッセージは、サーバーに最後にログインしたデバイスにのみ送信されます。
+
+新しいデバイスに切り替える場合、古いデバイスから%sをアンイストールか無効にしてから、新しいデバイスを再起動してください。]]></string>
+    <string name="app_store_error_code">App storeエラーコード: %d</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_restore_type"><![CDATA[どの種類のバックアップで復元しますか？ <br/><br/> <a href=%s>${app_name_short}のバックアップについての詳細</a>]]></string>
+    <string name="data_backup_info">トークを含むすべてを復元する</string>
+    <string name="new_to_threema">%sがはじめての方</string>
+    <string name="back_to_threema">%sの既存ユーザー</string>
+    <string name="id_backup_info">IDのみ復元する</string>
+    <string name="restore_your_id_contacts_and_groups">ID、連絡先、グループを復元する</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_safe_backup">${app_name_short} Safe バックアップ</string>
+    <string name="forgot_your_password"><![CDATA[<a href=%s>パスワードをお忘れの方</a>]]></string>
+    <string name="download_failed">ダウンロードに失敗しました。エラーコード: %d</string>
+    <string name="edit_answer">回答を編集</string>
+    <string name="share_media">他のアプリで共有</string>
+    <string name="group_image">グループ画像</string>
+    <string name="miui_battery_optimization">%sがこのタスクを実行するには、「電池の最適化」を無効にする必要があります。Xiaomiでは、アプリがこの設定画面を直接呼び出すことを許可していないため、あなた自身で端末の設定を手動で行う必要があります。電池の最適化を無効にする方法についてサポートが必要な場合は、Xiaomiのサポートにお問い合わせください。</string>
+    <string name="forward_captions">キャプションを含む</string>
+    <string name="importing_files_failed">バックアップファイルの読み込みが出来ません。ストレージに十分な空き容量があるか確認してください。</string>
+    <string name="label_continue">続ける</string>
+    <string name="select_date">日付を選択</string>
+    <string name="select_time">時間を選択</string>
+    <string name="send_to">%s に送信</string>
+    <string name="receipts_override_choice_send">送信する</string>
+    <string name="receipts_override_choice_dont_send">送信しない</string>
+    <string name="receipts_override_choice_default">デフォルト (%s)</string>
+    <string name="unable_to_determine_recording_length">空の録音であるか、または録音の長さを特定できません</string>
+    <string name="prefs_header_receipts">既読/入力状態の通知</string>
+    <string name="prefs_title_reset_receipts">個別設定のクリア</string>
+    <string name="prefs_sum_reset_receipts">連絡先ごとの既読と入力中の設定をデフォルトに戻します</string>
+    <string name="reset_successful">デフォルトへのリセットに成功しました</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="no_threema_qr_info">これは${app_name_short}固有のQRコードではありません。デコードされたコンテンツは次のとおりです：</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="qr_scanner_id_hint">本人確認のために、連絡先のQRコードをスキャンします。QRコードを表示するには、${app_name_short}のホーム画面の左上にあるプロフィール画像をタップします。</string>
+    <string name="enable_storage_access_for_media">デバイス内の画像や動画を表示するためにストレージへのアクセスを有効にしてください</string>
+    <string name="take_me_there">案内をお願い…</string>
+    <string name="manage">管理</string>
+    <string name="custom">その他のカスタム</string>
+    <string name="show_public_key">公開鍵を表示</string>
+    <string name="public_key_for">%s の公開鍵</string>
+    <string name="copied">コピーしました</string>
+    <string name="no_votes_yet">今のところ投票はありません。</string>
+    <string name="permission_contacts_sync_required">連絡先を同期するために、連絡先へのアクセスを許可してください。</string>
+    <string name="not_voted_user_list">無投票の参加者: %s</string>
+    <string name="contact_update">連絡先の状態を更新中</string>
+    <string name="invalid_onprem_id">このIDは (もう) 存在しないか、あなたのIDとの互換性がありません。</string>
+    <string name="enable_unknown_sources">インストールできません。%sの「不明なアプリのインストール」を有効にしてください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push">${app_name_short}プッシュ</string>
+    <string name="threema_push_notification_text">タップすると詳細を表示します。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push_notification_info_text_1">${app_name_short}プッシュはバックグラウンドでアクティブに動作し、メッセージや着信を通知します。</string>
+    <string name="threema_push_notification_info_text_2">この通知を永続的に表示しておかないとアプリをバックグラウンドで動作させ続けられません。この通知を表示することで、アプリを積極的に使用しなくても、${app_name_short}プッシュをアクティブなままにしておけます。</string>
+    <string name="threema_push_notification_info_text_3">通知の遅延や欠落の問題が発生する場合は、アプリがバックグラウンドで制限なくアクティブになれるように、システムのバッテリー節約設定をすべて無効化してください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push_service_description">${app_name_short}プッシュがアクティブなときに表示される永続的な通知</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push_activated">${app_name_short}プッシュがアクティブになりました。</string>
+    <string name="add_shortcut_error">ランチャー画面にショートカットを追加する際にエラーが発生しました</string>
+    <string name="web_link">リンク</string>
+    <string name="link_copied">%s をコピーしました</string>
+    <string name="invalid_onprem_id_title">IDを追加できません</string>
+    <string name="name_given">名</string>
+    <string name="name_family">姓</string>
+    <string name="name_prefix">敬称（名前の前）</string>
+    <string name="name_middle">ミドルネーム</string>
+    <string name="name_suffix">敬称（名前の後）</string>
+    <string name="full_name">名前</string>
+    <string name="send_contact">連絡先を送信</string>
+    <string name="edit_send_contact_detail_icon">連絡先の詳細タイプ</string>
+    <string name="phoneTypeCustom">カスタム</string>
+    <string name="phoneTypeHome">自宅</string>
+    <string name="phoneTypeMobile">携帯</string>
+    <string name="phoneTypeWork">勤務先</string>
+    <string name="phoneTypePager">ポケベル</string>
+    <string name="phoneTypeOther">その他</string>
+    <string name="phoneTypeCar">クルマ</string>
+    <string name="phoneTypeIsdn">ISDN</string>
+    <string name="phoneTypeOtherFax">FAX（その他）</string>
+    <string name="eventTypeCustom">カスタム</string>
+    <string name="eventTypeBirthday">誕生日</string>
+    <string name="eventTypeAnniversary">記念日</string>
+    <string name="eventTypeOther">その他</string>
+    <string name="emailTypeHome">自宅</string>
+    <string name="emailTypeWork">勤務先</string>
+    <string name="emailTypeOther">その他</string>
+    <string name="postalTypeCustom">カスタム</string>
+    <string name="postalTypeHome">自宅</string>
+    <string name="postalTypeWork">勤務先</string>
+    <string name="postalTypeOther">その他</string>
+    <string name="relationTypeCustom">カスタム</string>
+    <string name="relationTypeChild">子ども</string>
+    <string name="relationTypeFriend">友だち</string>
+    <string name="relationTypeParent">親</string>
+    <string name="relationTypeSpouse">配偶者</string>
+    <string name="contact_property_key">"鍵"</string>
+    <string name="header_nickname_entry">"ニックネーム"</string>
+    <string name="contact_picture_content_description">連絡先の画像</string>
+    <string name="prefs_title_use_system_ringtone">システムの着信音を使用</string>
+    <string name="organization_type">組織</string>
+    <string name="permission_bluetooth_connect_required">接続済みBluetoothヘッドセットを検出するために、「付近のデバイス」権限を許可してください。</string>
+    <string name="tooltip_multiple_recipients_title">受信者の複数選択</string>
+    <string name="tooltip_multiple_recipients_text">長押しすると、同じメッセージを送る複数の受信者を選択できます。</string>
+    <string name="synchronizing">同期中…</string>
+    <string name="forward_security">Perfect Forward Secrecyを使用してメッセージを送信</string>
+    <string name="forward_security_mode">Perfect Forward Secrecy</string>
+    <string name="forward_security_mode_none">無し</string>
+    <string name="clear_forward_security">この連絡先のPerfect Forward Secrecyを初期化</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="clear_forward_security_warning">これは${company_name}のサポートチームからの指示がある場合にのみ実行してください。</string>
+    <string name="forward_security_cleared">この連絡先とのPerfect Forward Secrecyセッションはクリアされました</string>
+    <string name="message_without_forward_security">Perfect Forward Secrecyを使用しないメッセージを受信しました。送信者がPerfect Forward Secrecyを意図的に無効にしていることを確認してください。</string>
+    <string name="forward_security_disabled">Perfect Forward Secrecyはこのトークで無効になってます</string>
+    <string name="forward_security_established">このトークのメッセージはPerfect Forward Secrecyにより保護されます。</string>
+    <string name="forward_security_established_rx">このトークで受信したメッセージはPerfect Forward Secrecyによって保護されるようになりました。</string>
+    <string name="forward_security_reset">Perfect Forward Secrecy セッションが初期化されました。これは、トークの相手がが端末を変更したり、アプリを再インストールしたりした場合に発生することがあります。</string>
+    <string name="forward_security_reset_simple">この連絡先とのPerfect Forward Secrecyセッションはリセットされました。</string>
+    <string name="forward_security_message_out_of_order">メッセージが間違った順序で受信されたため、復号化できませんでした。</string>
+    <string name="forward_security_notification_channel_name">Perfect Forward Secrecy</string>
+    <string name="forward_security_notification_rejected_title">メッセージの送信に失敗</string>
+    <string name="forward_security_notification_rejected_text_contact">%1$s に対する１つ以上のメッセージが送信できませんでした。</string>
+    <string name="forward_security_notification_rejected_text_group">「%1$s」に対する１つ以上のメッセージが送信できませんでした。</string>
+    <string name="forward_security_notification_rejected_text_generic">１つ以上のメッセージの送信に失敗しました。</string>
+    <string name="self_updater_installation_failed">アップデートのダウンロードに失敗しました。<a href="https://shop.threema.ch/download">https://shop.threema.ch/download</a> からアップデートをダウンロードしてインストールしてください。</string>
+    <string name="spam_first_contact">このトークは不明な連絡先からのものです</string>
+    <string name="spam_report">スパム報告</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="spam_report_dialog_explain">続行すると、この連絡先のIDとユーザー名があなたのIDとともに${company_name}に転送されます。コンテンツや個人のデータは送信されません。なお、この連絡先にはこのことについて通知されません。</string>
+    <string name="spam_report_dialog_block_checkbox">また、この連絡先をブロックし、トークも削除する</string>
+    <string name="spam_report_dialog_title">報告 %s</string>
+    <string name="spam_successfully_reported">このIDはスパム送信者として報告されています。</string>
+    <string name="spam_error_reporting">スパム報告中のエラー: %s</string>
+    <string name="spam_report_short">報告</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="wizard_incompatible_contact_sync_params">互換性のないMDMパラメーター設定があります。ユーザー制限 DISALLOW_MODIFY_ACCOUNTS が設定されている場合、${app_name_short} MDMパラメーター th_contact_sync を true に設定できません。あなたのデバイスの管理者に問い合わせてみてください。</string>
+    <string name="messages_cannot_be_recovered">削除後はメッセージを復元することはできません。</string>
+    <string name="contact_deleted">連絡先を削除しました</string>
+    <string name="last_added_contact">最後に追加</string>
+    <string name="directory_explain_text">会社のディレクトリを検索して、連絡先リストに登録されていない従業員を探します。</string>
+    <string name="cannot_display_location">この位置は表示できません。</string>
+    <string name="draw_reply">描画で返信</string>
+    <string name="drawing">描画</string>
+    <string name="background_color">背景色</string>
+    <string name="send_video_muted">ビデオから音を除去</string>
+    <string name="send_without_audio">オーディオの除去</string>
+    <string name="edit_filename">ファイル名の編集</string>
+    <string name="unable_to_restore_identity_because">IDを復元できません。理由: %s</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="share_with_app">${app_name}で共有</string>
+    <string name="read_phone_state_dialog_allow">アクセス許可</string>
+    <string name="read_phone_state_dialog_disallow">このまま続ける</string>
+    <string name="read_phone_state_dialog_never_ask_again">二度と尋ねない</string>
+    <string name="read_phone_state_dialog_title">アクセス許可要求</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="read_phone_state_dialog_message">${app_name_short}通話が通常の通話を妨げないようにするには、電話へのアクセス許可が必要です。このアクセス許可が与えられていない場合、通常の通話の最中でも、${app_name_short}通話の着信が鳴ります。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="read_phone_state_short_message">通話の最中であるかどうかの確認のために、${app_name}に電話へのアクセスを許可してください。</string>
+    <string name="prefs_title_read_phone_state">電話へのアクセス許可</string>
+    <string name="prefs_title_hibernation">使用されていないアプリの設定</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_hibernation_api_32">長期の不使用後に、${app_name}がシステムによって中断されるのを防ぐために、システム設定の「権限を削除して空き容量を増やす」を無効にしてください。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_hibernation_api">長期の不使用後に、${app_name}がシステムによって中断されるのを防ぐために、システム設定の「使用していないアプリを一時停止する」を無効にしてください。</string>
+    <string name="unable_to_fetch_configuration">設定サーバーからデータを取得できません。後でもう一度お試しください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="rogue_device_warning"><![CDATA[異なるデバイスからの接続が、同じ${app_name_short} IDで検出されました。最近、別の端末であなたの${app_name_short} IDを使用しましたか？<br><br>もし使用したのであれば、このメッセージは無視してください。<br><br>もし使用していないのであれば、あなたのプライベートキーが不正利用されている可能性があります。新しいIDを作成する前に、<a href="https://threema.com/faq/another_connection">私たちの提案に従って</a>、あなたの端末とデータを保護してください。]]></string>
+    <string name="fetch2_failure">プロビジョニングサーバーとの同期に失敗しました。</string>
+    <string name="no_members_support_group_calls">このグループにはグループ通話に応答できるメンバーがいません</string>
+    <string name="group_calls">グループ通話</string>
+    <string name="prefs_title_group_calls_enable">グループ通話を有効化</string>
+    <string name="group_no_members">このグループには他にメンバーがいません</string>
+    <string name="group_call">グループ通話</string>
+    <string name="checking_compatibility">互換性の確認中…</string>
+    <string name="group_call_mic_permission_rationale">グループ通話を行うには、「権限」でマイクへのアクセスを %s に許可する必要があります。</string>
+    <string name="group_call_mic_permission_description">グループ通話を行うためには、マイクの許可を有効にする必要があります。</string>
+    <string name="call_mic_permission_description">通話をするためには、マイクの許可を有効に津す必要があります。</string>
+    <string name="group_call_camera_permission_rationale">他の参加者にあなたの映像を見せるには、「権限」でカメラへのアクセスを %s に許可する必要があります。</string>
+    <string name="group_call_phone_permission_description">グループ通話を行うためには、他の通話がグループ通話を中断した際に検出するために、電話の許可が必要です。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="call_phone_permission_description">${app_name_short}通話を行うためには、他の通話が${app_name_short}通話を中断した際に検出するために、電話の許可が必要です。</string>
+    <string name="group_call_nearby_devices_permission_description">Bluetoothヘッドセットを使用してグループ通話を行うには、「近くのデバイス」の許可をBluetoothヘッドセットの検出に許可する必要があります。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="call_nearby_devices_permission_description">Bluetoothヘッドセットを使用して${app_name}通話を行うには、「近くのデバイス」の許可をBluetoothヘッドセットの検出に許可する必要があります。</string>
+    <string name="settings">設定</string>
+    <string name="leave">退出</string>
+    <string name="fs_key_mismatch">キーが一致しません</string>
+    <string name="tap_to_resend">タップで再送</string>
+    <string name="group_calls_tooltip_title">グループ通話</string>
+    <string name="group_calls_tooltip_text">ここをタップすると、すべてのグループメンバーを通話に招待できます。すべてのグループメンバーは通知を受け取り、通話に参加するかどうかを決定できます。</string>
+    <string name="prefs_title_calls">安全な通話</string>
+    <string name="prefs_sum_group_calls_vibration">グループ通話の開始時にバイブレーションを鳴らすかどうかを選択します</string>
+    <string name="forward_security_mode_4dh">完全</string>
+    <string name="forward_security_mode_2dh">単方向</string>
+    <string name="forward_security_explanation">Perfect Forward Secrecy (略してPFS、日本語で前方秘匿性) は、長期鍵の安全性が損なわれたとしても、記録された通信をさかのぼって復号化されることから保護します。\n\nこのオプションは、双方のアプリがPFSに対応している場合に有効にすることができます。</string>
+    <string name="group_call_inactivity_left">非アクティブによるグループ通話の退出</string>
+    <string name="missing_permission_external_storage">ファイルをコピーできませんでした。下記の手段を試みてください:\n1. 設定アプリを開く\n2.「アプリ」から「特別なアプリへのアクセス」を選択\n3. 「すべてのファイルのアクセス」を選択\n4. 右上の3つの点をタップし「システムを表示」を選択\n5. 「外部ストレージ」と「すべてのファイルの管理へのアクセスを許可」が許可されていることを確認\n6. バックアップの復元をもう一度試す</string>
+    <string name="forward_security_downgraded_status_message">相手のアプリバージョンがサポートされていないため、このトークではPerfect Forward Secrecyが無効になっています。</string>
+    <string name="forward_security_illegal_session_status_message">このPerfect Forward Secrecyセッションは無効であるため、リセットされました。</string>
+    <string name="crop_image_title">画像を切り抜く</string>
+    <string name="scroll_to_bottom">下部にスクロール</string>
+    <string name="scroll_to_top">上部にスクロール</string>
+    <string name="contact_sync_mdm_rationale">管理者がお使いのデバイスで連絡先の同期を有効にしました。そのため、連絡先へのアクセス許可が必要です。</string>
+    <string name="welcome_back">おかえりなさい！</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="id_restored_successfully">あなたの${app_name_short} IDが復元されました</string>
+    <string name="prefs_dynamic_colors">ダイナミックカラー</string>
+    <string name="prefs_dynamic_colors_sum">システムカラーを使用</string>
+    <string name="apply_changes">変更を適応</string>
+    <string name="prefs_threema_work_summary">Threemaはビジネス向けのコミュニケーションソリューションも提供していることをご存知でたか？Threema Workについて詳しく知りたい場合は、こちらをタップしてください。</string>
+    <string name="notification_channel_voice_message_player">音声メッセージプレイヤー</string>
+    <string name="voice_message_from">%sからの音声メッセージ</string>
+    <string name="vm_fg_service_not_allowed">音声メッセージプレイバックエラー</string>
+    <string name="vm_fg_service_not_allowed_explain">メディア通知に再生ボタンがまだ表示されている場合は、そのボタンを押してください。表示されていない場合は、アプリを開いてトークから再生を開始してください。</string>
+    <string name="use_threema_without_this_permission">この権限なしで%sを使用する</string>
+    <string name="grant_permission">許可を与える</string>
+    <string name="grant_permission_settings">設定で許可を与える</string>
+    <string name="ignore_permission">二度と尋ねない</string>
+    <string name="permission_nearby_devices">近くの端末</string>
+    <string name="permission_bluetooth">Bluetooth</string>
+    <string name="permission_camera">カメラ</string>
+    <string name="permission_microphone">マイク</string>
+    <string name="permission_read_phone_state">電話</string>
+    <string name="permission_enable_in_settings_rationale">設定で権限を有効にしてください。「許可」 を選択し、次に 「%s」 を許可してください。</string>
+    <string name="group_name">グループ名</string>
+    <string name="star_message">メッセージにスターを付ける</string>
+    <string name="starred_message">スター付きメッセージ</string>
+    <string name="starred">スター付き</string>
+    <string name="starred_messages">スター付きメッセージ</string>
+    <string name="sorting">並び替え</string>
+    <string name="sort_by">並び替え…</string>
+    <string name="newest_first">新しい順</string>
+    <string name="oldest_first">古い順</string>
+    <string name="no_starred_messages">スター付きメッセージが見つかりませんでした。メッセージにスターを付けるには、長押ししてスターのボタンを選択してください。</string>
+    <string name="remove_all_stars">すべてのスターを外す</string>
+    <string name="remove_star">スターを外す</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="samsung_permission_problem_explain">${app_name}はシステムアプリの許可が不足しているためメディアファイルにアクセスできません。これを解決するには、次の画面で「外部ストレージ」の隣のスイッチが有効になっていることを確認し、%1$sを再起動してください。</string>
+    <string name="min_n_chars">最低%d文字</string>
+    <string name="prefs_title_grant_bluetooth_permission">Bluetoothの許可を与える</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_managed_password_confirm">${app_name_short} Safeバックアップ用の管理されたパスワードが設定されています。\n\nこのパスワードを使用しますか？ 疑問がある場合は、管理者に連絡してください。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_managed_new_password_confirm">${app_name_short} Safeバックアップ用の新しい管理されたパスワードが設定されました。\n\n現在のパスワードをこの新しい管理されたパスワードに置き換えますか？ 疑問がある場合は、管理者に連絡してください。</string>
+    <string name="real_not_now">今はしない</string>
+    <string name="add_contact_in">連絡先を追加…</string>
+    <string name="really_remove_all_stars">本当に全てのメッセージのスターを外しますか？</string>
+    <string name="prefs_sum_storage_management">メモリを管理し、メッセージやメディアを削除する</string>
+    <string name="delete_automatically">自動削除</string>
+    <string name="keep_messages">メッセージを保持する期間:</string>
+    <string name="clean_up_manually">手動で整理する</string>
+    <string name="forever">常に</string>
+    <string name="autodelete_explain">このメッセージは、「常に」以外に設定された場合、指定された時間が経過すると、受信および送信メッセージが回復不能に削除されます。これには未読および未送信のメッセージも含まれます。ただし、ノートグループ内のメッセージやスター付きメッセージは削除されません。削除プロセスは定期的に行われ、必ずしもアクティベーション直後に行われるわけではありません。</string>
+    <string name="autodelete_confirm">%s後にメッセージが自動的に削除されます。続行しますか？</string>
+    <string name="autodelete_activated">自動削除が有効になりました。</string>
+    <string name="autodelete_disabled">自動削除が無効になりました。</string>
+    <string name="set_by_administrator">この値は管理者によって設定されており、変更することはできません。</string>
+    <string name="action_dissolve_group">グループを解散する</string>
+    <string name="really_dissolve_group">グループを解散すると、誰も新しいメッセージをグループに送ることができなくなり、もはや管理することもできません。解散したグループは、依然としてクローンされることが可能です。</string>
+    <string name="status_orphaned_group">*このグループは孤立しています*\nグループの作成者がグループを離れたため、これ以上管理することができません。残ったメンバーの中で、新しい管理者になるためにグループの詳細からグループをクローンすることができます。</string>
+    <string name="group_not_a_member_notice">あなたはもはやこのグループの一員ではなく、これ以上使用することはできません。</string>
+    <string name="group_dissolved_notice">このグループは解散され、もはや使用することはできません。</string>
+    <string name="md_linked_devices">紐づいた端末</string>
+    <string name="md_link_device">新しい端末と紐づけ</string>
+    <!-- ${app_name_desktop} is a placeholder for the desktop app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <!-- The part of this text that is surrounded by the square brackets will be clickable by the user and lead them to the download page for the desktop client -->
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. ${app_name_desktop} is a placeholder for the app's name and must NOT be translated -->
+    <string name="md_link_device_qr_scan_message">QRコードを読み取ってください</string>
+    <string name="directory_request_failed">ディレクトリ要求に失敗しました。もう一度試してください。</string>
+    <string name="add_shortcut_exists">この対象のためのショートカットは既に存在します。</string>
+    <string name="scan_qr_code">QRコードをスキャンする</string>
+    <!-- ${app_name_desktop} is a placeholder for the desktop app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="connecting">接続中…</string>
+    <string name="trust_new_device">新しい端末を信頼する</string>
+    <string name="no_match_question">マッチしませんか？</string>
+    <string name="sending_data">データを送信中…</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="resend_message_dialog_title">グループメッセージを再送信しますか？</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="work_lost_credentials_help">資格情報を忘れましたか？${app_name_short}の管理者に連絡してください。</string>
+    <string name="problemsolver_intro">以下の指示に従ってこれらの問題を解決することによって、%sが正しく動作することを妨げる可能性のあるシステム設定の問題を修正してください。</string>
+    <string name="problemsolver_title">構成の問題を修正する</string>
+    <string name="problemsolver_title_background">バックグラウンド使用が制限されています</string>
+    <string name="problemsolver_title_background_data">バックグラウンドデータが制限されています</string>
+    <string name="problemsolver_title_notifications">通知が無効になっています</string>
+    <string name="problemsolver_title_fullscreen_notifications">フルスクリーン通知が許可されていません</string>
+    <string name="problemsolver_explain_fullscreen_notifications">このアプリはフルスクリーン通知を表示することが許可されていません。デバイスがロックされている場合、着信通話を見逃す可能性があります。これを修正するには、”フルスクリーン通知を許可する”を有効にしてください。</string>
+    <string name="problemsolver_explain_notifications">このアプリの通知は完全に無効になっています。着信メッセージや通話の通知が届かず、アプリが期待通りに動作しない可能性があります。これを修正するには、\"すべての通知\"を有効にしてください。</string>
+    <string name="problemsolver_explain_background_data">このアプリは、バックグラウンドで使用している間にモバイルデータを使用できません。アプリをアクティブに開かない限り、着信メッセージの通知は届きません。これを修正するには、\"バックグラウンドデータ\"を有効にしてください。</string>
+    <string name="problemsolver_explain_background">アプリのバックグラウンド使用が制限されています。通知は届かず、多くの機能が期待通りに動作しない可能性があります。これを修正するには、”アプリのバッテリー使用量”をタップし、”制限なし”を選択してください。</string>
+    <string name="problemsolver_info_text">上記で言及されたシステム設定オプションの名称は、Androidのバージョンやデバイスメーカーによって異なる場合があります。</string>
+    <string name="problemsolver_title_app_battery_usgae_optimized">アプリのバッテリー使用量が\"最適化\"に設定されています</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="problemsolver_explain_app_battery_usgae_optimized">このアプリは、${app_name_short} Pushが機能するために必要なサーバーへの恒常的な接続を維持することが許可されていません。アプリがバックグラウンドにあるときに新しいメッセージの通知が届かない可能性があります。これを修正するには、\"アプリのバッテリー使用量\"をタップし、\"制限なし\"を選択してください。</string>
+    <string name="problemsolver_to_settings">設定へ</string>
+    <!-- Label on button to dismiss/hide a warning -->
+    <string name="prefs_advanced_options">高度なオプション</string>
+    <string name="push_service">プッシュサービス</string>
+    <string name="edit_and_send">編集して送信</string>
+    <string name="media_gallery_animated_webps">アニメーションWebP</string>
+    <string name="unsupported_image_type">サポート外の画像形式: %s</string>
+    <string name="add_contact_failed">連絡先の追加が失敗しました</string>
+    <!-- accessibility -->
+    <!-- Hint shown on message details screen, to let the user know how they can view a message's emoji reactions -->
+    <!-- Title shown in popup above emoji reaction buttons on a message, to hint to the user that they can long-press to view the details -->
+    <!-- Message shown in popup above emoji reaction buttons on a message, to hint to the user that they can long-press to view the details -->
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <!-- Title shown on a banner shown in the old Threema web sessions screen to point to the new multi device feature instead -->
+    <!-- ${app_name_desktop} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <!-- Body shown on a banner shown in the old Threema web sessions screen to point to the new multi device feature instead -->
+    <!-- Screen reader text on a cross icon button to close a hint banner -->
+    <!-- The part of this text that is surrounded by the square brackets will be clickable by the user and lead them to the download page for the desktop client -->
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <!-- The part of this text that is surrounded by the square brackets will be clickable by the user and lead them to the download page for the desktop client -->
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <!-- Error message when linking of a new device failed due to an invalid contact. %1$s will be replaced with the threema identity of the affected contact. -->
+    <!-- Instruction text for the user directory search -->
+    <!-- Prompt to the user shown in the work directory search. ${app_name_short} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <!-- Message that is shown when the user wants to share an invalid file. -->
+    <!-- Status of a contact (only relevant for Work), e.g. as shown on their profile. Indicating that the person is currently available, i.e., not busy and not out-of-office -->
+    <!-- Status of a contact (only relevant for Work), e.g. as shown on their profile, indicating that the person is currently not available, i.e., busy or out-of-office -->
+    <!-- Error message (only relevant for OnPrem) if the preset server url is different from the one provided by mdm. -->
+    <!-- Error message (only relevant for OnPrem) if the preset server url is different from the one provided by the activation link. -->
+    <!-- Message shown fullscreen when the app is opened, to inform the user that their access has been blocked by an admin. Only used for OnPrem builds. -->
+    <!-- Message shown fullscreen when the app is opened, to inform the user that the DualLock (a.k.a. "Remote Secret") needed to unlock the app could not be fetched due to a network issue. Shown above a "Retry" button. Only used for OnPrem builds. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <!-- Shown on loading spinner after app is started while DualLock (a.k.a. "Remote Secret") is fetched from the server to unlock the app. Only used for OnPrem builds. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <!-- Shown as the title of an info dialog when DualLock (a.k.a. "Remote Secret") has been activated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <!-- Shown as the content of an info dialog when DualLock (a.k.a. "Remote Secret") has been activated. The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <!-- Shown as the title of an info dialog when DualLock (a.k.a. "Remote Secret") has been deactivated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <!-- Shown as the content of an info dialog when DualLock (a.k.a. "Remote Secret") has been deactivated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <!-- Shown on loading indicator while the DualLock (a.k.a. "Remote Secret") feature is being activated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <!-- Error message shown fullscreen when activating the DualLock (a.k.a. "Remote Secret") feature failed. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <!-- Shown on loading indicator while the DualLock (a.k.a. "Remote Secret") feature is being deactivated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <!-- Error message shown fullscreen when deactivating the DualLock (a.k.a. "Remote Secret") feature failed. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <plurals name="contacts_counter_label">
+        <item quantity="other">%d 連絡先</item>
+    </plurals>
+    <plurals name="really_delete_thread_message">
+        <item quantity="other">本当に%d件のトークを削除しますか？</item>
+    </plurals>
+    <plurals name="sending_message_failed">
+        <item quantity="other">%1$d件のメッセージの送信に失敗しました</item>
+    </plurals>
+    <plurals name="selection_counter_label">
+        <item quantity="other">%d枚の画像が選択済み</item>
+    </plurals>
+    <plurals name="message_copied">
+        <item quantity="other">メッセージをコピーしました</item>
+    </plurals>
+    <plurals name="new_messages">
+        <item quantity="other">%d 件の新しいメッセージ</item>
+    </plurals>
+    <plurals name="unread_messages">
+        <item quantity="other">%d 件の未読メッセージ</item>
+    </plurals>
+    <plurals name="file_saved">
+        <item quantity="other">%d ファイルの保存に成功しました。</item>
+    </plurals>
+    <plurals name="saving_media">
+        <item quantity="other">メディアを保存中</item>
+    </plurals>
+    <plurals name="ballot_really_delete">
+        <item quantity="other">投票を削除</item>
+    </plurals>
+    <plurals name="ballot_really_delete_text">
+        <item quantity="other">票の復元はできません。本当に %1$d 件の投票を削除しますか？</item>
+    </plurals>
+    <plurals name="media_files_deleted">
+        <item quantity="other">%d 個のメディアファイルを削除しました</item>
+    </plurals>
+    <plurals name="message_deleted">
+        <item quantity="other">%d 件のメッセージを削除しました</item>
+    </plurals>
+    <plurals name="notifications_for_x_hours">
+        <item quantity="other">%d 時間</item>
+    </plurals>
+    <plurals name="really_delete_contacts_message">
+        <item quantity="other">本当に %1$d 件の連絡先と関連するすべてのトークを削除しますか？</item>
+    </plurals>
+    <plurals name="some_contacts_not_deleted">
+        <item quantity="other">%d 件の連絡先は、まだグループに属しているため、削除できませんでした。</item>
+    </plurals>
+    <plurals name="message_archived">
+        <item quantity="other">%d 件のトークを受け取りました</item>
+    </plurals>
+    <plurals name="webclient_running_sessions">
+        <item quantity="other">%d セッションを実行中</item>
+    </plurals>
+    <plurals name="chat_deleted">
+        <item quantity="other">%d 件のトークを削除しました</item>
+    </plurals>
+    <plurals name="num_archived_chats">
+        <item quantity="other">%d 件のアーカイブされたトーク</item>
+    </plurals>
+    <plurals name="forward_security_messages_skipped">
+        <item quantity="other">%d 件のメッセージが最後のメッセージからロストしました。</item>
+    </plurals>
+    <plurals name="number_of_group_members">
+        <item quantity="other">%d名のグループメンバー</item>
+    </plurals>
+</resources>

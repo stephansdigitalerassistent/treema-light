@@ -1,0 +1,144 @@
+/*  _____ _
+ * |_   _| |_  _ _ ___ ___ _ __  __ _
+ *   | | | ' \| '_/ -_) -_) '  \/ _` |_
+ *   |_| |_||_|_| \___\___|_|_|_\__,_(_)
+ *
+ * Threema for Android
+ * Copyright (c) 2014-2025 Threema GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ch.threema.app.workers
+
+import android.content.Context
+import androidx.work.*
+import ch.threema.app.di.awaitAppFullyReadyWithTimeout
+import ch.threema.app.managers.ListenerManager
+import ch.threema.app.preference.service.PreferenceService
+import ch.threema.app.services.notification.NotificationService
+import ch.threema.app.threemasafe.ThreemaSafeService
+import ch.threema.app.utils.ConfigUtils
+import ch.threema.base.utils.getThreemaLogger
+import ch.threema.common.minus
+import java.time.Instant
+import java.util.concurrent.TimeUnit
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.seconds
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+private val logger = getThreemaLogger("ThreemaSafeUploadWorker")
+
+class ThreemaSafeUploadWorker(
+    context: Context,
+    workerParameters: WorkerParameters,
+) : CoroutineWorker(context, workerParameters), KoinComponent {
+
+    private val threemaSafeService: ThreemaSafeService by inject()
+    private val preferenceService: PreferenceService by inject()
+    private val notificationService: NotificationService by inject()
+
+    override suspend fun doWork(): Result {
+        val forceUpdate: Boolean = inputData.getBoolean(EXTRA_FORCE_UPDATE, false)
+        var success = true
+
+        logger.info("Threema Safe upload worker started, force = {}", forceUpdate)
+
+        awaitAppFullyReadyWithTimeout(timeout = 20.seconds)
+            ?: return Result.failure()
+
+        if (ConfigUtils.isSerialLicensed() && !ConfigUtils.isSerialLicenseValid()) {
+            // skip upload if license was revoked or is temporarily unavailable
+            return Result.success()
+        }
+
+        try {
+            threemaSafeService.createBackup(forceUpdate)
+            // When the backup has been successfully uploaded or does not need to be uploaded, then
+            // we ignore previous errors.
+            preferenceService.threemaSafeErrorTimestamp = null
+        } catch (e: ThreemaSafeService.ThreemaSafeUploadException) {
+            if (preferenceService.threemaSafeErrorTimestamp == null && e.isUploadNeeded) {
+                preferenceService.threemaSafeErrorTimestamp = Instant.now()
+            }
+            showWarningNotification(preferenceService, notificationService)
+            logger.error("Threema Safe upload failed", e)
+            success = false
+        }
+
+        ListenerManager.threemaSafeListeners.handle { listener -> listener.onBackupStatusChanged() }
+
+        logger.info("Threema Safe upload worker finished. Success = {}", success)
+
+        return if (success) {
+            Result.success()
+        } else {
+            Result.failure()
+        }
+    }
+
+    private fun showWarningNotification(preferenceService: PreferenceService, notificationService: NotificationService) {
+        val errorTimestamp = preferenceService.threemaSafeErrorTimestamp ?: return
+        if (errorTimestamp < Instant.now() - 7.days) {
+            val lastBackupDate = preferenceService.threemaSafeBackupTimestamp
+            val fullDaysSinceLastBackup = lastBackupDate?.let { (Instant.now() - lastBackupDate).inWholeDays.toInt() }
+            if (fullDaysSinceLastBackup != null && fullDaysSinceLastBackup > 0 && preferenceService.getThreemaSafeEnabled()) {
+                notificationService.showSafeBackupFailed(fullDaysSinceLastBackup)
+            } else {
+                notificationService.cancelSafeBackupFailed()
+            }
+        }
+    }
+
+    companion object {
+        private const val EXTRA_FORCE_UPDATE = "FORCE_UPDATE"
+
+        /**
+         * Build a one time work request without any initial delay.
+         */
+        fun buildOneTimeWorkRequest(forceUpdate: Boolean): OneTimeWorkRequest {
+            val data = Data.Builder()
+                .putBoolean(EXTRA_FORCE_UPDATE, forceUpdate)
+                .build()
+
+            return OneTimeWorkRequestBuilder<ThreemaSafeUploadWorker>()
+                .apply { setInputData(data) }
+                .build()
+        }
+
+        /**
+         * Build a periodic work request that runs every [schedulePeriodMs] milliseconds. The
+         * request is scheduled to first run in [schedulePeriodMs] milliseconds. Note that the
+         * schedule period is not added as tag, as these period does not change dynamically.
+         */
+        fun buildPeriodicWorkRequest(schedulePeriodMs: Long): PeriodicWorkRequest {
+            val data = Data.Builder()
+                .putBoolean(EXTRA_FORCE_UPDATE, false)
+                .build()
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+
+            return PeriodicWorkRequestBuilder<ThreemaSafeUploadWorker>(
+                schedulePeriodMs,
+                TimeUnit.MILLISECONDS,
+            )
+                .setInitialDelay(schedulePeriodMs, TimeUnit.MILLISECONDS)
+                .setConstraints(constraints)
+                .addTag(schedulePeriodMs.toString())
+                .apply { setInputData(data) }
+                .build()
+        }
+    }
+}

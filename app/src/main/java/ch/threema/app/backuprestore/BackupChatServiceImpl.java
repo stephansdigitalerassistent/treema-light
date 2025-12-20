@@ -1,0 +1,218 @@
+/*  _____ _
+ * |_   _| |_  _ _ ___ ___ _ __  __ _
+ *   | | | ' \| '_/ -_) -_) '  \/ _` |_
+ *   |_| |_||_|_| \___\___|_|_|_\__,_(_)
+ *
+ * Threema for Android
+ * Copyright (c) 2015-2025 Threema GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ch.threema.app.backuprestore;
+
+import android.content.Context;
+import android.text.format.DateUtils;
+
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.ListIterator;
+
+import ch.threema.app.R;
+import ch.threema.app.services.ContactService;
+import ch.threema.app.services.FileService;
+import ch.threema.app.services.MessageService;
+import ch.threema.app.utils.FileHandlingZipOutputStream;
+import ch.threema.app.utils.FileUtil;
+import ch.threema.app.utils.GeoLocationUtil;
+import ch.threema.app.utils.NameUtil;
+import ch.threema.app.utils.ElapsedTimeFormatter;
+import ch.threema.app.utils.TestUtil;
+import ch.threema.app.voicemessage.VoiceRecorderActivity;
+import static ch.threema.base.utils.LoggingKt.getThreemaLogger;
+import ch.threema.storage.models.AbstractMessageModel;
+import ch.threema.storage.models.ConversationModel;
+import ch.threema.storage.models.MessageType;
+import ch.threema.storage.models.data.media.AudioDataModel;
+import ch.threema.storage.models.data.media.FileDataModel;
+import ch.threema.storage.models.data.media.VideoDataModel;
+
+public class BackupChatServiceImpl implements BackupChatService {
+    private static final Logger logger = getThreemaLogger("BackupChatServiceImpl");
+
+    private final Context context;
+    private final FileService fileService;
+    private final MessageService messageService;
+    private final ContactService contactService;
+    private boolean isCanceled;
+
+    public BackupChatServiceImpl(Context context, FileService fileService, MessageService messageService, ContactService contactService) {
+        this.context = context;
+        this.fileService = fileService;
+        this.messageService = messageService;
+        this.contactService = contactService;
+    }
+
+    private boolean buildThread(
+        ConversationModel conversationModel,
+        FileHandlingZipOutputStream zipOutputStream,
+        StringBuilder messageBody,
+        boolean includeMedia
+    ) {
+        AbstractMessageModel m;
+
+        isCanceled = false;
+
+        List<AbstractMessageModel> messages = messageService.getMessagesForReceiver(conversationModel.messageReceiver);
+        ListIterator<AbstractMessageModel> listIter = messages.listIterator(messages.size());
+        while (listIter.hasPrevious()) {
+            m = listIter.previous();
+
+            if (isCanceled) {
+                break;
+            }
+
+            if (m.isStatusMessage()) {
+                continue;
+            }
+
+            if (m.getType() == MessageType.GROUP_CALL_STATUS || m.getType() == MessageType.FORWARD_SECURITY_STATUS) {
+                continue;
+            }
+
+            String filename = "";
+            String messageLine = "";
+
+            if (!conversationModel.isGroupConversation()) {
+                messageLine = m.isOutbox() ? this.context.getString(R.string.me_myself_and_i) : NameUtil.getDisplayNameOrNickname(this.contactService.getByIdentity(m.getIdentity()), true);
+                messageLine += ": ";
+            }
+
+            messageLine += messageService.getMessageString(m, 0).getRawMessage();
+
+            // add media file to zip
+            try {
+                boolean saveMedia = false;
+                String extension = "";
+
+                switch (m.getType()) {
+                    case IMAGE:
+                        saveMedia = true;
+                        extension = ".jpg";
+                        break;
+                    case VIDEO:
+                        VideoDataModel videoDataModel = m.getVideoData();
+                        saveMedia = videoDataModel.isDownloaded();
+                        extension = ".mp4";
+                        break;
+                    case VOICEMESSAGE:
+                        AudioDataModel audioDataModel = m.getAudioData();
+                        saveMedia = audioDataModel.isDownloaded();
+                        extension = VoiceRecorderActivity.VOICEMESSAGE_FILE_EXTENSION;
+                        break;
+                    case FILE:
+                        FileDataModel fileDataModel = m.getFileData();
+                        saveMedia = fileDataModel.isDownloaded();
+                        filename = TestUtil.isEmptyOrNull(fileDataModel.getFileName()) ?
+                            FileUtil.getDefaultFilename(fileDataModel.getMimeType()) :
+                            (m.getApiMessageId() != null ? m.getApiMessageId() : m.getId()) +
+                                "-" + fileDataModel.getFileName();
+                        extension = "";
+                        break;
+                    case LOCATION:
+                        messageLine += " <" + GeoLocationUtil.getLocationUri(m) + ">";
+                        break;
+                    case VOIP_STATUS:
+                        if (m.getVoipStatusData() != null && m.getVoipStatusData().getDuration() != null) {
+                            messageLine += " <" + ElapsedTimeFormatter.secondsToString(m.getVoipStatusData().getDuration()) + ">";
+                        }
+                        break;
+                    default:
+                }
+
+                if (saveMedia) {
+                    if (TestUtil.isEmptyOrNull(filename)) {
+                        filename = m.getUid() + extension;
+                    }
+
+                    if (includeMedia) {
+                        try (InputStream is = fileService.getDecryptedMessageStream(m)) {
+                            if (is != null) {
+                                zipOutputStream.addFileFromInputStream(is, filename, false);
+                            } else {
+                                // if media is missing, try thumbnail
+                                try (InputStream thumbnailInputStream = fileService.getDecryptedMessageThumbnailStream(m)) {
+                                    if (thumbnailInputStream != null) {
+                                        zipOutputStream.addFileFromInputStream(thumbnailInputStream, filename, false);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                //do not abort, its only a media :-)
+                logger.error("Exception", e);
+            }
+
+            if (!TestUtil.isEmptyOrNull(filename)) {
+                messageLine += " <" + filename + ">";
+            }
+
+            String messageDate = DateUtils.formatDateTime(context, m.getPostedAt().getTime(),
+                DateUtils.FORMAT_ABBREV_ALL |
+                    DateUtils.FORMAT_SHOW_YEAR |
+                    DateUtils.FORMAT_SHOW_DATE |
+                    DateUtils.FORMAT_NUMERIC_DATE |
+                    DateUtils.FORMAT_SHOW_TIME);
+            if (!TestUtil.isEmptyOrNull(messageLine)) {
+                messageBody.append("[");
+                messageBody.append(messageDate);
+                messageBody.append("] ");
+                messageBody.append(messageLine);
+                messageBody.append("\n");
+            }
+        }
+        return !isCanceled;
+    }
+
+    @Override
+    public boolean backupChatToZip(final ConversationModel conversationModel, final File outputFile, final String password, boolean includeMedia) {
+        StringBuilder messageBody = new StringBuilder();
+
+        try (final FileHandlingZipOutputStream zipOutputStream = FileHandlingZipOutputStream.initializeZipOutputStream(outputFile, password)) {
+            if (buildThread(conversationModel, zipOutputStream, messageBody, includeMedia)) {
+                zipOutputStream.addFileFromInputStream(IOUtils.toInputStream(messageBody, StandardCharsets.UTF_8), "messages.txt", true);
+            }
+            return true;
+
+        } catch (Exception e) {
+            logger.error("Exception", e);
+        } finally {
+            if (isCanceled) {
+                FileUtil.deleteFileOrWarn(outputFile, "output file", logger);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void cancel() {
+        isCanceled = true;
+    }
+}

@@ -1,0 +1,618 @@
+/*  _____ _
+ * |_   _| |_  _ _ ___ ___ _ __  __ _
+ *   | | | ' \| '_/ -_) -_) '  \/ _` |_
+ *   |_| |_||_|_| \___\___|_|_|_\__,_(_)
+ *
+ * Threema for Android
+ * Copyright (c) 2013-2025 Threema GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ch.threema.app.utils;
+
+import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.SystemClock;
+
+import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import ch.threema.app.AppConstants;
+import ch.threema.app.BuildConfig;
+import ch.threema.app.ThreemaApplication;
+import ch.threema.app.activities.ComposeMessageActivity;
+import ch.threema.app.home.HomeActivity;
+import ch.threema.app.fragments.ComposeMessageFragment;
+import ch.threema.app.managers.ServiceManager;
+import ch.threema.app.mediaattacher.MediaFilterQuery;
+import ch.threema.app.messagereceiver.ContactMessageReceiver;
+import ch.threema.app.messagereceiver.DistributionListMessageReceiver;
+import ch.threema.app.messagereceiver.GroupMessageReceiver;
+import ch.threema.app.messagereceiver.MessageReceiver;
+import ch.threema.app.services.ContactService;
+import ch.threema.app.services.DistributionListService;
+import ch.threema.app.services.GroupService;
+import ch.threema.app.services.MessageService;
+import ch.threema.common.models.Coordinates;
+import static ch.threema.base.utils.LoggingKt.getThreemaLogger;
+import ch.threema.storage.models.AbstractMessageModel;
+import ch.threema.storage.models.ContactModel;
+import ch.threema.storage.models.ConversationModel;
+import ch.threema.storage.models.DistributionListMessageModel;
+import ch.threema.storage.models.GroupMessageModel;
+import ch.threema.storage.models.GroupModel;
+import ch.threema.storage.models.WebClientSessionModel;
+import ch.threema.storage.models.ballot.BallotChoiceModel;
+import ch.threema.storage.models.ballot.BallotModel;
+
+import static android.app.PendingIntent.FLAG_MUTABLE;
+
+public class IntentDataUtil {
+    private static final Logger logger = getThreemaLogger("IntentDataUtil");
+
+    public static final String ACTION_LICENSE_NOT_ALLOWED = BuildConfig.APPLICATION_ID + "license_not_allowed";
+    public static final String ACTION_CONTACTS_CHANGED = BuildConfig.APPLICATION_ID + "contacts_changed";
+    public static final String ACTION_UPDATE_AVAILABLE = BuildConfig.APPLICATION_ID + "update_available";
+
+    public static final String INTENT_DATA_LOCATION_LAT = "latitude";
+    public static final String INTENT_DATA_LOCATION_LNG = "longitude";
+    public static final String INTENT_DATA_LOCATION_NAME = "lname";
+    private static final String INTENT_DATA_LOCATION_ALT = "altitude";
+    private static final String INTENT_DATA_LOCATION_ACCURACY = "accuracy";
+    public static final String INTENT_DATA_LOCATION_PROVIDER = "location_provider";
+
+    private static final String INTENT_DATA_CONTACT_LIST = "contactl";
+    private static final String INTENT_DATA_GROUP_LIST = "groupl";
+    private static final String INTENT_DATA_DIST_LIST = "distl";
+
+    private static final String INTENT_DATA_MESSAGE = "message";
+    private static final String INTENT_DATA_URL = "url";
+    private static final String INTENT_DATA_CONTACTS = "contacts";
+    private static final String INTENT_DATA_ABSTRACT_MESSAGE_ID = "abstract_message_id";
+    private static final String INTENT_DATA_ABSTRACT_MESSAGE_IDS = "abstract_message_ids";
+    private static final String INTENT_DATA_ABSTRACT_MESSAGE_TYPE = "abstract_message_type";
+    private static final String INTENT_DATA_ABSTRACT_MESSAGE_TYPES = "abstract_message_types";
+    public static final String INTENT_DATA_WEB_CLIENT_SESSION_MODEL_ID = "session_model_id";
+    public static final String INTENT_DATA_PAYLOAD = "payload";
+
+    private static final String INTENT_HIDE_AFTER_UNLOCK = "hide_after_unlock";
+    private static final String INTENT_DATA_BALLOT_ID = "ballot_id";
+    private static final String INTENT_DATA_BALLOT_CHOICE_ID = "ballot_choide_id";
+
+    public static final int PENDING_INTENT_FLAG_MUTABLE = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? FLAG_MUTABLE : 0;
+
+    public static void append(byte[] payload, Intent intent) {
+        intent.putExtra(INTENT_DATA_PAYLOAD, payload);
+    }
+
+    public static void append(ContactModel contactModel, Intent intent) {
+        intent.putExtra(AppConstants.INTENT_DATA_CONTACT, contactModel.getIdentity());
+    }
+
+    public static void append(String identity, Intent intent) {
+        intent.putExtra(AppConstants.INTENT_DATA_CONTACT, identity);
+    }
+
+    public static void append(GroupModel groupModel, Intent intent) {
+        intent.putExtra(AppConstants.INTENT_DATA_GROUP_DATABASE_ID, (long) groupModel.getId());
+    }
+
+    public static void append(
+        @NonNull Coordinates coordinates,
+        @Nullable String provider,
+        @Nullable String poiName,
+        @Nullable String poiAddress,
+        @NonNull Intent intent
+    ) {
+        intent.putExtra(INTENT_DATA_LOCATION_LAT, coordinates.getLatitude());
+        intent.putExtra(INTENT_DATA_LOCATION_LNG, coordinates.getLongitude());
+        intent.putExtra(INTENT_DATA_LOCATION_PROVIDER, provider);
+        if (TestUtil.isEmptyOrNull(poiName)) {
+            intent.putExtra(INTENT_DATA_LOCATION_NAME, poiAddress);
+        } else {
+            intent.putExtra(INTENT_DATA_LOCATION_NAME, poiName);
+        }
+    }
+
+    public static void append(AbstractMessageModel abstractMessageModel, Intent intent) {
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_ID, abstractMessageModel.getId());
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_TYPE, abstractMessageModel.getClass().toString());
+    }
+
+
+    public static void append(WebClientSessionModel model, Intent intent) {
+        intent.putExtra(INTENT_DATA_WEB_CLIENT_SESSION_MODEL_ID, model.getId());
+    }
+
+    public static void appendMultiple(List<AbstractMessageModel> models, Intent intent) {
+        ArrayList<Integer> messageIDs = new ArrayList<>(models.size());
+
+        for (AbstractMessageModel model : models) {
+            messageIDs.add(model.getId());
+        }
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_IDS, messageIDs);
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_TYPE, models.get(0).getClass().toString());
+    }
+
+    public static void appendMultipleMessageTypes(List<AbstractMessageModel> models, Intent intent) {
+        ArrayList<Integer> messageIDs = new ArrayList<>(models.size());
+        ArrayList<String> messageTypes = new ArrayList<>();
+
+        for (AbstractMessageModel failedMessage : models) {
+            messageIDs.add(failedMessage.getId());
+            messageTypes.add(failedMessage.getClass().toString());
+        }
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_IDS, messageIDs);
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_TYPES, messageTypes);
+    }
+
+    public static void append(int id, String classname, Intent intent) {
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_ID, id);
+        intent.putExtra(INTENT_DATA_ABSTRACT_MESSAGE_TYPE, classname);
+    }
+
+    public static void append(List<ContactModel> contacts, Intent intent) {
+        String[] identities = new String[contacts.size()];
+        int p = 0;
+        for (ContactModel c : contacts) {
+            identities[p++] = c.getIdentity();
+        }
+
+        intent.putExtra(INTENT_DATA_CONTACTS, identities);
+    }
+
+    public static Location getLocation(Intent intent) {
+        Location location = new Location(intent.getStringExtra(INTENT_DATA_LOCATION_PROVIDER));
+        location.setLatitude(intent.getDoubleExtra(INTENT_DATA_LOCATION_LAT, 0));
+        location.setLongitude(intent.getDoubleExtra(INTENT_DATA_LOCATION_LNG, 0));
+        location.setAltitude(intent.getDoubleExtra(INTENT_DATA_LOCATION_ALT, 0));
+        location.setAccuracy(intent.getFloatExtra(INTENT_DATA_LOCATION_ACCURACY, 0));
+
+        return location;
+    }
+
+    public static Intent createActionIntentLicenseNotAllowed(String message) {
+        Intent intent = new Intent();
+        intent.putExtra(INTENT_DATA_MESSAGE, message);
+        intent.setAction(ACTION_LICENSE_NOT_ALLOWED);
+        return intent;
+    }
+
+    public static Intent createActionIntentUpdateAvailable(String updateMessage, String updateUrl) {
+        Intent intent = new Intent();
+        intent.putExtra(INTENT_DATA_MESSAGE, updateMessage);
+        intent.putExtra(INTENT_DATA_URL, updateUrl);
+        intent.setAction(ACTION_UPDATE_AVAILABLE);
+        return intent;
+    }
+
+    public static Intent createActionIntentHideAfterUnlock(Intent intent) {
+        intent.putExtra(INTENT_HIDE_AFTER_UNLOCK, true);
+        return intent;
+    }
+
+    public static boolean hideAfterUnlock(Intent intent) {
+        return intent.hasExtra(INTENT_HIDE_AFTER_UNLOCK) && intent.getBooleanExtra(INTENT_HIDE_AFTER_UNLOCK, false);
+    }
+
+    public static Intent createActionIntentContactsChanged() {
+        Intent intent = new Intent();
+        intent.setAction(ACTION_CONTACTS_CHANGED);
+        return intent;
+    }
+
+    public static String getMessage(Intent intent) {
+        return intent.getStringExtra(INTENT_DATA_MESSAGE);
+    }
+
+    /** @noinspection unused*/
+    // used by threema shop builds
+    public static String getUrl(Intent intent) {
+        return intent.getStringExtra(INTENT_DATA_URL);
+    }
+
+    public static String[] getContactIdentities(Intent intent) {
+        return intent.getStringArrayExtra(INTENT_DATA_CONTACTS);
+    }
+
+    public static long getGroupId(Intent intent) {
+        if (intent.hasExtra(AppConstants.INTENT_DATA_GROUP_DATABASE_ID)) {
+            return intent.getLongExtra(AppConstants.INTENT_DATA_GROUP_DATABASE_ID, -1L);
+        }
+        return -1L;
+    }
+
+    public static long getDistributionListId(Intent intent) {
+        if (intent.hasExtra(AppConstants.INTENT_DATA_DISTRIBUTION_LIST_ID)) {
+            return intent.getLongExtra(AppConstants.INTENT_DATA_DISTRIBUTION_LIST_ID, -1);
+        }
+        return -1;
+    }
+
+    public static String getIdentity(Intent intent) {
+        if (intent.hasExtra(AppConstants.INTENT_DATA_CONTACT)) {
+            return intent.getStringExtra(AppConstants.INTENT_DATA_CONTACT);
+        }
+        return null;
+    }
+
+    public static void append(@NonNull BallotModel ballotModel, @NonNull Intent intent) {
+        intent.putExtra(INTENT_DATA_BALLOT_ID, ballotModel.getId());
+    }
+
+    public static int getBallotId(Intent intent) {
+        if (intent.hasExtra(INTENT_DATA_BALLOT_ID)) {
+            return intent.getIntExtra(INTENT_DATA_BALLOT_ID, 0);
+        }
+
+        return 0;
+    }
+
+    public static void append(BallotChoiceModel ballotChoiceModel, Intent intent) {
+        intent.putExtra(INTENT_DATA_BALLOT_CHOICE_ID, ballotChoiceModel.getId());
+    }
+
+    public static int getBallotChoiceId(Intent intent) {
+        if (intent.hasExtra(INTENT_DATA_BALLOT_CHOICE_ID)) {
+            return intent.getIntExtra(INTENT_DATA_BALLOT_CHOICE_ID, 0);
+        }
+
+        return 0;
+    }
+
+    @Nullable
+    public static String getAbstractMessageType(Intent intent) {
+        return intent.getStringExtra(INTENT_DATA_ABSTRACT_MESSAGE_TYPE);
+    }
+
+    public static int getAbstractMessageId(Intent intent) {
+        return intent.getIntExtra(INTENT_DATA_ABSTRACT_MESSAGE_ID, 0);
+    }
+
+    public static ArrayList<Integer> getAbstractMessageIds(Intent intent) {
+        return intent.getIntegerArrayListExtra(INTENT_DATA_ABSTRACT_MESSAGE_IDS);
+    }
+
+    public static ArrayList<String> getAbstractMessageTypes(Intent intent) {
+        return intent.getStringArrayListExtra(INTENT_DATA_ABSTRACT_MESSAGE_TYPES);
+    }
+
+    public static AbstractMessageModel getAbstractMessageModel(Intent intent, MessageService messageService) {
+        if (intent != null && messageService != null) {
+
+            int id = getAbstractMessageId(intent);
+            String type = getAbstractMessageType(intent);
+
+            return messageService.getMessageModelFromId(id, type);
+        }
+        return null;
+    }
+
+    public static ArrayList<AbstractMessageModel> getAbstractMessageModels(Intent intent, MessageService messageService) {
+        ArrayList<Integer> messageIDs = getAbstractMessageIds(intent);
+        ArrayList<String> messageTypes = getAbstractMessageTypes(intent);
+        ArrayList<AbstractMessageModel> messageModels = new ArrayList<>(messageIDs.size());
+
+        Iterator<Integer> ids = messageIDs.iterator();
+        Iterator<String> types = messageTypes.iterator();
+
+        while (ids.hasNext() && types.hasNext()) {
+            messageModels.add(messageService.getMessageModelFromId(ids.next(), types.next()));
+        }
+        return messageModels;
+    }
+
+    @Nullable
+    public static MessageReceiver getMessageReceiverFromIntent(Context context, Intent intent) {
+        ServiceManager serviceManager = ThreemaApplication.getServiceManager();
+        ContactService contactService;
+        GroupService groupService;
+        DistributionListService distributionListService;
+
+        try {
+            contactService = serviceManager.getContactService();
+            groupService = serviceManager.getGroupService();
+            distributionListService = serviceManager.getDistributionListService();
+        } catch (Exception e) {
+            return null;
+        }
+
+        if (!TestUtil.required(contactService, groupService, distributionListService)) {
+            return null;
+        }
+
+        String identity = ContactUtil.getIdentityFromViewIntent(context, intent);
+        if (!TestUtil.isEmptyOrNull(identity)) {
+            return contactService.createReceiver(contactService.getByIdentity(identity));
+        }
+
+        return getMessageReceiverFromExtras(intent.getExtras(), contactService, groupService, distributionListService);
+    }
+
+    /**
+     * Copy the message receiver from one intent to the other.
+     *
+     * @param context    the context
+     * @param fromIntent the intent where the message receiver is copied from
+     * @param toIntent   the intent where the message receiver is copied to
+     * @return {@code true} if copying the message receiver was successful, {@code false} otherwise
+     */
+    public static boolean copyMessageReceiverFromIntentToIntent(@NonNull Context context, @Nullable Intent fromIntent, @Nullable Intent toIntent) {
+        if (fromIntent == null || toIntent == null) {
+            logger.warn("fromIntent or toIntent is null: {} {}", fromIntent == null, toIntent == null);
+            return false;
+        }
+
+        @SuppressWarnings("rawtypes") MessageReceiver messageReceiver = getMessageReceiverFromIntent(context, fromIntent);
+        if (messageReceiver == null) {
+            logger.warn("messageReceiver is null");
+            return false;
+        }
+
+        addMessageReceiverToIntent(toIntent, messageReceiver);
+
+        return true;
+    }
+
+    @Nullable
+    public static MessageReceiver getMessageReceiverFromExtras(
+        @Nullable Bundle extras,
+        @NonNull ContactService contactService,
+        @NonNull GroupService groupService,
+        @NonNull DistributionListService distributionListService
+    ) {
+        if (extras == null) {
+            return null;
+        }
+
+        if (extras.containsKey(AppConstants.INTENT_DATA_CONTACT)) {
+            String cIdentity = extras.getString(AppConstants.INTENT_DATA_CONTACT);
+            return contactService.createReceiver(contactService.getByIdentity(cIdentity));
+        } else if (extras.containsKey(AppConstants.INTENT_DATA_GROUP_DATABASE_ID)) {
+            int groupId = (int) extras.getLong(AppConstants.INTENT_DATA_GROUP_DATABASE_ID, 0L);
+            final @Nullable GroupModel groupModel = groupService.getById(groupId);
+            if (groupModel != null) {
+                return groupService.createReceiver(groupModel);
+            }
+        } else if (extras.containsKey(AppConstants.INTENT_DATA_DISTRIBUTION_LIST_ID)) {
+            long distId = extras.getLong(AppConstants.INTENT_DATA_DISTRIBUTION_LIST_ID, 0);
+            return distributionListService.createReceiver(distributionListService.getById(distId));
+        }
+
+        return null;
+    }
+
+    /**
+     * Get a list of message receivers from an intent
+     *
+     * @param intent
+     * @return ArrayList of MessageReceivers
+     */
+    public static ArrayList<MessageReceiver> getMessageReceiversFromIntent(Intent intent) {
+        ArrayList<MessageReceiver> messageReceivers = new ArrayList<>();
+        ServiceManager serviceManager = ThreemaApplication.getServiceManager();
+        ContactService contactService;
+        GroupService groupService;
+        DistributionListService distributionListService;
+
+        try {
+            contactService = serviceManager.getContactService();
+            groupService = serviceManager.getGroupService();
+            distributionListService = serviceManager.getDistributionListService();
+        } catch (Exception e) {
+            return null;
+        }
+
+        if (!TestUtil.required(contactService, groupService, distributionListService)) {
+            return null;
+        }
+
+        if (intent.hasExtra(INTENT_DATA_CONTACT_LIST)) {
+            ArrayList<String> contactIds = intent.getStringArrayListExtra(INTENT_DATA_CONTACT_LIST);
+            for (String contactId : contactIds) {
+                messageReceivers.add(contactService.createReceiver(contactService.getByIdentity(contactId)));
+            }
+        }
+        if (intent.hasExtra(INTENT_DATA_GROUP_LIST)) {
+            ArrayList<Integer> groupIds = intent.getIntegerArrayListExtra(INTENT_DATA_GROUP_LIST);
+            for (int groupId : groupIds) {
+                messageReceivers.add(groupService.createReceiver(groupService.getById(groupId)));
+            }
+        }
+        if (intent.hasExtra(INTENT_DATA_DIST_LIST)) {
+            ArrayList<Long> distributionListIds = (ArrayList<Long>) intent.getSerializableExtra(INTENT_DATA_DIST_LIST);
+            for (long distributionListId : distributionListIds) {
+                messageReceivers.add(distributionListService.createReceiver(distributionListService.getById(distributionListId)));
+            }
+        }
+        return messageReceivers;
+    }
+
+    public static Intent addMessageReceiverToIntent(Intent intent, MessageReceiver messageReceiver) {
+        switch (messageReceiver.getType()) {
+            case MessageReceiver.Type_CONTACT:
+                intent.putExtra(AppConstants.INTENT_DATA_CONTACT, ((ContactMessageReceiver) messageReceiver).getContact().getIdentity());
+                break;
+            case MessageReceiver.Type_GROUP:
+                intent.putExtra(AppConstants.INTENT_DATA_GROUP_DATABASE_ID, (long) ((GroupMessageReceiver) messageReceiver).getGroup().getId());
+                break;
+            case MessageReceiver.Type_DISTRIBUTION_LIST:
+                intent.putExtra(AppConstants.INTENT_DATA_DISTRIBUTION_LIST_ID, ((DistributionListMessageReceiver) messageReceiver).getDistributionList().getId());
+                break;
+            default:
+                break;
+        }
+
+        return intent;
+    }
+
+    /**
+     * Add extras to an existing intent representing a list of MessageReceivers
+     *
+     * @param intent
+     * @param messageReceivers
+     * @return intent
+     */
+    public static Intent addMessageReceiversToIntent(Intent intent, MessageReceiver[] messageReceivers) {
+        ArrayList<String> contactIds = new ArrayList<>();
+        ArrayList<Integer> groupIds = new ArrayList<>();
+        ArrayList<Long> distributionListIds = new ArrayList<>();
+
+        for (MessageReceiver messageReceiver : messageReceivers) {
+            switch (messageReceiver.getType()) {
+                case MessageReceiver.Type_CONTACT:
+                    contactIds.add(((ContactMessageReceiver) messageReceiver).getContact().getIdentity());
+                    break;
+                case MessageReceiver.Type_GROUP:
+                    groupIds.add(((GroupMessageReceiver) messageReceiver).getGroup().getId());
+                    break;
+                case MessageReceiver.Type_DISTRIBUTION_LIST:
+                    distributionListIds.add(((DistributionListMessageReceiver) messageReceiver).getDistributionList().getId());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if (!contactIds.isEmpty()) {
+            intent.putExtra(INTENT_DATA_CONTACT_LIST, contactIds);
+        }
+        if (!groupIds.isEmpty()) {
+            intent.putExtra(INTENT_DATA_GROUP_LIST, groupIds);
+        }
+        if (!distributionListIds.isEmpty()) {
+            intent.putExtra(INTENT_DATA_DIST_LIST, distributionListIds);
+        }
+
+        return intent;
+    }
+
+    public static AbstractMessageModel getMessageModelFromReceiver(Intent intent, MessageReceiver messageReceiver) {
+        ServiceManager serviceManager = ThreemaApplication.getServiceManager();
+        MessageService messageService;
+        try {
+            messageService = serviceManager.getMessageService();
+        } catch (Exception e) {
+            return null;
+        }
+
+        if (intent.hasExtra(AppConstants.INTENT_DATA_MESSAGE_ID)) {
+            int id = intent.getIntExtra(AppConstants.INTENT_DATA_MESSAGE_ID, -1);
+
+            if (id >= 0) {
+                if (messageReceiver.getType() == MessageReceiver.Type_CONTACT) {
+                    return messageService.getContactMessageModel(id);
+                } else if (messageReceiver.getType() == MessageReceiver.Type_GROUP) {
+                    return messageService.getGroupMessageModel(id);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * get the payload byte array or null
+     *
+     * @param intent
+     * @return
+     */
+    public static byte[] getPayload(Intent intent) {
+        return intent.hasExtra(INTENT_DATA_PAYLOAD) ?
+            intent.getByteArrayExtra(INTENT_DATA_PAYLOAD)
+            : null;
+    }
+
+    public static Intent getShowConversationIntent(@Nullable ConversationModel conversationModel, Context context) {
+        if (conversationModel == null) {
+            return null;
+        }
+
+        Intent intent = new Intent(context, ComposeMessageActivity.class);
+
+        if (conversationModel.isGroupConversation()) {
+            intent.putExtra(AppConstants.INTENT_DATA_GROUP_DATABASE_ID, (long) conversationModel.getGroup().getId());
+        } else if (conversationModel.isDistributionListConversation()) {
+            intent.putExtra(AppConstants.INTENT_DATA_DISTRIBUTION_LIST_ID, conversationModel.getDistributionList().getId());
+        } else {
+            intent.putExtra(AppConstants.INTENT_DATA_CONTACT, conversationModel.getContact().getIdentity());
+        }
+        return intent;
+    }
+
+    public static Intent getComposeIntentForReceivers(Context context, ArrayList<MessageReceiver> receivers) {
+        Intent intent;
+
+        if (!receivers.isEmpty()) {
+            intent = addMessageReceiverToIntent(new Intent(context, ComposeMessageActivity.class), receivers.get(0));
+            intent.putExtra(AppConstants.INTENT_DATA_EDITFOCUS, Boolean.TRUE);
+        } else {
+            intent = new Intent(context, HomeActivity.class);
+        }
+
+        // fix for <4.1 - keeps android from re-using existing intent and stripping extras
+        intent.setData((Uri.parse("foobar://" + SystemClock.elapsedRealtime())));
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(AppConstants.INTENT_DATA_TIMESTAMP, SystemClock.elapsedRealtime());
+
+        return intent;
+    }
+
+    public static Intent getJumpToMessageIntent(Context context, AbstractMessageModel messageModel) {
+        Intent intent = new Intent(context, ComposeMessageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        if (messageModel instanceof GroupMessageModel) {
+            intent.putExtra(AppConstants.INTENT_DATA_GROUP_DATABASE_ID, (long) ((GroupMessageModel) messageModel).getGroupId());
+        } else if (messageModel instanceof DistributionListMessageModel) {
+            intent.putExtra(AppConstants.INTENT_DATA_DISTRIBUTION_LIST_ID, ((DistributionListMessageModel) messageModel).getDistributionListId());
+        } else {
+            intent.putExtra(AppConstants.INTENT_DATA_CONTACT, messageModel.getIdentity());
+        }
+        intent.putExtra(ComposeMessageFragment.EXTRA_API_MESSAGE_ID, messageModel.getApiMessageId());
+        intent.putExtra(ComposeMessageFragment.EXTRA_SEARCH_QUERY, " ");
+
+        return intent;
+    }
+
+    public static MediaFilterQuery getLastMediaFilterFromIntent(Intent intent) {
+        if (intent.getStringExtra(ComposeMessageFragment.EXTRA_LAST_MEDIA_SEARCH_QUERY) != null) {
+            return new MediaFilterQuery(intent.getStringExtra(ComposeMessageFragment.EXTRA_LAST_MEDIA_SEARCH_QUERY),
+                intent.getIntExtra(ComposeMessageFragment.EXTRA_LAST_MEDIA_TYPE_QUERY, -1));
+        }
+        return null;
+    }
+
+    public static Intent addLastMediaFilterToIntent(Intent intent, MediaFilterQuery mediaFilterQuery) {
+        intent.putExtra(ComposeMessageFragment.EXTRA_LAST_MEDIA_SEARCH_QUERY, mediaFilterQuery.getQuery());
+        intent.putExtra(ComposeMessageFragment.EXTRA_LAST_MEDIA_TYPE_QUERY, mediaFilterQuery.getType());
+        return intent;
+    }
+
+    public static Intent addLastMediaFilterToIntent(Intent intent, String query, int type) {
+        intent.putExtra(ComposeMessageFragment.EXTRA_LAST_MEDIA_SEARCH_QUERY, query);
+        intent.putExtra(ComposeMessageFragment.EXTRA_LAST_MEDIA_TYPE_QUERY, type);
+        return intent;
+    }
+
+}
+

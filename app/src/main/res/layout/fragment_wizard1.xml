@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/safe_enable_explain"
+            style="@style/WizardSmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wizard_paragraph_height"
+            android:gravity="center_horizontal"
+            android:text="@string/safe_configure_choose_password" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password1layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_unit_x2"
+            android:textColorHint="@android:color/white"
+            app:counterEnabled="true"
+            app:errorEnabled="true"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <ch.threema.app.ui.ThreemaEditText
+                android:id="@+id/safe_password1"
+                style="@style/WizardHintedEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_hint"
+                android:imeOptions="actionNext"
+                android:inputType="text|textNoSuggestions|textPassword"
+                android:nextFocusForward="@+id/safe_password2"
+                android:singleLine="true"
+                android:textIsSelectable="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password2layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:errorEnabled="true"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <ch.threema.app.ui.ThreemaTextInputEditText
+                android:id="@+id/safe_password2"
+                style="@style/WizardHintedEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/backup_password_again_summary"
+                android:imeOptions="actionDone"
+                android:inputType="text|textNoSuggestions|textPassword"
+                android:singleLine="true"
+                android:textIsSelectable="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ch.threema.app.activities.wizard.components.WizardButtonXml
+            android:id="@+id/advanced_options_compose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/grid_unit_x3"
+            app:wizardButton_style="wizardButton_inverse"
+            app:wizardButton_text="@string/safe_advanced_options" />
+
+        <TextView
+            android:id="@+id/disabled_by_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_unit_x2"
+            android:gravity="center_horizontal"
+            android:text="@string/disabled_by_policy"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</ScrollView>

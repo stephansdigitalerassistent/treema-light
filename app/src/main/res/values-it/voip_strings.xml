@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voip_title">Chiamata Threema</string>
+    <string name="voip_hangup">Riattacca</string>
+    <string name="voip_toggle_mic">Attiva/disattiva microfono</string>
+    <string name="voip_toggle_speaker">Attiva/disattiva speaker</string>
+    <string name="voip_switch_cam">Cambia fotocamera</string>
+    <string name="voip_switch_cam_front">Passato alla fotocamera anteriore</string>
+    <string name="voip_switch_cam_rear">Passato alla fotocamera posteriore</string>
+    <string name="voip_toggle_video">Passa a modalità video</string>
+    <string name="voip_call_confirm">Vuoi chiamare %1$s?</string>
+    <string name="voip_error_call">Errore durante la chiamata Threema</string>
+    <string name="voip_error_init_call">Errore durante l\'inizializzazione della chiamata</string>
+    <string name="voip_notification_title">Chiamata Threema in arrivo</string>
+    <string name="voip_notification_text">%1$s sta chiamando</string>
+    <!-- Shown when starting a call, before the peer device is ringing -->
+    <string name="voip_status_initializing">Inizializza</string>
+    <!-- Shown when the callee has accepted the call and the connection is being established -->
+    <string name="voip_status_connecting">Connessione</string>
+    <!-- Shown when a call is being disconnected -->
+    <string name="voip_status_disconnecting">Disconnessione</string>
+    <!-- Shown when the device of the callee is ringing -->
+    <string name="voip_status_ringing">Squilla</string>
+    <string name="voip_mic_enable">Abilita microfono</string>
+    <string name="voip_mic_disable">Disabilita microfono</string>
+    <string name="voip_checking_compatibility">Verifico che il contatto possa ricevere chiamate Threema</string>
+    <string name="voip_incompatible">Questo contatto non è ancora in grado di ricevere chiamate Threema.</string>
+    <string name="voip_call_status_unavailable">Destinatario chiamata non disponibile</string>
+    <string name="voip_call_status_rejected">Chiamata respinta</string>
+    <string name="voip_call_status_busy">Destinatario chiamata occupato</string>
+    <string name="voip_call_status_busy_short">Occupato</string>
+    <string name="voip_call_status_disabled">Le chiamate Threema sono disabilitate dal destinatario</string>
+    <string name="voip_call_status_missed">Chiamata persa</string>
+    <string name="voip_call_finished_outbox">Chiamata in uscita</string>
+    <string name="voip_call_finished_inbox">Chiamata in arrivo</string>
+    <string name="voip_call_status_aborted">Chiamata interrotta</string>
+    <string name="voip_return_call">Richiamata</string>
+    <string name="voip_accept">Accetta</string>
+    <string name="voip_reject">Rifiuta</string>
+    <string name="voip_speakerphone">Vivavoce</string>
+    <string name="voip_wired_headset">Cuffie</string>
+    <string name="voip_earpiece">Telefono</string>
+    <string name="voip_bluetooth">Bluetooth</string>
+    <string name="voip_none">Non disponibile</string>
+    <string name="voip_call_finished">La chiamata Threema si è conclusa</string>
+    <string name="voip_another_call">Impossibile connettersi. Al momento è attiva un\'altra chiamata Threema.</string>
+    <string name="voip_prefs_title_aec">Eliminazione eco</string>
+    <string name="voip_prefs_aec_sw">Eliminazione eco software</string>
+    <string name="voip_prefs_aec_hw">Eliminazione eco hardware</string>
+    <string name="voip_prefs_title_video_codec">Codec video</string>
+    <string name="voip_prefs_video_aec_hw">Hardware accelerato</string>
+    <string name="voip_prefs_video_codec_no_vp8">VP8 disattivato</string>
+    <string name="voip_prefs_video_codec_no_h264hip">H264-HiP disattivato</string>
+    <string name="voip_prefs_video_codec_sw">Codec software</string>
+    <string name="voip_connection_failed">Impossibile stabilire la connessione.</string>
+    <string name="voip_connection_lost">Connessione persa</string>
+    <string name="prefs_voip_reject_incoming_calls_title">Rifiuta chiamate mobili</string>
+    <string name="prefs_voip_reject_incoming_calls_summary">Rifiuta chiamate cellulari in arrivo mentre è attiva una Chiamata Threema.</string>
+    <string name="voip_contact_not_found">Non è stato trovato nessun contatto Threema per questo numero.</string>
+    <string name="voip_another_pstn_call">Impossibile avviare la chiamata. È ancora in corso una telefonata normale.</string>
+    <string name="voip_call_status_off_hours">Chiamate fuori orario</string>
+    <string name="voip_peer_video_disabled">Le videochiamate sono state disattivate dall\'altra persona.</string>
+    <string name="voip_reject_channel_name">Modifica stato chiamata</string>
+    <!-- WebRTC debugger -->
+    <string name="voip_prefs_webrtc_debug">Diagnostica WebRTC</string>
+    <string name="voip_prefs_webrtc_debug_summary">Avvia questo strumento per eseguire il debug dei problemi di impostazione delle chiamate vocali</string>
+    <string name="voip_webrtc_debug">Diagnostica WebRTC</string>
+    <string name="voip_webrtc_debug_intro">Premi il pulsante \"Avvia\" per iniziare il test.</string>
+    <string name="voip_webrtc_debug_start">Avvia</string>
+    <string name="voip_webrtc_debug_done">Fatto. Se sperimenti problemi di connessione di chiamata, invia questo output al servizio di assistenza di Threema.</string>
+    <string name="voip_webrtc_debug_copied">Copiato negli appunti.</string>
+    <string name="voip_webrtc_debug_copy_clipboard">Copia negli appunti</string>
+    <!-- Group Calls -->
+    <string name="voip_gc_members_notified">Tutti i membri del gruppo sono stati informati</string>
+    <string name="voip_gc_notification_channel_description">Chiamate di gruppo</string>
+    <string name="voip_gc_notification_title">Chiamata di gruppo</string>
+    <string name="voip_gc_notification_call_started">%1$s ha avviato una chiamata di gruppo in %2$s</string>
+    <string name="voip_gc_notification_call_started_generic">%1$s ha avviato una chiamata di gruppo</string>
+    <string name="voip_gc_notification_call_started_generic_outbox">Hai avviato una chiamata di gruppo</string>
+    <string name="voip_gc_dismiss_call">Ignora</string>
+    <string name="voip_gc_join_call">Partecipa</string>
+    <string name="voip_gc_ongoing_call">Chiamata di gruppo in corso</string>
+    <string name="voip_gc_waiting_for_participants">Attendi altri partecipanti</string>
+    <string name="voip_gc_participant_avatar_description">Immagine di profilo del partecipante</string>
+    <string name="voip_gc_participant_mute_status_description">Modalità silenzioso del partecipante</string>
+    <string name="voip_gc_participant_screen_share_status_description">Il partecipante sta condividendo uno schermo</string>
+    <string name="voip_gc_notification_new_call_public">È stata avviata una nuova chiamata di gruppo</string>
+    <string name="voip_gc_open_call">Apri</string>
+    <string name="voip_gc_call_started">Chiamata di gruppo avviata</string>
+    <string name="voip_gc_call_ended">Chiamata di gruppo terminata</string>
+    <string name="voip_gc_in_call">Nella chiamata di gruppo</string>
+    <string name="voip_gc_sfu_not_available">Impossibile connettersi al server</string>
+    <string name="voip_gc_call_error">Impossibile avviare la chiamata di gruppo</string>
+    <string name="voip_gc_call_start_error">Impossibile avviare chiamata di gruppo</string>
+    <string name="voip_gc_call_already_ended">La chiamata di gruppo è già stata terminata</string>
+    <string name="voip_gc_screen_sharing_not_supported">Al momento, la condivisione dello schermo è limitata ai dispositivi desktop.</string>
+    <string name="voip_gc_call_full_generic">Impossibile partecipare: è stato raggiunto il numero massimo di partecipanti.</string>
+    <string name="voip_gc_call_full_n">Impossibile partecipare: è stato raggiunto il numero massimo di partecipanti (%1$d).</string>
+    <plurals name="n_participants_in_call">
+        <item quantity="one">%d partecipante</item>
+        <item quantity="other">%d partecipanti</item>
+    </plurals>
+    <plurals name="n_members_dont_support_group_calls">
+        <item quantity="one">Avviso: un membro non può partecipare alle chiamate di gruppo.</item>
+        <item quantity="other">Avviso: %d membri non possono partecipare alle chiamate di gruppo.</item>
+    </plurals>
+</resources>

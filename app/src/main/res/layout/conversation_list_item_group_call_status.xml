@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ no avatar
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/msg_list_item_status"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/message_block"
+        style="@style/Threema.CardView.Bubble.Status"
+        app:cardBackgroundColor="@color/bubble_status_colorstatelist">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.6"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:baselineAlignBottom="true"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_phone_locked_outline"
+                app:tint="@color/bubble_text_status_colorstatelist" />
+
+            <ch.threema.app.emojis.EmojiConversationTextView
+                android:id="@+id/text_view"
+                style="@style/Threema.Bubble.Text.Body.Status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="none"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:maxLines="2"
+                android:textSize="?attr/font_status"
+                tools:text="Text" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

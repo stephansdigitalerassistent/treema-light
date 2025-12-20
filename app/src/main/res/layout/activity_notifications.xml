@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:clipToPadding="false">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/grid_unit_x2"
+        app:cardBackgroundColor="?attr/colorSurfaceContainer"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="1dp"
+        app:contentPaddingLeft="@dimen/grid_unit_x2"
+        app:contentPaddingRight="@dimen/grid_unit_x2"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/work_life_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_unit_x2"
+                android:clickable="false"
+                android:focusable="false"
+                android:outlineProvider="none"
+                android:visibility="gone"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                app:cardCornerRadius="@dimen/cardview_border_radius"
+                app:cardElevation="8dp"
+                app:contentPadding="@dimen/grid_unit_x1"
+                app:strokeWidth="0dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="@dimen/grid_unit_x0_5"
+                        android:contentDescription="@string/info"
+                        app:srcCompat="@drawable/ic_info_outline"
+                        app:tint="?attr/colorOnSurface" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/grid_unit_x1"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:text="@string/work_life_dnd_active"
+                        android:textColor="?attr/colorOnSurface" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/notification_sound_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_unit_x2"
+                android:clickable="false"
+                android:focusable="false"
+                android:outlineProvider="none"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                app:cardCornerRadius="@dimen/cardview_border_radius"
+                app:cardElevation="8dp"
+                app:contentPadding="@dimen/grid_unit_x1"
+                app:strokeWidth="0dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/grid_unit_x1">
+
+                    <TextView
+                        style="@style/Threema.MaterialAlertDialog.Title.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/grid_unit_x0_5"
+                        android:text="@string/prefs_notification_sound" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:id="@+id/sound_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:id="@+id/radio_sound_default"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/grid_unit_x1"
+                                android:layout_marginEnd="@dimen/grid_unit_x4"
+                                android:paddingStart="@dimen/grid_unit_x0_5"
+                                android:singleLine="true"
+                                android:text="@string/notifications_default"
+                                tools:checked="true" />
+
+                            <TextView
+                                android:id="@+id/text_sound_default"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="36dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                tools:text="Sunlight" />
+
+                            <RadioButton
+                                android:id="@+id/radio_sound_none"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/grid_unit_x1"
+                                android:paddingStart="@dimen/grid_unit_x0_5"
+                                android:text="@string/notifications_mute" />
+
+                            <RadioButton
+                                android:id="@+id/radio_sound_custom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/grid_unit_x1"
+                                android:paddingStart="@dimen/grid_unit_x0_5"
+                                android:text="@string/notifications_choose_sound" />
+
+                            <TextView
+                                android:id="@+id/text_sound"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="36dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                tools:text="Sunlight" />
+
+                        </RadioGroup>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/prefs_button"
+                            style="@style/Threema.MaterialButton.Minimal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|top"
+                            android:layout_marginTop="@dimen/grid_unit_x1"
+                            android:contentDescription="@string/menu_settings"
+                            android:visibility="visible"
+                            app:icon="@drawable/ic_settings_outline_24dp" />
+
+                    </FrameLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_unit_x2"
+                android:clickable="false"
+                android:focusable="false"
+                android:outlineProvider="none"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                app:cardCornerRadius="@dimen/cardview_border_radius"
+                app:cardElevation="8dp"
+                app:contentPadding="@dimen/grid_unit_x1"
+                app:strokeWidth="0dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/grid_unit_x1">
+
+                    <TextView
+                        style="@style/Threema.MaterialAlertDialog.Title.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/grid_unit_x0_5"
+                        android:text="@string/dnd" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/duration_radio_group"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <RadioButton
+                                android:id="@+id/radio_silent_off"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/grid_unit_x1"
+                                android:paddingStart="@dimen/grid_unit_x0_5"
+                                android:text="@string/switched_off"
+                                tools:checked="true" />
+
+                            <RadioButton
+                                android:id="@+id/radio_silent_except_mentions"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/grid_unit_x1"
+                                android:paddingStart="@dimen/grid_unit_x0_5"
+                                android:text="@string/off_unless_i_was_mentioned"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
+
+                            <RadioButton
+                                android:id="@+id/radio_silent_unlimited"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/grid_unit_x1"
+                                android:paddingStart="@dimen/grid_unit_x0_5"
+                                android:text="@string/switched_on" />
+
+                            <RadioButton
+                                android:id="@+id/radio_silent_limited"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/grid_unit_x1"
+                                android:layout_marginEnd="@dimen/grid_unit_x1"
+                                android:paddingStart="@dimen/grid_unit_x0_5"
+                                tools:text="For 1 hour" />
+
+                        </RadioGroup>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_unit_x1"
+                            android:layout_marginEnd="@dimen/grid_unit_x1"
+                            android:gravity="center_vertical">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/duration_minus"
+                                android:layout_width="@dimen/grid_unit_x4"
+                                android:layout_height="@dimen/grid_unit_x4"
+                                android:layout_marginEnd="@dimen/grid_unit_x2"
+                                android:elevation="0dp"
+                                android:outlineProvider="none"
+                                app:cardBackgroundColor="?attr/colorPrimary"
+                                app:cardCornerRadius="@dimen/grid_unit_x4"
+                                app:cardElevation="0dp"
+                                app:cardUseCompatPadding="false"
+                                app:strokeWidth="0dp"
+                                tools:alpha="0.2"
+                                tools:enabled="false">
+
+                                <ImageView
+                                    android:layout_width="@dimen/grid_unit_x3"
+                                    android:layout_height="@dimen/grid_unit_x3"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@string/minus"
+                                    android:src="@drawable/ic_minus"
+                                    app:tint="?attr/colorOnPrimary" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/duration_plus"
+                                android:layout_width="@dimen/grid_unit_x4"
+                                android:layout_height="@dimen/grid_unit_x4"
+                                android:elevation="0dp"
+                                android:outlineProvider="none"
+                                app:cardBackgroundColor="?attr/colorPrimary"
+                                app:cardCornerRadius="@dimen/grid_unit_x4"
+                                app:cardElevation="0dp"
+                                app:cardUseCompatPadding="false"
+                                app:strokeWidth="0dp"
+                                tools:alpha="0.2"
+                                tools:enabled="false">
+
+                                <ImageView
+                                    android:layout_width="@dimen/grid_unit_x3"
+                                    android:layout_height="@dimen/grid_unit_x3"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@string/plus"
+                                    android:src="@drawable/ic_add"
+                                    app:tint="?attr/colorOnPrimary" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/individual_settings_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_unit_x2"
+                android:clickable="false"
+                android:focusable="false"
+                android:outlineProvider="none"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                app:cardCornerRadius="@dimen/cardview_border_radius"
+                app:cardElevation="8dp"
+                app:contentPadding="@dimen/grid_unit_x1"
+                app:strokeWidth="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/individual_settings_text"
+                        style="@style/Threema.TextAppearance.BodyMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/individual_settings_switch"
+                        android:clickable="true"
+                        android:drawablePadding="@dimen/grid_unit_x1_5"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="@dimen/grid_unit_x0_5"
+                        android:text="@string/individual_notification_settings"
+                        android:textColor="?attr/colorOnSurface"
+                        app:drawableLeftCompat="@drawable/ic_settings_outline_24dp"
+                        app:drawableTint="?attr/colorOnSurface" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/individual_settings_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/grid_unit_x0_5" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/done_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/grid_unit_x2"
+                android:layout_marginBottom="@dimen/grid_unit_x1_5"
+                android:text="@string/menu_done" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</ScrollView>

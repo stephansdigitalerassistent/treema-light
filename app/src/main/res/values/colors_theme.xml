@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="seed">@color/brand_800</color>
+
+    <!-- LIGHT -->
+
+    <!-- Primary -->
+    <color name="md_theme_light_primary">@color/brand_800</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">@color/brand_100</color>
+    <color name="md_theme_light_onPrimaryContainer">#1D1D1B</color> <!-- Brand Text -->
+    <color name="md_theme_light_inversePrimary">@color/brand_600</color>
+
+    <!-- Secondary -->
+    <color name="md_theme_light_secondary">@color/brand_400</color>
+    <color name="md_theme_light_onSecondary">@color/brand_900</color>
+    <color name="md_theme_light_secondaryContainer">@color/brand_200</color>
+    <color name="md_theme_light_onSecondaryContainer">@color/brand_900</color>
+
+    <!-- Tertiary -->
+    <color name="md_theme_light_tertiary">@color/brand_100</color>
+    <color name="md_theme_light_onTertiary">#1D1D1B</color> <!-- Brand Text -->
+    <color name="md_theme_light_tertiaryContainer">@color/brand_100</color>
+    <color name="md_theme_light_onTertiaryContainer">#1D1D1B</color> <!-- Brand Text -->
+
+    <!-- Error -->
+    <color name="md_theme_light_error">#E11D24</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+
+    <!-- Background/Surface -->
+    <color name="md_theme_light_background">#FFFFFF</color>
+    <color name="md_theme_light_onBackground">#1D1D1B</color>  <!-- Brand Text -->
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_onSurface">#1D1D1B</color>  <!-- Brand Text -->
+    <color name="md_theme_light_surfaceVariant">#FFFFFF</color>
+    <color name="md_theme_light_onSurfaceVariant">#1D1D1B</color>  <!-- Brand Text -->
+    <color name="md_theme_light_inverseSurface">#1D1D1B</color> <!-- Brand Text -->
+    <color name="md_theme_light_inverseOnSurface">#FFFFFF</color>
+
+    <!-- Container -->
+    <color name="md_theme_light_surfaceContainerLowest">#FFFFFF</color>
+    <color name="md_theme_light_surfaceContainerLow">@color/brand_grey_50</color>
+    <color name="md_theme_light_surfaceContainer">@color/brand_grey_100</color>
+    <color name="md_theme_light_surfaceContainerHigh">@color/brand_grey_200</color>
+    <color name="md_theme_light_surfaceContainerHighest">@color/brand_grey_300</color>
+
+    <!-- Other -->
+    <color name="md_theme_light_outline">@color/brand_grey_700</color>
+    <color name="md_theme_light_outlineVariant">@color/brand_grey_600</color>
+
+    <!-- DARK -->
+
+    <!-- Primary -->
+    <color name="md_theme_dark_primary">@color/brand_500</color>
+    <color name="md_theme_dark_onPrimary">#000000</color>
+    <color name="md_theme_dark_primaryContainer">@color/brand_500</color>
+    <color name="md_theme_dark_onPrimaryContainer">#000000</color>
+    <color name="md_theme_dark_inversePrimary">@color/brand_700</color>
+
+    <!-- Secondary -->
+    <color name="md_theme_dark_secondary">@color/brand_400</color>
+    <color name="md_theme_dark_onSecondary">#000000</color>
+    <color name="md_theme_dark_secondaryContainer">@color/brand_800</color>
+    <color name="md_theme_dark_onSecondaryContainer">#F3F4F6</color> <!-- Brand Text -->
+
+    <!-- Tertiary -->
+    <color name="md_theme_dark_tertiary">@color/brand_grey_800</color>
+    <color name="md_theme_dark_onTertiary">#F3F4F6</color> <!-- Brand Text -->
+    <color name="md_theme_dark_tertiaryContainer">@color/brand_grey_800</color>
+    <color name="md_theme_dark_onTertiaryContainer">#F3F4F6</color> <!-- Brand Text -->
+
+    <!-- Error -->
+    <color name="md_theme_dark_error">#EDA19D</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_onError">#000000</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+
+    <!-- Background/Surface -->
+    <color name="md_theme_dark_background">#000000</color>
+    <color name="md_theme_dark_onBackground">#F3F4F6</color> <!-- Brand Text -->
+    <color name="md_theme_dark_surface">#000000</color>
+    <color name="md_theme_dark_onSurface">#F3F4F6</color> <!-- Brand Text -->
+    <color name="md_theme_dark_surfaceVariant">#000000</color>
+    <color name="md_theme_dark_onSurfaceVariant">#F3F4F6</color> <!-- Brand Text -->
+    <color name="md_theme_dark_inverseSurface">#F3F4F6</color> <!-- Brand Text -->
+    <color name="md_theme_dark_inverseOnSurface">#000000</color>
+
+    <!-- Container -->
+    <color name="md_theme_dark_surfaceContainerLowest">#000000</color>
+    <color name="md_theme_dark_surfaceContainerLow">@color/brand_grey_900</color>
+    <color name="md_theme_dark_surfaceContainer">@color/brand_grey_800</color>
+    <color name="md_theme_dark_surfaceContainerHigh">@color/brand_grey_700</color>
+    <color name="md_theme_dark_surfaceContainerHighest">@color/brand_grey_600</color>
+
+    <!-- Other -->
+    <color name="md_theme_dark_outline">@color/brand_grey_100</color>
+    <color name="md_theme_dark_outlineVariant">@color/brand_grey_50</color>
+</resources>

@@ -1,0 +1,274 @@
+/*  _____ _
+ * |_   _| |_  _ _ ___ ___ _ __  __ _
+ *   | | | ' \| '_/ -_) -_) '  \/ _` |_
+ *   |_| |_||_|_| \___\___|_|_|_\__,_(_)
+ *
+ * Threema for Android
+ * Copyright (c) 2021-2025 Threema GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ch.threema.app.camera
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Size
+import android.view.MotionEvent
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
+import androidx.camera.core.Camera
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.FocusMeteringAction
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import ch.threema.android.buildActivityIntent
+import ch.threema.android.buildIntent
+import ch.threema.app.R
+import ch.threema.app.activities.ThreemaActivity
+import ch.threema.app.ui.InsetSides
+import ch.threema.app.ui.SpacingValues
+import ch.threema.app.ui.applyDeviceInsetsAsPadding
+import ch.threema.app.utils.SoundUtil
+import ch.threema.app.utils.logScreenVisibility
+import ch.threema.base.utils.getThreemaLogger
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+
+private val logger = getThreemaLogger("QRScannerActivity")
+
+class QRScannerActivity : ThreemaActivity() {
+    init {
+        logScreenVisibility(logger)
+    }
+
+    private lateinit var cameraExecutor: ExecutorService
+
+    private lateinit var cameraPreview: PreviewView
+    private lateinit var cameraPreviewContainer: View
+
+    private var hint: String = ""
+
+    private var camera: Camera? = null
+    private var preview: Preview? = null
+    private var imageCapture: ImageCapture? = null
+    private var imageAnalyzer: ImageAnalysis? = null
+    private var cameraProvider: ProcessCameraProvider? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        cameraExecutor = Executors.newSingleThreadExecutor()
+
+        setContentView(R.layout.activity_qrscanner)
+
+        cameraPreview = findViewById(R.id.camera_preview)
+        cameraPreviewContainer = findViewById(R.id.camera_preview_container)
+
+        // Hide the system bars
+        WindowInsetsControllerCompat(window, findViewById(R.id.root_view)).let { controller ->
+            controller.hide(WindowInsetsCompat.Type.systemBars())
+            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+
+        if (hint.isEmpty()) {
+            hint = intent.getStringExtra(EXTRA_HINT_TEXT)
+                ?: getString(R.string.msg_default_status)
+        }
+
+        // set hint text
+        findViewById<TextView>(R.id.hint_view)?.let { hintTextView ->
+            hintTextView.text = hint
+            hintTextView.applyDeviceInsetsAsPadding(
+                insetSides = InsetSides.horizontal(),
+                ownPadding = SpacingValues.symmetric(
+                    vertical = R.dimen.grid_unit_x1,
+                    horizontal = R.dimen.grid_unit_x2,
+                ),
+            )
+        }
+
+        // Wait for the views to be properly laid out
+        cameraPreview.post {
+            setUpCamera()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Shut down our background executor
+        cameraExecutor.shutdown()
+    }
+
+    private fun setUpCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        cameraProviderFuture.addListener(
+            {
+                // CameraProvider
+                cameraProvider = cameraProviderFuture.get()
+
+                // Build and bind the camera use cases
+                bindCameraUseCases()
+            },
+            ContextCompat.getMainExecutor(this),
+        )
+    }
+
+    @SuppressLint("ClickableViewAccessibility", "WrongConstant")
+    private fun bindCameraUseCases() {
+        val lensFacing = when {
+            cameraProvider?.hasCamera(CameraSelector.DEFAULT_BACK_CAMERA) == true -> CameraSelector.LENS_FACING_BACK
+            cameraProvider?.hasCamera(CameraSelector.DEFAULT_FRONT_CAMERA) == true -> CameraSelector.LENS_FACING_FRONT
+            else -> -1
+        }
+
+        if (lensFacing == -1) {
+            Toast.makeText(this, R.string.no_camera_installed, Toast.LENGTH_SHORT).show()
+            logger.info("Back and front camera are unavailable")
+            finish()
+            return
+        }
+
+        val cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
+        val rotation = cameraPreview.display?.rotation ?: 0
+        val resolution = Size(720, 1280)
+
+        val cameraProvider = cameraProvider
+            ?: throw IllegalStateException("Camera initialization failed.")
+
+        preview = Preview.Builder()
+            .setTargetResolution(resolution)
+            .setTargetRotation(rotation)
+            .build()
+
+        imageCapture = ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+            .setTargetResolution(resolution)
+            .setTargetRotation(rotation)
+            .build()
+
+        imageAnalyzer = ImageAnalysis.Builder()
+            .setTargetResolution(resolution)
+            .setTargetRotation(rotation)
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .build()
+            .also {
+                it.setAnalyzer(
+                    cameraExecutor,
+                    QRCodeAnalyzer { decodeQRCodeState: DecodeQRCodeState ->
+                        when (decodeQRCodeState) {
+                            is DecodeQRCodeState.ERROR -> {
+                                logger.debug("Decoder Error")
+                                it.clearAnalyzer()
+                                runOnUiThread {
+                                    Toast.makeText(this, R.string.qr_code, Toast.LENGTH_LONG).show()
+                                    returnData(null, false)
+                                }
+                            }
+
+                            is DecodeQRCodeState.SUCCESS -> {
+                                logger.debug("Decoder Success")
+                                val qrCodeData = decodeQRCodeState.qrCode
+                                it.clearAnalyzer()
+                                qrCodeData?.let {
+                                    returnData(qrCodeData, true)
+                                }
+                            }
+                        }
+                    },
+                )
+            }
+
+        try {
+            // Must unbind the use-cases before rebinding them
+            cameraProvider.unbindAll()
+
+            camera = cameraProvider.bindToLifecycle(
+                this, cameraSelector, preview, imageCapture, imageAnalyzer,
+            )
+
+            // Attach the viewfinder's surface provider to preview use case
+            preview?.surfaceProvider = cameraPreview.surfaceProvider
+
+            val point = cameraPreview.meteringPointFactory.createPoint(
+                cameraPreviewContainer.left + cameraPreviewContainer.width / 2.0f,
+                cameraPreviewContainer.top + cameraPreviewContainer.height / 2.0f,
+            )
+            camera?.cameraControl?.startFocusAndMetering(FocusMeteringAction.Builder(point).build())
+        } catch (e: Exception) {
+            logger.error("Use case binding failed", e)
+            returnData(null, false)
+        }
+
+        cameraPreviewContainer.setOnTouchListener { _: View, motionEvent: MotionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> true
+                MotionEvent.ACTION_UP -> {
+                    camera?.cameraControl?.startFocusAndMetering(
+                        FocusMeteringAction.Builder(
+                            cameraPreview.meteringPointFactory.createPoint(motionEvent.x, motionEvent.y),
+                        ).build(),
+                    )
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun returnData(qrCodeData: String?, success: Boolean) {
+        if (success) {
+            SoundUtil.play(R.raw.qrscanner_beep)
+            setResult(
+                RESULT_OK,
+                buildIntent {
+                    putExtra(RESULT_CONTENT, qrCodeData)
+                },
+            )
+        } else {
+            setResult(RESULT_CANCELED)
+        }
+
+        finish()
+    }
+
+    companion object {
+        @JvmStatic
+        @JvmOverloads
+        fun createIntent(context: Context, hint: String? = null) = buildActivityIntent<QRScannerActivity>(context) {
+            if (!hint.isNullOrEmpty()) {
+                putExtra(EXTRA_HINT_TEXT, hint)
+            }
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+        }
+
+        @JvmStatic
+        fun extractResult(intent: Intent?): String? =
+            intent?.getStringExtra(RESULT_CONTENT)
+
+        private const val EXTRA_HINT_TEXT = "hint"
+        private const val RESULT_CONTENT = "content"
+    }
+}

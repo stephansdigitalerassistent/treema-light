@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/top_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_view" />
+
+    <RelativeLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_bar"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/grid_unit_x2">
+
+                <TextView
+                    android:id="@+id/safe_enable_explain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/safe_configure_choose_password"
+                    android:textAppearance="@style/Threema.TextAppearance.BodyMedium" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password1layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/safe_enable_explain"
+                    android:layout_marginTop="@dimen/grid_unit_x2"
+                    android:hint="@string/password_hint"
+                    app:counterEnabled="true"
+                    app:errorEnabled="true"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:passwordToggleEnabled="true">
+
+                    <ch.threema.app.ui.ThreemaTextInputEditText
+                        android:id="@+id/safe_password1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text|textNoSuggestions|textPassword"
+                        android:nextFocusForward="@+id/safe_password2"
+                        android:singleLine="true"
+                        android:textIsSelectable="false">
+
+                        <requestFocus />
+                    </ch.threema.app.ui.ThreemaTextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password2layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/password1layout"
+                    android:hint="@string/backup_password_again_summary"
+                    app:counterEnabled="true"
+                    app:errorEnabled="true"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:passwordToggleEnabled="true">
+
+                    <ch.threema.app.ui.ThreemaTextInputEditText
+                        android:id="@+id/safe_password2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="text|textNoSuggestions|textPassword"
+                        android:nextFocusRight="@id/next"
+                        android:nextFocusForward="@+id/safe_password1"
+                        android:singleLine="true"
+                        android:textIsSelectable="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/button_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:padding="@dimen/grid_unit_x2"
+            android:weightSum="13">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/advanced_options"
+                style="@style/Threema.MaterialButton.Outlined.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="6"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/safe_advanced_options" />
+
+            <android.widget.Space
+                android:layout_width="@dimen/grid_unit_x1"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/next"
+                style="@style/Threema.MaterialButton.Action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="6"
+                android:ellipsize="none"
+                android:singleLine="true"
+                android:text="@string/next"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

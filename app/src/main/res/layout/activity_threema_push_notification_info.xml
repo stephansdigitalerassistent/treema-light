@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scroll_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:padding="@dimen/grid_unit_x2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Headline -->
+            <TextView
+                style="@style/Threema.TextAppearance.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/threema_push" />
+
+            <!-- Info text -->
+            <TextView
+                style="@style/Threema.TextAppearance.BodyLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/threema_push_notification_info_text_1" />
+
+            <TextView
+                style="@style/Threema.TextAppearance.BodyLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/threema_push_notification_info_text_2" />
+
+            <TextView
+                style="@style/Threema.TextAppearance.BodyLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/threema_push_notification_info_text_3" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Close button -->
+    <LinearLayout
+        android:id="@+id/button_bar_layout"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_button"
+            style="@style/Threema.MaterialButton.Action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/grid_unit_x2"
+            android:layout_marginBottom="@dimen/grid_unit_x2"
+            android:layout_weight="1"
+            android:text="@string/close" />
+
+    </LinearLayout>
+
+</LinearLayout>

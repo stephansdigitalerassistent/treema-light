@@ -1,0 +1,51 @@
+/*  _____ _
+ * |_   _| |_  _ _ ___ ___ _ __  __ _
+ *   | | | ' \| '_/ -_) -_) '  \/ _` |_
+ *   |_| |_||_|_| \___\___|_|_|_\__,_(_)
+ *
+ * Threema for Android
+ * Copyright (c) 2025 Threema GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ch.threema.testhelpers
+
+import ch.threema.common.TimeProvider
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import kotlin.time.Duration
+
+class TestTimeProvider(
+    initialTimestamp: Long = 0L,
+    var timeZoneOffset: ZoneOffset = ZoneOffset.UTC,
+) : TimeProvider {
+    private var timestamp = initialTimestamp
+
+    override fun get(): Instant = Instant.ofEpochMilli(timestamp)
+
+    fun set(timestamp: Long) {
+        this.timestamp = timestamp.coerceAtLeast(0L)
+    }
+
+    fun set(time: Instant) {
+        timestamp = time.toEpochMilli()
+    }
+
+    override fun getLocal(): LocalDateTime = LocalDateTime.ofInstant(get(), timeZoneOffset)
+
+    fun advanceBy(duration: Duration) {
+        timestamp += duration.inWholeMilliseconds
+    }
+}

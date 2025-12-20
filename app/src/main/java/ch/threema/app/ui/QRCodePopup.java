@@ -1,0 +1,173 @@
+/*  _____ _
+ * |_   _| |_  _ _ ___ ___ _ __  __ _
+ *   | | | ' \| '_/ -_) -_) '  \/ _` |_
+ *   |_| |_||_|_| \___\___|_|_|_\__,_(_)
+ *
+ * Threema for Android
+ * Copyright (c) 2020-2025 Threema GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ch.threema.app.ui;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+
+import org.koin.java.KoinJavaComponent;
+import org.slf4j.Logger;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import ch.threema.app.R;
+import ch.threema.app.qrcodes.ContactUrlUtil;
+import ch.threema.app.qrcodes.QrCodeGenerator;
+import ch.threema.app.services.UserService;
+import ch.threema.app.utils.AnimationUtil;
+import static ch.threema.base.utils.LoggingKt.getThreemaLogger;
+
+public class QRCodePopup extends DimmingPopupWindow implements DefaultLifecycleObserver {
+    private static final Logger logger = getThreemaLogger("QRCodePopup");
+
+    private ImageView imageView;
+    private View topLayout;
+    private View parentView;
+
+    private final int[] location = new int[2];
+
+    private @Nullable Bitmap bitmap;
+
+    public QRCodePopup(Context context, View parentView, LifecycleOwner lifecycleOwner) {
+        super(context);
+
+        if (lifecycleOwner != null) {
+            lifecycleOwner.getLifecycle().addObserver(this);
+        }
+
+        init(context, parentView);
+    }
+
+    private void init(@NonNull Context context, View parentView) {
+        this.parentView = parentView;
+
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        topLayout = layoutInflater.inflate(R.layout.popup_qrcode, null, true);
+
+        this.imageView = topLayout.findViewById(R.id.thumbnail_view);
+
+        setContentView(topLayout);
+
+        setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+
+        setBackgroundDrawable(new BitmapDrawable());
+        setAnimationStyle(0);
+        setElevation(0);
+        setInputMethodMode(PopupWindow.INPUT_METHOD_NOT_NEEDED);
+    }
+
+    /**
+     * Show a popup with a QR code
+     *
+     * @param sourceView  starting point for animation
+     * @param text        text to display as QR code, or null to display a QR code for the user's identity and public key
+     */
+    public void show(@NonNull final View sourceView, @Nullable String text) {
+        QrCodeGenerator qrCodeGenerator = KoinJavaComponent.get(QrCodeGenerator.class);
+
+        if (text != null) {
+            bitmap = qrCodeGenerator.generateWithUnicodeSupport(text);
+        } else {
+            UserService userService = KoinJavaComponent.get(UserService.class);
+            ContactUrlUtil contactUrlUtil = KoinJavaComponent.get(ContactUrlUtil.class);
+            var content = contactUrlUtil.generate(
+                userService.getIdentity(),
+                userService.getPublicKey()
+            );
+            bitmap = qrCodeGenerator.generate(content);
+        }
+
+        if (bitmap == null) {
+            logger.debug("Unable to get qr code bitmap");
+            return;
+        }
+
+        final BitmapDrawable bitmapDrawable = new BitmapDrawable(getContext().getResources(), bitmap);
+        bitmapDrawable.setFilterBitmap(false);
+
+        this.imageView.setImageDrawable(bitmapDrawable);
+        showAtLocation(parentView, Gravity.CENTER, 0, 0);
+        dimBackground();
+
+        getContentView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                getContentView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                AnimationUtil.getViewCenter(sourceView, getContentView(), location);
+
+                AnimationSet animation = new AnimationSet(true);
+                Animation scale = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.ABSOLUTE, location[0], Animation.ABSOLUTE, location[1]);
+                Animation fade = new AlphaAnimation(0.0f, 1.0f);
+
+                animation.addAnimation(scale);
+                animation.addAnimation(fade);
+                animation.setInterpolator(new DecelerateInterpolator());
+                animation.setDuration(150);
+
+                getContentView().startAnimation(animation);
+            }
+        });
+
+        topLayout.setOnClickListener(v -> dismiss());
+    }
+
+    @Override
+    public void dismiss() {
+        AnimationUtil.popupAnimateOut(getContentView(), () -> {
+            QRCodePopup.super.dismiss();
+            if (bitmap != null) {
+                bitmap.recycle();
+                bitmap = null;
+            }
+        });
+    }
+
+    /**
+     * Notifies that {@code ON_PAUSE} event occurred.
+     * <p>
+     * This method will be called before the {@link LifecycleOwner}'s {@code onPause} method
+     * is called.
+     *
+     * @param owner the component, whose state was changed
+     */
+    @Override
+    public void onPause(@NonNull LifecycleOwner owner) {
+        QRCodePopup.super.dismiss();
+    }
+}

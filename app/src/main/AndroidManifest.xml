@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:installLocation="internalOnly"
+    android:testOnly="false"
+    tools:ignore="GoogleAppIndexingWarning">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <!-- Maplibre requires OpenGL ES 3.0 and/or Vulkan 1.0. To support more devices, we remove this requirement and
+    handle missing support by disabling the location features on the affected devices. -->
+    <uses-feature
+        android:glEsVersion="0x00030000"
+        tools:node="remove" />
+    <uses-feature
+        android:name="android.hardware.vulkan.version"
+        tools:node="remove" />
+
+    <!-- DANGEROUS PERMISSIONS -->
+    <!-- android.permission-group.CONTACTS -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <!-- android.permission-group.STORAGE -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- android.permission-group.LOCATION -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- android.permission-group.MICROPHONE -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- android.permission-group.PHONE -->
+    <!-- Required to detect and hangup incoming regular calls -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+
+    <!-- android.permission-group.CAMERA -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- PROTECTION_NORMAL - granted automatically -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+
+    <!-- Access to address book -->
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+
+    <!-- Access to audio settings and bluetooth for voice calls -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- Permissions for biometric unlocking  -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <!-- Permission to show notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Launcher shortcuts -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
+    <!-- Huawei launcher badges -->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" />
+
+    <!-- Sony launcher badges -->
+    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" />
+
+    <!-- foreground service permissions -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+
+    <!-- only for fastlane test -->
+    <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/> -->
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.portrait"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="false" />
+
+    <queries>
+        <!-- various power manager and autostart packages we may need to direct our users to -->
+        <package android:name="com.samsung.android.lool" />
+        <package android:name="com.huawei.systemmanager" />
+        <package android:name="com.iqoo.secure" />
+        <package android:name="com.vivo.permissionmanager" />
+        <package android:name="com.htc.pitroad" />
+        <package android:name="com.miui.securitycenter" />
+        <package android:name="com.letv.android.letvsafe" />
+        <package android:name="com.coloros.safecenter" />
+        <package android:name="com.oppo.safe" />
+        <package android:name="com.asus.mobilemanager" />
+        <package android:name="com.transsion.phonemanager" />
+
+        <!-- provider for xperia home icon badge counters -->
+        <provider
+            android:authorities="com.sonymobile.home.resourceprovider"
+            android:exported="false" />
+
+        <intent>
+            <action android:name="miui.intent.action.POWER_HIDE_MODE_APP_LIST" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent>
+        <intent>
+            <action android:name="miui.intent.action.OP_AUTO_START" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="text/plain" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.IGNORE_BACKGROUND_DATA_RESTRICTIONS_SETTINGS" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".ThreemaApplication"
+        android:allowAudioPlaybackCapture="false"
+        android:allowBackup="false"
+        android:appCategory="social"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:hardwareAccelerated="true"
+        android:hasFragileUserData="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:localeConfig="@xml/locales_config"
+        android:manageSpaceActivity="ch.threema.app.activities.StorageManagementActivity"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="false"
+        android:theme="@style/AppBaseTheme"
+        android:usesCleartextTraffic="false"
+        tools:replace="android:supportsRtl,android:allowBackup,android:dataExtractionRules">
+        <!-- Note: The "replace" entry above should be kept to ensure that a library cannot accidentally
+        override rtl or backup support. -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.5" />
+        <meta-data
+            android:name="android.provider.CONTACTS_STRUCTURE"
+            android:resource="@xml/contacts" />
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:configChanges="uiMode"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <!-- Commented out to make Treema Light the default -->
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+                <!-- samsung multiwindow -->
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/app_shortcuts" />
+        </activity>
+
+        <activity
+            android:name="ch.threema.treemalight.TreemaLightActivity"
+            android:configChanges="uiMode"
+            android:exported="true"
+            android:label="Treema Light"
+            android:theme="@style/Theme.Threema.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".home.HomeActivity"
+            android:configChanges="uiMode"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ComposeMessageActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:enableOnBackInvokedCallback="false"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:parentActivityName=".home.HomeActivity"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="stateUnchanged">
+            <intent-filter
+                android:label="@string/threema_contact"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="@string/contacts_mime_type" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.RecipientListActivity"
+            android:configChanges="uiMode"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Threema.WithToolbar">
+            <intent-filter android:label="@string/share_with_app">
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/*" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter android:label="@string/share_with_app">
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data
+                    android:host="compose"
+                    android:scheme="${uriScheme}" />
+            </intent-filter>
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${actionUrl}"
+                    android:pathPrefix="/compose"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.chooser.chooser_target_service"
+                android:value="androidx.sharetarget.ChooserTargetServiceCompat" />
+        </activity>
+        <activity
+            android:name=".activities.RecipientListBaseActivity"
+            android:configChanges="uiMode"
+            android:launchMode="singleTop"
+            android:parentActivityName=".home.HomeActivity"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".preference.SettingsActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Threema.Settings">
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".preference.SettingsMediaDummyActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".contactdetails.ContactDetailActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.TransparentStatusbar" />
+        <activity
+            android:name=".activities.AddContactActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Threema.Translucent">
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="add"
+                    android:scheme="${uriScheme}" />
+            </intent-filter>
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${actionUrl}"
+                    android:pathPrefix="/add"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".webviews.LicenseActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".webviews.TermsOfServiceActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".webviews.EulaActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ExportIDResultActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:launchMode="singleTop"
+            android:parentActivityName=".home.HomeActivity"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ExportIDActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.Translucent" />
+        <activity
+            android:name=".activities.WorkIntroActivity"
+            android:exported="false"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard">
+
+        </activity>
+        <activity
+            android:name=".activities.EnterSerialActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name"
+                android:priority="1000">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${actionUrl}"
+                    android:pathPrefix="/license"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="license"
+                    android:scheme="${uriScheme}" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".passphrase.PassphraseLockActivity"
+            android:autoRemoveFromRecents="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".passphrase.PassphraseUnlockActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop"
+            android:noHistory="true"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".webviews.SupportActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".webviews.PrivacyPolicyActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ServerMessageActivity"
+            android:label="server_message"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.SendMediaActivity"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activities.BackupAdminActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.PinLockActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:noHistory="true"
+            android:theme="@style/Theme.Threema.WithToolbar.NoAnim"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustPan" />
+        <activity
+            android:name=".activities.GroupAddActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.GroupAdd2Activity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.Translucent" />
+        <activity
+            android:name=".activities.GroupDetailActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.TransparentStatusbar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activities.DistributionListAddActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ExcludedSyncIdentitiesActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.BlockedIdentitiesActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ProfilePicRecipientsActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.AddAccountActivity"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".activities.MediaViewerActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".mediagallery.MediaGalleryActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+
+        <!-- https://code.google.com/p/android/issues/detail?id=53313 -->
+        <activity
+            android:name=".activities.DummyActivity"
+            android:allowTaskReparenting="true"
+            android:alwaysRetainTaskState="false"
+            android:clearTaskOnLaunch="true"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:noHistory="true"
+            android:stateNotNeeded="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name=".activities.ballot.BallotOverviewActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ballot.BallotMatrixActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ballot.BallotChooserActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.CropImageActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.ballot.BallotWizardActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".filepicker.FilePickerActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.StorageManagementActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.notificationpolicy.ContactNotificationsActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.CircularReveal" />
+        <activity
+            android:name=".activities.notificationpolicy.GroupNotificationsActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.CircularReveal" />
+        <activity
+            android:name=".activities.ImagePaintActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <!-- Webclient activities -->
+        <activity
+            android:name=".webclient.activities.SessionsActivity"
+            android:configChanges="uiMode"
+            android:launchMode="singleTop"
+            android:parentActivityName=".home.HomeActivity"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".webclient.activities.SessionsIntroActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".webclient.activities.WebDiagnosticsActivity"
+            android:configChanges="uiMode"
+            android:parentActivityName=".home.HomeActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            tools:ignore="LockedOrientationActivity" />
+
+        <!-- MD activities -->
+        <activity
+            android:name=".multidevice.LinkedDevicesActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:launchMode="singleTop"
+            android:parentActivityName=".home.HomeActivity"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".multidevice.wizard.LinkNewDeviceWizardActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.Translucent"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <!-- VoIP activities -->
+        <activity
+            android:name=".voip.activities.CallActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|touchscreen|keyboard|keyboardHidden|uiMode"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity=".voip.activities.CallActivity"
+            android:theme="@style/Theme.Threema.TransparentStatusbar">
+            <intent-filter android:label="@string/threema_call">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".voip.activities.GroupCallActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity=".voip.activities.GroupCallActivity"
+            android:theme="@style/Theme.Threema.TransparentStatusbar_Fullscreen" />
+        <activity
+            android:name=".voip.activities.CallActionIntentActivity"
+            android:exported="true"
+            android:screenOrientation="sensorPortrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <!-- Handle calls from phonebook -->
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="${callMimeType}" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".voip.activities.WebRTCDebugActivity"
+            android:parentActivityName=".home.HomeActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activities.WhatsNewActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:noHistory="true"
+            android:theme="@style/Theme.Threema.WhatsNew" />
+
+        <!-- Wizard activities -->
+        <activity
+            android:name=".activities.wizard.WizardIntroActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard" />
+        <activity
+            android:name=".activities.wizard.WizardStartActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard" />
+        <activity
+            android:name=".activities.wizard.WizardBaseActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activities.wizard.WizardFingerPrintActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard" />
+        <activity
+            android:name=".activities.wizard.WizardIDRestoreActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard" />
+        <activity
+            android:name=".activities.wizard.WizardSafeRestoreActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.wizard.WizardBackupRestoreActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/Theme.Threema.Wizard"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.SMSVerificationLinkActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="link_mobileno"
+                    android:scheme="${uriScheme}" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.VoiceActionActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.voicesearch.SEND_MESSAGE_TO_CONTACTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="audio/wav" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.DisableBatteryOptimizationsActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.Translucent" />
+        <activity
+            android:name=".activities.StickerSelectorActivity"
+            android:theme="@style/Theme.Threema.Transparent.Background" />
+        <activity
+            android:name=".activities.ImagePaintKeyboardActivity"
+            android:theme="@style/Theme.Threema.Transparent.Background"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible" />
+        <activity
+            android:name=".activities.DownloadApkActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.Translucent" />
+        <activity
+            android:name=".voicemessage.VoiceRecorderActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode"
+            android:theme="@style/Theme.Threema.Translucent"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".location.LocationPickerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".mediaattacher.MediaAttachActivity"
+            android:configChanges="uiMode"
+            android:resizeableActivity="true"
+            android:theme="@style/Theme.MediaAttacher"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".mediaattacher.MediaSelectionActivity"
+            android:configChanges="uiMode"
+            android:resizeableActivity="true"
+            android:theme="@style/Theme.MediaAttacher"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".activities.EditSendContactActivity"
+            android:configChanges="uiMode"
+            android:resizeableActivity="true"
+            android:theme="@style/Theme.Threema.Translucent"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".threemasafe.ThreemaSafeConfigureActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="ch.threema.app.activities.DirectoryActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".applock.AppLockActivity"
+            android:autoRemoveFromRecents="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.BiometricUnlock" />
+        <activity
+            android:name=".activities.AppLinksActivity"
+            android:autoRemoveFromRecents="true"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:exported="true"
+            android:theme="@style/Theme.Threema.Transparent.Background">
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${contactActionUrl}"
+                    android:pathPattern="/.*"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".camera.CameraActivity"
+            android:autoRemoveFromRecents="true"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.Threema.Camera">
+            <!-- Declare Huawei notch support -->
+            <meta-data
+                android:name="android.notch_support"
+                android:value="true" />
+        </activity>
+        <activity
+            android:name="ch.threema.app.globalsearch.GlobalSearchActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.StarredMessages"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="ch.threema.app.activities.StarredMessagesActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.StarredMessages"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".location.LocationAutocompleteActivity"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".archive.ArchiveActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activities.referral.ReferralActivity"
+            android:configChanges="touchscreen|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".location.MapActivity"
+            android:configChanges="keyboardHidden|screenSize|screenLayout|uiMode"
+            android:exported="true"
+            android:theme="@style/Theme.Threema.WithToolbar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="geo" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".webviews.WorkExplainActivity"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|orientation|screenLayout|screenSize|uiMode"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.VerificationLevelActivity"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".messagedetails.MessageDetailsActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".camera.QRScannerActivity"
+            android:clearTaskOnLaunch="true"
+            android:stateNotNeeded="true"
+            android:theme="@style/Theme.Threema.Camera"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.ThreemaPushNotificationInfoActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.PermissionRequestActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".activities.BackupRestoreProgressActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".problemsolving.ProblemSolverActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
+            android:name=".debug.patternlibrary.PatternLibraryActivity"
+            android:theme="@style/Theme.Threema.Translucent" />
+        <activity
+            android:name="ch.threema.app.emojireactions.EmojiReactionsOverviewActivity"
+            android:theme="@style/Theme.Threema.Translucent"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="ch.threema.app.emojireactions.EmojiReactionsPickerActivity"
+            android:theme="@style/Theme.Threema.Translucent"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".startup.AppStartupActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.AppStartup" />
+        <activity
+            android:name=".startup.RemoteSecretProtectionUpdateActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.Threema.AppStartup" />
+
+        <!-- services -->
+        <service
+            android:name=".services.AccountAuthenticatorService"
+            android:exported="true"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+        <service
+            android:name=".services.ContactsSyncAdapterService"
+            android:exported="true"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_contacts" />
+            <meta-data
+                android:name="android.provider.CONTACTS_STRUCTURE"
+                android:resource="@xml/contacts" />
+        </service>
+        <service
+            android:name=".services.PassphraseService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="remoteMessaging"
+            android:label="PassphraseService">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="@string/special_use_fgs_passphrase_service_explanation" />
+        </service>
+        <service
+            android:name=".services.WidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".jobs.ReConnectJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".services.VoiceActionService"
+            android:foregroundServiceType="remoteMessaging" />
+        <service
+            android:name=".backuprestore.csv.BackupService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+        <service
+            android:name=".backuprestore.csv.RestoreService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+        <service
+            android:name=".voip.services.VoipCallService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+        <service
+            android:name=".voip.services.CallRejectService"
+            android:exported="false" />
+        <service
+            android:name=".webclient.services.SessionAndroidService"
+            android:exported="false"
+            android:foregroundServiceType="remoteMessaging"
+            android:label="WebClientService" />
+        <service
+            android:name=".webclient.services.StopSessionsAndroidService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".services.notification.NotificationActionService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name=".services.ThreemaPushService"
+            android:exported="false"
+            android:foregroundServiceType="remoteMessaging"
+            android:label="ThreemaPushService" />
+
+        <service
+            android:name=".voip.groupcall.service.GroupCallService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <!-- Set the exported attribute for the sharetarget (needed for target api 31) -->
+        <service
+            android:name="androidx.sharetarget.ChooserTargetServiceCompat"
+            android:exported="true"
+            tools:node="merge" />
+        <service
+            android:name=".services.VoiceMessagePlayerService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+                <action android:name="androidx.media3.session.MediaLibraryService" />
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+
+        <!-- Store the chosen per-app locale -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
+        <!-- broadcast receivers -->
+        <receiver
+            android:name=".receivers.AutoStartNotifyReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="BootListener">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.AlarmManagerBroadcastReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".receivers.WidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_info" />
+        </receiver>
+        <receiver
+            android:name=".receivers.UpdateReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.ReSendMessagesBroadcastReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".receivers.CancelResendMessagesBroadcastReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".receivers.FetchMessagesBroadcastReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".voip.receivers.VoipMediaButtonReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.PowerSaveModeReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.os.action.POWER_SAVE_MODE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.SendTextToContactBroadcastReceiver"
+            android:exported="false" />
+
+        <!-- content providers -->
+        <provider
+            android:name=".NamedFileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- disable emoji2 because we use our own emoji parsing -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                tools:node="remove" />
+            <meta-data
+                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                tools:node="remove" />
+        </provider>
+
+        <!-- samsung multiwindow -->
+        <uses-library
+            android:name="com.sec.android.app.multiwindow"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.samsung.android.sdk.multiwindow.penwindow.enable"
+            android:value="true" />
+        <meta-data
+            android:name="com.sec.android.support.multiwindow"
+            android:value="true" />
+        <meta-data
+            android:name="com.samsung.android.keepalive.density"
+            android:value="true" />
+
+    </application>
+
+</manifest>

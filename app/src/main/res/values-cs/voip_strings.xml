@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voip_title">Hovor Threema</string>
+    <string name="voip_hangup">Zavěsit</string>
+    <string name="voip_toggle_mic">Přepnout mikrofon</string>
+    <string name="voip_toggle_speaker">Přepnout reproduktor</string>
+    <string name="voip_switch_cam">Přepnout fotoaparát</string>
+    <string name="voip_switch_cam_front">Přepnuto na přední fotoaparát</string>
+    <string name="voip_switch_cam_rear">Přepnuto na zadní fotoaparát</string>
+    <string name="voip_toggle_video">Přepnout režim videa</string>
+    <string name="voip_call_confirm">Chcete zavolat kontaktu %1$s?</string>
+    <string name="voip_error_call">Během hovoru Threema došlo k chybě</string>
+    <string name="voip_error_init_call">Při zahajování hovoru došlo k chybě</string>
+    <string name="voip_notification_title">Příchozí hovor Threema</string>
+    <string name="voip_notification_text">Kontakt %1$s volá</string>
+    <!-- Shown when starting a call, before the peer device is ringing -->
+    <string name="voip_status_initializing">Zahajování</string>
+    <!-- Shown when the callee has accepted the call and the connection is being established -->
+    <string name="voip_status_connecting">Spojování</string>
+    <!-- Shown when a call is being disconnected -->
+    <string name="voip_status_disconnecting">Odpojování</string>
+    <!-- Shown when the device of the callee is ringing -->
+    <string name="voip_status_ringing">Vytáčení</string>
+    <string name="voip_mic_enable">Povolit mikrofon</string>
+    <string name="voip_mic_disable">Zakázat mikrofon</string>
+    <string name="voip_checking_compatibility">Ověřuje se, zda tento kontakt může přijímat hovory Threema</string>
+    <string name="voip_incompatible">Tento kontakt nyní nemůže přijímat hovory Threema.</string>
+    <string name="voip_call_status_unavailable">Příjemce hovoru není dostupný</string>
+    <string name="voip_call_status_rejected">Hovor byl odmítnut</string>
+    <string name="voip_call_status_busy">Příjemce hovoru je zaneprázdněn</string>
+    <string name="voip_call_status_busy_short">Obsazeno</string>
+    <string name="voip_call_status_disabled">Příjemce hovoru má zakázané hovory Threema</string>
+    <string name="voip_call_status_missed">Zmeškaný hovor</string>
+    <string name="voip_call_finished_outbox">Odchozí hovor</string>
+    <string name="voip_call_finished_inbox">Příchozí hovor</string>
+    <string name="voip_call_status_aborted">Hovor byl zrušen</string>
+    <string name="voip_return_call">Zpětný hovor</string>
+    <string name="voip_accept">Přijmout</string>
+    <string name="voip_reject">Odmítnout</string>
+    <string name="voip_speakerphone">Hlasitý odposlech</string>
+    <string name="voip_wired_headset">Sluchátka</string>
+    <string name="voip_earpiece">Telefon</string>
+    <string name="voip_bluetooth">Bluetooth</string>
+    <string name="voip_none">Nedostupný</string>
+    <string name="voip_call_finished">Hovor Threema byl ukončen</string>
+    <string name="voip_another_call">Nelze se spojit. Probíhá jiný hovor Threema.</string>
+    <string name="voip_prefs_title_aec">Potlačení ozvěny</string>
+    <string name="voip_prefs_aec_sw">Softwarové potlačení ozvěny</string>
+    <string name="voip_prefs_aec_hw">Hardwarové potlačení ozvěny</string>
+    <string name="voip_prefs_title_video_codec">Video kodeky</string>
+    <string name="voip_prefs_video_aec_hw">Hardwarově akcelerováno</string>
+    <string name="voip_prefs_video_codec_no_vp8">Zakázat VP8</string>
+    <string name="voip_prefs_video_codec_no_h264hip">Zakázat H264-HiP</string>
+    <string name="voip_prefs_video_codec_sw">Softwarové kodeky</string>
+    <string name="voip_connection_failed">Nezdařilo se navázat spojení</string>
+    <string name="voip_connection_lost">Spojení bylo ztraceno</string>
+    <string name="prefs_voip_reject_incoming_calls_title">Odmítat mobilní hovory</string>
+    <string name="prefs_voip_reject_incoming_calls_summary">Odmítat příchozí mobilní hovory, pokud již probíhá hovor Threema.</string>
+    <string name="voip_contact_not_found">Pod tímto číslem nebyl nalezen žádný Threema kontakt.</string>
+    <string name="voip_another_pstn_call">Hovor nelze zahájit. Stále probíhá běžný telefonní hovor.</string>
+    <string name="voip_call_status_off_hours">Hovor mimo pracovní dobu</string>
+    <string name="voip_peer_video_disabled">Videohovory jsou u protistrany zakázány.</string>
+    <string name="voip_reject_channel_name">Změna stavu hovoru</string>
+    <!-- WebRTC debugger -->
+    <string name="voip_prefs_webrtc_debug">Diagnostika WebRTC</string>
+    <string name="voip_prefs_webrtc_debug_summary">Spuštění tohoto nástroje vám umožní hledat zdroj problémů s nastavením spojení hlasového hovoru</string>
+    <string name="voip_webrtc_debug">Diagnostika WebRTC</string>
+    <string name="voip_webrtc_debug_intro">Klepnutím na tlačítko „Spustit“ zahájíte test.</string>
+    <string name="voip_webrtc_debug_start">Spustit</string>
+    <string name="voip_webrtc_debug_done">Hotovo. Pokud zaznamenáváte problémy s navázáním spojení hovoru, odešlete prosím tento výstup podpoře společnosti Threema.</string>
+    <string name="voip_webrtc_debug_copied">Zkopírováno do schránky.</string>
+    <string name="voip_webrtc_debug_copy_clipboard">Zkopírovat do schránky</string>
+    <!-- Group Calls -->
+    <string name="voip_gc_members_notified">Všichni členové skupiny obdrželi oznámení</string>
+    <string name="voip_gc_notification_channel_description">Skupinové hovory</string>
+    <string name="voip_gc_notification_title">Skupinový hovor</string>
+    <string name="voip_gc_notification_call_started">%1$s zahájil(a) skupinový hovor ve skupině %2$s</string>
+    <string name="voip_gc_notification_call_started_generic">%1$s zahájil(a) skupinový hovor</string>
+    <string name="voip_gc_notification_call_started_generic_outbox">Vy jste zahájil(a) skupinový hovor</string>
+    <string name="voip_gc_dismiss_call">Ignorovat</string>
+    <string name="voip_gc_join_call">Připojit se</string>
+    <string name="voip_gc_ongoing_call">Probíhající skupinový hovor</string>
+    <string name="voip_gc_waiting_for_participants">Čeká se na účastníky</string>
+    <string name="voip_gc_participant_avatar_description">Profilový obrázek účastníka</string>
+    <string name="voip_gc_participant_mute_status_description">Stav ztlumení účastníka</string>
+    <string name="voip_gc_participant_screen_share_status_description">Účastník sdílí obrazovku</string>
+    <string name="voip_gc_notification_new_call_public">Byl zahájen nový skupinový hovor</string>
+    <string name="voip_gc_open_call">Otevřít</string>
+    <string name="voip_gc_call_started">Skupinový hovor byl zahájen</string>
+    <string name="voip_gc_call_ended">Skupinový hovor skončil</string>
+    <string name="voip_gc_in_call">Hovor ve skupině</string>
+    <string name="voip_gc_sfu_not_available">Server není dostupný, zkuste to prosím později</string>
+    <string name="voip_gc_call_error">Hovor ukončen kvůli chybě</string>
+    <string name="voip_gc_call_start_error">Nezdařilo se zahájit skupinový hovor</string>
+    <string name="voip_gc_call_already_ended">Skupinový hovor již skončil</string>
+    <string name="voip_gc_screen_sharing_not_supported">Sdílení obrazovky je v současnosti omezeno na desktopová zařízení.</string>
+    <string name="voip_gc_call_full_generic">Bylo dosaženo maxima: Do tohoto skupinového hovoru se nemůže připojit více účastníků.</string>
+    <string name="voip_gc_call_full_n">Bylo dosaženo maximálního počtu účastníků (%1$d). Do tohoto skupinového hovoru se už nemůžete připojit.</string>
+    <plurals name="n_participants_in_call">
+        <item quantity="one">%d účastník</item>
+        <item quantity="few">%d účastníci</item>
+        <item quantity="many">%d účastníků</item>
+        <item quantity="other">%d účastníků</item>
+    </plurals>
+    <plurals name="n_members_dont_support_group_calls">
+        <item quantity="one">Upozornění: Jeden člen se nemůže účastnit skupinových hovorů.</item>
+        <item quantity="few">Upozornění: %d členové se nemohou účastnit skupinových hovorů.</item>
+        <item quantity="many">Upozornění: %d členů se nemůže účastnit skupinových hovorů.</item>
+        <item quantity="other">Upozornění: %d členů se nemůže účastnit skupinových hovorů.</item>
+    </plurals>
+</resources>

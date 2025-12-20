@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019-2025 Threema GmbH
+  ~ All rights reserved.
+  -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/invite_people_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/listitem_contacts_margin_left_right"
+    android:paddingVertical="@dimen/listitem_contacts_margin_top_bottom">
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Threema.MaterialButton.Outlined.Secondary"
+        android:id="@+id/invite_people_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/title_invite_friend"
+        android:text="@string/title_invite_friend"
+        app:icon="@drawable/ic_person_add_outline"
+        app:iconPadding="@dimen/grid_unit_x1_5"/>
+
+</FrameLayout>

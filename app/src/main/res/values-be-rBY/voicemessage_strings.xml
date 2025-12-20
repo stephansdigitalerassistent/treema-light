@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recording">Запіс паведамлення</string>
+    <string name="recording_stopped_title">Запіс спынены</string>
+    <string name="recording_stopped_message">Адправіць запісанае галасавое паведамленне?</string>
+    <string name="recording_canceled">Запіс быў адменены з-за невядомай памылкі.</string>
+    <string name="cancel_recording">Выдаліць запіс</string>
+    <string name="cancel_recording_message">Сапраўды адмяніць і выдаліць запіс?</string>
+    <string name="stop">Стоп</string>
+</resources>

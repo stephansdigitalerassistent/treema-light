@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voip_title">Звонок Threema</string>
+    <string name="voip_hangup">Завершить</string>
+    <string name="voip_toggle_mic">Переключить микрофон</string>
+    <string name="voip_toggle_speaker">Переключить динамик</string>
+    <string name="voip_switch_cam">Переключить камеру</string>
+    <string name="voip_switch_cam_front">Переключено на переднюю камеру</string>
+    <string name="voip_switch_cam_rear">Переключено на заднюю камеру</string>
+    <string name="voip_toggle_video">Переключить режим видео</string>
+    <string name="voip_call_confirm">Позвонить пользователю %1$s?</string>
+    <string name="voip_error_call">Ошибка во время звонка Threema</string>
+    <string name="voip_error_init_call">Ошибка инициализации звонка</string>
+    <string name="voip_notification_title">Входящий звонок Threema</string>
+    <string name="voip_notification_text">Вызывает %1$s</string>
+    <!-- Shown when starting a call, before the peer device is ringing -->
+    <string name="voip_status_initializing">Инициализация</string>
+    <!-- Shown when the callee has accepted the call and the connection is being established -->
+    <string name="voip_status_connecting">Соединение</string>
+    <!-- Shown when a call is being disconnected -->
+    <string name="voip_status_disconnecting">Разъединение</string>
+    <!-- Shown when the device of the callee is ringing -->
+    <string name="voip_status_ringing">Звонок…</string>
+    <string name="voip_mic_enable">Включить микрофон</string>
+    <string name="voip_mic_disable">Отключить микрофон</string>
+    <string name="voip_checking_compatibility">Проверка возможности приёма звонков Threema контактом…</string>
+    <string name="voip_incompatible">Этот контакт пока не может принимать звонки Threema.</string>
+    <string name="voip_call_status_unavailable">Адресат звонка недоступен</string>
+    <string name="voip_call_status_rejected">Звонок отклонён</string>
+    <string name="voip_call_status_busy">Адресат звонка занят</string>
+    <string name="voip_call_status_busy_short">Занято</string>
+    <string name="voip_call_status_disabled">Звонки Threema отключены адресатом</string>
+    <string name="voip_call_status_missed">Пропущенный звонок</string>
+    <string name="voip_call_finished_outbox">Исходящий звонок</string>
+    <string name="voip_call_finished_inbox">Входящий звонок</string>
+    <string name="voip_call_status_aborted">Звонок прерван</string>
+    <string name="voip_return_call">Перезвонить</string>
+    <string name="voip_accept">Принять</string>
+    <string name="voip_reject">Отклонить</string>
+    <string name="voip_speakerphone">Громкая связь</string>
+    <string name="voip_wired_headset">Гарнитура</string>
+    <string name="voip_earpiece">Телефон</string>
+    <string name="voip_bluetooth">Bluetooth</string>
+    <string name="voip_none">Недоступно</string>
+    <string name="voip_call_finished">Звонок Threema завершён</string>
+    <string name="voip_another_call">Невозможно соединиться. Совершается другой звонок Threema.</string>
+    <string name="voip_prefs_title_aec">Эхокомпенсация</string>
+    <string name="voip_prefs_aec_sw">Программная эхокомпенсация</string>
+    <string name="voip_prefs_aec_hw">Аппаратная эхокомпенсация</string>
+    <string name="voip_prefs_title_video_codec">Видеокодеки</string>
+    <string name="voip_prefs_video_aec_hw">Аппаратное ускорение</string>
+    <string name="voip_prefs_video_codec_no_vp8">Отключить VP8</string>
+    <string name="voip_prefs_video_codec_no_h264hip">Отключить H264-HiP</string>
+    <string name="voip_prefs_video_codec_sw">Программные кодеки</string>
+    <string name="voip_connection_failed">Невозможно установить соединение.</string>
+    <string name="voip_connection_lost">Соединение утеряно</string>
+    <string name="prefs_voip_reject_incoming_calls_title">Отклонять звонки с мобильных</string>
+    <string name="prefs_voip_reject_incoming_calls_summary">Отклонять входящие звонки с мобильных телефонов, когда совершается звонок Threema.</string>
+    <string name="voip_contact_not_found">По этому номеру не найден контакт Threema.</string>
+    <string name="voip_another_pstn_call">Невозможно начать звонок. Выполняется обычный телефонный звонок.</string>
+    <string name="voip_call_status_off_hours">Звонок в нерабочее время</string>
+    <string name="voip_peer_video_disabled">Видеозвонки отключены собеседником.</string>
+    <string name="voip_reject_channel_name">Изменение состояния звонка</string>
+    <!-- WebRTC debugger -->
+    <string name="voip_prefs_webrtc_debug">Диагностика WebRTC</string>
+    <string name="voip_prefs_webrtc_debug_summary">Запустите это средство для отладки неполадок с настройкой соединения для голосовой связи</string>
+    <string name="voip_webrtc_debug">Диагностика WebRTC</string>
+    <string name="voip_webrtc_debug_intro">Нажмите кнопку «Пуск» для запуска теста</string>
+    <string name="voip_webrtc_debug_start">Пуск</string>
+    <string name="voip_webrtc_debug_done">Готово. Если у вас возникают неполадки с настройкой соединения для звонков, отправьте данные в службу поддержки Threema.</string>
+    <string name="voip_webrtc_debug_copied">Данные скопированы в буфер обмена.</string>
+    <string name="voip_webrtc_debug_copy_clipboard">Копировать в буфер обмена</string>
+    <!-- Group Calls -->
+    <string name="voip_gc_members_notified">Все члены группы уведомлены</string>
+    <string name="voip_gc_notification_channel_description">Групповые звонки</string>
+    <string name="voip_gc_notification_title">Групповой звонок</string>
+    <string name="voip_gc_notification_call_started">Пользователь %1$s начал групповой звонок в %2$s</string>
+    <string name="voip_gc_notification_call_started_generic">Пользователь %1$s начал групповой звонок</string>
+    <string name="voip_gc_notification_call_started_generic_outbox">Вы начали групповой звонок</string>
+    <string name="voip_gc_dismiss_call">Игнорировать</string>
+    <string name="voip_gc_join_call">Участвовать</string>
+    <string name="voip_gc_ongoing_call">Текущий групповой звонок</string>
+    <string name="voip_gc_waiting_for_participants">Ожидание участников</string>
+    <string name="voip_gc_participant_avatar_description">Аватар участника</string>
+    <string name="voip_gc_participant_mute_status_description">Статус звука участника</string>
+    <string name="voip_gc_participant_screen_share_status_description">Участник демонстрирует экран</string>
+    <string name="voip_gc_notification_new_call_public">Начат новый групповой звонок</string>
+    <string name="voip_gc_open_call">Открыть</string>
+    <string name="voip_gc_call_started">Начат групповой звонок</string>
+    <string name="voip_gc_call_ended">Групповой звонок завершён</string>
+    <string name="voip_gc_in_call">Сейчас в групповом звонке</string>
+    <string name="voip_gc_sfu_not_available">Сервер недоступен, повторите попытку позже</string>
+    <string name="voip_gc_call_error">Звонок прерван по причине ошибки</string>
+    <string name="voip_gc_call_start_error">Невозможно начать групповой звонок</string>
+    <string name="voip_gc_call_already_ended">Групповой звонок уже завершён</string>
+    <string name="voip_gc_screen_sharing_not_supported">Функция демонстрации экрана в настоящее время доступна только на ПК.</string>
+    <string name="voip_gc_call_full_generic">Достигнут максимум: новые участники больше не могут присоединиться к групповому звонку.</string>
+    <string name="voip_gc_call_full_n">Достигнут максимум (не более %1$d участников), вы не можете присоединиться к этому групповому звонку.</string>
+    <plurals name="n_participants_in_call">
+        <item quantity="one">%d участник</item>
+        <item quantity="few">%d участника</item>
+        <item quantity="many">%d участников</item>
+        <item quantity="other">%d участников</item>
+    </plurals>
+    <plurals name="n_members_dont_support_group_calls">
+        <item quantity="one">Уведомление: один участник не может участвовать в групповых звонках.</item>
+        <item quantity="few">Уведомление: %d участника не могут участвовать в групповых звонках.</item>
+        <item quantity="many">Уведомление: %d участников не могут участвовать в групповых звонках.</item>
+        <item quantity="other">Уведомление: %d участников не могут участвовать в групповых звонках.</item>
+    </plurals>
+</resources>

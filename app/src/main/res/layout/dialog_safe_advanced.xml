@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <TextView
+            android:id="@+id/safe_enable_explain"
+            style="@style/Threema.MaterialAlertDialog.Body.Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/flavored__safe_configure_server_explain" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/safe_switch_server"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            android:enabled="true"
+            android:text="@string/safe_use_default_server"
+            android:textAppearance="@style/Threema.TextAppearance.Dialog.Body" />
+
+        <LinearLayout
+            android:id="@+id/safe_server_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/safe_server"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false">
+
+                <ch.threema.app.ui.PrefixEditText
+                    android:id="@+id/safe_edit_server"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/safe_enter_server_address_explain"
+                    android:imeOptions="actionDone"
+                    android:inputType="textWebEditText"
+                    android:singleLine="true"
+                    android:tag="https://">
+
+                    <requestFocus />
+                </ch.threema.app.ui.PrefixEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/safe_credentials_title"
+                style="@style/Threema.MaterialAlertDialog.Body.Style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/safe_configure_server_credentials_title"
+                android:textColor="?attr/colorOnSurface" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/safe_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="true">
+
+                <ch.threema.app.ui.ThreemaTextInputEditText
+                    android:id="@+id/safe_edit_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/username_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="textWebEditText"
+                    android:nextFocusDown="@id/safe_edit_server_password"
+                    android:singleLine="true">
+
+                </ch.threema.app.ui.ThreemaTextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/safe_server_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="true"
+                app:passwordToggleEnabled="true">
+
+                <ch.threema.app.ui.ThreemaTextInputEditText
+                    android:id="@+id/safe_edit_server_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/password_hint"
+                    android:imeOptions="actionDone"
+                    android:inputType="textWebPassword"
+                    android:singleLine="true"
+                    android:tag="https://">
+
+                </ch.threema.app.ui.ThreemaTextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

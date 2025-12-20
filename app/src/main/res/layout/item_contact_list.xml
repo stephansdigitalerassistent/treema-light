@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ch.threema.app.ui.CheckableConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/topLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/listitem_background_selector"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/listitem_contacts_margin_left_right"
+    android:paddingVertical="@dimen/listitem_contacts_margin_top_bottom">
+
+    <ImageView
+        android:id="@+id/initial_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:importantForAccessibility="no"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!-- textColor="@null" -> https://stackoverflow.com/a/45198884 -->
+
+    <ImageView
+        android:id="@+id/blocked_contact"
+        android:layout_width="22dp"
+        android:layout_height="18dp"
+        android:baselineAlignBottom="true"
+        android:contentDescription="@string/blocked"
+        android:paddingLeft="4dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/verification_level"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/verification_level"
+        app:srcCompat="@drawable/ic_block"
+        app:tint="@color/material_red"
+        tools:visibility="visible" />
+    <!-- textColor="@null" -> https://stackoverflow.com/a/45198884 -->
+
+    <TextView
+        android:id="@+id/contact_text_bottom_right"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:minHeight="@dimen/listitem_min_height_second_line"
+        android:singleLine="true"
+        android:textAppearance="@style/Threema.TextAppearance.List.SecondLine"
+        android:textColor="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/contact_text_bottom_left"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contact_text_top_left"
+        tools:text="Department" />
+
+    <ch.threema.app.emojis.EmojiTextView
+        android:id="@+id/initial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:textAppearance="@style/Threema.Material.Header.Big.Text"
+        android:textColor="@null"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/avatar_view"
+        tools:text="A" />
+
+    <ch.threema.app.emojis.EmojiTextView
+        android:id="@+id/contact_text_bottom_left"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:minHeight="@dimen/listitem_min_height_second_line"
+        android:singleLine="true"
+        android:textAppearance="@style/Threema.TextAppearance.List.SecondLine"
+        android:textColor="@null"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="@id/contact_text_top_left"
+        app:layout_constraintRight_toLeftOf="@+id/contact_text_bottom_right"
+        app:layout_constraintTop_toBottomOf="@+id/contactTextTopLeft"
+        tools:text="Job Title" />
+    <!-- textColor="@null" -> https://stackoverflow.com/a/45198884 -->
+
+    <ch.threema.app.emojis.EmojiTextView
+        android:id="@+id/contact_text_top_left"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginEnd="32dp"
+        android:ellipsize="end"
+        android:minHeight="@dimen/listitem_min_height_first_line"
+        android:singleLine="true"
+        android:textAppearance="@style/Threema.TextAppearance.List.FirstLine"
+        android:textColor="@null"
+        app:layout_constraintBottom_toTopOf="@+id/contact_text_bottom_left"
+        app:layout_constraintLeft_toRightOf="@id/avatar_view"
+        app:layout_constraintRight_toLeftOf="@+id/verification_level"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Firstname Lastname" />
+    <!-- textColor="@null" -> https://stackoverflow.com/a/45198884 -->
+
+    <ch.threema.app.ui.AvatarView
+        android:id="@+id/avatar_view"
+        android:layout_width="@dimen/avatar_size_small"
+        android:layout_height="@dimen/avatar_size_small"
+        android:layout_marginLeft="34dp"
+        android:duplicateParentState="true"
+        android:stateListAnimator="@animator/selector_list_checkbox_bg"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ch.threema.app.ui.CheckableView
+        android:id="@+id/check_box"
+        android:layout_width="@dimen/avatar_size_small"
+        android:layout_height="@dimen/avatar_size_small"
+        android:background="@drawable/selector_list_checkbox"
+        android:duplicateParentState="true"
+        android:stateListAnimator="@animator/selector_list_checkbox_fg"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_view"
+        app:layout_constraintLeft_toLeftOf="@id/avatar_view"
+        app:layout_constraintRight_toRightOf="@id/avatar_view"
+        app:layout_constraintTop_toTopOf="@id/avatar_view" />
+
+    <ch.threema.app.ui.VerificationLevelImageView
+        android:id="@+id/verification_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="@dimen/grid_unit_x1"
+        app:layout_constraintBottom_toBottomOf="@id/contact_text_top_left"
+        app:layout_constraintEnd_toStartOf="@id/blocked_contact"
+        app:layout_constraintTop_toTopOf="@id/contact_text_top_left"
+        app:srcCompat="@drawable/ic_verification_none"
+        tools:srcCompat="@drawable/ic_verification_server" />
+
+</ch.threema.app.ui.CheckableConstraintLayout>

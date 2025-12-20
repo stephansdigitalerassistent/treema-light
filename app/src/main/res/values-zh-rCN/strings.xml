@@ -1,0 +1,1887 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="title_section2">联系人</string>
+    <!-- Label on first tab on app's main screen, selecting it leads to the list of chats -->
+    <string name="title_section1">会话</string>
+    <string name="title_compose_message">发起新会话</string>
+    <string name="title_choose_recipient">选择收件人</string>
+    <string name="title_keyfingerprint">密钥指纹</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="title_mythreemaid">我的 ${app_name_short} ID</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="title_threemaid">${app_name_short} ID</string>
+    <string name="title_adduser">添加新的联系人</string>
+    <string name="title_enter_id">输入ID</string>
+    <string name="title_invite_friend">邀请朋友</string>
+    <string name="invite_via">通过…邀请朋友</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invite_email_body">您好，\n\n我使用%1$s，这是保护用户隐私的安全即时通讯工具。\n\n我的${app_name_short} ID：https://threema.id/%2$s\n\n让我们通过%1$s进行通信吧！\n\n\n谨启</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invite_sms_body">嗨！让我们使用%1$s以安全和符合隐私的方式进行交流！我的${app_name_short} ID：https://threema.id/%2$s</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invite_email_subject">${app_name_short}，保护隐私的安全通讯工具。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="enter_id_hint">输入 ${app_name_short} ID</string>
+    <string name="account_links">链接账户</string>
+    <string name="menu_settings">设置</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="menu_about">关于 ${app_name}</string>
+    <string name="menu_add_contact">添加联系人</string>
+    <string name="menu_done">完成</string>
+    <string name="compose_message_and_enter">点击这里输入信息</string>
+    <string name="title_job_title">职位名称</string>
+    <string name="title_department">部门</string>
+    <string name="send">发送</string>
+    <string name="prefs_privacy">隐私</string>
+    <string name="prefs_notifications">声音和通知</string>
+    <string name="prefs_chatdisplay">会话</string>
+    <string name="prefs_security">安全</string>
+    <string name="prefs_sum_privacy">隐私设置</string>
+    <string name="prefs_sum_notifications">设置声音和振动</string>
+    <string name="prefs_sum_chatdisplay">会话设置</string>
+    <string name="prefs_masterkey">对本地存储的数据进行加密</string>
+    <string name="prefs_header_contacts">联系人</string>
+    <string name="prefs_header_chat">会话</string>
+    <string name="prefs_header_reset">重置</string>
+    <string name="prefs_header_keyboard">键盘</string>
+    <string name="prefs_sum_sync_contacts_on">使用设备通讯录同步 %s 用户</string>
+    <string name="prefs_sum_sync_contacts_off">不要将 %s 用户与设备通讯录同步</string>
+    <string name="prefs_title_sync_contacts">联系人同步</string>
+    <string name="prefs_sum_block_unknown_off">任何人都可以向您发送消息。当您收到第一条消息时，新的联系人将被自动添加。</string>
+    <string name="prefs_sum_block_unknown_on">只有您的联系人列表中的人才能向您发送消息。</string>
+    <string name="prefs_title_block_unknown">屏蔽未知联系人</string>
+    <string name="prefs_title_read_receipts">发送已读回执</string>
+    <string name="prefs_title_typing_indicator">发送输入状态</string>
+    <string name="prefs_media_title">媒体与存储</string>
+    <string name="prefs_sum_media_title">媒体和存储设置</string>
+    <string name="prefs_image_size">图片尺寸</string>
+    <string name="prefs_notification_sound">通知声音</string>
+    <string name="prefs_sum_notification_sound">系统默认</string>
+    <string name="prefs_vibrate">振动</string>
+    <string name="prefs_sum_vibrate">收到消息时振动</string>
+    <!-- Label on checkbox in notification settings screen, to let the user enable/disable the use of the device's color LED for notifications. Only relevant on Android 7 -->
+    <string name="prefs_notification_light">通知灯</string>
+    <!-- Summary on checkbox in notification settings screen, to let the user enable/disable the use of the device's color LED for notifications. Only relevant on Android 7 -->
+    <string name="prefs_sum_notification_light">使用彩色通知灯（如设备有通知灯）显示收到的信息</string>
+    <string name="prefs_sum_light">白色</string>
+    <string name="prefs_title_wallpaper">选择壁纸</string>
+    <string name="prefs_sum_wallpaper">选择图片作为背景</string>
+    <string name="prefs_title_wallpaper_switch">壁纸</string>
+    <string name="prefs_title_enter">按 “Enter” 键发送</string>
+    <string name="prefs_sum_enter_on">按 “Enter” 键以立即发送消息</string>
+    <string name="prefs_sum_enter_off">按 “Enter” 键以添加新行</string>
+    <string name="prefs_system_notifications">单次会话</string>
+    <string name="prefs_inapp">应用内</string>
+    <string name="prefs_inapp_sounds">应用内声音</string>
+    <string name="prefs_inapp_sounds_on">发送/接收消息时播放声音</string>
+    <string name="prefs_inapp_sounds_off">不要播放任何应用内声音</string>
+    <string name="prefs_inapp_vibrate">应用内振动</string>
+    <string name="prefs_inapp_vibrate_on">接收消息时振动</string>
+    <string name="prefs_inapp_vibrate_off">接收消息时不要振动</string>
+    <string name="workarounds">解决方法</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_title_threema_push_switch">使用 ${app_name_short} Push</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_threema_push_on">使用 ${app_name_short} Push 以获取新消息通知</string>
+    <string name="prefs_sum_threema_push_off">使用系统推送服务检查新消息</string>
+    <string name="prefs_logging">日志记录</string>
+    <string name="prefs_title_message_log_switch">记录到文件</string>
+    <string name="prefs_title_sum_message_log_on">事件和网络消息将记录到 debug_log.txt</string>
+    <string name="prefs_title_sum_message_log_off">事件将不会被记录</string>
+    <string name="prefs_reset_push">重置推送令牌</string>
+    <string name="prefs_sum_reset_push">重新注册设备以通过FCM或HMS获取推送通知</string>
+    <string name="prefs_notification_preview">显示消息预览</string>
+    <string name="prefs_sum_reset_ringtones">恢复系统默认值</string>
+    <string name="prefs_title_reset_ringtones">重置通知声音设置</string>
+    <string name="image_size_small">小（640x640）</string>
+    <string name="image_size_medium">中（1024x1024）</string>
+    <string name="image_size_large">大（1600x1600）</string>
+    <string name="image_size_xlarge">最大（2592x2592）</string>
+    <string name="image_size_original">原始尺寸</string>
+    <string name="next">下一步</string>
+    <string name="finish">完成</string>
+    <string name="please_wait">请等待…</string>
+    <!-- Text shown when a task which shows a loading spinner takes longer than expected (e.g. creating a group) -->
+    <string name="please_wait_timeout">所需时间比预期长</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="wizard_first_create_id">正在创建您的 ${app_name_short} ID…</string>
+    <string name="wizard1_sync_contacts">正在同步通讯录…</string>
+    <string name="wizard2_email_hint">输入您的电子邮箱地址</string>
+    <string name="wizard2_email_linking">将电子邮件链接到您的ID</string>
+    <string name="wizard2_phone_hint">输入您的手机号码</string>
+    <string name="wizard2_phone_number_confirm_title">确认号码</string>
+    <string name="wizard2_phone_number_confirm">我们即将发送短信至:\n\n%1$s\n\n此号码正确吗？</string>
+    <string name="wizard2_phone_linking">将电话号码链接到您的ID</string>
+    <string name="wizard3_nickname_hint">输入您的昵称</string>
+    <string name="set_nickname_title">设置昵称</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="copy_message_action">复制</string>
+    <string name="delete_contact_action">删除联系人</string>
+    <string name="delete_multiple_contact_action">删除联系人</string>
+    <string name="scan_id">扫描ID</string>
+    <string name="id_scanned">ID已扫描</string>
+    <string name="id_mismatch">您扫描的公钥与服务器为该ID存储的密钥不匹配。这意味着有人操纵了扫描后的代码，并且该密钥不应受到信任。</string>
+    <string name="scan_successful">该ID已成功扫描，现在已验证联系人。</string>
+    <string name="scan_duplicate">此ID已被扫描和验证。</string>
+    <string name="linked_email">电子邮箱</string>
+    <string name="linked_mobile">手机号码</string>
+    <string name="public_nickname">昵称</string>
+    <string name="share_via">分享到…</string>
+    <string name="share_subject">%s 对话</string>
+    <string name="message_delete_undo">撤消</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="mobile_already_linked">您的 ${app_name_short} ID 已链接到此手机号码</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="email_already_linked">您的 ${app_name_short} ID 已链接到此电子邮箱地址</string>
+    <string name="whoaaa">公告</string>
+    <string name="really_delete_message_title">删除消息</string>
+    <string name="really_delete_thread">删除会话</string>
+    <string name="really_delete_multiple_threads">删除会话</string>
+    <string name="really_delete_contact">您确定要删除此联系人和所有关联的消息吗？</string>
+    <string name="image_placeholder">图片</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="invalid_threema_id">无效的 ${app_name_short} ID</string>
+    <string name="contact_already_exists">联系人已存在</string>
+    <string name="close">关闭</string>
+    <string name="creating_contact">正在添加新联系人</string>
+    <string name="creating_contact_successful">已成功添加联系人</string>
+    <string name="invalid_threema_qr_code">无效的二维码</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="threema_contact">${app_name_short} 联系人</string>
+    <string name="first_name">名字</string>
+    <string name="last_name">姓氏</string>
+    <string name="os_licenses">许可证</string>
+    <string name="verify_title">正在验证手机号码</string>
+    <string name="verify_success_text">您的手机号码已成功验证。</string>
+    <string name="verify_failed">失败</string>
+    <string name="verify_failed_summary">验证您的手机号码失败。请确保输入的号码
+正确无误，并且已连接到移动网络，然后重试。</string>
+    <string name="verify_failed_not_linked">验证您的手机号码失败。验证过程已中止。</string>
+    <string name="check_incoming_sms">检查收到的短信</string>
+    <string name="backup_title">导出ID</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_sum">导出您的 ${app_name_short} ID</string>
+    <string name="backup_and_delete">备份和删除</string>
+    <string name="delete_id_title">删除ID</string>
+    <string name="delete_id_message">除非您已创建备份或导出并保存了此ID的副本，否则您将永远无法使用该ID再次发送或接收消息。\n\n如果您不想再使用此ID，建议在删除ID之前，在 myid.threema.ch/revoke 上设置撤销密码并撤销该ID。</string>
+    <string name="delete_id_message2">最后警告：您确定要删除此设备上的ID吗？</string>
+    <string name="delete_id_sum">永久删除您的ID和此设备上的所有数据</string>
+    <string name="delete_all_data_prompt">删除所有应用数据？</string>
+    <string name="backup_password_summary">您的ID导出将使用密码进行加密。使用字母，数字和符号的组合。请牢牢记住这里输入的内容！</string>
+    <string name="backup_password_again_summary">再次输入密码</string>
+    <string name="password_hint">密码</string>
+    <string name="generating_backup_data">正在生成备份数据</string>
+    <string name="backup_id_title">您的ID导出</string>
+    <string name="backup_id_summary">上面显示的文本字符串或二维码以及您
+选择的密码，可用于另一台设备上恢复您的ID。您应将其复制到合适的位置，通过
+电子邮件分享或使用其他设备扫描二维码。</string>
+    <string name="support">帮助</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_share_content">以下文本字符串可以与所选密码一起使用，以
+        恢复您的 ${app_name_short} ID。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_share_subject">${app_name_short} ID 导出为</string>
+    <string name="add_attachment">新附件</string>
+    <string name="invalid_passphrase">密码无效</string>
+    <string name="master_key_locked">主密钥被锁定</string>
+    <string name="master_key_locked_notify_description">点击这里输入密码</string>
+    <string name="prefs_masterkey_passphrase">未设置密码</string>
+    <string name="prefs_title_masterkey_passphrase">密码</string>
+    <string name="setting_masterkey_passphrase">设置主密钥密码</string>
+    <string name="masterkey_passphrase_title">主密钥密码口令</string>
+    <string name="masterkey_passphrase_summary">设置密码来保护您的主密钥。请注意，每次重启应用后，您都必须输入密码。</string>
+    <string name="masterkey_passphrase_again_summary">再次输入密码</string>
+    <string name="masterkey_passphrase_hint">密码</string>
+    <string name="master_key_locked_want_exit">主密钥仍处于锁定状态。您想再试一次吗？</string>
+    <string name="click_here_to_change_passphrase">点击这里更改密码</string>
+    <string name="attach_camera">系统相机</string>
+    <string name="menu_restore">从备份恢复</string>
+    <string name="restore_id_hint">输入或粘贴ID导出的文本字符串以恢复</string>
+    <string name="location_placeholder">位置</string>
+    <string name="video_placeholder">视频</string>
+    <string name="audio_placeholder">音频</string>
+    <string name="restoring_backup">正在恢复备份</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="server_message_title">来自 ${company_name} 服务器的消息</string>
+    <string name="error">错误</string>
+    <!-- Empty state text for Contacts tab, shown when there are no contacts and Contact Synchronization is disabled -->
+    <string name="no_contacts"><![CDATA[您还没有任何联系人。打开同步（“设置”>“隐私”）或手动添加联系人。]]></string>
+    <!-- Empty state text for Contacts tab, shown when there are no contacts and Contact Synchronization is enabled -->
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="no_contacts_sync_on"><![CDATA[您还没有任何联系人。同步已经开始，但在通讯录中的联系人看似都不在 ${app_name_short} 上（您可以邀请他们加入）。]]></string>
+    <string name="masterkey_title">输入密码</string>
+    <string name="masterkey_body">您的主密钥受密码保护，请输入密码以解锁密钥。</string>
+    <string name="masterkey_unlocking">正在解锁主密钥</string>
+    <string name="verify_phonecall_text">请求通话</string>
+    <string name="prepare_call_message">如果您选择继续，我们将尝试立即致电给您。您的验证码将
+被朗读两次。请注意，您只有一次致电的机会，因此在继续之前，
+请确定您已准备就绪。</string>
+    <string name="enter_code_hint">输入验证码</string>
+    <string name="enter_code_sum">请输入验证短信中的验证码或电话中提及的验证码。</string>
+    <string name="no_matching_contacts">找不到联系人。</string>
+    <string name="code_invalid">您输入的验证码无效。</string>
+    <string name="try_again">再试一次</string>
+    <string name="decoding_message">正在解密消息</string>
+    <string name="expired_barcode">此二维码已过期。请直接从其他用户的应用程序再次扫描。</string>
+    <string name="pending">待定</string>
+    <string name="unlinking_email">正在解除链接电子邮件</string>
+    <string name="unlink">解除连结</string>
+    <string name="threema_version">版本</string>
+    <string name="threema_version_code">版本号</string>
+    <!-- Section title on "About" screen, for section which shows information about the (on prem) server and user credentials -->
+    <string name="about_server_config_title">服务器配置</string>
+    <string name="wrong_backupid_or_password_or_no_internet_connection">无法连接到互联网，无效的ID导出数据或错误的密码</string>
+    <string name="prefs_header_other">其他</string>
+    <string name="an_error_occurred">发生错误</string>
+    <string name="an_error_occurred_more">发生错误：%1$s</string>
+    <string name="acknowledge">同意</string>
+    <string name="decline">不同意</string>
+    <string name="forward_message">转发消息</string>
+    <string name="file_is_not_a_image">所选文件不是图像</string>
+    <string name="connection_error">连接错误，请稍后再试。</string>
+    <string name="me_myself_and_i">我自己</string>
+    <string name="really_forward">转发到%1$s？</string>
+    <string name="really_send">发送到%1$s？</string>
+    <string name="ringtone_none">静音</string>
+    <string name="no_camera_installed">没有可用的摄像头</string>
+    <string name="save_message_action">保存</string>
+    <string name="file_is_not_a_video">所选文件不是视频</string>
+    <string name="masterkey_is_unlocked">主钥匙已解锁</string>
+    <string name="file_too_large">文件大于最大大小 %1$d MB</string>
+    <string name="deleting_thread">正在删除会话</string>
+    <string name="enter_serial_body"><![CDATA[请输入您的商店许可证密钥。如果您之前已经购买了许可证，您可以<a href="https://shop.threema.ch/">购买</a>许可证或<a href="https://shop.threema.ch/retrieve_keys">找回</a>您的密钥。]]></string>
+    <!-- ${app_name_short} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="work_enter_serial_body">请输入贵公司提供的 ${app_name_short} 凭证。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="enter_serial_title">解锁 ${app_name}</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="serial_required_want_exit">许可证密钥无效。您想重试还是退出${app_name}？</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="work_serial_required_want_exit">许可证为无效。您想重试还是退出 ${app_name}？</string>
+    <!-- Message shown on progress dialog that shows while checking whether the user has a valid license -->
+    <string name="checking_serial">正在检查许可证密钥</string>
+    <!-- Message shown on progress dialog that shows while the credentials that the user entered are being checked for their validity -->
+    <string name="work_checking_credentials">正在检查凭证</string>
+    <string name="update_available">有可用更新</string>
+    <!-- Message shown in Update dialog to inform the user that a new version of the app is available -->
+    <string name="update_available_message">新版本已经发布，您想现在就下载吗？</string>
+    <string name="no_update_available">没有更新</string>
+    <string name="download">下载</string>
+    <string name="not_now">稍后提醒我</string>
+    <string name="preparing_messages">正在准备消息</string>
+    <string name="select_emoji">表情符号</string>
+    <string name="search_contact">搜索联系人</string>
+    <string name="push_reset_title">推送令牌重置</string>
+    <string name="push_reset_text">推送令牌已重置</string>
+    <string name="emoji_recent">常用</string>
+    <string name="emoji_smileys">表情符号</string>
+    <string name="emoji_people">人物</string>
+    <string name="emoji_nature">野生动物</string>
+    <string name="emoji_food">食物与饮料</string>
+    <string name="emoji_travel">旅行与地点</string>
+    <string name="emoji_activity">活动</string>
+    <string name="emoji_objects">物件</string>
+    <string name="emoji_symbols">符号</string>
+    <string name="emoji_flags">旗帜</string>
+    <string name="emoji_search">搜索表情符号</string>
+    <string name="emoji_search_no_result">没有搜索结果</string>
+    <string name="title_lock">锁</string>
+    <string name="new_messages_locked">有新消息</string>
+    <string name="new_messages_locked_description">点击以查看新消息。</string>
+    <string name="new_unprocessed_messages">有新消息</string>
+    <string name="new_unprocessed_messages_description">点击以获取并查看新收到的消息。</string>
+    <string name="prefs_title_masterkey_notification_newmsg">新消息通知</string>
+    <string name="prefs_masterkey_notification_newmsg_off">主密钥锁定时，新消息不会
+触发通知</string>
+    <string name="prefs_masterkey_notification_newmsg_on">当主密钥锁定时，
+新消息会触发通用通知</string>
+    <string name="chat_history_attached">会话日志已附加。</string>
+    <string name="backup_data_title">数据备份</string>
+    <string name="backup_data_password_msg">您的数据将保存在内部 USB 存储设备上的 ZIP 文件中，并且可以
+在任何 Android 设备上恢复。请输入密码以保护您的数据备份。</string>
+    <string name="restore_data_password_msg">输入用于创建此备份的密码。</string>
+    <string name="backup_data_media">包括大型媒体文件（视频，文档，原始图片）</string>
+    <string name="backup_data_new">创建数据备份</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="pinentry_enter_pin">输入您的 ${app_name} PIN 码以继续</string>
+    <string name="pinentry_wrong_pin">PIN 码错误</string>
+    <string name="prefs_sum_security_pin">锁定访问用户界面</string>
+    <string name="prefs_title_pin_switch">应用锁定</string>
+    <string name="prefs_title_pin_code">设置密码</string>
+    <string name="prefs_pin_grace">锁定时间</string>
+    <string name="prefs_sum_pin_grace">直到屏幕锁定被激活的时间</string>
+    <string name="click_here_to_change_pin">PIN 码已设置。点击这里即可更改。</string>
+    <string name="set_pin_menu_title">设置新 PIN 码</string>
+    <string name="set_pin_summary_intro">通过设置 PIN 码（仅数字）来保护您的隐私。此 PIN 码可用于在限制时间后锁定应用，或保护私人会话。</string>
+    <string name="set_pin_again_summary">再次输入 PIN 码</string>
+    <string name="set_pin_hint">PIN 码</string>
+    <string name="title_addgroup">新建群组</string>
+    <string name="search_group">搜索群组</string>
+    <string name="updating_system">正在更新系统</string>
+    <string name="title_select_contacts">选择成员</string>
+    <string name="pin_invalid_not_set">PIN 码无效。设置未完成。</string>
+    <string name="prefs_group_notifications">群组会话</string>
+    <string name="group_select_at_least_two">需要选择至少一个成员才能继续</string>
+    <string name="group_select_max">您不能选择超过%1$d个群组成员</string>
+    <string name="search">搜索</string>
+    <string name="hint_search_keyword">搜索关键词</string>
+    <string name="add_group_owner">群组创建者</string>
+    <string name="title_tab_users">联系人</string>
+    <string name="title_tab_groups">群组</string>
+    <string name="no_matching_groups">找不到群组</string>
+    <string name="action_leave_group">退出群组</string>
+    <string name="group_edit_title">编辑群组</string>
+    <string name="really_leave_group_message">您确定要退出这个群组吗？</string>
+    <string name="search_no_matches">找不到匹配项</string>
+    <string name="search_no_more_matches">没有更多的匹配项</string>
+    <string name="backup_share">分享备份</string>
+    <string name="my_backups_title">备份</string>
+    <string name="backup_delete_confirm">备份文件已删除</string>
+    <string name="message_log_title">消息详情</string>
+    <string name="state_read">已阅读</string>
+    <string name="state_ack">同意</string>
+    <string name="state_dec">不同意</string>
+    <string name="state_delivered">已送达</string>
+    <string name="state_sending">发送中</string>
+    <string name="state_pending">待定</string>
+    <string name="state_failed">失败</string>
+    <string name="state_sent">已发送</string>
+    <string name="state_dialog_created">已创建</string>
+    <string name="state_dialog_posted">已发送</string>
+    <string name="state_dialog_modified">已更新</string>
+    <string name="state_dialog_edited">已编辑</string>
+    <string name="state_dialog_deleted">已删除</string>
+    <string name="state_dialog_status">状态</string>
+    <string name="title_tab_recent">最近</string>
+    <string name="no_recent_conversations">找不到会话记录</string>
+    <string name="save_changes">保存</string>
+    <string name="creating_group">正在创建群组</string>
+    <string name="updating_group">正在更新群组</string>
+    <string name="leaving_group">退出群组</string>
+    <string name="disbanding_group">解散群组</string>
+    <string name="removing_group">删除群组</string>
+    <string name="resyncing_group">重新同步群组</string>
+    <string name="status_create_group">群组已创建。</string>
+    <string name="status_rename_group">群组名称改为 “%1$s”</string>
+    <string name="status_group_new_photo">群组头像已更新。</string>
+    <string name="status_group_new_member">%1$s 已添加到群组。</string>
+    <string name="status_group_member_left">%1$s 离开了群组。</string>
+    <string name="status_group_member_kicked">%1$s 已从群组中移除。</string>
+    <string name="can_not_send_no_group_members">您无法将消息发送到空群组</string>
+    <string name="you_are_not_a_member_of_this_group">您不是此群组的成员</string>
+    <string name="can_not_delete_not_valid">无法删除无效的对象</string>
+    <string name="can_not_delete_contact_until_in_group">该联系人仍然是群组
+对话的成员或创建者，因此无法删除。退出或删除所有包含此联系人的群组，
+然后重试。</string>
+    <string name="can_not_delete_contact">无法删除联系人</string>
+    <string name="title_public_nickname">昵称</string>
+    <string name="prefs_sum_excluded_sync_identities">同步联系人时，这里列出的ID将被忽略</string>
+    <string name="prefs_title_excluded_sync_identities">排除清单</string>
+    <string name="synchronize_contact">通讯录同步</string>
+    <string name="exclude_contact">排除自动同步</string>
+    <string name="prefs_header_lists">清单</string>
+    <string name="prefs_title_blocked_contacts">被屏蔽的联系人</string>
+    <string name="prefs_sum_blocked_contacts">来自这里列出的ID的消息将被忽略。</string>
+    <string name="verified">已验证</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="want_to_add_to_exclude_list">此联系人已链接到手机通讯录中的记录。如果您
+在 ${app_name_short} 中将其删除，在联系人同步之后他会重新出现。 \n是否要从同步中排除他？</string>
+    <string name="no">否</string>
+    <string name="yes">是</string>
+    <string name="deleting_contact">正在删除联系人</string>
+    <string name="prefs_contact_soring">排序</string>
+    <string name="prefs_sum_contact_soring">设置联系人列表中条目的排序顺序</string>
+    <string name="prefs_contact_format">查看联系人姓名</string>
+    <string name="prefs_sum_contact_format">设置联系人姓名格式</string>
+    <string name="prefs_contact_list_title">联系人列表</string>
+    <string name="prefs_default_contact_picture_colored">默认联系人图片</string>
+    <string name="prefs_show_inactive_contacts">显示不活跃的ID</string>
+    <string name="prefs_sum_default_contact_picture_colored_on">如果
+缺少联系人图片，则显示多色占位符</string>
+    <string name="prefs_sum_default_contact_picture_colored_off">如果缺少联系人图片，则使用灰色占位符</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_show_inactive_contacts_on">显示您的联系人列表中的所有 ${app_name_short} ID</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_show_inactive_contacts_off">隐藏不活跃/已吊销的 ${app_name_short} ID</string>
+    <string name="contact_sorting_first_name">名字 - 姓氏</string>
+    <string name="contact_sorting_last_name">姓氏 - 名字</string>
+    <string name="contact_format_first_name_last_name">先名字，后姓氏</string>
+    <string name="contact_format_last_name_first_name">先姓氏，后名字</string>
+    <string name="block_contact">屏蔽联系人</string>
+    <string name="unblock_contact">解除屏蔽联系人</string>
+    <string name="one_unread_message">1条未读消息</string>
+    <string name="really_unlink_contact_title">解除链接联系人</string>
+    <string name="really_unlink_contact">您是否真的要解除与此联系人的链接？</string>
+    <string name="do_unlink_contact">解除链接联系人</string>
+    <string name="do_choose_other_contact">选择另一个联系人</string>
+    <string name="touch_to_link">（没有）</string>
+    <string name="prefs_validate_contacts">验证联系人链接</string>
+    <string name="prefs_validate_contacts_loading">正在验证联系人链接</string>
+    <string name="prefs_title_fullscreen_ime">全屏键盘</string>
+    <string name="prefs_sum_fullscreen_ime_on">如果您的设备处于横向模式，键盘将覆盖应用程序</string>
+    <string name="prefs_sum_fullscreen_ime_off">如果有空间，则在键盘上方显示会话的预览</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="add_acount_from_within_threema">在 ${app_name_short} 内管理您的 ${app_name_short} ID。</string>
+    <string name="save_image">保存图片</string>
+    <string name="share_image">分享图片</string>
+    <string name="view_in_gallery">在相册中查看</string>
+    <string name="token_register_failed">更新推送令牌失败，请稍后再试。</string>
+    <string name="internet_connection_required">没有网络连接。</string>
+    <string name="prefs_sum_save_media">以未加密的形式保存收到的图片和视频，以及发送的相机图片。</string>
+    <string name="prefs_save_media">自动保存到图库</string>
+    <string name="title_add_distribution_list">创建通讯组列表</string>
+    <string name="title_edit_distribution_list">编辑通讯组列表</string>
+    <string name="really_delete_distribution_list">删除通讯组列表</string>
+    <string name="really_delete_distribution_list_message">您是否真的要移除此列表并删除其消息？</string>
+    <string name="enter_distribution_list_name">为此列表选择名称</string>
+    <string name="distribution_list">通讯组列表</string>
+    <string name="title_tab_distribution_list">通讯组列表</string>
+    <string name="no_matching_distribution_lists">没有匹配的通讯组列表</string>
+    <string name="is_typing">输入中…</string>
+    <string name="push_not_available_title">找不到推送服务</string>
+    <string name="push_not_available_text1">我们无法在您的设备上找到推送服务，因为 Google Play 服务没有安装或过时。</string>
+    <string name="push_not_available_text2">%s 将在后台持续地与服务器连接。如果您的设备启用了电池优化，这可能会干扰后台连接，${app_name_short} Push 将可能无法可靠地运行。</string>
+    <string name="backup_in_progress">正在进行备份</string>
+    <string name="backup_or_restore_success_body">数据备份成功完成</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_or_restore_error">${app_name_short} 备份</string>
+    <string name="backup_or_restore_error_body">备份未成功完成</string>
+    <string name="could_not_download_message">无法下载消息</string>
+    <string name="info">资讯</string>
+    <string name="resync_group">重新同步群组</string>
+    <string name="edit_name">编辑名称和图片</string>
+    <string name="edit_name_only">编辑名称</string>
+    <string name="group_was_synchronized">群组已同步。</string>
+    <string name="verification_level2_work_explain">内部联系人，由贵组织预先填写。</string>
+    <string name="verification_level3_work_explain">通过扫描二维码，您能亲自验证内部联系人的身份和公钥。</string>
+    <string name="verification_level3_explain">通过扫描二维码，您能亲自验证联系人的身份和公钥。</string>
+    <string name="verification_level2_explain">联系人的电话号码和/或电子邮件地址包含在您的通讯录中。</string>
+    <string name="verification_level1_explain">未知联系人；该联系人没有将电话号码或电子邮件地址链接到其ID，或者您的通讯录中没有这些联系人的详细消息。</string>
+    <string name="state_dialog_received">已收到</string>
+    <string name="prefs_title_hide_screenshots">没有缩略图和屏幕截图</string>
+    <string name="prefs_summary_hide_screenshots">不要在应用切换器中显示缩略图，
+并禁用屏幕截图</string>
+    <string name="media_gallery">媒体库</string>
+    <string name="media_file_not_found">无法打开媒体文件。它已被删除或未从服务器下载。</string>
+    <string name="no_media_found">在此会话中找不到%s。</string>
+    <string name="media_gallery_all">所有媒体</string>
+    <string name="media_gallery_pictures">图片</string>
+    <string name="media_gallery_videos">影片</string>
+    <string name="group_membership_title">这些群组的成员</string>
+    <string name="group_description">群组描述</string>
+    <string name="change_group_description">更改群组描述</string>
+    <string name="add_group_description">添加群组描述</string>
+    <string name="read_more">阅读更多</string>
+    <string name="read_less">阅读更少</string>
+    <string name="changed_group_desc_date">最后修改：\u0020</string>
+    <string name="num_items_sected">已选择 %s</string>
+    <string name="really_delete_media">您确定要删除%d条媒体消息吗？</string>
+    <string name="check_updates">检查更新</string>
+    <!-- ${app_name} and ${app_name_short} are placeholders for the app's name, e.g. "Threema". They must be left as-is and not translated. -->
+    <string name="masterkey_lock_explain">${app_name} 一直记录密码。如果您遇到需要经常重新输入密码 的情况，请确保已禁用可能会过早结束 ${app_name_short} 的任务管理器和电池优化应用。</string>
+    <string name="identity_already_exists">此ID已在您的联系人列表中</string>
+    <string name="share_contact">分享联系人</string>
+    <string name="add_shortcut">添加快捷方式</string>
+    <string name="group_not_found">找不到这样的群组。</string>
+    <string name="contact_not_found">没有这样的联系人</string>
+    <string name="contact_now_blocked">联系人已屏蔽</string>
+    <string name="contact_now_unblocked">联系人已解除屏蔽</string>
+    <string name="sending_images">正在传送图片</string>
+    <string name="share_conversation_body">您需要具有 AES 支持的现代 ZIP 工具才能解压缩文件，例如
+http://www.7-zip.org 或 https://itunes.apple.com/us/app/the-unarchiver/id425424353</string>
+    <string name="enter_zip_password_body">此会话将作为加密的zip文件发送。请选择密码：</string>
+    <string name="ballot_create">建立投票</string>
+    <string name="ballot_choice_add">添加选项</string>
+    <string name="ballot_state_closed">已关闭</string>
+    <string name="ballot_vote">投票</string>
+    <string name="ballot_placeholder">投票</string>
+    <string name="ballot_close">关闭这个投票</string>
+    <string name="ballot_really_close">真的要关闭这个投票吗？</string>
+    <string name="ballot_multiple_choice">多项选择</string>
+    <string name="ballot_result_intermediate">中间结果</string>
+    <string name="ballot_error_more_than_x_choices">需要设置至少两个选择</string>
+    <string name="ballot_message_closed">结果现已可用</string>
+    <string name="ballot_vote_posted_successfully">投票已成功发布</string>
+    <string name="ballot_vote_posted_failed">投票发布失败</string>
+    <string name="attach_ballot">投票</string>
+    <string name="ballot_overview">所有投票</string>
+    <string name="ballot_copy">复制投票</string>
+    <string name="ballot_remove">删除投票</string>
+    <string name="ballot_not_exist">投票不存在</string>
+    <string name="ballot_tap_to_vote">点击即可投票</string>
+    <string name="ballot_tap_to_view_results">投票已关闭。点击即可查看结果</string>
+    <string name="ballot_subject_hint">输入这次投票的标题</string>
+    <string name="ballot_no_ballots_yet">还没有人投票。</string>
+    <string name="print">打印</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="ballot_wizard0_explain">您可以直接用 ${app_name_short} 快速创建在线投票，例如安排活动、创建调查问卷或向您的朋友问任何问题。</string>
+    <string name="ballot_add_choices">添加答案</string>
+    <string name="blocked_cannot_send">您无法向被屏蔽的联系人发送信息</string>
+    <string name="invalid_some_cannot_send">无法选择发送到某些收件人。</string>
+    <string name="invalid_all_cannot_send">无法选择发送到这些收件人。</string>
+    <string name="really_block_contact">来自此联系人今后的消息将被丢弃。是否继续？</string>
+    <string name="ballot_result_final">最后结果</string>
+    <string name="invalid_cannot_send">您无法向无效的联系人发送信息</string>
+    <string name="ballot_answer_count_error">请输入至少两个答案进行投票。</string>
+    <string name="ballot_one_contact_not_supported">警告：%1$s 将无法参与您的投票。</string>
+    <string name="ballot_x_contact_not_supported">警告：%1$d个联系人将无法参与您的投票。</string>
+    <string name="contact_state_inactive">不活跃</string>
+    <string name="contact_state_invalid">无效</string>
+    <string name="back">返回</string>
+    <string name="wearable_reply">回复</string>
+    <string name="wearable_reply_label">回复 %s</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="push_disable_text">如果继续，您将使用 “${app_name_short} Push” 代替系统内置的推送服务。虽然这能减少您的数字足迹，但您需要允许 “应用程序在后台运行” 才能顺利使用。如果在设备设置中找不到相应的选项，您可能需要联系设备制造商的支持以获取配置帮助。</string>
+    <string name="ballot_intermediate_results_show">显示中间结果</string>
+    <string name="converting_video">正在处理影片</string>
+    <string name="video_size_small">高质量（使用数据较少）</string>
+    <string name="video_size_large">低质量（使用数据较多）</string>
+    <string name="video_size_original">无（使用大量数据）</string>
+    <string name="prefs_video_size">视频压缩</string>
+    <string name="menu_video_size_small">小型尺寸</string>
+    <string name="menu_video_size_medium">中型尺寸</string>
+    <string name="menu_video_size_large">原始尺寸</string>
+    <string name="show_contact">显示联系人</string>
+    <string name="chat_with">与 %1$s 聊天</string>
+    <string name="kick_user_from_group">将 %1$s 踢出群组</string>
+    <string name="show_as_qrcode">显示为二维码</string>
+    <string name="qr_code">二维码</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="really_leave_id_export">如果您还没有备份，请将ID导出文本字符串或将相应的二维码保存到安全的地方或打印出来。没有备份的话，则无法恢复 ${app_name_short} ID。</string>
+    <string name="revocation_key_title">ID吊销</string>
+    <string name="revocation_key_not_set">未设置吊销密码</string>
+    <string name="revocation_key_set_at">吊销密码设置为%1$s</string>
+    <string name="prefs_sum_remove_wallpapers">删除所有个人壁纸</string>
+    <string name="prefs_title_remove_wallpapers">删除所有壁纸</string>
+    <string name="really_remove_wallpapers">您确定要删除所有壁纸吗？</string>
+    <string name="wallpapers_removed">壁纸已删除</string>
+    <string name="invalid_backup">无效的备份数据。无法恢复。</string>
+    <string name="invalid_zip_restore_failed">恢复失败，这是无效的备份数据：%1$s</string>
+    <string name="revocation_explain">您在这里输入的密码，可让您通过 https://myid.threema.ch/revoke 吊销您的ID，以防丢失或被盗</string>
+    <!-- Empty state text shown on home screen widget when there are no unread messages -->
+    <string name="no_unread_messages">没有未读消息</string>
+    <string name="send_media">发送媒体</string>
+    <string name="rotate">旋转</string>
+    <string name="remove">删除</string>
+    <string name="item_already_added">此项目已被添加。</string>
+    <string name="password_too_short" tools:ignore="PluralsCandidate">至少%d个字符。</string>
+    <string name="mark_read">标记为已读</string>
+    <string name="attach_document">文件</string>
+    <string name="parent_directory">父母</string>
+    <string name="file_placeholder">文件</string>
+    <string name="internal_storage">内部存储</string>
+    <string name="no_activity_for_mime_type">找不到打开此文件的应用。</string>
+    <string name="no_activity_for_intent">找不到应用程序。</string>
+    <string name="open_from">从…打开</string>
+    <string name="file_one_contact_not_supported">%1$s 无法接收文件。</string>
+    <string name="file_x_contact_not_supported">警告：%1$d个联系人无法收到您的文件。</string>
+    <string name="mime_android_apk">Android 套件</string>
+    <string name="mime_audio">音频文件</string>
+    <string name="mime_certificate">数字证书</string>
+    <string name="mime_codes">源代码</string>
+    <string name="mime_compressed">归档</string>
+    <string name="mime_contact">联系人</string>
+    <string name="mime_event">日历活动</string>
+    <string name="mime_font">字体</string>
+    <string name="mime_image">图片文件</string>
+    <string name="mime_pdf">PDF文件</string>
+    <string name="mime_presentation">简报</string>
+    <string name="mime_spreadsheet">试算表</string>
+    <string name="mime_text">文本文件</string>
+    <string name="mime_video">影片档案</string>
+    <string name="mime_word">文字文件</string>
+    <string name="no_filename"><![CDATA[<没有文件名>]]></string>
+    <string name="send_as_files">作为文件发送</string>
+    <string name="send_as_files_warning">传输未压缩的文件和图片可能会使用大量数据，
+        而您的移动运营商也可能会收取额外费用。我们建议仅在WiFi
+        网络中上传和下载文件。</string>
+    <string name="prefs_theme">设计主题</string>
+    <string name="list_theme_light">浅色</string>
+    <string name="list_theme_dark">深色</string>
+    <string name="prefs_header_appearance">外观</string>
+    <string name="prefs_sum_passphrase">需要密码才能解锁本地加密</string>
+    <string name="prefs_title_masterkey_change_passphrase">更改密码</string>
+    <string name="storage_total">内部存储空间</string>
+    <string name="storage_threema">%s 占用的空间</string>
+    <string name="storage_total_free">总可用空间</string>
+    <string name="storage_total_in_use">正在使用</string>
+    <string name="one_year">1年</string>
+    <string name="six_months">6个月</string>
+    <string name="three_months">3个月</string>
+    <string name="one_month">1个月</string>
+    <string name="one_week">1星期</string>
+    <string name="everything">所有</string>
+    <string name="delete_media_files_time">删除早于以下时间的媒体和文件：</string>
+    <string name="storage_explain">如果可用空间不足，您可以删除较旧的加密媒体文件腾出空间。
+缩略图仍将保留。请注意，这不是自动运行的过程。除非您点击下面的按钮其中之一，否则不会删除任何内容。</string>
+    <string name="delete_data">立即删除数据</string>
+    <string name="delete_date_confirm_message">如果继续，这些文件将被删除，并且仅
+保留缩略图。</string>
+    <string name="storage_management">存储管理</string>
+    <string name="media">媒体</string>
+    <string name="prefs_storage_mgmt_title">清理媒体，文件和消息</string>
+    <string name="num_messages">消息数量</string>
+    <string name="delete_messages_explain">删除早于以下时间的消息：</string>
+    <string name="delete_message">立即删除消息</string>
+    <string name="really_delete_messages">如果继续，这些消息将被永久删除。您将无法
+恢复消息。</string>
+    <string name="messages_delete_explain">您也可以彻底删除旧消息。</string>
+    <string name="backup_started">数据备份已开始</string>
+    <string name="invalid_data">无效数据。无法发送。</string>
+    <string name="prefs_emoji_style">表情符号样式</string>
+    <string name="prefs_android_emojis">系统表情符号</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_default_emojis">${app_name_short} 表情（默认）</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="android_emojis_warning">注意：系统的字符集可能无法显示
+${app_name_short} 支持的所有表情符号。</string>
+    <string name="crop">裁剪</string>
+    <string name="scan_id_mismatch_title">ID不匹配</string>
+    <string name="scan_id_mismatch_message">您扫描的ID与您存储的联系人不匹配。</string>
+    <string name="title_remove_picture">删除图片</string>
+    <string name="blocked">被屏蔽</string>
+    <string name="name">名称</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="terms_of_service">服务条款</string>
+    <string name="eula">最终用户许可协议</string>
+    <string name="save_group_changes">您想保存对群组的更改吗？</string>
+    <string name="prefs_title_fontsize">字体大小</string>
+    <string name="fontsize_normal">正常</string>
+    <string name="fontsize_large">大</string>
+    <string name="fontsize_xlarge">超大</string>
+    <string name="no_app_for_location">在此设备上找不到地图应用程序</string>
+    <string name="prefs_sendlog">发送日志</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sendlog_summary">将日志发送给 ${company_name}，以便在出现问题时进行进一步分析</string>
+    <string name="prefs_exportlog">导出日志文件</string>
+    <string name="prefs_exportlog_summary">与其他应用分享日志文件</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_storage_required">如要保存或发送媒体，请允许 ${app_name} 访问存储权限。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_location_required">如要发送位置，请允许 ${app_name} 访问您的位置的权限。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_contacts_required">如要发送联系人，请允许 ${app_name} 读取联系人的权限。</string>
+    <!-- "Thumbs up" should be translated by the name of the emoji 👍 -->
+    <string name="message_acknowledged">已发送 “赞”</string>
+    <!-- "Thumbs down" should be translated by the name of the emoji 👎 -->
+    <string name="message_declined">已发送 “踩”</string>
+    <string name="notifications_settings">通知设置</string>
+    <string name="notifications_default">默认设置</string>
+    <string name="notifications_until">直到%s</string>
+    <string name="notifications_mute">已静音</string>
+    <string name="notifications_choose_sound">选择声音</string>
+    <string name="error_video_conversion">视频转换出错。</string>
+    <string name="confirm_your_pin">确认 PIN 码</string>
+    <string name="too_many_incorrect_attempts">错误尝试次数太多。请在%s秒后重试。</string>
+    <string name="no_lockscreen_set">未设置系统屏幕锁定。</string>
+    <string name="on">开启</string>
+    <string name="off">关闭</string>
+    <string name="new_wizard_select_country">选择您的国家</string>
+    <string name="new_wizard_lets_get_started">让我们开始吧！</string>
+    <string name="new_wizard_setup_threema">立即设置</string>
+    <!-- Label on call-to-action button in setup wizard when app is first opened, to allow the user to start setting up the app. ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="work_new_wizard_setup_threema">设置 ${app_name}</string>
+    <string name="new_wizard_restore_id_backup">恢复已导出的 ID</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="new_wizard_welcome">欢迎使用 ${app_name}！</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_move_finger">在屏幕上移动手指以生成新的 ${app_name_short} ID。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_this_is_your_id">这是您的 ${app_name_short} ID：</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_works_like_phone_number">您的 ${app_name_short} ID 就像电话号码一样。\n您的朋友可以通过此 ID 与您联系。</string>
+    <string name="new_wizard_choose_nickname">选择昵称</string>
+    <string name="new_wizard_nickname_explain">您的朋友会在通知中看到您的昵称</string>
+    <string name="new_wizard_hint_enter_nickname">输入昵称</string>
+    <string name="new_wizard_help_your_friends_find_you">帮助您的朋友找到您！</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_link_mobile">将您的手机号码和/或电子邮件链接到${app_name_short} ID。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_link_mobile_only">将您的手机号码链接到${app_name_short} ID。</string>
+    <string name="new_wizard_hint_mobile_number">手机号码（可选）</string>
+    <string name="new_wizard_hint_email">电子邮件（可选）</string>
+    <string name="new_wizard_done_title">大功告成！\n资料正确吗？</string>
+    <string name="new_wizard_linked_to">链接到</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_need_internet">创建唯一的 ${app_name_short} ID 需要稳定的网络连接。请再试一次。</string>
+    <string name="new_wizard_more_information">更多信息</string>
+    <string name="message_details_message_id_copied">消息编号已复制到剪贴板</string>
+    <string name="contact_details_id_copied">ID已复制到剪贴板</string>
+    <string name="contact_details_nickname_copied">昵称已复制到剪贴板</string>
+    <string name="generic_copied_to_clipboard_hint">已复制到剪贴板</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_use_id_as_nickname">你想用 ${app_name_short} ID 作为您的昵称吗？</string>
+    <string name="new_wizard_phone_email_invalid">您输入的电话号码或电子邮件地址无效。\n请先更正，然后再继续。</string>
+    <string name="new_wizard_phone_invalid">您输入的电话号码无效。\n请先更正，然后再继续。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_fingerprint">通过移动手指，您可以创建随机数据（称为熵），该数据用于生成与全新而唯一的 ${app_name_short} ID 关联的密钥对。该密钥对包括一个的<b>公钥</b>分配给您的朋友，而<b>私钥</b>安全地存储在您的手机上。您的朋友将使用您的公钥加密发送给您的消息。只有私钥的擁有者才能解密这些消息，其他人都不能解密。</string>
+    <string name="new_wizard_info_id">您还创建了一个密钥对。公钥已安全地传输到我们的
+服务器。私钥永远不会离开您的设备。这样可以确保没有其他人可以阅读您的消息。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_sync_contacts">如果启用此选项，${app_name_short} 会将电子邮件地址和电话号码单向加密（散列），
+然后再将其发送到服务器以查找匹配的联系人。我们不会存储任何地址簿数据。</string>
+    <string name="new_wizard_info_sync_contacts_dialog">联系人同步可以帮助您找到您的朋友。如果选择同意，电话簿中的电话号码和电邮地址将先以加密的形式发送到我们的服务器，来查找匹配的联系人。我们绝对不会存储或分享任何数据。\n\n是否要启用联系人同步？</string>
+    <!-- Instructions shown during the setup wizard. Only used for work builds (i.e., Threema Work or OnPrem). ${app_name_short} is a placeholders for the app's name, it must be kept as-is and should not be translated. -->
+    <string name="new_wizard_info_link">通过提供您的电话号码和电子邮件地址，${app_name_short} 可以帮助您的朋友 自动在您的电话通讯录中找到您。数据将以 单向加密（散列）形式存储在我们的服务器上。如果您想 完全匿名使用 ${app_name}，则可以跳过此步骤。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_link_phone_only">通过提供您的电话号码，${app_name_short} 可以帮助您的朋友
+自动在您的电话通讯录中找到您。该号码将以
+单向加密（散列）形式存储在我们的服务器上。如果您想
+完全匿名使用 ${app_name_short}，则可以跳过此步骤。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_info_nickname">昵称用於设备上的推送通知，向尚未将您存储在通讯录的用户识别您的身份。
+我们建议仅提供您的名字或化名作为昵称。
+如果您未设置昵称，在默认情况下，我们将使用您的 ${app_name_short} ID。</string>
+    <string name="not_linked">未链接</string>
+    <string name="linked">已链接</string>
+    <string name="pending_sms_verification_notice">您的手机号码尚未验证。</string>
+    <string name="no_sms_received">没有收到短信？</string>
+    <string name="really_cancel_verify">您是否真的要中止手机号码验证？</string>
+    <string name="verification_of">%s的验证</string>
+    <string name="status_ballot_voting_changed">%1$s 投票获得了新一票</string>
+    <string name="status_ballot_user_first_vote">%1$s 已对 %2$s 投了一票</string>
+    <string name="status_ballot_user_modified_vote">%1$s 更改了 %2$s 的投票</string>
+    <string name="status_ballot_all_votes">已完成 %1$s 的投票</string>
+    <string name="restore">恢复</string>
+    <!-- Shown in prompt dialog during the setup wizard. Only used for work builds (i.e. Threema Work and OnPrem). ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="new_wizard_anonymous_confirm">您没有输入手机号码或电子邮件地址链接到\n${app_name_short} ID。您将不会出现在朋友的联系人列表中。您确定要匿名使用 ${app_name} 吗？</string>
+    <!-- ${app_name} and ${app_name_short} are placeholders for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="new_wizard_anonymous_confirm_phone_only">您没有输入手机号码链接到\n${app_name_short} ID。您将不会出现在朋友的联系人列表中。您确定要匿名使用 ${app_name} 吗？</string>
+    <string name="new_wizard_scan_id_backup">或扫描ID导出的二维码</string>
+    <string name="error_saving_file">保存文件时出错。请检查权限。</string>
+    <string name="wait_one_minute">请求通话前，请至少等待10分钟，直至短信到达。</string>
+    <string name="backup_id">已导出的ID</string>
+    <string name="backup_data">数据备份</string>
+    <string name="action_delete_group">删除群组</string>
+    <string name="action_leave_and_delete_group">离开并删除群组</string>
+    <string name="action_dissolve_and_delete_group">解散并删除群组</string>
+    <string name="delete_my_group_message">您确实要完全删除此群组吗？所有消息将被删除，剩下的成员将无法再使用这个群。</string>
+    <string name="error_out_of_memory">没有足够的内存来完成此操作</string>
+    <string name="configure">配置</string>
+    <string name="file_is_not_audio">不是音频文件</string>
+    <string name="disabled_by_policy">某些设置已被管理员禁用</string>
+    <string name="select_all">全选</string>
+    <string name="deleting_messages">正在删除消息</string>
+    <string name="media_gallery_files">文件</string>
+    <string name="prefs_gif_autoplay">自动播放动画图像</string>
+    <string name="media_gallery_audio">语音消息</string>
+    <string name="action_clone_group">克隆群组</string>
+    <string name="clone_group_message">这将创建这个群组的克隆，并由您作为管理员。是否继续？</string>
+    <string name="prefs_proximity_sensor">使用近距离传感器</string>
+    <string name="prefs_proximity_sensor_explain">如果覆盖了近距离传感器，请使用听筒播放语音消息</string>
+    <string name="error_creating_group_network">群组未能创建，请检查您的互联网连接并重试。</string>
+    <string name="error_creating_group_internal">由于内部错误，群组未能创建。请稍后重试。</string>
+    <string name="error_cloning_group_network">群组未能复制，请检查您的互联网连接并重试。</string>
+    <string name="error_cloning_group_internal">由于内部错误，群组未能复制。请稍后重试。</string>
+    <string name="error_updating_group_network">无法应用更改，请检查您的互联网连接并重试。</string>
+    <string name="error_updating_group_internal">由于内部错误，无法应用更改。请稍后重试。</string>
+    <string name="error_leaving_group_network">未能退出群组，请检查您的互联网连接并重试。</string>
+    <string name="error_leaving_group_internal">由于内部错误，未能退出群组。请稍后重试。</string>
+    <string name="error_disbanding_group_network">群组未能解散，请检查您的互联网连接并重试。</string>
+    <string name="error_disbanding_group_internal">由于内部错误，群组未能解散。请稍后重试。</string>
+    <string name="error_removing_group_network">群组未能删除，请检查您的互联网连接并重试。</string>
+    <string name="error_removing_group_internal">由于内部错误，群组未能删除。请稍后重试。</string>
+    <string name="error_resyncing_group_network">群组未能重新同步，请检查您的互联网连接并重试。</string>
+    <string name="error_resyncing_group_internal">由于内部错误，群组未能重新同步。请稍后重试。</string>
+    <string name="no_media_found_generic">在此会话中找不到符合已选择的媒体</string>
+    <string name="max_images_reached">一次最多可以编辑%d个项目</string>
+    <string name="enter_description">请在这里描述错误/问题。</string>
+    <string name="add_caption_hint">添加可选描述</string>
+    <string name="disable">禁用</string>
+    <string name="continue_anyway">仍然继续</string>
+    <string name="invalid_input">输入无效</string>
+    <string name="already_licensed">已获得许可</string>
+    <string name="hide_chat">私密会话</string>
+    <string name="really_hide_chat_message">您想将此会话标记为私密吗？使用菜单切换消息列表中私密会话的可见性。</string>
+    <string name="chat_hidden">会话标记为私密</string>
+    <string name="title_show_private_chats">显示私密会话</string>
+    <string name="title_hide_private_chats">隐藏私密会话</string>
+    <string name="chat_visible">会话不再是私密的</string>
+    <string name="prefs_title_locking_mechanism">锁定装置</string>
+    <string name="lock_option_none">没有</string>
+    <string name="lock_option_pin">PIN 码</string>
+    <string name="lock_option_screenlock">系统屏幕锁定</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="hide_chat_message_explain">${app_name_short} 允许您使用 PIN 码保护某些会话，并将其暂时隐藏在消息列表中。要启用私密会话，请设置 PIN 码或在设置中启用系统屏幕锁定（Android 6.0+）。</string>
+    <string name="set_lock">现在设置</string>
+    <string name="prefs_title_access_protection">访问保护</string>
+    <string name="private_chat_subject">私密</string>
+    <string name="grace_thirty_seconds">30秒</string>
+    <string name="grace_one_minute">1分钟</string>
+    <string name="grace_two_minutes">2分钟</string>
+    <string name="grace_five_minutes">5分钟</string>
+    <string name="grace_ten_minutes">10分钟</string>
+    <string name="grace_thirty_minutes">30分钟</string>
+    <string name="grace_never">从不（手动）</string>
+    <string name="never">从不</string>
+    <string name="access_protection_private_chats_warning">取消访问保护后，您的私密会话将再次可见。</string>
+    <string name="verification_started">验证开始</string>
+    <string name="cannot_open_file">无法打开文件</string>
+    <string name="prefs_title_image_attach_previews">图片快速选择</string>
+    <string name="prefs_sum_image_attach_previews">在附件弹出窗口中显示最近添加的图片的列表</string>
+    <string name="prefs_title_direct_share">直接分享</string>
+    <string name="prefs_sum_direct_share">与其他应用分享时显示最近的聊天记录</string>
+    <string name="restore_disable_energy_saving">请将设备连接至充电器，并禁用所有省电选项，以防设备中断备份或恢复过程。</string>
+    <string name="draft">草稿</string>
+    <string name="prefs_bigger_single_emojis">更大的单个表情符号</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="wizard1_sync_work">正在同步 ${app_name} 数据…</string>
+    <string name="notification_hidden_text">内容已隐藏</string>
+    <string name="really_reset_ringtones">真的将通知声音设置重置为默认值吗？</string>
+    <string name="reset_ringtones_confirm">通知声音设置已重设。</string>
+    <string name="prefs_language_override">语言</string>
+    <string name="threema_channel_intro">${app_name_short} 频道为您提供关于 ${app_name_short} 的所有新闻。您想订阅${app_name_short} 频道并将其添加到您的联系人中吗？这是免费的，您可以随时退订。</string>
+    <string name="quote">引用</string>
+    <string name="contacts_deleted">联系人已被删除</string>
+    <string name="take_photo">拍摄照片</string>
+    <string name="select_from_gallery">从图库中选择</string>
+    <string name="palette">调色盘</string>
+    <string name="stickers">表情包</string>
+    <string name="text">文本</string>
+    <string name="undo">撤消</string>
+    <string name="android_backup_date">上次备份</string>
+    <string name="check_now">现在检查</string>
+    <string name="discard">丢弃</string>
+    <string name="android_backup_restart_threema">请稍等片刻。此应用将在几秒钟后重新启动。</string>
+    <string name="battery_optimizations_title">禁用电池优化</string>
+    <string name="battery_optimizations_explain">电池优化使 %1$s 在手机进入睡眠模式时无法正常运行。请为 %2$s 禁用电池优化。</string>
+    <string name="battery_optimizations_disable_guide">在下拉菜单中选择 “所有应用”</string>
+    <string name="battery_optimizations_disable_guide_ctd">在列表中搜索 %s 并禁用优化</string>
+    <string name="enter_text_hint">输入文字</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_explain_text">如果您切换或丢失设备，如果您没有备份，您将无法恢复您的 ${app_name_short} ID 或会话。请使用适当的备份方法保存您的数据。</string>
+    <string name="data_backup_explain">数据备份包含：\n\n&#9679; 您的ID和密钥对\n&#9679; 联系人和信任级别\n&#9679; 群组成员资格\n&#9679; 会话\n&#9679; 媒体和文件（可选）\n\n数据将保存到加密的 ZIP 文件中。建议备份成功完成后，将文件保存到其他地方。</string>
+    <string name="draw">绘画</string>
+    <string name="edit">编辑</string>
+    <string name="edit_message">编辑消息</string>
+    <string name="edited">已编辑</string>
+    <string name="confirm_edit_desc">确认编辑</string>
+    <string name="edit_history">编辑记录</string>
+    <string name="discard_changes">您要放弃更改吗？</string>
+    <string name="prefs_title_network">网络</string>
+    <string name="prefs_title_ipv6_preferred">以 IPv6 发送消息</string>
+    <string name="prefs_ipv6_preferred_off">仅使用 IPv4 连接</string>
+    <string name="prefs_ipv6_preferred_on">在 IPv4 上优先使用 IPv6 连接</string>
+    <string name="prefs_title_ipv6_webrtc_allowed">以 IPv6 通话和上网</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_ipv6_webrtc_allowed_on">允许 ${app_name_short} 通话和桌面应用程序/网络客户端使用 IPv6。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_ipv6_webrtc_allowed_off">禁止 ${app_name_short} 通话和桌面应用程序/网络客户端使用 IPv6。</string>
+    <string name="ipv6_requires_restart">如要应用此设置，需要重新启动应用程序。</string>
+    <string name="ipv6_restart_now">立即重启</string>
+    <string name="on_cap">开启</string>
+    <string name="off_cap">关闭</string>
+    <string name="share_chat">分享会话</string>
+    <string name="flip">翻转</string>
+    <string name="to_front">移到最前</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="retry">重试</string>
+    <string name="voice_message_record">录制语音消息</string>
+    <string name="open_navdrawer">打开抽屉式导航</string>
+    <string name="profile_picture">个人头像</string>
+    <string name="profile_picture_release">谁可以看到您的个人头像？</string>
+    <string name="picrelease_nobody">没有人</string>
+    <string name="picrelease_selected">选定的联系人</string>
+    <string name="picrelease_everyone">任何人</string>
+    <string name="prefs_title_receive_profilepics">显示个人头像</string>
+    <string name="prefs_sum_receive_profilepics_off">隐藏联系人提供的个人头像</string>
+    <string name="prefs_sum_receive_profilepics_on">显示联系人提供的个人头像</string>
+    <string name="prefs_sum_receive_profilepics_recipients_list">当您向列表中选择的联系人发送消息时，他们将看到您的个人头像。</string>
+    <string name="menu_send_profilpic">添加为个人头像接收者</string>
+    <string name="menu_send_profilpic_off">删除为个人头像接收者</string>
+    <string name="menu_send_profilpic_now">立即发送个人头像</string>
+    <string name="profile_picture_sent">个人头像已发送</string>
+    <string name="sending_messages">发送中…</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_data_media_confirm">将大型媒体文件保存到本地 ZIP 备份可能会超出设备的 CPU 和内存容量，并且可能需要很长时间才能完成。在备份进行期间，${app_name} 不能发送或接收消息。是否继续？</string>
+    <string name="backup_data_cancelled">备份已取消</string>
+    <string name="message_sent">消息已发送</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_call">${app_name_short} 通话</string>
+    <string name="threema_message_to">给%s的消息</string>
+    <string name="threema_call_with">致电给%s</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_title_voip">${app_name_short} 通话</string>
+    <string name="prefs_title_force_turn">总是转发通话</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_force_turn_off">如果可以的话，则建立直接连接，并且仅通过 ${company_name} 服务器将通话中继到未经验证的联系人。这可能会暴露您的 IP 地址。</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_force_turn_on">通过 ${company_name} 服务器强制中继所有通话，从而保护您的 IP 地址。可能会影响通话质量。</string>
+    <string name="permission_record_audio_required">如要拨打加密电话并发送语音消息，请允许使用麦克风。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_voice_call_notifications">${app_name_short} 通话</string>
+    <string name="prefs_voice_call_sound">铃声</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_voice_call_sound">选择 ${app_name_short} 通话的来电铃声</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_sum_voice_call_vibrate">收到 ${app_name_short} 通话时振动</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_title_voip_enable">启用 ${app_name_short} 通话</string>
+    <string name="webclient_invalid_push_token_message">需要手动启动</string>
+    <string name="threema_work_contact">Threema Work 联系人</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_phone_required">使用 ${app_name} 通话时允许管理电话的权限</string>
+    <string name="strikethrough">删除线</string>
+    <string name="italic">斜体</string>
+    <string name="bold">粗体</string>
+    <string name="shortcut_choice_title">为…创建快捷方式</string>
+    <string name="prefs_title_device_info">设备信息</string>
+    <string name="notifications_disabled_title">禁用推送通知</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="notifications_disabled_text">在系统设置中已禁用 ${app_name} 的通知。您将不会收到有关新消息的通知。</string>
+    <string name="notifications_disabled_settings">编辑系统设置</string>
+    <string name="error_attaching_files">添加附件时出错。</string>
+    <string name="prefs_fix_powermanager_problems">禁用电源限制</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_fix_powermanager_problems_desc">允许 ${app_name} 在后台运行，即使不在活动状态也可以接收消息。</string>
+    <string name="disable_powermanager_explain">在下一个屏幕中，确保对 %s 允许后台运行，以及设置 “允许应用忽略电池优化” 。完成后，点击 “返回” 按钮。</string>
+    <string name="disable_autostart_explain">在下一个屏幕中，确保 %s 在自动启动的应用程序列表中。完成后，点击 “返回” 按钮。</string>
+    <string name="notification_priority_default">低</string>
+    <string name="notification_priority_high">高</string>
+    <string name="notification_priority_max">最高</string>
+    <string name="prefs_title_notification_priority">优先级</string>
+    <string name="pin">置顶</string>
+    <string name="unpin">取消置顶</string>
+    <string name="location_services_disabled">定位服务已禁用。您现在要启用吗？</string>
+    <string name="send_location">发送位置</string>
+    <string name="forward_location">转发位置</string>
+    <string name="unknown_address">未知地址</string>
+    <string name="your_location">您的位置</string>
+    <string name="reply_later">待会再聊</string>
+    <string name="reply_on_my_way">我马上就到</string>
+    <string name="reply_thank_you">谢谢</string>
+    <string name="reply_youre_welcome">别客气</string>
+    <string name="prefs_auto_download_title">自动下载媒体文件</string>
+    <string name="prefs_auto_download_wifi">当连接到 WiFi 时</string>
+    <string name="prefs_auto_download_mobile">当使用移动数据时</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="rate_intro">您如何评价 ${app_name}？</string>
+    <string name="rate_feedback_intro">请让我们知道如何改进应用程序（可选）。</string>
+    <string name="rate_positive">发送评论</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="rate_title">评价 ${app_name}</string>
+    <string name="rate_thank_you">谢谢您的评价！</string>
+    <string name="disabled_by_policy_short">管理员已禁用功能</string>
+    <string name="rate_forward_to_play_store">您还要在 Google Play 上给我们评分吗？</string>
+    <string name="rate_error">无法将您的评论发送到服务器。请重试之前，请确保您已连接到互联网。</string>
+    <string name="off_unless_i_was_mentioned">开启，除非有人提到我</string>
+    <string name="dnd">请勿打扰</string>
+    <string name="minus">减</string>
+    <string name="plus">加</string>
+    <string name="switched_off">关闭</string>
+    <string name="switched_on">开启</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="title_tab_work_users">${app_name} 用户</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="no_matching_work_contacts">找不到经过管理员验证的 ${app_name} 联系人</string>
+    <string name="all">所有</string>
+    <string name="webclient_session_stop_all">关闭所有</string>
+    <string name="passphrase_service_name">密码服务</string>
+    <string name="passphrase_service_description">密码解锁时的通知</string>
+    <string name="webclient_service_description">${app_name_short} 网页版/桌面版会话运行时的通知</string>
+    <string name="prefs_title_accept_privacy_policy">接受隐私权政策</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="privacy_policy_explain">${app_name}比任何其他即时通讯工具都更加严格地保护您的隐私。在我们的%1$s中了解更多。</string>
+    <string name="privacy_policy_check_confirm">使用 %s 前，请接受隐私政策。\n\n（根据欧盟法规 2016/679《通用数据保护条例》的要求）</string>
+    <string name="prefs_title_incognito_keyboard">请求隐身键盘</string>
+    <string name="prefs_sum_incognito_keyboard">禁用数据收集以获取个性化建议（如果键盘支持）</string>
+    <string name="tooltip_mentions">在键盘上输入 “@” 字符，以直接称呼或提及此群组成员。</string>
+    <string name="tooltip_imagepaint">发挥创意吧！在发送之前，点击魔术棒按钮在图片上涂鸦或添加表情和文字。</string>
+    <string name="call_ongoing">正在进行的通话</string>
+    <string name="ballot_received_votes">目前票数：%1$d / %2$d</string>
+    <string name="quote_not_found">找不到引用的消息</string>
+    <string name="ballot_secret">秘密</string>
+    <string name="password_too_short_generic">密码太短</string>
+    <string name="passwords_dont_match">密码不匹配</string>
+    <string name="test_unsuccessful">测试失败</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="preparing_threema_safe">正在准备 ${app_name_short} Safe</string>
+    <string name="disable_powermanager_title">电源限制</string>
+    <string name="disable_autostart_title">自动开启</string>
+    <string name="unchanged">不变</string>
+    <string name="safe_learn_more_button">了解更多</string>
+    <string name="safe_enable_explain">您会话关连的所有数据只存储在您的设备上。因为我们没有保存您的帐户，所以如果您丢失了手机或意外删除了数据，我们将无法为您提供帮助。\n\n${app_name_short} Safe 在您选择的安全服务器上，以匿名方式创建所有重要数据的自动备份，包括您的密钥，联系人列表和群组成员身份（但不包含消息内容）。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_disable_confirm">您真的要在不启用 ${app_name_short} Safe 的情况下继续吗？当使用 ${app_name_short} Safe 时，您可以恢复您的 ${app_name_short} ID、联系人和群组，以防您失去设备的访问权。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_choose_password">请选择一个强密码。您将需要此密码来恢复 ${app_name_short} Safe 备份。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_choose_server">选择 ${app_name_short} Safe 服务器</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_server_explain">您可以使用 ${company_name} 官方的服务器，也可以选择使用的第三方备份服务器。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="onprem_safe_configure_server_explain">将您的 ${app_name_short} Safe 备份保存在贵组织的服务器上，或指定不同的备份服务器。</string>
+    <string name="safe_use_default_server">使用默认服务器</string>
+    <string name="safe_test_server">测试连接服务器</string>
+    <string name="safe_advanced_options">专家设置</string>
+    <string name="safe_enter_password">请输入您的 ${app_name_short} Safe 密码</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_threema_id">您的 ${app_name_short} ID</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_restore_enter_id">请输入您想恢复的 ${app_name_short} ID</string>
+    <string name="safe_search_id_title">请输入与您的 ${app_name_short} ID相关联的手机号码或电子邮件地址</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_id_lookup">查找 ${app_name_short} ID</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_no_id_found">找不到 ${app_name_short} ID</string>
+    <string name="safe_no_backup_found">在服务器上找不到备份。请检查 ID 和密码。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_select_id">找到多个 ${app_name_short} ID。请选择要使用的 ID：</string>
+    <string name="safe_backup_now">立即备份</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_enable_explain_short">启用 ${app_name_short} Safe 可以自动为所有重要数据创建安全和匿名的备份。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_deleting">删除 ${app_name_short} Safe 备份</string>
+    <string name="safe_delete_error">删除备份时出错：%s</string>
+    <string name="safe_delete_success">备份已在服务器上成功删除</string>
+    <string name="safe_error_preparing">准备 ${app_name_short} Safe 备份时出错</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_configure_choose_password_force">请设置一个强密码，以使用 ${app_name_short} Safe 保护您的 ${app_name_short} ID。请不要忘记您在这里输入的内容！</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_deactivate">禁用 ${app_name_short} Safe</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_deactivate_explain">如果您禁用 ${app_name_short} Safe，任何现有的备份都将在服务器上被删除。是否继续？</string>
+    <string name="add_group_members">添加更多成员</string>
+    <string name="contact_add_confirm">您想将新联系人 “%1$s” 添加到您的联系人列表中吗？</string>
+    <string name="password_bad">密码强度低</string>
+    <string name="prefs_fix_background_data">启用背景数据</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_fix_background_data_desc">如要让 ${app_name} 处于后台时接收消息，请同时启用 “后台数据” 和 “不限制数据使用”</string>
+    <string name="prefs_fix_device">解决设备配置问题</string>
+    <string name="safe_successful">成功</string>
+    <string name="safe_unsuccessful">失败</string>
+    <string name="safe_upload_failed">上传失败</string>
+    <string name="safe_upload_size_exceeded">超出服务器的上传最大限制</string>
+    <string name="safe_connection_error">连接错误</string>
+    <string name="safe_server_name">服务器名称</string>
+    <string name="safe_max_backup_size">最大备份大小</string>
+    <string name="safe_retention">备份保留</string>
+    <string name="safe_result">备份结果</string>
+    <string name="number_of_days">%d天</string>
+    <string name="backup_other_restore_options">其他恢复选项</string>
+    <string name="safe_size">备份大小</string>
+    <string name="backup_version_mismatch">此备份的版本高于支持的版本。请更新到最新版本的应用。</string>
+    <string name="safe_restore_failed">恢复失败</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_failed_notification">${app_name_short} Safe 备份连续%d天失败。点击这里检查。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_restore">恢复 ${app_name_short} Safe</string>
+    <string name="backup_restore_in_progress">正在进行备份或恢复。检查通知以获取状态消息。</string>
+    <string name="restore_error_body">恢复未成功完成</string>
+    <string name="forgot_your_id">忘记您的ID？</string>
+    <string name="restore_success_body">恢复成功完成</string>
+    <string name="work_data_sync">数据同步</string>
+    <string name="private_contact">私密联系人</string>
+    <string name="ringtone_selection_default">默认（%s）</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="work_data_sync_desc">${app_name} 同步</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="ballot_not_connected">在结束投票之前，请确保 ${app_name} 在线。</string>
+    <string name="empty_chat_title">清空会话记录</string>
+    <string name="empty_chat_confirm">此会话中的所有消息将被删除。是否继续？</string>
+    <string name="emptying_chat">正在清空会话记录</string>
+    <string name="emptying_chat_deleting_messages">正在删除消息…</string>
+    <string name="delete_chat_title">删除会话</string>
+    <string name="delete_chat_confirm">此会话中的所有消息将被删除，同时此会话也将被删除。是否继续？</string>
+    <string name="deleting_chat">正在删除会话</string>
+    <string name="set_private">标记为 “私密会话”</string>
+    <string name="unset_private">停用 “私密会话”</string>
+    <string name="delete_group_message">您确定要退出这个群组并将其完全删除吗？所有消息将被删除。</string>
+    <string name="delete_left_group_message">您确定要删除这个群组吗？所有消息都会被删除。</string>
+    <string name="chats">会话</string>
+    <string name="notification_setting_ignored">任何变化都将被忽略！</string>
+    <string name="notification_channel_alerts">警告和错误</string>
+    <string name="notification_channel_notices">告示</string>
+    <string name="chat_updates">会话更新</string>
+    <string name="backup_or_restore_progress">备份和恢复进度</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="tooltip_export_id">点击这里立即分享或打印您的加密 ${app_name_short} ID</string>
+    <string name="downloading">下载中</string>
+    <string name="today">今天</string>
+    <string name="restore_data_cancelled">恢复已取消</string>
+    <string name="safe_change_password">更改密码</string>
+    <string name="safe_configure_choose_password_title">选择密码</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="password_bad_explain">${app_name_short} Safe 所选的密码不安全，容易被攻击者猜中，请选择其他密码。提示：使用由多个单词组成的密码。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_password_updated">${app_name_short} Safe 密码已更新。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_activated">${app_name_short} Safe 现在已激活。</string>
+    <string name="restore_zip_invalid_file">备份文件无效。</string>
+    <string name="push_token_cleared">推送令牌已清除</string>
+    <string name="insert_date">输入日期</string>
+    <string name="add_answer">添加答案</string>
+    <string name="title_cannot_be_empty">投票标题不能为空</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="voip_disabled">${app_name_short} 通话被禁用</string>
+    <string name="hide_chat_enter_message_explain">此会话标记为私密会话。如要进入该会话，请先设置访问保护。</string>
+    <string name="unknown">未知</string>
+    <string name="miui_notification_title">有关 MIUI 通知的重要提醒</string>
+    <string name="miui_notification_body">MIUI 10 默认禁用所有新创建的通知频道的声音和灯光（除非是小米认为 “重要” 的一些应用除外）。您必须在手机特定应用的通知设置界面中为每个频道明确启用。请与手机的制造商联系以获取更多信息。</string>
+    <string name="miui12_notification_body">MIUI 默认禁用了所有应用的声音、灯光和浮动通知（除了一些被小米视为 “重要” 的非常流行的应用）。你需要在手机的应用通知权限设置中手动启用这些设置，并在每次应用更新后重复这些步骤。请联系小米公司了解更多信息。</string>
+    <string name="dont_show_again">下次不再提示</string>
+    <string name="miui_notification_prefs">MIUI 设置</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_safe_upload_successful">${app_name_short} Safe 备份成功上传</string>
+    <string name="time_remaining">还剩%s</string>
+    <string name="safe_configure_server_credentials_title">验证（可选）</string>
+    <string name="username_hint">用户名</string>
+    <string name="server_hint">服务器</string>
+    <!-- Shown in "About" to indicate that the DualLock (a.k.a. "Remote Secret") feature is currently activated -->
+    <string name="about_screen_remote_secrets_activated">已启用</string>
+    <string name="lock_option_biometric">生物识别</string>
+    <string name="biometric_enter_authentication">请认证以解锁</string>
+    <string name="biometric_authentication_failed">认证失败</string>
+    <string name="biometric_authentication_successful">成功认证</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="work_safe_forced_explain">您的管理员为您的设备启用了 ${app_name_short} Safe。</string>
+    <string name="pin_locked_cannot_send">此应用程序已锁定，无法发送。</string>
+    <string name="prefs_summary_hide_screenshots_notice">出于隐私考虑，在安全设置中启用 “应用锁定” 后，始终会阻止缩略图和屏幕截图</string>
+    <string name="work_select_categories">选择类别</string>
+    <string name="my_profile">个人资料</string>
+    <string name="message_too_long">消息太长，无法发送。</string>
+    <string name="database_migration_no_space">数据库迁移失败：设备上没有足够的空间。</string>
+    <string name="advanced_options">高级选项</string>
+    <string name="url_warning_body">您要打开的链接的主机名有可疑。\n\n显示的主机名：<b>%s</b>\n真实的主机名：<b>%s</b>\n\n这可能是试图欺骗您打开一个假装成其他网站的虛假网页。\n\n您仍然要继续吗？</string>
+    <string name="url_warning_title">网络钓鱼警告</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="permission_camera_qr_required">${app_name} 需要访问相机以扫描二维码</string>
+    <string name="voice_action_title">语音操作</string>
+    <string name="voice_action_body">语音操作正在处理中</string>
+    <string name="permission_camera_photo_required">请允许使用相机权限以拍照</string>
+    <string name="global_search">搜索会话</string>
+    <string name="global_search_empty_view_text">输入至少两个字符以搜索所有消息</string>
+    <string name="my_id">我的ID</string>
+    <string name="profile_picture_and_nickname">个人头像和昵称</string>
+    <string name="lp_select_this_place">选择这个地方</string>
+    <string name="lp_or_select_nearby">或选择附近的地方</string>
+    <string name="lp_use_this_location">发送这个位置？</string>
+    <string name="lp_search_place">输入城市</string>
+    <string name="lp_no_nearby_places_found">找不到附近的地方</string>
+    <string name="select_directory_for_backup">保存在这里</string>
+    <string name="data_backup_headline">创建数据备份以保存您的所有数据，包括会话和媒体。</string>
+    <string name="data_backup_save_path">备份路径</string>
+    <string name="change">更改</string>
+    <string name="data_backup_last_date">上次成功的数据备份</string>
+    <string name="archived">已归档会话</string>
+    <string name="to_archive">归档</string>
+    <string name="archived_chats">已归档会话</string>
+    <!-- Menu option in context menu when long-pressing a chat in the Chats tab, allows the user to move the selected chat to the archive -->
+    <string name="archive_chat">归档会话</string>
+    <string name="unarchive">取消归档</string>
+    <string name="no_archived_chats">没有已归档的会话记录。\n如要将会话记录归档，请在消息列表中向左滑动。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="add_contact_enter_id_hint">请输入您要添加的联系人的${app_name_short} ID</string>
+    <string name="notification_channel_new_contact">新联系人</string>
+    <string name="notification_channel_new_contact_desc">关于新联系人的通知</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. %1$s is a placeholder for a person's name. -->
+    <string name="notification_contact_has_joined">%1$s加入了${app_name_short}。点击这里发送信息。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. %1$s is a placeholder for a number (of contacts). %2$s is a summary of people's names. -->
+    <string name="notification_contact_has_joined_multiple">%1$d个联系人已加入${app_name_short}: %2$s。点击这里向他们发送信息。</string>
+    <string name="system_default">系统默认</string>
+    <string name="open_in_maps_app">在地图应用中打开</string>
+    <string name="delete">删除</string>
+    <string name="delete_from_this_device">在此裝置中刪除</string>
+    <string name="delete_for_all">为所有人删除</string>
+    <string name="message_was_deleted">此消息已删除</string>
+    <string name="continue_recording">继续录音</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". %1$s is a placeholder for the version number. They must not be translated. -->
+    <string name="whatsnew_title">${app_name} %1$s 有哪些新功能？</string>
+    <string name="whatsnew_headline"><![CDATA[        <p>您现在可以将 Android 设备连接到新的桌面版应用程序（测试版），并测试多设备功能。</p>
+        <p>如需了解更多详情，请前往 “菜单 > Threema 2.0 桌面版（测试版）”。</p>
+        ]]></string>
+    <string name="tap_to_start">点击这里立即启动 %s。</string>
+    <string name="two_years">2年</string>
+    <string name="invalid_backup_path">无效的备份路径</string>
+    <string name="backup_data_no_permission">无法写入此目录。请选择另一个。</string>
+    <string name="prefs_sum_show_unread_badge">在底部导航栏显示未读消息提示</string>
+    <string name="prefs_title_show_unread_badge">未读消息提示</string>
+    <string name="open_myid_popup">打开快速访问弹出窗口</string>
+    <string name="logo">标志/回到顶部</string>
+    <string name="quote_subj_end">结束引用</string>
+    <string name="quote_subj">引用</string>
+    <string name="duration">持续时间</string>
+    <string name="seconds">秒</string>
+    <string name="minutes">分钟</string>
+    <string name="and">和</string>
+    <string name="edit_type_content_description">查看或编辑 %1$s %2$s</string>
+    <string name="group">群组</string>
+    <string name="play_services_not_installed_unable_to_use_push">由于您还未安装推送服务，因此无法切换到 Google FCM 或 HMS 推送消息。</string>
+    <string name="unable_to_get_current_location">无法确定当前位置。</string>
+    <string name="lp_search_place_min_chars">请输入至少三个字符以搜索地点。</string>
+    <string name="lp_search_place_no_matches">找不到匹配的地点。请修改您的查询。</string>
+    <string name="wallpaper_default">默认壁纸</string>
+    <string name="wallpaper_gallery">从图库中选择</string>
+    <string name="wallpaper_none">空白壁纸</string>
+    <string name="wallpaper_threema">%s 默认壁纸</string>
+    <string name="message_id">消息编号</string>
+    <string name="mime_type">MIME类型</string>
+    <string name="password_does_not_comply">密码不符合管理员设置的准则。</string>
+    <string name="audio_mute_due_to_focus_loss">由于其他应用正在播放音频，目前音频已暂时静音</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="restore_data_backup_explain">请首先在 “个人资料” 界面中删除您的 ${app_name_short} ID 以恢复数据备份。\n\n当应用程序重启后，请选择 “从备份恢复” &gt; “其他恢复选项” &gt; “数据备份”，然后选择要恢复的数据备份文件。</string>
+    <string name="audio_focus_loss_complete">由于完全失去音频焦点，通话已断开。</string>
+    <string name="tap_for_picture_hold_for_video">点击拍摄图片，长按拍摄视频</string>
+    <string name="sending_media">正在发送媒体</string>
+    <string name="permission_record_video_audio_required">请允许使用麦克风以录制视频</string>
+    <string name="media_files">文件</string>
+    <string name="auto_download_limit_explain">大于%s的视频和文件将始终按需下载</string>
+    <string name="quoted_message_deleted">所引用的消息现时已不可用</string>
+    <string name="searching">搜索中…</string>
+    <string name="prefs_work_life_balance">请勿打扰</string>
+    <string name="prefs_title_working_days">工作日</string>
+    <string name="prefs_working_days_sum">选择工作日</string>
+    <string name="prefs_work_time_start">上班时间</string>
+    <string name="prefs_work_time_start_sum">设置上班时间</string>
+    <string name="prefs_work_time_end">下班时间</string>
+    <string name="prefs_work_time_end_sum">设置下班时间</string>
+    <string name="prefs_working_days_enable_title">非工作时间政策</string>
+    <string name="prefs_working_days_enable_sum">在工作时间以外禁用通知并拒绝通话</string>
+    <string name="work_life_dnd_active">非工作时间在线</string>
+    <string name="warning">警告</string>
+    <string name="password_remember_warning">请您记住在这里输入的内容！由于 %s 不会在服务器上保存任何密码，如果您忘记了 PIN 码或密码，我们无法帮助您找回密码。</string>
+    <string name="safe_backup_tap_to_restart">点击系统通知以重启应用程序。如果看不到通知，请向下滑动打开手机的通知栏。</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="send_to_support">发送给 ${company_name} 支持</string>
+    <string name="menu_legal">法律</string>
+    <string name="tooltip_work_hint">此联系人使用 Threema Work。</string>
+    <string name="video_camera_on">摄像头已启用</string>
+    <string name="video_camera_off">摄像头已禁用</string>
+    <string name="enable_picture_in_picture">启动画中画模式</string>
+    <string name="call_with">致电给 %s</string>
+    <string name="picture_in_picture_disabled_in_setting">在 %s 中禁用了画中画模式。请在系统设置中启用它。</string>
+    <string name="delete_everything">删除所有内容</string>
+    <string name="prefs_title_voip_video_enable">允许视频通话</string>
+    <string name="video_calls">视频通话</string>
+    <string name="prefs_videocall_profile">首选图片质量</string>
+    <string name="videocall_profile_auto">平衡（推荐）</string>
+    <string name="videocall_profile_low_bandwidth">低数据消耗</string>
+    <string name="videocall_profile_max_quality">最高品质</string>
+    <string name="unable_to_play_video">无法播放视频</string>
+    <string name="tooltip_voip_turn_on_camera">点击这里打开摄像头</string>
+    <string name="prefs_videocall_profile_explain">实际的图片质量取决于网络以及对方的设置</string>
+    <string name="permission_camera_videocall_required">请允许使用摄像头以进行视频通话。</string>
+    <string name="tooltip_voip_enable_speakerphone">点击这里打开免提电话</string>
+    <string name="ballot_open">开放投票</string>
+    <string name="ballot_window_hide">隐藏公开的投票</string>
+    <string name="ballot_window_show">显示公开的投票</string>
+    <string name="single_ballot_really_delete">移除这个投票</string>
+    <string name="single_ballot_really_delete_text">您确定要删除这个投票吗？你将无法恢复原来的票数。</string>
+    <string name="tooltip_voip_other_party_video_on">对方已建立视频通话，点击这里打开摄像头。</string>
+    <string name="tooltip_voip_other_party_video_disabled">对方使用的应用程序版本不支持或不允许进行视频通话。</string>
+    <string name="biometrics_not_enrolled">系统未注册任何生物识别信息</string>
+    <string name="biometrics_not_avilable">生物识别在此系统上不可用。</string>
+    <string name="biometrics_no_permission">缺少访问生物识别数据或硬件的权限</string>
+    <string name="verification_settings_desc">圆点是联系人的验证级别指标。</string>
+    <string name="verification_levels_title">验证级别</string>
+    <string name="work_verification_levels_title">贵组织中的联系人</string>
+    <string name="external_verification_levels_title">其他联系人</string>
+    <string name="switch_flash">切换闪光灯模式</string>
+    <string name="message_not_found">未找到消息</string>
+    <string name="insert_datetime">输入日期和时间</string>
+    <string name="prefs_sum_disable_smart_replies">禁止 Android 通知中的智能回复</string>
+    <string name="prefs_title_disable_smart_replies">禁用智能回复</string>
+    <string name="url_warning_body_alt">您要打开的链接的主机名有可疑。\n\n这可能是试图欺骗您打开一个假装成其他网站的虛假网页。\n\n您仍然要继续吗？</string>
+    <string name="read_on">继续阅读…</string>
+    <string name="forward_text">转发文字</string>
+    <string name="an_error_occurred_during_send">发送一个或多个消息时发生错误。</string>
+    <string name="state_processing">处理中</string>
+    <string name="passphrase_locked">密码被锁定</string>
+    <string name="selected_media">您的选择</string>
+    <string name="attach_gif">Gif</string>
+    <string name="attach_gallery">图库</string>
+    <string name="attach_picture">图片</string>
+    <string name="attach_video">视频</string>
+    <string name="attach_location">位置</string>
+    <string name="filter_by_album">按相册过滤</string>
+    <string name="media_date_taken">拍摄日期：%s</string>
+    <string name="media_date_added">添加日期：%s</string>
+    <string name="media_date_modified">修改日期：%s</string>
+    <string name="media_date_unknown">未知日期</string>
+    <string name="max_selectable_media_exceeded">一次最多只能发送%d个对象。</string>
+    <string name="error_unable_loading_media_thumb">错误。无法加载媒体缩略图</string>
+    <string name="select">选择</string>
+    <string name="filter_list">过滤列表</string>
+    <string name="hint_filter_list">输入过滤文字</string>
+    <string name="add">添加</string>
+    <string name="threema_message_from">来自%s的消息</string>
+    <string name="show_text">显示文字</string>
+    <string name="only_images_or_videos">只能选择图片或视频</string>
+    <string name="media_gallery_gifs">GIF</string>
+    <string name="no_media_found_global">在此设备上找不到媒体</string>
+    <string name="original_file_no_longer_avilable">原文件已无法访问，请重新发送消息。</string>
+    <string name="state_transcoding">正在转码中</string>
+    <string name="importing_files">正在导入文件</string>
+    <string name="tooltip_image_resolution_hint">点击这里调整图片分辨率。</string>
+    <string name="ballot_created_successfully">投票已成功创建。</string>
+    <string name="file_size">文件大小</string>
+    <string name="thirty_days_abbrev">30天</string>
+    <string name="show_in_chat">在会话中显示</string>
+    <string name="group_create_no_members">您确定要创建一个空白群组吗？</string>
+    <string name="notes">注意</string>
+    <string name="blur_faces">脸部模糊</string>
+    <string name="brush">笔刷</string>
+    <string name="pencil">铅笔</string>
+    <string name="highlighter">荧光笔</string>
+    <string name="error_detecting_faces">检测面部时出错</string>
+    <string name="no_faces_detected">未检测到面部</string>
+    <string name="smiley">笑脸</string>
+    <string name="blur">模糊</string>
+    <string name="face_blur_tooltip_title">人脸识别</string>
+    <string name="face_blur_tooltip_text">在图片中找出面孔，将脸部模糊或用笑脸覆盖。</string>
+    <string name="listened_to">已聆听</string>
+    <string name="transcoder_unsupported_audio_format">由于缺少系统支持，音频无法转码。</string>
+    <string name="transcoder_unknown_audio_error">发生未知的音频转码错误。</string>
+    <string name="video_size_explain">就算设置为未压缩，体积非常大的视频都有可能被压缩。</string>
+    <string name="status_create_notes">*在此会话中只有您一个人能访问*\n将此会话作为保存文本、媒体和文件的安全笔记本。</string>
+    <string name="status_create_notes_off">*在此会话中不再只有您一个人能访问*\n新消息将被发送到所有群组成员。</string>
+    <string name="note_group_howto">提示：如果您不添加任何群组成员，发送到这个群组的信息将保留在本地。这样能方便您安全地存储笔记、媒体和文件，或将文件转移到桌面。</string>
+    <string name="mark_unread">标记为未读</string>
+    <string name="mark_read_short">标记为已读</string>
+    <string name="unread">未读会话</string>
+    <string name="missing_app_licence">应用商店无法验证您的购买凭证。如果你使用 Google Play，请清除 Google Play 商店的应用程序数据并重启您的设备。</string>
+    <string name="set_backup_path">设置备份路径</string>
+    <string name="set_backup_path_intro">在下一个屏幕中，请选择保存数据备份的文件夹。</string>
+    <string name="discard_changes_title">放弃更改</string>
+    <string name="accept">接受</string>
+    <string name="tap_here_for_more">点击这里查看更多信息</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="another_connection_instructions"><![CDATA[服务器检测到相同的 ${app_name_short} ID 在两个或更多的设备上同时连接。<br><br>相同的 ${app_name_short} ID 不可以在多个设备上同时使用。新的消息只会发送到最新登录的设备上。<br><br>如果您要切换到新设备，请先在旧设备上卸载或禁用 %s，然后重启新设备。]]></string>
+    <string name="app_store_error_code">应用商店错误代码：%d</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="backup_restore_type"><![CDATA[您想恢复哪些备份数据？<br/><br/> <a href=%s>了解更多有关 ${app_name_short} 备份的消息</a>。]]></string>
+    <string name="data_backup_info">恢复所有内容，包括会话记录</string>
+    <string name="new_to_threema">第一次使用 %s？</string>
+    <string name="back_to_threema">返回到 %s？</string>
+    <string name="id_backup_info">仅恢复您的ID</string>
+    <string name="restore_your_id_contacts_and_groups">恢复您的ID、联系人和群组</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_safe_backup">${app_name_short} Safe 备份</string>
+    <string name="forgot_your_password"><![CDATA[<a href=%s>需要帮忙？</a>]]></string>
+    <string name="download_failed">下载失败。错误代码：%d</string>
+    <string name="edit_answer">编辑答案</string>
+    <string name="share_media">与其他应用分享…</string>
+    <string name="group_image">群组图标</string>
+    <string name="miui_battery_optimization">请禁用“电池优化”以使 %s 顺利运行。由于小米不允许第三方应用直接打开设置菜单，因此您必须手动打开手机的相关设置菜单。如果您在禁用电池优化方面需要帮助，请联系小米支持。</string>
+    <string name="forward_captions">包含描述</string>
+    <string name="importing_files_failed">无法导入备份文件，请确保内部存储有足够的可用空间。</string>
+    <string name="label_continue">继续</string>
+    <string name="select_date">选择日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="send_to">发送到%s</string>
+    <string name="receipts_override_choice_send">发送</string>
+    <string name="receipts_override_choice_dont_send">不要发送</string>
+    <string name="receipts_override_choice_default">默认（%s）</string>
+    <string name="unable_to_determine_recording_length">录音为空白或无法确定录音长度</string>
+    <string name="prefs_header_receipts">消息回执和输入状态</string>
+    <string name="prefs_title_reset_receipts">清除个别设置</string>
+    <string name="prefs_sum_reset_receipts">将特定联系人的已读回执和输入状态设置重置为默认值</string>
+    <string name="reset_successful">成功重置为默认值</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="no_threema_qr_info">这不是 ${app_name_short} 专用的二维码。 解码后的内容为：</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="qr_scanner_id_hint">您可以扫描联系人的二维码以验证其身份。如要显示二维码，请让您的联系人点击 ${app_name_short} 主屏幕左上角的头像。</string>
+    <string name="enable_storage_access_for_media">启用存储访问权限以查看设备上的图片和视频</string>
+    <string name="select_storage_access_for_media_is_granted">您已授予部分的照片和视频的访问权限。</string>
+    <string name="take_me_there">带我到…</string>
+    <string name="manage">管理</string>
+    <string name="custom">其他</string>
+    <string name="show_public_key">显示公钥</string>
+    <string name="public_key_for">%s的公钥</string>
+    <string name="copied">已复制</string>
+    <string name="no_votes_yet">到目前为止，还没有人投票。</string>
+    <string name="permission_contacts_sync_required">请允许系统访问您的联系人，以便同步联系人列表。</string>
+    <string name="not_voted_user_list">这些参与者没有投票：%s</string>
+    <string name="contact_update">更新联系人状态</string>
+    <string name="invalid_onprem_id">此ID(永久)不再存在，或者与您的ID不兼容。</string>
+    <string name="enable_unknown_sources">无法安装。请确保为 %s 启用了 “安装未知应用程序” 。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push">${app_name_short} Push</string>
+    <string name="threema_push_notification_text">点击了解更多。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push_notification_info_text_1">${app_name_short} Push 在后台持续运行，以通知您新收到的消息和来电。</string>
+    <string name="threema_push_notification_info_text_2">如果不能显示永久通知，此应用程序就不能在后台运行。通过显示永久通知，可以确保 ${app_name_short} Push 即使在您不主动使用此应用程序时也会保持运行。</string>
+    <string name="threema_push_notification_info_text_3">如果您仍然遇到延迟或丢失通知的问题，请调整您的系统设置，以确保应用程序可以在后台不受任何限制地运行，并禁用节电模式。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push_service_description">当 ${app_name_short} Push 运行时，显示永久通知</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_push_activated">${app_name_short} Push 现在已激活。</string>
+    <string name="add_shortcut_error">将快捷方式添加到主屏幕时发生错误</string>
+    <string name="web_link">链接</string>
+    <string name="link_copied">%s 已复制</string>
+    <string name="invalid_onprem_id_title">无法添加ID</string>
+    <string name="name_given">名字</string>
+    <string name="name_family">姓氏</string>
+    <string name="name_prefix">姓名前缀</string>
+    <string name="name_middle">中间名</string>
+    <string name="name_suffix">姓名后缀</string>
+    <string name="full_name">名称</string>
+    <string name="send_contact">发送联系人</string>
+    <string name="edit_send_contact_detail_icon">联系人的详细类型</string>
+    <string name="phoneTypeCustom">自定义</string>
+    <string name="phoneTypeHome">住宅</string>
+    <string name="phoneTypeMobile">手机</string>
+    <string name="phoneTypeWork">单位</string>
+    <string name="phoneTypePager">寻呼机</string>
+    <string name="phoneTypeOther">其他</string>
+    <string name="phoneTypeCar">车载电话</string>
+    <string name="phoneTypeIsdn">ISDN</string>
+    <string name="phoneTypeOtherFax">其他传真</string>
+    <string name="eventTypeCustom">自定义</string>
+    <string name="eventTypeBirthday">生日</string>
+    <string name="eventTypeAnniversary">周年纪念日</string>
+    <string name="eventTypeOther">其他</string>
+    <string name="emailTypeHome">个人</string>
+    <string name="emailTypeWork">工作</string>
+    <string name="emailTypeOther">其他</string>
+    <string name="postalTypeCustom">自定义</string>
+    <string name="postalTypeHome">住宅</string>
+    <string name="postalTypeWork">单位</string>
+    <string name="postalTypeOther">其他</string>
+    <string name="relationTypeCustom">自定义</string>
+    <string name="relationTypeChild">子女</string>
+    <string name="relationTypeFriend">朋友</string>
+    <string name="relationTypeParent">父母</string>
+    <string name="relationTypeSpouse">配偶</string>
+    <string name="contact_property_key">"钥匙"</string>
+    <string name="header_nickname_entry">"昵称"</string>
+    <string name="contact_picture_content_description">联系人头像</string>
+    <string name="prefs_title_use_system_ringtone">使用系统铃声</string>
+    <string name="organization_type">单位</string>
+    <string name="permission_bluetooth_connect_required">请启用 “附近设备” 权限以定位已连接的蓝牙耳机</string>
+    <string name="tooltip_multiple_recipients_title">一条消息同时发送到多个收件人</string>
+    <string name="tooltip_multiple_recipients_text">长按可将一条消息同时发送到多个收件人。</string>
+    <string name="synchronizing">同步中…</string>
+    <string name="forward_security">以完全正向保密发送消息</string>
+    <string name="forward_security_mode">完全正向保密</string>
+    <string name="forward_security_mode_none">没有</string>
+    <string name="clear_forward_security">重置对此联系人的 “完全正向保密” 状态</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="clear_forward_security_warning">仅在 ${company_name} 支持团队的指示下，才执行此操作。</string>
+    <string name="forward_security_cleared">与此联系人的完全正向保密会话已被清除</string>
+    <string name="message_without_forward_security">您收到一条没有完全正向保密的消息，您可以验证发件人是否主动禁用完美前向保密。</string>
+    <string name="forward_security_disabled">此会话已禁用完全正向保密功能。</string>
+    <string name="forward_security_established">跟对方聊天的消息现正受完全正向保密的保护。</string>
+    <string name="forward_security_established_rx">在此会话中的消息现正受完全正向保密的保护。</string>
+    <string name="forward_security_reset">这个之前已启用 “完全正向保密” 的会话，现被重置保密状态。如果对方更换了设备或重新安装此应用程序，就会重置保密状态。</string>
+    <string name="forward_security_reset_simple">与此联系人的完全正向保密会话已重置。</string>
+    <string name="forward_security_message_out_of_order">解密新收到的消息发生错误，无法解密。</string>
+    <string name="forward_security_notification_channel_name">完全正向保密警告</string>
+    <string name="forward_security_notification_rejected_title">消息发送失败</string>
+    <string name="forward_security_notification_rejected_text_contact">一条或多条消息无法发送到%1$s。</string>
+    <string name="forward_security_notification_rejected_text_group">一条或多条消息无法发送到 “%1$s”。</string>
+    <string name="forward_security_notification_rejected_text_generic">一条或多条消息无法发送。</string>
+    <string name="self_updater_installation_failed">下载更新失败。请手动从 <a href="https://shop.threema.ch/download">https://shop.threema.ch/download</a> 下载并安装更新。</string>
+    <string name="spam_first_contact">此会话来自一个未知联系人</string>
+    <string name="spam_report">举报垃圾消息</string>
+    <!-- ${company_name} is a placeholder for the name of the company that operates the app, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="spam_report_dialog_explain">如果继续，此联系人的ID、昵称与您的ID将发送到 ${company_name}。我们不会发送任何会话内容或个人数据，也不会通知该联系人有关举报为垃圾消息的事项。</string>
+    <string name="spam_report_dialog_block_checkbox">同时屏蔽此联系人并删除会话</string>
+    <string name="spam_report_dialog_title">举报%s</string>
+    <string name="spam_successfully_reported">该ID已被其他用户报告为发送垃圾消息。</string>
+    <string name="spam_error_reporting">举报垃圾消息时发生错误：%s</string>
+    <string name="spam_report_short">举报</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="wizard_incompatible_contact_sync_params">您可能设置了不兼容的 MDM 参数。如果用户限制设置为 DISALLOW_MODIFY_ACCOUNTS，${app_name_short} MDM 参数 th_contact_sync 则无法设置为 true。请联系您的设备管理员以获取帮助。</string>
+    <string name="messages_cannot_be_recovered">您将无法恢复消息。</string>
+    <string name="groups_left_or_dissolved">群组将被保留或解散，然后被删除。</string>
+    <string name="contact_deleted">联系人已删除</string>
+    <string name="last_added_contact">最后添加</string>
+    <string name="directory_explain_text">在公司目录中搜索任何尚未列在您的联系人列表中的员工。</string>
+    <string name="cannot_display_location">无法显示此位置。</string>
+    <string name="draw_reply">绘制回复图片</string>
+    <string name="drawing">绘画</string>
+    <string name="background_color">背景颜色</string>
+    <string name="send_video_muted">从视频中删除声音</string>
+    <string name="send_without_audio">移除音频</string>
+    <string name="edit_filename">编辑文件名</string>
+    <string name="unable_to_restore_identity_because">无法恢复ID。原因：%s</string>
+    <!-- ${app_name} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="share_with_app">分享到 ${app_name}</string>
+    <string name="read_phone_state_dialog_allow">授予权限</string>
+    <string name="read_phone_state_dialog_disallow">仍然继续</string>
+    <string name="read_phone_state_dialog_never_ask_again">下次不再提示</string>
+    <string name="read_phone_state_dialog_title">需要权限</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="read_phone_state_dialog_message">为防止 ${app_name_short} 通话中断一般通话，需要授予通话权限。 如果未授予此权限，当正在进行一般通话时，${app_name_short} 通话有来电也会同时响铃，阻碍一般通话。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="read_phone_state_short_message">如要检查正在进行的通话，请授予 ${app_name} 通话权限。</string>
+    <string name="prefs_title_read_phone_state">授予通话权限</string>
+    <string name="prefs_title_hibernation">未使用的应用设置</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_hibernation_api_32">为防止 ${app_name} 在长时间不使用后被系统暂停，请禁用系统设置中的 “撤销权限并释放空间” 。</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="prefs_summary_hibernation_api">为防止 ${app_name} 在长时间不使用后被系统暂停，请禁用系统设置中的 “暂停闲置应用的活动” 。</string>
+    <string name="unable_to_fetch_configuration">无法从配置服务器获取数据，请稍后再试。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="rogue_device_warning"><![CDATA[我们的服务器检测到有人试图从另一台设备登录现有的 ${app_name_short} ID，您最近是否在其他设备上登录过您的 ${app_name_short} ID？<br><br>如果有，就可以忽略此消息。<br><br>如果没有，您的私钥可能已经泄露。在创建新ID之前，请<a href="https://threema.com/faq/another_connection">按照我们的建议</a>保护您的设备和数据。]]></string>
+    <string name="fetch2_failure">与配置服务器同步失败。</string>
+    <string name="no_members_support_group_calls">此群组中没有成员可以接听群组通话</string>
+    <string name="group_calls">群组通话</string>
+    <string name="prefs_title_group_calls_enable">启用群组通话</string>
+    <string name="group_no_members">此群组不包含任何其他成员</string>
+    <string name="group_call">群组通话</string>
+    <string name="checking_compatibility">正在检查兼容性…</string>
+    <string name="group_call_mic_permission_rationale">如要进行群组通话，您必须在系统 “权限” 设置下允许 %s 访问麦克风权限。</string>
+    <string name="group_call_mic_permission_description">如要进行群组通话，您必须允许访问麦克风的权限，以便其他人可以听到您的声音。</string>
+    <string name="call_mic_permission_description">如要进行语音通话，您必须允许访问麦克风权限，以便其他人可以听到您的声音。</string>
+    <string name="group_call_camera_permission_rationale">为了让其他参与者看到您的照片，您必须在系统 “权限” 设置下允许 %s 访问相机权限。</string>
+    <string name="group_call_phone_permission_description">如要进行群组通话，您必须允许访问电话权限，来防止语音通话中断 ${app_name_short} 通话。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="call_phone_permission_description">如要进行 ${app_name_short} 通话，您必须允许访问电话权限，来防止语音通话中断 ${app_name_short} 通话。</string>
+    <string name="group_call_nearby_devices_permission_description">如要使用蓝牙耳机进行群组通话，您必须允许访问 “附近设备” 权限来检测蓝牙耳机。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="call_nearby_devices_permission_description">如要使用蓝牙耳机进行 ${app_name} 通话，您必须允许访问 “附近设备” 权限来检测蓝牙耳机。</string>
+    <string name="settings">设置</string>
+    <string name="leave">退出</string>
+    <string name="fs_key_mismatch">密钥不匹配</string>
+    <string name="tap_to_resend">点击重新发送</string>
+    <string name="group_calls_tooltip_title">群组通话</string>
+    <string name="group_calls_tooltip_text">点击这里可邀请所有群组成员加入通话。所有群组成员都会收到通知，并可以决定是否要加入通话。</string>
+    <string name="prefs_title_calls">加密通话</string>
+    <string name="prefs_sum_group_calls_vibration">选择是否在群组通话开始时进行振动</string>
+    <string name="forward_security_mode_4dh">完整保密</string>
+    <string name="forward_security_mode_2dh">单向保密</string>
+    <string name="forward_security_mode_all">完整</string>
+    <string name="forward_security_mode_partial">部分</string>
+    <string name="forward_security_explanation">完全正向保密（PFS）可以保护会话记录不被追溯解密，即使长期加密密钥已被盗用。\n\n如果双方的应用程序都支持完全正向保密的话，就可以启用此选项。</string>
+    <string name="group_call_inactivity_left">因为长时间不活动，群组通话自动退出</string>
+    <string name="missing_permission_external_storage">无法复制文件，请尝试以下步骤以解決问题：\n1. 打开系统设置。\n2. 前往 “应用程序”，然后点击右上角的三个点，选择 “特殊访问” 权限。\n3. 点击 “所有文件访问”。\n4. 点击右上角的三个点，选择“显示系统应用程序”。\n5. 点击 “外部存储” 并确保授予 “允许访问所有文件” 权限。\n6. 再次尝试恢复备份。</string>
+    <string name="forward_security_downgraded_status_message">因为对方使用的应用程序版本不支持 “完全正向保密” 功能，所以在此会话中已禁用 “完全正向保密” 。</string>
+    <string name="forward_security_illegal_session_status_message">这个之前已启用 “完全正向保密” 的会话，因无效而被重置保密状态。</string>
+    <string name="crop_image_title">裁剪图片</string>
+    <string name="scroll_to_bottom">回到底部</string>
+    <string name="scroll_to_top">回到顶部</string>
+    <string name="contact_sync_mdm_rationale">由于您的管理员为您的设备启用了联系人同步的功能，因此我们需要访问联系人的权限。</string>
+    <string name="welcome_back">欢迎回来！</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="id_restored_successfully">您的 ${app_name_short} ID 已成功恢復</string>
+    <string name="prefs_dynamic_colors">动态颜色</string>
+    <string name="prefs_dynamic_colors_sum">使用系统颜色</string>
+    <string name="apply_changes">应用更改</string>
+    <string name="prefs_threema_work_summary">您知道 Threema 也为企业提供专业的通信解决方案吗？点击这里了解更多关于 Threema Work 的信息</string>
+    <string name="notification_channel_voice_message_player">语音消息播放器</string>
+    <string name="voice_message_from">来自%s的语音消息</string>
+    <string name="vm_fg_service_not_allowed">语音消息播放错误</string>
+    <string name="vm_fg_service_not_allowed_explain">如果要播放语音消息，请先在手机通知栏点击播放按钮，否则就在会话界面中点击播放按钮。</string>
+    <string name="use_threema_without_this_permission">在没有启用此权限的情况下使用 %s</string>
+    <string name="grant_permission">授予权限</string>
+    <string name="grant_permission_settings">在设置中授予权限</string>
+    <string name="ignore_permission">下次不再提示</string>
+    <string name="permission_nearby_devices">附近设备</string>
+    <string name="permission_bluetooth">蓝牙</string>
+    <string name="permission_camera">相机</string>
+    <string name="permission_microphone">麦克风</string>
+    <string name="permission_read_phone_state">电话</string>
+    <string name="permission_enable_in_settings_rationale">请在设置中启用该权限。先选择 “权限”，然后点击允许 “%s”。</string>
+    <string name="group_name">群组名称</string>
+    <string name="star_message">为消息加星标</string>
+    <string name="starred_message">已加星标的消息</string>
+    <string name="starred">已加星标</string>
+    <string name="starred_messages">已加星标的消息</string>
+    <string name="sorting">排序</string>
+    <string name="sort_by">按…排序</string>
+    <string name="newest_first">最新到最旧</string>
+    <string name="oldest_first">最旧到最新</string>
+    <string name="no_starred_messages">未找到已加星标的消息。如要为消息加注星标，请先长按该消息，然后点击星星按钮。</string>
+    <string name="remove_all_stars">取消所有星标</string>
+    <string name="remove_star">取消星标</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="samsung_permission_problem_explain">由于 “外部存储” 权限被禁用，${app_name} 无法访问媒体文件。如要修复这个问题，请先在接下来的界面中允许 “外部存储” 权限，然后重启 %1$s。</string>
+    <string name="min_n_chars">至少%d个字符</string>
+    <string name="prefs_title_grant_bluetooth_permission">授予蓝牙权限</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_managed_password_confirm">您的 ${app_name_short} Safe 备份的管理密码已设置。\n\n您想使用此密码吗？ 如有疑问，请联系您的管理员。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="safe_managed_new_password_confirm">您的 ${app_name_short} Safe 备份新的管理密码已设置。\n\n您想用这个新的管理密码替换当前的密码吗？如有疑问，请联系您的管理员。</string>
+    <string name="real_not_now">现在不要</string>
+    <string name="add_contact_in">在…中添加联系人</string>
+    <string name="really_remove_all_stars">您确定要为所有消息取消星标吗？</string>
+    <string name="prefs_sum_storage_management">管理内存，同时删除消息或媒体</string>
+    <string name="delete_automatically">自动删除</string>
+    <string name="keep_messages">保留消息期限：</string>
+    <string name="clean_up_manually">手动清理</string>
+    <string name="forever">永远</string>
+    <string name="autodelete_explain">如果设置为 “永远” 以外的其他选项，已收到和已发送的消息将在已选定的时间后彻底删除，且不可恢复，这包含未阅读和未发送的消息。不过，私人收藏在备忘录 “一人群组” 内的消息、已加星标的消息不会被删除。自动删除功能会定期执行，不一定是在启用此功能后立即执行。</string>
+    <string name="autodelete_confirm">消息将在%s后自动删除。是否继续？</string>
+    <string name="autodelete_activated">自动删除已启用。</string>
+    <string name="autodelete_disabled">自动删除已禁用。</string>
+    <string name="set_by_administrator">数值已由管理员设置，不可更改。</string>
+    <string name="action_dissolve_group">解散群组</string>
+    <string name="really_dissolve_group">如果您只是解散群组，没有人可以再向此群组发送新消息，并且无法再对群组进行管理，而解散的群组仍然可以被克隆。</string>
+    <string name="status_orphaned_group">*此群组成为孤立群组*\n由于群组创建者已离开群组，管理员职位现在为空缺。其余成员应该克隆该群组（点击群组详细信息）以成为新的管理员。</string>
+    <string name="group_not_a_member_notice">由于您不再是这个群组的成员，因此您不能再参与这个群组的讨论。</string>
+    <string name="group_dissolved_notice">由于这个群组已解散，因此您不能再参与这个群组的讨论。</string>
+    <string name="md_linked_devices"> ${app_name_desktop} 2.0 桌面版（测试版）</string>
+    <string name="md_link_device">链接新设备</string>
+    <!-- ${app_name_desktop} is a placeholder for the desktop app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <!-- The part of this text that is surrounded by the square brackets will be clickable by the user and lead them to the download page for the desktop client -->
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. ${app_name_desktop} is a placeholder for the app's name and must NOT be translated -->
+    <string name="md_linked_devices_empty">在链接新设备前，请下载并打开 [${app_name_desktop} 桌面版] 的最新测试版。</string>
+    <string name="md_link_device_qr_scan_message">请扫描二维码</string>
+    <string name="directory_request_failed">目录请求失败，请再试一次。</string>
+    <string name="add_shortcut_exists">此目标的快捷方式已经存在。</string>
+    <string name="scan_qr_code">扫描二维码</string>
+    <!-- ${app_name_desktop} is a placeholder for the desktop app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="scan_qr_code_explain">在您要链接的设备上扫描 ${app_name_desktop} 桌面测试版中显示的二维码。</string>
+    <string name="connecting">连接中…</string>
+    <string name="trust_new_device">信任新设备</string>
+    <string name="trust_new_device_explain">请选择与新设备上显示的相同图像，以确认您信任新设备。</string>
+    <string name="trust_new_device_info">新设备将存储您的 %s 个人资料的独立副本，该设备将可以发送和接收消息。</string>
+    <string name="no_match_question">没有匹配项？</string>
+    <string name="sending_data">正在发送数据…</string>
+    <string name="continue_on_new_device">请在您的新设备上继续</string>
+    <string name="device_linked_successfully">设备链接成功</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="device_linked_successfully_explain">现在，您可以在你刚刚链接的设备上使用 ${app_name}（即使此设备已关机或无互联网连接）。</string>
+    <string name="resend_message_dialog_title">重新发送群组消息？</string>
+    <string name="resend_message_dialog_message">此消息无法发送给群组所有成员。重新发送消息到%1$s？</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="work_lost_credentials_help">忘记了您的凭证？请联系您的 ${app_name_short} 管理员。</string>
+    <string name="problemsolver_intro">某些系统配置问题可能会阻止 %s 正常运行，请按照以下步骤以解决问题。</string>
+    <string name="problemsolver_title">修复配置问题</string>
+    <string name="problemsolver_title_background">后台使用量受限制</string>
+    <string name="problemsolver_title_background_data">后台数据受限制</string>
+    <string name="problemsolver_title_notifications">禁用推送通知</string>
+    <string name="problemsolver_title_fullscreen_notifications">全屏通知被禁止</string>
+    <string name="problemsolver_explain_fullscreen_notifications">此应用被禁止显示全屏通知。当手机锁屏时，您可能会错过来电。如要解决问题，请为此应用启用 “允许全屏通知”。</string>
+    <string name="problemsolver_explain_notifications">此应用的通知已被完全禁用，您将无法及时收到新信息或新来电的通知，而此应用可能无法正常运行。如要解决问题，请为此应用启用 \"所有通知\"。</string>
+    <string name="problemsolver_explain_background_data">此应用在后台运行时无法使用移动数据。除非您主动打开此应用，否则您将不会收到新消息的通知。如要解决问题，请为此应用启用 “后台数据”。</string>
+    <string name="problemsolver_explain_background">此应用在后台运行受到限制，您将不会收到任何通知，并且许多功能将无法正常运行。如要解决问题，请先点击 “应用程序电池使用量” ，然后选择 “无限制”。</string>
+    <string name="problemsolver_info_text">上述某些系统设置选项的命名可能会因 Android 版本和设备制造商而有所不同。</string>
+    <string name="problemsolver_title_app_battery_usgae_optimized">应用程序电池使用量设置为 “优化”。</string>
+    <!-- ${app_name_short} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="problemsolver_explain_app_battery_usgae_optimized">此应用被禁止与服务器永久保持连接，以至 ${app_name_short} Push 无法正常运行。当此应用在后台运行时，您将不会收到新消息的通知。如要解决问题，请先点击 “应用程序电池使用量” ，然后选择 “无限制”。</string>
+    <string name="problemsolver_to_settings">前往设置</string>
+    <!-- Label on button to dismiss/hide a warning -->
+    <string name="problemsolver_dismiss">忽略</string>
+    <string name="prefs_advanced_options">高级选项</string>
+    <string name="push_service">推送服务</string>
+    <string name="edit_and_send">编辑并发送</string>
+    <string name="media_gallery_animated_webps">动画 WebP 文件</string>
+    <string name="unsupported_image_type">不支持的图像类型：%s</string>
+    <string name="application_setup_steps_failed">检查联系人状态需要有效的互联网连接。请确保您已连接到互联网，然后重试。</string>
+    <string name="add_contact_failed">添加联系人失败</string>
+    <string name="edit_message_not_supported_for_contact">由于对方使用的应用版本不支持编辑消息功能，因此无法编辑消息。</string>
+    <string name="edit_message_not_supported_for_all_group_members">以下群组成员将无法看到您对消息的编辑：%1$s</string>
+    <string name="edit_message_not_supported_for_any_group_members">由于有部分群组成员使用的应用版本不支持编辑消息功能，因此无法编辑消息。</string>
+    <string name="prefs_notification_settings">通知设置</string>
+    <string name="prefs_notification_settings_summary">在系统设置对话框中更改声音和振动</string>
+    <string name="new_messages">新消息</string>
+    <string name="new_group_messages">新的群组消息</string>
+    <string name="individual_notification_settings">单独通知设置</string>
+    <string name="delete_message_not_supported_for_all_group_members">此消息不会为以下群组成员删除：%1$s</string>
+    <string name="individual_notification_settings_warn">对每个已启用单独通知设置的聊天会话，都会创建一个通知频道。即使此应用程序锁定，会话名称也会在设备设置中显示。是否继续？</string>
+    <string name="incoming_calls">来电</string>
+    <string name="group_chats">群组会话</string>
+    <string name="edit_history_file_no_caption">无编辑记录</string>
+    <string name="device_linking_failed">设备链接失败</string>
+    <string name="device_linking_failed_explain">无法链接设备，请重试。\n原因：%s。</string>
+    <string name="qr_code_scan_error">扫描二维码时发生错误</string>
+    <string name="verification_failed">验证失败</string>
+    <string name="md_device_currently_active">当前在线</string>
+    <string name="md_device_last_active_at">最后上线时间：%s</string>
+    <plurals name="md_max_device_slots_reached_info">
+        <item quantity="other">已达到%d个设备的数量限制，请移除现有已链接设备以添加新设备。</item>
+    </plurals>
+    <string name="md_device_invalid_label">设备</string>
+    <string name="md_device_invalid_hint">无法获得信息</string>
+    <string name="device_linking_cancel_dialog_title">取消链接</string>
+    <string name="device_linking_cancel_dialog_message">链接还未完成。是否要取消链接？</string>
+    <string name="device_linking_cancel_dialog_cancel">取消链接</string>
+    <string name="device_linking_cancel_dialog_continue">继续</string>
+    <string name="md_drop_device_dialog_drop_button">移除设备</string>
+    <string name="md_drop_device_dialog_close_button">关闭</string>
+    <string name="md_drop_device_failed_dialog_title">移除已链接设备可能失败</string>
+    <string name="md_drop_device_failed_dialog_message">请检查您的互联网连接并重试。</string>
+    <string name="md_drop_device_failed_dialog_button_close">关闭</string>
+    <!-- accessibility -->
+    <string name="cd_ack_icon">您对这条消息表示 “同意”。</string>
+    <string name="cd_dec_icon">您对这条消息表示 “不同意”。</string>
+    <string name="cd_ack_dec_group_count">由%d个群组成员</string>
+    <string name="cd_edited">消息已编辑</string>
+    <string name="cd_created_at">创建于%s</string>
+    <string name="cd_edited_at">编辑于%s</string>
+    <string name="cd_index_in_edit_history">%d的编辑记录</string>
+    <string name="cd_message_details_container">消息详情</string>
+    <string name="cd_enable_formatting">启用格式化</string>
+    <string name="cd_message">消息</string>
+    <string name="reactions_on_this_message">所有心情表态</string>
+    <string name="select_emoji_content_description">在表情符号选择器内，选择要添加的表情符号</string>
+    <string name="group_emoji_reactions_partially_supported">部分用户可能正使用旧版本的应用程序，而看不到您的心情表态。</string>
+    <string name="tab_emoji_reactions_overview_content_description">%1$s心情表态为%2$s</string>
+    <string name="reaction_cannot_be_displayed">无法显示此心情表态，这是未知的表情符号。</string>
+    <string name="emoji_reactions_unavailable_title">添加心情表态失败</string>
+    <string name="emoji_reactions_unavailable_body">%1$s使用的应用程序版本尚不支持此功能。</string>
+    <string name="emoji_reactions_unavailable_group_body">由于所有群组成员使用的应用版本都不支持心情表态功能，因此无法对消息进行心情表态。</string>
+    <string name="emoji_reactions_cannot_remove_title">移除心情表态失败</string>
+    <string name="emoji_reactions_cannot_remove_body">虽然%1$s使用的应用版本尚不支持删除心情表态或发送多个心情表态，但您仍然可以选择 👍 或 👎 。</string>
+    <string name="emoji_reactions_cannot_remove_group_body">虽然所有群组成员使用的应用版本都不支持删除心情表态或发送多个心情表态，但您仍然可以选择 👍 或 👎 。</string>
+    <!-- Hint shown on message details screen, to let the user know how they can view a message's emoji reactions -->
+    <string name="emoji_reactions_message_details_hint">有人为此消息添加了心情表态。在会话內，长按任意表情符号气泡即可查看所有心情表态。</string>
+    <!-- Title shown in popup above emoji reaction buttons on a message, to hint to the user that they can long-press to view the details -->
+    <string name="emoji_reactions_popup_hint_title">心情表态</string>
+    <!-- Message shown in popup above emoji reaction buttons on a message, to hint to the user that they can long-press to view the details -->
+    <string name="emoji_reactions_popup_hint_text">有人为此消息添加了心情表态。在会话內，长按任意表情符号气泡即可查看所有心情表态。</string>
+    <string name="accessibility_device_linking_pfs_warning_icon">资讯</string>
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <string name="device_linking_pfs_warning_body">当您链接新设备时，将对所有联系人禁用完全正向保密。\n\n这是当前测试版的限制。如想知道更多其他的限制，请参阅[这条常见问题解答条目]。</string>
+    <string name="device_linking_pfs_warning_button_continue">链接新设备</string>
+    <string name="device_linking_pfs_warning_button_cancel">取消</string>
+    <!-- Title shown on a banner shown in the old Threema web sessions screen to point to the new multi device feature instead -->
+    <!-- ${app_name_desktop} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="threema_web_link_to_multi_device_feature_banner_title">新消息：推出 ${app_name_desktop} 2.0 桌面版（测试版）</string>
+    <!-- Body shown on a banner shown in the old Threema web sessions screen to point to the new multi device feature instead -->
+    <string name="threema_web_link_to_multi_device_feature_banner_body">点击这里使用支持多设备登录的新一代电脑版应用程序。</string>
+    <!-- Screen reader text on a cross icon button to close a hint banner -->
+    <string name="accessibility_dismiss_hint">关闭提示</string>
+    <string name="device_linking_error_generic_title">发送数据失败</string>
+    <string name="device_linking_error_generic_body">请重试链接设备。如果问题仍然存在，请联系我们的支持人员（“主菜单 &gt; 帮助”）。</string>
+    <string name="device_linking_error_generic_network_title">没有网络连接</string>
+    <string name="device_linking_error_generic_network_body">请重试链接设备。如果问题仍然存在，请联系我们的支持人员（“主菜单 &gt; 帮助”）。</string>
+    <string name="device_linking_error_unknown_qr_code_title">未知的二维码</string>
+    <!-- The part of this text that is surrounded by the square brackets will be clickable by the user and lead them to the download page for the desktop client -->
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <string name="device_linking_error_unknown_qr_code_body">这似乎不是 ${app_name_desktop} 2.0 桌面版（测试版）的二维码。请先从 [我们的网站] 下载桌面版应用程序的最新测试版，之后用手机扫描桌面版应用程序上显示的二维码。</string>
+    <string name="device_linking_error_web_qr_code_title">没有正确的二维码</string>
+    <!-- The part of this text that is surrounded by the square brackets will be clickable by the user and lead them to the download page for the desktop client -->
+    <!-- The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <string name="device_linking_error_web_qr_code_body">此二维码属于 ${app_name_short} 的网页客户端。\n请先从 [我们的网站] 下载 ${app_name_desktop} 2.0 桌面版（测试版）的最新测试版，之后用手机扫描桌面版应用程序上显示的二维码。</string>
+    <string name="device_linking_error_old_rendezvous_version_title">不兼容版本</string>
+    <!-- ${app_name} is a placeholder for the app's name, e.g. "Threema". It must be left as-is and not translated. -->
+    <string name="device_linking_error_old_rendezvous_version_body">请在两台设备上安装最新版本的 ${app_name}。</string>
+    <string name="device_linking_error_emoji_mismatch_title">图片与新设备不匹配？</string>
+    <string name="device_linking_error_emoji_mismatch_body">连接设备时似乎存在问题。请在新设备上重新启动此应用程序，然后重试。</string>
+    <string name="device_linking_error_unexpected_title">发生意外错误</string>
+    <string name="device_linking_error_unexpected_body">请重试链接设备。如果问题仍然存在，请联系我们的支持人员（“主菜单 &gt; 帮助”）。</string>
+    <string name="device_linking_error_invalid_contact_title">无效联系人</string>
+    <!-- Error message when linking of a new device failed due to an invalid contact. %1$s will be replaced with the threema identity of the affected contact. -->
+    <string name="device_linking_error_invalid_contact_body">由于在此设备上存储的身份为 %1$s 的联系人信息不正确，导致无法链接到新设备。请联系我们的支持团队以解决问题（“主菜单 &gt; 帮助”）。</string>
+    <string name="device_linking_error_screen_close">关闭</string>
+    <string name="work_directory_title">公司目录</string>
+    <!-- Instruction text for the user directory search -->
+    <string name="work_directory_search">在公司目录中搜索</string>
+    <!-- Prompt to the user shown in the work directory search. ${app_name_short} is a placeholder for the app's name, it must be kept as-is, not translated. -->
+    <string name="work_directory_empty_view_text">请输入至少3个字符，以便在贵公司的 ${app_name_short} 用户目录中搜索。</string>
+    <!-- Message that is shown when the user wants to share an invalid file. -->
+    <string name="invalid_file_cannot_be_shared">此文件为无效，无法分享</string>
+    <!-- Status of a contact (only relevant for Work), e.g. as shown on their profile. Indicating that the person is currently available, i.e., not busy and not out-of-office -->
+    <string name="contact_availability_status_available">在线</string>
+    <!-- Status of a contact (only relevant for Work), e.g. as shown on their profile, indicating that the person is currently not available, i.e., busy or out-of-office -->
+    <string name="contact_availability_status_unavailable">离线</string>
+    <!-- Error message (only relevant for OnPrem) if the preset server url is different from the one provided by mdm. -->
+    <string name="error_preset_onprem_url_mismatch_mdm">您所提供的服务器网址为无效，请联系您的管理员以获取帮助。</string>
+    <!-- Error message (only relevant for OnPrem) if the preset server url is different from the one provided by the activation link. -->
+    <string name="error_preset_onprem_url_mismatch_intent">激活链接为无效，请联系您的管理员以获取帮助。</string>
+    <string name="work_intro_screen_work_title">为企业提供高度安全的通信</string>
+    <string name="work_intro_screen_work_subtitle">Threema Work 是专为企业设计的加密通信解决方案 — 端到端加密、符合欧盟通用数据保护条例 (GDPR) 标准，应用程序在瑞士开发。</string>
+    <string name="work_intro_screen_work_sign_in_button_label">立即登录</string>
+    <string name="work_intro_screen_work_learn_more_hint">还没使用 Threema Work？</string>
+    <string name="work_intro_screen_work_learn_more_button_label">了解更多</string>
+    <string name="work_intro_screen_work_use_private_hint">如果您想使用 Threema 作私人用途，我们推荐您使用 Threema Private 应用程序。</string>
+    <string name="work_intro_screen_work_download_private_button_label">立刻下载</string>
+    <string name="work_intro_screen_onprem_title">最高安全级别的通信</string>
+    <string name="work_intro_screen_onprem_subtitle">Threema OnPrem 是专为企业、政府机构及军事组织设计的自托管通信解决方案 — 可完全保护数据主权、加密数据传输，并满足安全敏感环境的高要求。</string>
+    <string name="work_intro_screen_onprem_sign_in_button_label">立即登录</string>
+    <string name="work_intro_screen_onprem_learn_more_hint">还没使用 Threema OnPrem？</string>
+    <string name="work_intro_screen_onprem_learn_more_button_label">了解更多</string>
+    <string name="work_intro_screen_onprem_use_private_hint">如果您想使用 Threema 作私人用途，我们推荐您使用 Threema Private 应用程序。</string>
+    <string name="work_intro_screen_onprem_download_private_button_label">立刻下载</string>
+    <!-- Message shown fullscreen when the app is opened, to inform the user that their access has been blocked by an admin. Only used for OnPrem builds. -->
+    <string name="remote_secrets_blocked_by_admin">您的管理员已阻止访问此应用程序。\n\n请联系您的管理员以获取更多信息。</string>
+    <!-- Message shown fullscreen when the app is opened, to inform the user that the DualLock (a.k.a. "Remote Secret") needed to unlock the app could not be fetched due to a network issue. Shown above a "Retry" button. Only used for OnPrem builds. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secrets_failed_to_fetch">无法获取 ${remote_secret} 令牌，请检查您的互联网连接并重试。</string>
+    <!-- Shown on loading spinner after app is started while DualLock (a.k.a. "Remote Secret") is fetched from the server to unlock the app. Only used for OnPrem builds. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="fetching_remote_secret">获取 ${remote_secret} 令牌</string>
+    <!-- Shown as the title of an info dialog when DualLock (a.k.a. "Remote Secret") has been activated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_activated_notification_title">${remote_secret} 已启用</string>
+    <!-- Shown as the content of an info dialog when DualLock (a.k.a. "Remote Secret") has been activated. The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <string name="remote_secret_activated_dialog_content">如果您丢失设备，此功能可让管理员本锁定应用程序，阻止未经授权的人员设法解锁您的设备，您的聊天内容仍保持加密状态。\n[了解更多]</string>
+    <!-- Shown as the title of an info dialog when DualLock (a.k.a. "Remote Secret") has been deactivated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_deactivated_notification_title">${remote_secret} 已停用</string>
+    <!-- Shown as the content of an info dialog when DualLock (a.k.a. "Remote Secret") has been deactivated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. The text in [square brackets] must be translated, and the brackets must be kept around the translation. -->
+    <string name="remote_secret_deactivated_dialog_content">您的管理员已停用 ${remote_secret}。关于 ${remote_secret} 的更多信息，请参阅这条[常见问题解答条目]。</string>
+    <!-- Shown on loading indicator while the DualLock (a.k.a. "Remote Secret") feature is being activated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_activating">正在启用 ${remote_secret}</string>
+    <!-- Error message shown fullscreen when activating the DualLock (a.k.a. "Remote Secret") feature failed. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_activating_failed">启用 ${remote_secret} 失败，请检查您的互联网连接并重试。</string>
+    <!-- Shown on loading indicator while the DualLock (a.k.a. "Remote Secret") feature is being deactivated. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_deactivating">正在停用 ${remote_secret}</string>
+    <!-- Error message shown fullscreen when deactivating the DualLock (a.k.a. "Remote Secret") feature failed. ${remote_secret} is a placeholder for a feature name, e.g. "DualLock". It must be left as-is and not translated. -->
+    <string name="remote_secret_deactivating_failed">停用 ${remote_secret} 失败，请检查您的互联网连接并重试。</string>
+    <plurals name="contacts_counter_label">
+        <item quantity="other">%d个联系人</item>
+    </plurals>
+    <plurals name="really_delete_thread_message">
+        <item quantity="other">您是否确定要删除 ％d 个会话？</item>
+    </plurals>
+    <plurals name="sending_message_failed">
+        <item quantity="other">无法发送%1$d 条消息</item>
+    </plurals>
+    <plurals name="selection_counter_label">
+        <item quantity="other">已选择%d张图片</item>
+    </plurals>
+    <plurals name="message_copied">
+        <item quantity="other">消息已复制</item>
+    </plurals>
+    <plurals name="new_messages">
+        <item quantity="other">%d条新消息</item>
+    </plurals>
+    <plurals name="unread_messages">
+        <item quantity="other">%d条未读消息</item>
+    </plurals>
+    <plurals name="file_saved">
+        <item quantity="other">%d个文件已成功保存。</item>
+    </plurals>
+    <plurals name="saving_media">
+        <item quantity="other">正在保存媒体</item>
+    </plurals>
+    <plurals name="ballot_really_delete">
+        <item quantity="other">移除投票</item>
+    </plurals>
+    <plurals name="ballot_really_delete_text">
+        <item quantity="other">您确定要删除%1$d个投票吗？你将无法恢复原来的票数。</item>
+    </plurals>
+    <plurals name="media_files_deleted">
+        <item quantity="other">%d个媒体文件已删除</item>
+    </plurals>
+    <plurals name="message_deleted">
+        <item quantity="other">已删除%d条消息</item>
+    </plurals>
+    <plurals name="notifications_for_x_hours">
+        <item quantity="other">%d小时</item>
+    </plurals>
+    <plurals name="really_delete_contacts_message">
+        <item quantity="other">您确定要删除%1$d个联系人和所有关联的消息吗？</item>
+    </plurals>
+    <plurals name="some_contacts_not_deleted">
+        <item quantity="other">无法删除%d个联系人，因为他(们)仍然是群组成员之一。</item>
+    </plurals>
+    <plurals name="message_archived">
+        <item quantity="other">已归档%d个会话</item>
+    </plurals>
+    <plurals name="new_messages_in_chats">
+        <item quantity="other">%2$d个会话中有%1$d条新消息</item>
+    </plurals>
+    <plurals name="webclient_running_sessions">
+        <item quantity="other">%d个会话正在运行</item>
+    </plurals>
+    <plurals name="chat_deleted">
+        <item quantity="other">已删除%d个会话</item>
+    </plurals>
+    <plurals name="num_archived_chats">
+        <item quantity="other">%d个已归档会话</item>
+    </plurals>
+    <plurals name="forward_security_messages_skipped">
+        <item quantity="other">自上一条消息以来，已丢失%d条消息。</item>
+    </plurals>
+    <plurals name="delete_messages">
+        <item quantity="other">删除这条消息？
+删除%d条消息？</item>
+    </plurals>
+    <plurals name="number_of_group_members">
+        <item quantity="other">%d个群组成员</item>
+    </plurals>
+</resources>

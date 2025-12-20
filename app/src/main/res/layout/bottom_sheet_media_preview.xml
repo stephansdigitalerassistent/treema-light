@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/preview_bottom_sheet"
+    style="@style/Threema.Preview.BottomSheetStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:clipToPadding="false"
+    android:elevation="2dp"
+    android:focusable="true"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:behavior_saveFlags="all"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:id="@+id/preview_drag_handle"
+        style="@style/Threema.BottomSheet.DragHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toTopOf="@+id/filename_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/md_theme_dark_onSurface" />
+
+    <TextView
+        android:id="@+id/filename_view"
+        style="@style/Threema.TextAppearance.BodyMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/grid_unit_x2"
+        android:layout_marginTop="@dimen/grid_unit_x1"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:textColor="@color/md_theme_dark_onSurface"
+        app:layout_constraintBottom_toTopOf="@+id/date_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/preview_drag_handle"
+        tools:text="filename.jpg" />
+
+    <TextView
+        android:id="@+id/date_view"
+        style="@style/Threema.TextAppearance.BodyMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/grid_unit_x2"
+        android:layout_marginTop="@dimen/grid_unit_x1"
+        android:layout_marginBottom="@dimen/grid_unit_x2"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:textColor="@color/md_theme_dark_onSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filename_view"
+        tools:text="Date taken: never" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

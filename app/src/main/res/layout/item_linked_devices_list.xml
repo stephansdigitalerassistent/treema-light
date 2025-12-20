@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/grid_unit_x2"
+    android:layout_marginVertical="@dimen/grid_unit_x0_5"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="?attr/colorSurface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/platformIconIv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/grid_unit_x2"
+            android:importantForAccessibility="no"
+            app:tint="?attr/colorOnSurface"
+            tools:src="@drawable/ic_platform_desktop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/grid_unit_x2"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/grid_unit_x1_5">
+
+            <TextView
+                android:id="@+id/firstLineTv"
+                style="@style/Threema.TextAppearance.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                tools:text="Threema Beta for Desktop" />
+
+            <TextView
+                android:id="@+id/secondLineTv"
+                style="@style/Threema.TextAppearance.BodySmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_unit_x0_5"
+                android:ellipsize="end"
+                tools:text="2.0-beta44 - Electron 30 on macOS" />
+
+            <TextView
+                android:id="@+id/thirdLineTv"
+                style="@style/Threema.TextAppearance.BodySmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_unit_x0_5"
+                android:ellipsize="end"
+                tools:text="Connected since christmas" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

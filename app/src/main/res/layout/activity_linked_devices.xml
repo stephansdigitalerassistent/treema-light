@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    tools:context=".multidevice.LinkedDevicesActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                tools:navigationIcon="?attr/homeAsUpIndicator"
+                tools:title="Threema 2.0 for Desktop (Beta)" />
+
+            <include layout="@layout/connection_indicator" />
+
+        </FrameLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/device_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/devices_list_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ch.threema.app.ui.EmptyRecyclerView
+                android:id="@+id/devices_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="@dimen/grid_unit_x1_5"
+                android:paddingBottom="@dimen/grid_unit_x10"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_linked_devices_list" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/empty_text_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/grid_unit_x10"
+            android:paddingBottom="@dimen/grid_unit_x10"
+            android:visibility="gone"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:id="@+id/empty_text"
+                style="@style/Threema.TextAppearance.BodyLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/grid_unit_x3"
+                android:alpha="0.8"
+                android:clickable="true"
+                android:drawablePadding="24dp"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:text="@string/md_linked_devices_empty"
+                android:textColor="?attr/colorOnBackground"
+                app:drawableTint="?attr/colorOnBackground"
+                app:drawableTopCompat="@drawable/ic_multi_device_rounded_128dp" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/link_device_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/grid_unit_x2"
+        android:contentDescription="@string/md_link_device"
+        android:text="@string/md_link_device"
+        android:tint="@android:color/white"
+        android:visibility="visible"
+        app:icon="@drawable/ic_qr_code_scanner_rounded" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

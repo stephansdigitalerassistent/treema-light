@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ no avatar
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/msg_list_item_status"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/message_block"
+        style="@style/Threema.CardView.Bubble.Status">
+
+        <ch.threema.app.emojis.EmojiConversationTextView
+            android:id="@+id/text_view"
+            style="@style/Threema.Bubble.Text.Body.Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alpha="0.6"
+            android:autoLink="none"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:maxLines="6"
+            tools:text="@tools:sample/lorem/random" />
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

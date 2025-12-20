@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+
+    <!-- BRAND -->
+    <!-- Changes here must also be made to every BrandColor.kt file for Compose -->
+    <color name="brand_50">#ECFDF4</color>
+    <color name="brand_100">#D9FAE9</color>
+    <color name="brand_200">#9CF2C6</color>
+    <color name="brand_300">#7DEEB5</color>
+    <color name="brand_400">#5FEAA3</color>
+    <color name="brand_500">#40E692</color>
+    <color name="brand_600">#36D588</color>
+    <color name="brand_700">#2CC47E</color>
+    <color name="brand_800">#0B734E</color>
+    <color name="brand_900">#00412A</color>
+
+    <!-- Changes here must also be made to BrandGreyColors.kt for Compose -->
+    <color name="brand_grey_50">#F4F4F3</color>
+    <color name="brand_grey_100">#E8E8E7</color>
+    <color name="brand_grey_200">#D0D0D0</color>
+    <color name="brand_grey_300">#B9B9B8</color>
+    <color name="brand_grey_400">#8A8A89</color>
+    <color name="brand_grey_500">#737371</color>
+    <color name="brand_grey_600">#5B5B5A</color>
+    <color name="brand_grey_700">#444442</color>
+    <color name="brand_grey_800">#2C2C2B</color>
+    <color name="brand_grey_900">#151513</color>
+
+    <color name="bubble_thumbnail_placeholder_tint">#eeeeee</color>
+    <color name="bubble_thumbnail_placeholder_background">#fcfcfc</color>
+
+    <color name="file_picker_divider_color">#1f000000</color>
+
+    <color name="voice_recorder_counter_background">@color/mention_background</color>
+
+    <color name="ballot_detail_highlight_text_color">#88000000</color>
+    <color name="ballot_detail_highlight_bg_color">#ffcccccc</color>
+
+    <color name="text_color_openNotice">@color/text_color_open_ballots</color>
+
+    <color name="verification_work">#0096ff</color>
+
+    <!-- Fixed color from the work brand color palette. Used to display components in the work
+    color outside of work the apps (e.g.: Referral banner) -->
+    <color name="work_primary_fixed">#002E63</color> <!-- work-800 -->
+    <color name="work_onPrimary_fixed">#FFFFFF</color>
+
+    <!-- emoji picker color -->
+    <color name="emoji_picker_background_top">#e4e7e9</color>
+    <color name="emoji_picker_background_main">#f3f4f8</color>
+    <color name="emoji_picker_divider">#f6f7f8</color>
+    <color name="emoji_picker_top_divider">#eff1f2</color>
+    <color name="emoji_picker_hint">#d3d3d3</color>
+    <color name="emoji_search_background">@android:color/white</color>
+    <color name="emoji_search_stroke">#20000000</color>
+    <!-- emoji picker color dark version -->
+    <color name="emoji_picker_background_top_dark">@color/dark_surface</color>
+    <color name="emoji_picker_background_main_dark">#1F1F1F</color>
+    <color name="emoji_picker_divider_dark">#303030</color>
+    <color name="emoji_picker_top_divider_dark">#404040</color>
+    <color name="emoji_picker_hint_dark">#707070</color>
+    <color name="emoji_search_background_dark">#333333</color>
+    <color name="emoji_search_stroke_dark">#33000000</color>
+
+    <!-- solid colors of selected list item background -->
+    <color name="list_item_background_checked_light">#ffd9d9d9</color>
+    <color name="list_item_background_checked">#40999999</color>
+
+    <!-- Media attacher -->
+    <color name="transparent_activity_overlay">#4C000000</color>
+    <color name="transparent_activity_overlay_darker">#80000000</color>
+    <color name="mime_type_marker_background">#55000000</color>
+    <color name="attach_button_background">#FFF1F1F1</color>
+    <color name="preview_navigation_area_bg">#44000000</color>
+    <color name="settings_multipane_selection_bg">#1a000000</color>
+
+    <!-- mentions -->
+    <color name="mention_background">@color/material_grey_300</color>
+    <color name="mention_background_inverted">@color/material_grey_500</color>
+    <color name="mention_text_color">@color/md_theme_light_onBackground</color>
+    <color name="mention_text_color_inverted">@color/md_theme_light_background</color>
+
+    <!-- contact availability status -->
+    <color name="availability_status_available">@color/material_green</color>
+    <color name="availability_status_unavailable">@color/material_red</color>
+
+    <!-- others -->
+    <color name="text_color_open_ballots">#656565</color>
+    <color name="markup_marker_color">#FFD3D3D3</color>
+    <color name="background_dim">#77ffffff</color>
+    <color name="qrscanner_masking_color">#50000000</color>
+    <color name="mediaviewer_caption_background_color">#77000000</color>
+    <color name="media_attach_button_background_default">#FFEEEEEE</color>
+    <color name="ic_launcher_background">#000000</color>
+
+    <!--**********************************************************************************************************-->
+    <!-- theme-agnostic colors -->
+
+    <!-- wizard -->
+    <color name="wizard_alpha_background">#33ffffff</color>
+
+    <!-- wizard step pager display -->
+    <color name="step_pager_previous_tab_color">#4433b5e5</color>
+    <color name="step_pager_selected_tab_color">@color/material_blue</color>
+    <color name="step_pager_next_tab_color">#10000000</color>
+
+    <!-- color for splash screen upon app startup -->
+    <color name="splash_background">#FF303030</color>
+
+    <color name="message_list_pin_color">@color/material_amber</color>
+    <color name="message_list_archive_color">@color/material_blue</color>
+
+    <!-- Location Picker -->
+    <color name="lp_marker_icon">#ffffffff</color>
+
+    <!-- others -->
+    <color name="item_controller_color">#FFAAAAAA</color>
+    <color name="imagepaint_overlay_select_color">#FFFFFFFF</color>
+    <color name="gallery_background">#ff1a1a1a</color>
+    <color name="status_bar_detail">#3000</color>
+
+    <!-- dark colors reference -->
+    <color name="dark_surface">#323232</color>
+    <color name="dark_background_dim">#77000000</color>
+
+    <!-- emoji reactions -->
+    <color name="emojireactions_background">@color/material_grey_250</color>
+    <color name="emojireactions_background_checked">@color/material_grey_350</color>
+    <color name="emojireactions_background_pressed">@color/material_grey_500</color>
+    <color name="emojireactions_popup_background_selected">
+        @color/emojireactions_background_checked
+    </color>
+
+    <!-- EmptyView -->
+    <color name="empty_view_icon_tint">@color/brand_grey_100</color>
+</resources>

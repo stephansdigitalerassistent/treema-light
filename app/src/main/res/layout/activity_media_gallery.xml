@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@+id/item_list">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                tools:navigationIcon="?attr/homeAsUpIndicator"
+                tools:title="Conversation Name" />
+
+            <include layout="@layout/connection_indicator" />
+
+        </FrameLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/colorBackground"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_content_types"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:paddingHorizontal="@dimen/grid_unit_x2"
+            android:paddingVertical="@dimen/grid_unit_x1"
+            app:chipSpacingHorizontal="@dimen/grid_unit_x0_5"
+            app:chipSpacingVertical="0dp"
+            app:lineSpacing="0dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/content_type_image"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/media_gallery_pictures"
+                tools:checked="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/content_type_gif"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/media_gallery_gifs"
+                tools:checked="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/content_type_video"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/media_gallery_videos" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/content_type_voice_message"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/media_gallery_audio" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/content_type_audio"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/audio_placeholder" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/content_type_file"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/media_gallery_files"
+                tools:checked="true" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <ch.threema.app.ui.EmptyRecyclerView
+            android:id="@+id/item_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/grid_spacing"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_media_gallery" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

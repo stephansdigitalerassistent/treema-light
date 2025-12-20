@@ -1,0 +1,109 @@
+/*  _____ _
+ * |_   _| |_  _ _ ___ ___ _ __  __ _
+ *   | | | ' \| '_/ -_) -_) '  \/ _` |_
+ *   |_| |_||_|_| \___\___|_|_|_\__,_(_)
+ *
+ * Threema for Android
+ * Copyright (c) 2017-2025 Threema GmbH
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package ch.threema.app.utils;
+
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.PowerManager;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import androidx.annotation.AnyThread;
+import androidx.annotation.NonNull;
+import ch.threema.app.BuildConfig;
+
+import static ch.threema.android.ThreadUtilKt.isMainThread;
+
+public class RuntimeUtil {
+    public static Handler handler = new Handler(Looper.getMainLooper());
+
+    private static final ExecutorService workerExecutor = Executors.newCachedThreadPool();
+
+    /**
+     * Run the specified runnable on the UI thread.
+     */
+    public static void runOnUiThread(final Runnable runnable) {
+        if (isMainThread()) {
+            if (runnable != null) {
+                runnable.run();
+            }
+        } else {
+            handler.post(runnable);
+        }
+    }
+
+    /**
+     * Run a {@link Runnable} in a background worker thread.
+     * <p>
+     * This method is backed by a {@link Executors#newCachedThreadPool()} that will create new threads
+     * if needed (no thread available).
+     * <p>
+     * Threads that have not been used for sixty seconds are terminated and removed from the cache.
+     */
+    @AnyThread
+    public static void runOnWorkerThread(@NonNull final Runnable runnable) {
+        workerExecutor.execute(runnable);
+    }
+
+    /**
+     * Run the provided runnable while holding a partial wakelock
+     *
+     * @param context  context
+     * @param timeout  wakelock timeout
+     * @param tag      wakelock tag
+     * @param runnable the runnable to run
+     */
+    public static void runInWakelock(@NonNull Context context, long timeout, @NonNull String tag, @NonNull final Runnable runnable) {
+        PowerManager powerManager = (PowerManager) context.getApplicationContext().getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = null;
+        try {
+            wakeLock = acquireWakeLock(powerManager, timeout, tag);
+            runnable.run();
+        } finally {
+            if (wakeLock != null && wakeLock.isHeld()) {
+                wakeLock.release();
+            }
+        }
+    }
+
+    private static PowerManager.WakeLock acquireWakeLock(PowerManager powerManager, long timeout, String tag) {
+        try {
+            PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, BuildConfig.APPLICATION_ID + ":" + tag);
+            wakeLock.acquire(timeout);
+            return wakeLock;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static class MainThreadExecutor implements Executor {
+        private final Handler handler = new Handler(Looper.getMainLooper());
+
+        @Override
+        public void execute(@NonNull Runnable runnable) {
+            handler.post(runnable);
+        }
+    }
+}

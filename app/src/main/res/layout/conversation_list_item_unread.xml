@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/msg_list_item_unread"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="0dp"
+    android:paddingBottom="@dimen/chat_bubble_container_padding_bottom">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/message_block"
+        style="@style/Threema.CardView.Bubble.FirstUnread"
+        app:contentPaddingBottom="6dp"
+        app:contentPaddingTop="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_keyboard_arrow_down_outline"
+                app:tint="?attr/colorOnSecondaryContainer" />
+
+            <TextView
+                android:id="@+id/text_view"
+                style="@style/Threema.Bubble.Text.Body.Status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:autoLink="none"
+                android:gravity="center_horizontal"
+                android:singleLine="true"
+                android:textAllCaps="true"
+                android:textColor="?attr/colorOnSecondaryContainer"
+                tools:text="3 ungelesene Nachrichten" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_keyboard_arrow_down_outline"
+                app:tint="?attr/colorOnSecondaryContainer" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>
