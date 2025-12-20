@@ -98,48 +98,52 @@ sonarqube {
 }
 
 afterEvaluate {
-    val bindingsDirectory = "../build/generated/source/libthreema"
+    if (!project.hasProperty("usePrebuiltRust")) {
+        val bindingsDirectory = "../build/generated/source/libthreema"
 
-    // Define the task to generate libthreema library (only used to generate bindings for it)
-    val generateLibthreema = tasks.register<Exec>("generateLibthreema") {
-        workingDir("${project.projectDir}/libthreema")
-        commandLine("cargo", "build", "-F", "uniffi", "-p", "libthreema", "--release", "--locked")
-    }
-
-    // Define the task to generate the uniffi bindings for libthreema
-    val uniffiBindings = tasks.register("generateUniFFIBindings") {
-        dependsOn(generateLibthreema)
-        doLast {
-            // It seems that the uniffi package generates a "*.so" file on linux and a "*.dylib" on mac
-            // while using the cargo build command from the gradle task above ("generateLibthreema").
-            val uniffiLibraryFilePathPrefix = "${project.projectDir}/libthreema/target/release/liblibthreema"
-            val uniffiLibraryFile = file("$uniffiLibraryFilePathPrefix.so")
-                .takeIf { it.exists() }
-                ?: file("$uniffiLibraryFilePathPrefix.dylib")
-            assert(uniffiLibraryFile.exists()) {
-                "Error: Missing pre-generated uniffy library file in libthreema/target/*/ directory.\n"
-            }
-
-            val processBuilder = ProcessBuilder(
-                "cargo",
-                "run",
-                "-p",
-                "uniffi-bindgen",
-                "generate",
-                "--library",
-                uniffiLibraryFile.path,
-                "--language",
-                "kotlin",
-                "--out-dir",
-                bindingsDirectory,
-                "--no-format",
-            )
-            processBuilder.directory(file("${project.projectDir}/libthreema"))
-            processBuilder.start().waitFor()
+        // Define the task to generate libthreema library (only used to generate bindings for it)
+        val generateLibthreema = tasks.register<Exec>("generateLibthreema") {
+            workingDir("${project.projectDir}/libthreema")
+            commandLine("cargo", "build", "-F", "uniffi", "-p", "libthreema", "--release", "--locked")
         }
-    }
 
-    tasks["compileKotlin"].dependsOn(uniffiBindings)
+        // Define the task to generate the uniffi bindings for libthreema
+        val uniffiBindings = tasks.register("generateUniFFIBindings") {
+            dependsOn(generateLibthreema)
+            doLast {
+                // It seems that the uniffi package generates a "*.so" file on linux and a "*.dylib" on mac
+                // while using the cargo build command from the gradle task above ("generateLibthreema").
+                val uniffiLibraryFilePathPrefix = "${project.projectDir}/libthreema/target/release/liblibthreema"
+                val uniffiLibraryFile = file("$uniffiLibraryFilePathPrefix.so")
+                    .takeIf { it.exists() }
+                    ?: file("$uniffiLibraryFilePathPrefix.dylib")
+                assert(uniffiLibraryFile.exists()) {
+                    "Error: Missing pre-generated uniffy library file in libthreema/target/*/ directory.\n"
+                }
+
+                val processBuilder = ProcessBuilder(
+                    "cargo",
+                    "run",
+                    "-p",
+                    "uniffi-bindgen",
+                    "generate",
+                    "--library",
+                    uniffiLibraryFile.path,
+                    "--language",
+                    "kotlin",
+                    "--out-dir",
+                    bindingsDirectory,
+                    "--no-format",
+                )
+                processBuilder.directory(file("${project.projectDir}/libthreema"))
+                processBuilder.start().waitFor()
+            }
+        }
+
+        tasks["compileKotlin"].dependsOn(uniffiBindings)
+    } else {
+        println("Using pre-built Kotlin bindings (skipping uniffi generation)")
+    }
 }
 
 publishing {

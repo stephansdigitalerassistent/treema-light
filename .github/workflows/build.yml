@@ -44,3 +44,31 @@ jobs:
       run: ./gradlew assembleStore_googleDebug --stacktrace
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+    - name: Upload Rust Native Libraries
+      uses: actions/upload-artifact@v4
+      with:
+        name: rust-native-libs
+        path: app/build/generated/source/libthreema/
+        if-no-files-found: warn
+
+    - name: Upload Kotlin Bindings
+      uses: actions/upload-artifact@v4
+      with:
+        name: kotlin-bindings
+        path: build/generated/source/libthreema/
+        if-no-files-found: warn
+
+    - name: Upload Protobuf Generated Files (app)
+      uses: actions/upload-artifact@v4
+      with:
+        name: protobuf-app
+        path: app/build/generated/source/protobuf/
+        if-no-files-found: warn
+
+    - name: Upload Protobuf Generated Files (domain)
+      uses: actions/upload-artifact@v4
+      with:
+        name: protobuf-domain
+        path: domain/build/generated/source/protobuf/
+        if-no-files-found: warn

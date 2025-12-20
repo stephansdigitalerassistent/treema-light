@@ -1009,27 +1009,38 @@ dependencies {
 // 'cargoBuild' task that builds native libraries that will be added to the apk. Note that the
 // kotlin bindings are created in the domain module. Building native libraries with rust-android
 // cannot be done in any other module than 'app'.
-cargo {
-    prebuiltToolchains = true
-    targetDirectory = "$projectDir/build/generated/source/libthreema"
-    module = "$projectDir/../domain/libthreema" // must contain Cargo.toml
-    libname = "libthreema" // must match the Cargo.toml's package name
-    profile = "release"
-    pythonCommand = "python3"
-    targets = listOf("x86_64", "arm64", "arm", "x86")
-    features {
-        defaultAnd(arrayOf("uniffi"))
+if (!project.hasProperty("usePrebuiltRust")) {
+    cargo {
+        prebuiltToolchains = true
+        targetDirectory = "$projectDir/build/generated/source/libthreema"
+        module = "$projectDir/../domain/libthreema" // must contain Cargo.toml
+        libname = "libthreema" // must match the Cargo.toml's package name
+        profile = "release"
+        pythonCommand = "python3"
+        targets = listOf("x86_64", "arm64", "arm", "x86")
+        features {
+            defaultAnd(arrayOf("uniffi"))
+        }
+        extraCargoBuildArguments = listOf("--lib", "--target-dir", "$projectDir/build/generated/source/libthreema", "--locked")
+        verbose = false
     }
-    extraCargoBuildArguments = listOf("--lib", "--target-dir", "$projectDir/build/generated/source/libthreema", "--locked")
-    verbose = false
-}
 
-afterEvaluate {
-    // The `cargoBuild` task isn't available until after evaluation.
-    android.applicationVariants.configureEach {
-        val variantName = name.replaceFirstChar { it.uppercase() }
-        // Set the dependency so that cargoBuild is executed before the native libs are merged
-        tasks["merge${variantName}NativeLibs"].dependsOn(tasks["cargoBuild"])
+    afterEvaluate {
+        // The `cargoBuild` task isn't available until after evaluation.
+        android.applicationVariants.configureEach {
+            val variantName = name.replaceFirstChar { it.uppercase() }
+            // Set the dependency so that cargoBuild is executed before the native libs are merged
+            tasks["merge${variantName}NativeLibs"].dependsOn(tasks["cargoBuild"])
+        }
+    }
+} else {
+    println("Using pre-built Rust artifacts (skipping cargo build)")
+    
+    // Create a dummy cargoBuild task to satisfy dependencies
+    tasks.register("cargoBuild") {
+        doLast {
+            println("Skipping Rust compilation - using pre-built artifacts")
+        }
     }
 }
 
