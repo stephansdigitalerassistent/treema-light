@@ -118,7 +118,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
                     // Get the message receiver for this contact
                     val receiver = contactService.createReceiver(contact)
                     if (receiver != null) {
-                        val recentMessages = messageService.getMessagesForReceiver(receiver, null)
+                        val recentMessages = messageService.getMessagesForReceiver(receiver)
                         recentMessages?.mapNotNull { it.toSimpleMessage(contact) }?.let {
                             allMessages.addAll(it)
                         }
