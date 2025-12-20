@@ -33,13 +33,21 @@ import java.io.File
 fun findKeystore(projectDir: File, name: String): KeystoreConfig? {
     val basePath = "${projectDir.absolutePath}/../../keystore"
     val storePath = "$basePath/$name.keystore"
-    val storeFile = File(storePath)
+    var storeFile = File(storePath)
+
+    // Fallback: Check for keystore inside the project root (sibling of app)
     if (!storeFile.isFile) {
-        return null
+        val internalPath = "${projectDir.absolutePath}/../keystore"
+        val internalStoreFile = File("$internalPath/$name.keystore")
+        if (internalStoreFile.isFile) {
+            storeFile = internalStoreFile
+        } else {
+            return null
+        }
     }
 
-    val propertiesPath = "$basePath/$name.properties"
-    val propertiesFile = File(propertiesPath)
+    // Try to load properties from the same directory where the store file was found
+    val propertiesFile = File(storeFile.parent, "$name.properties")
     val props = if (propertiesFile.isFile) {
         readPropertiesFile(propertiesFile)
     } else {
