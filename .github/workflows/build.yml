@@ -70,5 +70,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: protobuf-domain
-        path: domain/build/generated/source/protobuf/
+        path: domain/build/generated/source/proto/
         if-no-files-found: warn
