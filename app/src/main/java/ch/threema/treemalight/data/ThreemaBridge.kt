@@ -47,7 +47,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
      */
     fun getContacts(): Flow<List<Contact>> = flow {
         val contacts = withContext(Dispatchers.IO) {
-            contactService.all.map { it.toSimpleContact() }
+            contactService.getAll().map { it.toSimpleContact() }
         }
         emit(contacts)
     }
@@ -75,7 +75,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             val task = BasicAddOrUpdateContactBackgroundTask(
                 threemaId,
                 ContactModel.AcquaintanceLevel.DIRECT,
-                userService.identity, // Assuming property access for getIdentity()
+                userService.getIdentity(), // Explicit getter
                 apiConnector,
                 contactModelRepository,
                 AddContactRestrictionPolicy.CHECK,
@@ -113,7 +113,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             // Get messages from all 1:1 conversations
             val allMessages = mutableListOf<Message>()
             
-            contactService.all.forEach { contact ->
+            contactService.getAll().forEach { contact ->
                 try {
                     // Get the message receiver for this contact
                     val receiver = contactService.createReceiver(contact)
@@ -193,7 +193,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             name = getDisplayName() ?: identity ?: "Unknown",
             phoneNumber = "", // Could be fetched from linked contact
             isFavorite = true, // All contacts shown in simplified UI
-            avatarColor = this.getIdColor().colorIndex.toLong()
+            avatarColor = this.idColor.colorIndex.toLong()
         )
     }
 
