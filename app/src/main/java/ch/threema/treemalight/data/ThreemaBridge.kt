@@ -71,15 +71,20 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
                 return@withContext Result.success(existing.toSimpleContact())
             }
 
+            val myIdentity = userService.getIdentity()
+            if (myIdentity == null) {
+                return@withContext Result.failure(Exception("Local identity not available"))
+            }
+
             // Use Threema's background task to create contact
             val task = BasicAddOrUpdateContactBackgroundTask(
                 threemaId,
                 ContactModel.AcquaintanceLevel.DIRECT,
-                userService.getIdentity(), // Explicit getter
+                myIdentity,
                 apiConnector,
                 contactModelRepository,
                 AddContactRestrictionPolicy.CHECK,
-                context, // Using context passed to constructor
+                context,
                 null
             )
             
