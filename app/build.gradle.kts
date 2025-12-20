@@ -32,7 +32,9 @@ import utils.*
 plugins {
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.rust.android)
+    if (!project.hasProperty("usePrebuiltRust")) {
+        alias(libs.plugins.rust.android)
+    }
     id("com.android.application")
     id("kotlin-android")
     alias(libs.plugins.ksp)
@@ -78,7 +80,7 @@ android {
     //       make sure to adjust them in `scripts/Dockerfile` as well!
     compileSdk = 35
     buildToolsVersion = "35.0.0"
-    ndkVersion = "28.2.13676358"
+    // ndkVersion = "28.2.13676358"
 
     defaultConfig {
         // https://developer.android.com/training/testing/espresso/setup#analytics
@@ -543,6 +545,10 @@ android {
         getByName("main") {
             assets.srcDirs("assets")
             jniLibs.srcDirs("libs")
+            if (project.hasProperty("usePrebuiltRust")) {
+                // Add the prebuilt libs folder to jniLibs
+                jniLibs.srcDirs("build/generated/source/libthreema")
+            }
             res.srcDir("src/main/res-rendezvous")
             java.srcDir("./build/generated/source/protobuf/main/java")
             java.srcDir("./build/generated/source/protobuf/main/kotlin")
@@ -1009,27 +1015,31 @@ dependencies {
 // 'cargoBuild' task that builds native libraries that will be added to the apk. Note that the
 // kotlin bindings are created in the domain module. Building native libraries with rust-android
 // cannot be done in any other module than 'app'.
-cargo {
-    prebuiltToolchains = true
-    targetDirectory = "$projectDir/build/generated/source/libthreema"
-    module = "$projectDir/../domain/libthreema" // must contain Cargo.toml
-    libname = "libthreema" // must match the Cargo.toml's package name
-    profile = "release"
-    pythonCommand = "python3"
-    targets = listOf("x86_64", "arm64", "arm", "x86")
-    features {
-        defaultAnd(arrayOf("uniffi"))
+if (!project.hasProperty("usePrebuiltRust")) {
+    cargo {
+        prebuiltToolchains = true
+        targetDirectory = "$projectDir/build/generated/source/libthreema"
+        module = "$projectDir/../domain/libthreema" // must contain Cargo.toml
+        libname = "libthreema" // must match the Cargo.toml's package name
+        profile = "release"
+        pythonCommand = "python3"
+        targets = listOf("x86_64", "arm64", "arm", "x86")
+        features {
+            defaultAnd(arrayOf("uniffi"))
+        }
+        extraCargoBuildArguments = listOf("--lib", "--target-dir", "$projectDir/build/generated/source/libthreema", "--locked")
+        verbose = false
     }
-    extraCargoBuildArguments = listOf("--lib", "--target-dir", "$projectDir/build/generated/source/libthreema", "--locked")
-    verbose = false
 }
 
 afterEvaluate {
-    // The `cargoBuild` task isn't available until after evaluation.
-    android.applicationVariants.configureEach {
-        val variantName = name.replaceFirstChar { it.uppercase() }
-        // Set the dependency so that cargoBuild is executed before the native libs are merged
-        tasks["merge${variantName}NativeLibs"].dependsOn(tasks["cargoBuild"])
+    if (!project.hasProperty("usePrebuiltRust")) {
+        // The `cargoBuild` task isn't available until after evaluation.
+        android.applicationVariants.configureEach {
+            val variantName = name.replaceFirstChar { it.uppercase() }
+            // Set the dependency so that cargoBuild is executed before the native libs are merged
+            tasks["merge${variantName}NativeLibs"].dependsOn(tasks["cargoBuild"])
+        }
     }
 }
 
@@ -1070,13 +1080,17 @@ tasks.register<Exec>("compileProto") {
     group = "build"
     description = "generate class bindings from protobuf files in the 'protobuf' directory"
     workingDir(project.projectDir)
-    commandLine("./compile-proto.sh")
+    if (System.getProperty("os.name").lowercase().contains("windows")) {
+        commandLine("cmd", "/c", "compile-proto.bat")
+    } else {
+        commandLine("./compile-proto.sh")
+    }
 }
 project.tasks.preBuild.dependsOn("compileProto")
 
 tasks.withType<Test> {
     // Necessary to load the dynamic libthreema library in unit tests
-    systemProperty("jna.library.path", "${project.projectDir}/../domain/libthreema/target/release")
+    // systemProperty("jna.library.path", "${project.projectDir}/../domain/libthreema/target/release")
 }
 
 // Set up Gradle tasks to fetch screenshots on UI test failures
