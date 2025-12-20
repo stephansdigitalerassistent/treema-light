@@ -32,7 +32,7 @@ import utils.*
 plugins {
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.rust.android)
+    alias(libs.plugins.rust.android) apply false
     id("com.android.application")
     id("kotlin-android")
     alias(libs.plugins.ksp)
@@ -1013,30 +1013,56 @@ dependencies {
 // 'cargoBuild' task that builds native libraries that will be added to the apk. Note that the
 // kotlin bindings are created in the domain module. Building native libraries with rust-android
 // cannot be done in any other module than 'app'.
+// Configure Rust plugin conditionally
 if (!project.hasProperty("usePrebuiltRust")) {
-    cargo {
-        prebuiltToolchains = true
-        targetDirectory = "$projectDir/build/generated/source/libthreema"
-        module = "$projectDir/../domain/libthreema" // must contain Cargo.toml
-        libname = "libthreema" // must match the Cargo.toml's package name
-        profile = "release"
-        pythonCommand = "python3"
-        targets = listOf("x86_64", "arm64", "arm", "x86")
-        features {
-            defaultAnd(arrayOf("uniffi"))
+    apply(plugin = "org.mozilla.rust-android-gradle.rust-android")
+
+    // Configure 'cargo' extension dynamically to avoid import issues
+    extensions.configure("cargo") {
+        withGroovyBuilder {
+            "setProperty"("prebuiltToolchains", true)
+            "setProperty"("targetDirectory", "$projectDir/build/generated/source/libthreema")
+            "setProperty"("module", "$projectDir/../domain/libthreema")
+            "setProperty"("libname", "libthreema")
+            "setProperty"("profile", "release")
+            "setProperty"("pythonCommand", "python3")
+            "setProperty"("targets", listOf("x86_64", "arm64", "arm", "x86"))
+            "setProperty"("verbose", false)
+            "setProperty"("extraCargoBuildArguments", listOf("--lib", "--target-dir", "$projectDir/build/generated/source/libthreema", "--locked"))
+            
+            // Features configuration is tricky via GroovyBuilder, let's try to set the property directly
+            // or invoke the method. The dsl uses features { ... }
+            "invokeMethod"("features", arrayOf(closureOf<NamedDomainObjectContainer<*>> {
+                 withGroovyBuilder {
+                     "invokeMethod"("defaultAnd", arrayOf(arrayOf("uniffi")))
+                 }
+            }))
         }
-        extraCargoBuildArguments = listOf("--lib", "--target-dir", "$projectDir/build/generated/source/libthreema", "--locked")
-        verbose = false
     }
+} else {
+    // When using prebuilt rust, we expect the artifacts to be in the target directory
+    // We register a dummy cargoBuild task to satisfy any dependencies
+    tasks.register("cargoBuild") {
+        doLast {
+            println("Skipping cargoBuild (using prebuilt artifacts)")
+        }
+    }
+    
+    // Add the directory to jniLibs so Android picks up the .so files
+    // The structure of the artifact must match what Android expects (e.g. jniLibs/x86/lib.so)
+    // We assume the artifact download script places them correctly or the plugin output was already correct.
+    android.sourceSets.getByName("main").jniLibs.srcDir("$projectDir/build/generated/source/libthreema/jniLibs")
 }
 
+// afterEvaluate block modified to be safe
 afterEvaluate {
     if (!project.hasProperty("usePrebuiltRust")) {
-        // The `cargoBuild` task isn't available until after evaluation.
-        android.applicationVariants.configureEach {
-            val variantName = name.replaceFirstChar { it.uppercase() }
-            // Set the dependency so that cargoBuild is executed before the native libs are merged
-            tasks["merge${variantName}NativeLibs"].dependsOn(tasks["cargoBuild"])
+        // Only configure task dependencies if the plugin is applied
+        tasks.named("mergeDebugJniLibFolders").configure {
+             dependsOn("cargoBuild")
+        }
+        tasks.named("mergeReleaseJniLibFolders").configure {
+             dependsOn("cargoBuild")
         }
     }
 }
