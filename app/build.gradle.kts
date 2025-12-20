@@ -1016,7 +1016,7 @@ dependencies {
 if (!project.hasProperty("usePrebuiltRust")) {
     cargo {
         prebuiltToolchains = true
-        targetDirectory = File("$projectDir/build/generated/source/libthreema")
+        targetDirectory = "$projectDir/build/generated/source/libthreema"
         module = "$projectDir/../domain/libthreema" // must contain Cargo.toml
         libname = "libthreema" // must match the Cargo.toml's package name
         profile = "release"
