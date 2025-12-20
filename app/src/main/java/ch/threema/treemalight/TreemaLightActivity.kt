@@ -16,7 +16,7 @@ import ch.threema.treemalight.data.Message
 import ch.threema.treemalight.data.ThreemaBridge
 import ch.threema.treemalight.ui.screens.*
 import ch.threema.treemalight.ui.theme.TreemaLightTheme
-import kotlinx.coroutines.flow.collectAsState
+
 
 /**
  * Main activity for Treema Light - the accessible Threema interface.
