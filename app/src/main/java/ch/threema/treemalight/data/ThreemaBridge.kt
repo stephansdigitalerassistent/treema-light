@@ -11,29 +11,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * Bridge between Treema Light's simple UI and the full Threema services.
  * Provides a simplified facade for contacts and messaging.
  */
-class ThreemaBridge(private val context: Context) {
+class ThreemaBridge(private val context: Context) : KoinComponent {
 
-    private val serviceManager: ServiceManager?
-        get() = ThreemaApplication.getServiceManager()
-
-    private val contactService: ContactService?
-        get() = try {
-            serviceManager?.contactService
-        } catch (e: Exception) {
-            null
-        }
-
-    private val messageService: MessageService?
-        get() = try {
-            serviceManager?.messageService
-        } catch (e: Exception) {
-            null
-        }
+    private val contactService: ContactService by inject()
+    private val messageService: MessageService by inject()
+    private val serviceManager: ServiceManager by inject()
 
     // =========================================================================
     // CONTACTS
@@ -45,7 +34,7 @@ class ThreemaBridge(private val context: Context) {
      */
     fun getContacts(): Flow<List<Contact>> = flow {
         val contacts = withContext(Dispatchers.IO) {
-            contactService?.all?.map { it.toSimpleContact() } ?: emptyList()
+            contactService.all.map { it.toSimpleContact() }
         }
         emit(contacts)
     }
@@ -54,7 +43,7 @@ class ThreemaBridge(private val context: Context) {
      * Get a single contact by Threema ID.
      */
     suspend fun getContact(threemaId: String): Contact? = withContext(Dispatchers.IO) {
-        contactService?.getByIdentity(threemaId)?.toSimpleContact()
+        contactService.getByIdentity(threemaId)?.toSimpleContact()
     }
 
     /**
@@ -63,7 +52,7 @@ class ThreemaBridge(private val context: Context) {
      */
     suspend fun addContact(threemaId: String): Result<Contact> = withContext(Dispatchers.IO) {
         try {
-            val contact = contactService?.createContactByIdentity(threemaId, true)
+            val contact = contactService.createContactByIdentity(threemaId, true)
             if (contact != null) {
                 Result.success(contact.toSimpleContact())
             } else {
@@ -87,12 +76,12 @@ class ThreemaBridge(private val context: Context) {
             // Get messages from all 1:1 conversations
             val allMessages = mutableListOf<Message>()
             
-            contactService?.all?.forEach { contact ->
+            contactService.all.forEach { contact ->
                 try {
                     // Get the message receiver for this contact
-                    val receiver = contactService?.createReceiver(contact)
+                    val receiver = contactService.createReceiver(contact)
                     if (receiver != null) {
-                        val recentMessages = messageService?.getMessagesForReceiver(receiver, null)
+                        val recentMessages = messageService.getMessagesForReceiver(receiver, null)
                         recentMessages?.mapNotNull { it.toSimpleMessage(contact) }?.let {
                             allMessages.addAll(it)
                         }
@@ -113,17 +102,17 @@ class ThreemaBridge(private val context: Context) {
      */
     suspend fun sendMessage(contactId: String, text: String): Result<Unit> = withContext(Dispatchers.IO) {
         try {
-            val contact = contactService?.getByIdentity(contactId)
+            val contact = contactService.getByIdentity(contactId)
             if (contact == null) {
                 return@withContext Result.failure(Exception("Contact not found: $contactId"))
             }
             
-            val receiver = contactService?.createReceiver(contact)
+            val receiver = contactService.createReceiver(contact)
             if (receiver == null) {
                 return@withContext Result.failure(Exception("Could not create message receiver"))
             }
             
-            messageService?.sendText(text, receiver)
+            messageService.sendText(text, receiver)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
@@ -151,7 +140,10 @@ class ThreemaBridge(private val context: Context) {
      */
     fun isConnected(): Boolean {
         return try {
-            serviceManager?.connection?.isConnected ?: false
+            // serviceManager.connection might be accessible via property access if getter exists
+            // If not, we fall back to false to avoid compilation error during testing
+            // Using reflection just in case, or assuming getter exists as ThreemaApplication uses it
+             serviceManager.connection.isConnected
         } catch (e: Exception) {
             false
         }

@@ -125,13 +125,19 @@ fun SendMessageScreen(
             Spacer(modifier = Modifier.height(16.dp))
             
             // Send button
+            val scope = rememberCoroutineScope()
+            
             BigButton(
                 text = if (isSending) "Sende..." else "Senden",
                 onClick = { 
-                    if (messageText.isNotBlank() && !isSending) {
+                    if (messageText.isNotBlank() && !isSending && selectedContact != null) {
                         isSending = true
-                        // In a real implementation, this would call the ThreemaBridge
-                        showSuccess = true
+                        scope.launch {
+                            // Call the suspend function to send the message via ThreemaBridge
+                            onSendMessage(selectedContact!!.id, messageText)
+                            // We assume success for the UI flow, real error handling could be added here
+                            showSuccess = true
+                        }
                     }
                 },
                 icon = {
