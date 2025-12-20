@@ -22,7 +22,6 @@ import ch.threema.app.asynctasks.ContactCreated
 import ch.threema.app.asynctasks.ContactAvailable
 import ch.threema.domain.protocol.connection.ConnectionState
 import ch.threema.storage.models.AbstractMessageModel
-import ch.threema.storage.models.MessageModel
 
 /**
  * Bridge between Treema Light's simple UI and the full Threema services.
