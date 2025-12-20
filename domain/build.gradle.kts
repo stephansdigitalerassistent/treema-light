@@ -69,7 +69,7 @@ sourceSets {
 
 tasks.withType<Test> {
     // Necessary to load the dynamic libthreema library in unit tests
-    // systemProperty("jna.library.path", "${project.projectDir}/libthreema/target/release")
+    systemProperty("jna.library.path", "${project.projectDir}/libthreema/target/release")
 
     useJUnitPlatform()
 }
@@ -98,50 +98,48 @@ sonarqube {
 }
 
 afterEvaluate {
-    if (!project.hasProperty("usePrebuiltRust")) {
-        val bindingsDirectory = "../build/generated/source/libthreema"
+    val bindingsDirectory = "../build/generated/source/libthreema"
 
-        // Define the task to generate libthreema library (only used to generate bindings for it)
-        val generateLibthreema = tasks.register<Exec>("generateLibthreema") {
-            workingDir("${project.projectDir}/libthreema")
-            commandLine("cargo", "build", "-F", "uniffi", "-p", "libthreema", "--release", "--locked")
-        }
-
-        // Define the task to generate the uniffi bindings for libthreema
-        val uniffiBindings = tasks.register("generateUniFFIBindings") {
-            dependsOn(generateLibthreema)
-            doLast {
-                // It seems that the uniffi package generates a "*.so" file on linux and a "*.dylib" on mac
-                // while using the cargo build command from the gradle task above ("generateLibthreema").
-                val uniffiLibraryFilePathPrefix = "${project.projectDir}/libthreema/target/release/liblibthreema"
-                val uniffiLibraryFile = file("$uniffiLibraryFilePathPrefix.so")
-                    .takeIf { it.exists() }
-                    ?: file("$uniffiLibraryFilePathPrefix.dylib")
-                assert(uniffiLibraryFile.exists()) {
-                    "Error: Missing pre-generated uniffy library file in libthreema/target/*/ directory.\n"
-                }
-
-                val processBuilder = ProcessBuilder(
-                    "cargo",
-                    "run",
-                    "-p",
-                    "uniffi-bindgen",
-                    "generate",
-                    "--library",
-                    uniffiLibraryFile.path,
-                    "--language",
-                    "kotlin",
-                    "--out-dir",
-                    bindingsDirectory,
-                    "--no-format",
-                )
-                processBuilder.directory(file("${project.projectDir}/libthreema"))
-                processBuilder.start().waitFor()
-            }
-        }
-
-        tasks["compileKotlin"].dependsOn(uniffiBindings)
+    // Define the task to generate libthreema library (only used to generate bindings for it)
+    val generateLibthreema = tasks.register<Exec>("generateLibthreema") {
+        workingDir("${project.projectDir}/libthreema")
+        commandLine("cargo", "build", "-F", "uniffi", "-p", "libthreema", "--release", "--locked")
     }
+
+    // Define the task to generate the uniffi bindings for libthreema
+    val uniffiBindings = tasks.register("generateUniFFIBindings") {
+        dependsOn(generateLibthreema)
+        doLast {
+            // It seems that the uniffi package generates a "*.so" file on linux and a "*.dylib" on mac
+            // while using the cargo build command from the gradle task above ("generateLibthreema").
+            val uniffiLibraryFilePathPrefix = "${project.projectDir}/libthreema/target/release/liblibthreema"
+            val uniffiLibraryFile = file("$uniffiLibraryFilePathPrefix.so")
+                .takeIf { it.exists() }
+                ?: file("$uniffiLibraryFilePathPrefix.dylib")
+            assert(uniffiLibraryFile.exists()) {
+                "Error: Missing pre-generated uniffy library file in libthreema/target/*/ directory.\n"
+            }
+
+            val processBuilder = ProcessBuilder(
+                "cargo",
+                "run",
+                "-p",
+                "uniffi-bindgen",
+                "generate",
+                "--library",
+                uniffiLibraryFile.path,
+                "--language",
+                "kotlin",
+                "--out-dir",
+                bindingsDirectory,
+                "--no-format",
+            )
+            processBuilder.directory(file("${project.projectDir}/libthreema"))
+            processBuilder.start().waitFor()
+        }
+    }
+
+    tasks["compileKotlin"].dependsOn(uniffiBindings)
 }
 
 publishing {
@@ -174,23 +172,17 @@ tasks.register<Exec>("compileProto") {
     group = "build"
     description = "generate class bindings from protobuf files in the 'protocol/src' directory"
     workingDir(project.projectDir)
-    if (System.getProperty("os.name").lowercase().contains("windows")) {
-        commandLine("cmd", "/c", "compile-proto.bat")
-    } else {
-        commandLine("./compile-proto.sh")
-    }
+    commandLine("./compile-proto.sh")
 }
 
 tasks.compileKotlin.dependsOn("compileProto")
 
-if (!project.hasProperty("usePrebuiltRust")) {
-    tasks.register<Exec>("libthreemaCleanUp") {
-        workingDir("${project.projectDir}/libthreema")
-        commandLine("cargo", "clean")
-    }
-
-    tasks.clean.dependsOn("libthreemaCleanUp")
+tasks.register<Exec>("libthreemaCleanUp") {
+    workingDir("${project.projectDir}/libthreema")
+    commandLine("cargo", "clean")
 }
+
+tasks.clean.dependsOn("libthreemaCleanUp")
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11

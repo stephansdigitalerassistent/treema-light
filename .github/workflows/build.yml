@@ -44,17 +44,3 @@ jobs:
       run: ./gradlew assembleStore_googleDebug --stacktrace
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-
-    - name: Upload Rust Native Libs
-      uses: actions/upload-artifact@v4
-      with:
-        name: rust-libs
-        path: app/build/generated/source/libthreema/
-        if-no-files-found: warn
-
-    - name: Upload Kotlin Bindings
-      uses: actions/upload-artifact@v4
-      with:
-        name: kotlin-bindings
-        path: build/generated/source/libthreema/
-        if-no-files-found: warn
