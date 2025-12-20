@@ -89,7 +89,7 @@ fun AdminScreen(
                 AdminSettingCard(
                     title = "Schriftgröße",
                     description = "Aktuell: Sehr groß",
-                    icon = Icons.Default.TextFields,
+                    icon = Icons.Default.Edit,
                     onClick = { /* TODO: Font size settings */ }
                 )
             }
@@ -99,7 +99,7 @@ fun AdminScreen(
                 AdminSettingCard(
                     title = "Nachrichtenverlauf",
                     description = "Alle Nachrichten anzeigen",
-                    icon = Icons.Default.History,
+                    icon = Icons.Default.Refresh,
                     onClick = { /* TODO: Message history */ }
                 )
             }
@@ -200,9 +200,10 @@ private fun AdminSettingCard(
             }
             
             Icon(
-                imageVector = Icons.Default.ChevronRight,
+                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                 contentDescription = null,
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(32.dp),
+                tint = Color.Gray
             )
         }
     }

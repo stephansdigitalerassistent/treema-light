@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import ch.threema.treemalight.data.Contact
 import ch.threema.treemalight.ui.components.BigButton
 import ch.threema.treemalight.ui.components.ContactSelectCard

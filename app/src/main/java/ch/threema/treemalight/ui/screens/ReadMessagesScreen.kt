@@ -151,8 +151,9 @@ fun ReadMessagesScreen(
                         shape = RoundedCornerShape(16.dp)
                     ) {
                         Icon(
-                            imageVector = Icons.Default.VolumeUp,
-                            contentDescription = null,
+                            imageVector = Icons.Default.Notifications,
+                            contentDescription = "Vorlesen",
+                            tint = Color.White,
                             modifier = Modifier.size(32.dp)
                         )
                         Spacer(modifier = Modifier.width(12.dp))

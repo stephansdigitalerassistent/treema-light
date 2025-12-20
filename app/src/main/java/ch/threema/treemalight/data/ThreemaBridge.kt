@@ -13,6 +13,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import ch.threema.app.services.UserService
+import ch.threema.domain.protocol.api.APIConnector
+import ch.threema.data.repositories.ContactModelRepository
+import ch.threema.app.asynctasks.BasicAddOrUpdateContactBackgroundTask
+import ch.threema.app.asynctasks.AddContactRestrictionPolicy
+import ch.threema.app.asynctasks.ContactCreated
+import ch.threema.app.asynctasks.ContactAvailable
+import ch.threema.domain.protocol.connection.ConnectionState
+import ch.threema.storage.models.AbstractMessageModel
+import ch.threema.storage.models.MessageModel
 
 /**
  * Bridge between Treema Light's simple UI and the full Threema services.
@@ -23,6 +33,9 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     private val contactService: ContactService by inject()
     private val messageService: MessageService by inject()
     private val serviceManager: ServiceManager by inject()
+    private val userService: UserService by inject()
+    private val apiConnector: APIConnector by inject()
+    private val contactModelRepository: ContactModelRepository by inject()
 
     // =========================================================================
     // CONTACTS
@@ -52,11 +65,35 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
      */
     suspend fun addContact(threemaId: String): Result<Contact> = withContext(Dispatchers.IO) {
         try {
-            val contact = contactService.createContactByIdentity(threemaId, true)
-            if (contact != null) {
-                Result.success(contact.toSimpleContact())
+            // Check if exists first
+            val existing = contactService.getByIdentity(threemaId)
+            if (existing != null) {
+                return@withContext Result.success(existing.toSimpleContact())
+            }
+
+            // Use Threema's background task to create contact
+            val task = BasicAddOrUpdateContactBackgroundTask(
+                threemaId,
+                ContactModel.AcquaintanceLevel.DIRECT,
+                userService.identity, // Assuming property access for getIdentity()
+                apiConnector,
+                contactModelRepository,
+                AddContactRestrictionPolicy.CHECK,
+                context, // Using context passed to constructor
+                null
+            )
+            
+            val result = task.runSynchronously()
+            
+            if (result is ContactCreated || result is ContactAvailable) {
+                val newContact = contactService.getByIdentity(threemaId)
+                if (newContact != null) {
+                    Result.success(newContact.toSimpleContact())
+                } else {
+                    Result.failure(Exception("Contact created but not found"))
+                }
             } else {
-                Result.failure(Exception("Could not create contact"))
+                Result.failure(Exception("Failed to create contact: $result"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -140,10 +177,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
      */
     fun isConnected(): Boolean {
         return try {
-            // serviceManager.connection might be accessible via property access if getter exists
-            // If not, we fall back to false to avoid compilation error during testing
-            // Using reflection just in case, or assuming getter exists as ThreemaApplication uses it
-             serviceManager.connection.isConnected
+             serviceManager.connection.connectionState == ConnectionState.LOGGEDIN
         } catch (e: Exception) {
             false
         }
@@ -159,11 +193,13 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             name = getDisplayName() ?: identity ?: "Unknown",
             phoneNumber = "", // Could be fetched from linked contact
             isFavorite = true, // All contacts shown in simplified UI
-            avatarColor = colorIndex?.toLong() ?: 0xFF4CAF50
+            avatarColor = this.getIdColor().colorIndex.toLong()
         )
     }
 
-    private fun MessageModel.toSimpleMessage(contact: ContactModel): Message? {
+    private fun AbstractMessageModel.toSimpleMessage(contact: ContactModel): Message? {
+        if (this !is MessageModel) return null // Only handle text messages for now
+        
         val body = this.body ?: return null
         return Message(
             id = this.uid ?: "",
@@ -178,7 +214,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
 
     private fun ContactModel.getDisplayName(): String? {
         return when {
-            !firstName.isNullOrBlank() && !lastName.isNullOrBlank() -> "$firstName $lastName"
+            !firstName.isNullOrBlank() -> "$firstName $lastName" // Simplification
             !firstName.isNullOrBlank() -> firstName
             !lastName.isNullOrBlank() -> lastName
             else -> identity
