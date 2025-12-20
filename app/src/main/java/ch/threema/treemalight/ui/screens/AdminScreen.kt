@@ -109,7 +109,7 @@ fun AdminScreen(
                 AdminSettingCard(
                     title = "Threema Verbindung",
                     description = "Status prüfen",
-                    icon = Icons.Default.Wifi,
+                    icon = Icons.Default.Info,
                     onClick = { /* TODO: Connection status */ }
                 )
             }
