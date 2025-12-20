@@ -44,26 +44,33 @@ if "%RUN_ID%"=="" (
 echo Found build run: %RUN_ID%
 echo.
 
-REM Create directories
-echo Creating directories...
-if not exist "app\build\generated\source\libthreema" mkdir "app\build\generated\source\libthreema"
-if not exist "build\generated\source\libthreema" mkdir "build\generated\source\libthreema"
-if not exist "app\build\generated\source\protobuf" mkdir "app\build\generated\source\protobuf"
-if not exist "domain\build\generated\source\protobuf" mkdir "domain\build\generated\source\protobuf"
+REM Clean and create directories
+echo Cleaning and creating directories...
+if exist "app\build\generated\source\libthreema" rd /s /q "app\build\generated\source\libthreema"
+mkdir "app\build\generated\source\libthreema"
+
+if exist "build\generated\source\libthreema" rd /s /q "build\generated\source\libthreema"
+mkdir "build\generated\source\libthreema"
+
+if exist "app\build\generated\source\protobuf" rd /s /q "app\build\generated\source\protobuf"
+mkdir "app\build\generated\source\protobuf"
+
+if exist "domain\build\generated\source\protobuf" rd /s /q "domain\build\generated\source\protobuf"
+mkdir "domain\build\generated\source\protobuf"
 
 REM Download artifacts
 echo.
 echo Downloading Rust native libraries...
-gh run download %RUN_ID% --name rust-native-libs --dir app\build\generated\source\libthreema
+gh run download %RUN_ID% --name rust-native-libs --dir app\build\generated\source\libthreema || echo WARNING: Failed to download rust-native-libs
 
 echo Downloading Kotlin bindings...
-gh run download %RUN_ID% --name kotlin-bindings --dir build\generated\source\libthreema
+gh run download %RUN_ID% --name kotlin-bindings --dir build\generated\source\libthreema || echo WARNING: Failed to download kotlin-bindings
 
 echo Downloading Protobuf files (app)...
-gh run download %RUN_ID% --name protobuf-app --dir app\build\generated\source\protobuf
+gh run download %RUN_ID% --name protobuf-app --dir app\build\generated\source\protobuf || echo WARNING: Failed to download protobuf-app
 
 echo Downloading Protobuf files (domain)...
-gh run download %RUN_ID% --name protobuf-domain --dir domain\build\generated\source\protobuf
+gh run download %RUN_ID% --name protobuf-domain --dir domain\build\generated\source\protobuf || echo WARNING: Failed to download protobuf-domain
 
 echo.
 echo ========================================
