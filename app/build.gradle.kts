@@ -32,7 +32,7 @@ import utils.*
 plugins {
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.rust.android)
+    alias(libs.plugins.rust.android) apply false
     id("com.android.application")
     id("kotlin-android")
     alias(libs.plugins.ksp)
@@ -40,7 +40,28 @@ plugins {
     alias(libs.plugins.stem)
 }
 
-// only apply the plugin if we are dealing with an AppGallery build
+if (!project.hasProperty("usePrebuiltRust")) {
+    apply(plugin = "org.mozilla.rust-android-gradle.rust-android")
+    apply(from = "cargo_config.gradle")
+
+    afterEvaluate {
+        // The `cargoBuild` task isn't available until after evaluation.
+        android.applicationVariants.configureEach {
+            val variantName = name.replaceFirstChar { it.uppercase() }
+            // Set the dependency so that cargoBuild is executed before the native libs are merged
+            tasks["merge${variantName}NativeLibs"].dependsOn(tasks["cargoBuild"])
+        }
+    }
+} else {
+    println("Using pre-built Rust artifacts (skipping cargo build)")
+    
+    // Create a dummy cargoBuild task to satisfy dependencies
+    tasks.register("cargoBuild") {
+        doLast {
+            println("Skipping Rust compilation - using pre-built artifacts")
+        }
+    }
+}
 if (gradle.startParameter.taskRequests.toString().contains("Hms")) {
     logger.info("enabling hms plugin")
     apply {
@@ -478,6 +499,30 @@ android {
             )
             stringBuildConfigField("MEDIA_PATH", "ThreemaLibre")
         }
+        create("treemalight") {
+            versionName = "${appVersion}t$betaSuffix"
+            applicationId = "ch.heuscher.threemalight"
+            testApplicationId = "$applicationId.test"
+            setProductNames(
+                appName = "Threema Light",
+                shortAppName = "Treema",
+            )
+            stringResValue("package_name", applicationId!!)
+            stringResValue("contacts_mime_type", "vnd.android.cursor.item/vnd.$applicationId.profile")
+            stringResValue("call_mime_type", "vnd.android.cursor.item/vnd.$applicationId.call")
+            stringBuildConfigField("MEDIA_PATH", "ThreemaLight")
+            stringBuildConfigField("LOG_TAG", "3malight")
+
+            // config fields for action URLs / deep links
+            stringBuildConfigField("uriScheme", "treemalight")
+            stringBuildConfigField("actionUrl", "light.threema.ch")
+
+            with(manifestPlaceholders) {
+                put("uriScheme", "treemalight")
+                put("actionUrl", "light.threema.ch")
+                put("callMimeType", "vnd.android.cursor.item/vnd.$applicationId.call")
+            }
+        }
     }
 
     signingConfigs {
@@ -595,6 +640,11 @@ android {
         getByName("libre") {
             assets.srcDirs("src/foss_based/assets")
             java.srcDir("src/foss_based/java")
+        }
+
+        // Treema Light - simplified Threema
+        getByName("treemalight") {
+            java.srcDir("src/google_services_based/java")
         }
     }
 
@@ -953,6 +1003,7 @@ dependencies {
     "greenImplementation"(libs.playServices.base)
     "sandbox_workImplementation"(libs.playServices.base)
     "blueImplementation"(libs.playServices.base)
+    "treemalightImplementation"(libs.playServices.base)
 
     fun ExternalModuleDependency.excludeFirebaseDependencies() {
         exclude(group = "com.google.firebase", module = "firebase-core")
@@ -967,6 +1018,7 @@ dependencies {
     "greenImplementation"(libs.firebase.messaging) { excludeFirebaseDependencies() }
     "sandbox_workImplementation"(libs.firebase.messaging) { excludeFirebaseDependencies() }
     "blueImplementation"(libs.firebase.messaging) { excludeFirebaseDependencies() }
+    "treemalightImplementation"(libs.firebase.messaging) { excludeFirebaseDependencies() }
 
     // Google Assistant Voice Action verification library
     "noneImplementation"(group = "", name = "libgsaverification-client", ext = "aar")
@@ -977,12 +1029,14 @@ dependencies {
     "greenImplementation"(group = "", name = "libgsaverification-client", ext = "aar")
     "sandbox_workImplementation"(group = "", name = "libgsaverification-client", ext = "aar")
     "blueImplementation"(group = "", name = "libgsaverification-client", ext = "aar")
+    "treemalightImplementation"(group = "", name = "libgsaverification-client", ext = "aar")
 
     // Maplibre (may have transitive dependencies on Google location services)
     "noneImplementation"(libs.maplibre)
     "store_googleImplementation"(libs.maplibre)
     "store_google_workImplementation"(libs.maplibre)
     "store_threemaImplementation"(libs.maplibre)
+    "treemalightImplementation"(libs.maplibre)
     "libreImplementation"(libs.maplibre) {
         exclude(group = "com.google.android.gms")
     }
@@ -1009,40 +1063,7 @@ dependencies {
 // 'cargoBuild' task that builds native libraries that will be added to the apk. Note that the
 // kotlin bindings are created in the domain module. Building native libraries with rust-android
 // cannot be done in any other module than 'app'.
-if (!project.hasProperty("usePrebuiltRust")) {
-    cargo {
-        prebuiltToolchains = true
-        targetDirectory = "$projectDir/build/generated/source/libthreema"
-        module = "$projectDir/../domain/libthreema" // must contain Cargo.toml
-        libname = "libthreema" // must match the Cargo.toml's package name
-        profile = "release"
-        pythonCommand = "python3"
-        targets = listOf("x86_64", "arm64", "arm", "x86")
-        features {
-            defaultAnd(arrayOf("uniffi"))
-        }
-        extraCargoBuildArguments = listOf("--lib", "--target-dir", "$projectDir/build/generated/source/libthreema", "--locked")
-        verbose = false
-    }
-
-    afterEvaluate {
-        // The `cargoBuild` task isn't available until after evaluation.
-        android.applicationVariants.configureEach {
-            val variantName = name.replaceFirstChar { it.uppercase() }
-            // Set the dependency so that cargoBuild is executed before the native libs are merged
-            tasks["merge${variantName}NativeLibs"].dependsOn(tasks["cargoBuild"])
-        }
-    }
-} else {
-    println("Using pre-built Rust artifacts (skipping cargo build)")
-    
-    // Create a dummy cargoBuild task to satisfy dependencies
-    tasks.register("cargoBuild") {
-        doLast {
-            println("Skipping Rust compilation - using pre-built artifacts")
-        }
-    }
-}
+// Cargo configuration moved to cargo_config.gradle and applied dynamically above
 
 sonarqube {
     properties {
@@ -1077,13 +1098,18 @@ androidStem {
     includeLocalizedOnlyTemplates = true
 }
 
-tasks.register<Exec>("compileProto") {
-    group = "build"
-    description = "generate class bindings from protobuf files in the 'protobuf' directory"
-    workingDir(project.projectDir)
-    commandLine("./compile-proto.sh")
+if (!project.hasProperty("usePrebuiltRust")) {
+    tasks.register<Exec>("compileProto") {
+        group = "build"
+        description = "generate class bindings from protobuf files in the 'protobuf' directory"
+        workingDir(project.projectDir)
+        commandLine("./compile-proto.sh")
+    }
+    project.tasks.preBuild.dependsOn("compileProto")
+} else {
+    android.sourceSets["main"].java.srcDir("build/generated/source/protobuf/main/java")
+    android.sourceSets["main"].java.srcDir("build/generated/source/protobuf/main/kotlin")
 }
-project.tasks.preBuild.dependsOn("compileProto")
 
 tasks.withType<Test> {
     // Necessary to load the dynamic libthreema library in unit tests

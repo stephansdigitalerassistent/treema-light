@@ -61,8 +61,11 @@ sourceSets {
     }
 
     main {
-        java.srcDir("./build/generated/source/proto/main/java")
-        java.srcDir("./build/generated/source/proto/main/kotlin")
+        // Only include proto dir if NOT using prebuilt artifacts
+        if (!project.hasProperty("usePrebuiltRust")) {
+            java.srcDir("./build/generated/source/proto/main/java")
+            java.srcDir("./build/generated/source/proto/main/kotlin")
+        }
         java.srcDir("./build/generated/source/libthreema")
     }
 }
@@ -173,14 +176,23 @@ publishing {
     }
 }
 
-tasks.register<Exec>("compileProto") {
-    group = "build"
-    description = "generate class bindings from protobuf files in the 'protocol/src' directory"
-    workingDir(project.projectDir)
-    commandLine("./compile-proto.sh")
-}
+if (!project.hasProperty("usePrebuiltRust")) {
+    tasks.register<Exec>("compileProto") {
+        group = "build"
+        description = "generate class bindings from protobuf files in the 'protocol/src' directory"
+        workingDir(project.projectDir)
+        commandLine("./compile-proto.sh")
+    }
 
-tasks.compileKotlin.dependsOn("compileProto")
+    tasks.compileKotlin.dependsOn("compileProto")
+} else {
+    sourceSets {
+        main {
+            java.srcDir("${project.buildDir}/generated/source/protobuf/main/java")
+            java.srcDir("${project.buildDir}/generated/source/protobuf/main/kotlin")
+        }
+    }
+}
 
 tasks.register<Exec>("libthreemaCleanUp") {
     workingDir("${project.projectDir}/libthreema")

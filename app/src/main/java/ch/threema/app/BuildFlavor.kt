@@ -45,6 +45,7 @@ sealed class BuildFlavor(
                 Hms.gradleName -> Hms
                 HmsWork.gradleName -> HmsWork
                 Libre.gradleName -> Libre
+                TreemaLight.gradleName -> TreemaLight
                 else -> throw IllegalStateException("Unhandled build flavor " + BuildConfig.FLAVOR)
             }
         }
@@ -164,6 +165,14 @@ sealed class BuildFlavor(
         licenseType = LicenseType.SERIAL,
         buildEnvironment = BuildEnvironment.LIVE,
         displayName = "Libre",
+        desktopClientFlavor = DesktopClientFlavor.Consumer,
+    )
+
+    data object TreemaLight : BuildFlavor(
+        gradleName = "treemalight",
+        licenseType = LicenseType.NONE,
+        buildEnvironment = BuildEnvironment.LIVE,
+        displayName = "Light",
         desktopClientFlavor = DesktopClientFlavor.Consumer,
     )
 
