@@ -1,0 +1,14 @@
+cargo {
+    prebuiltToolchains = true
+    targetDirectory = "${projectDir}/build/generated/source/libthreema"
+    module = "${projectDir}/../domain/libthreema"
+    libname = "libthreema"
+    profile = "release"
+    pythonCommand = "python3"
+    targets = ["x86_64", "arm64", "arm", "x86"]
+    features {
+        defaultAnd(["uniffi"])
+    }
+    extraCargoBuildArguments = ["--lib", "--target-dir", "${projectDir}/build/generated/source/libthreema", "--locked"]
+    verbose = false
+}

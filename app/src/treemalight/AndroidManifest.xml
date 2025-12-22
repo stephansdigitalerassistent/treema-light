@@ -37,6 +37,26 @@
             </intent-filter>
         </service>
 
+        <!-- Treema Light launcher activity - simplified accessible interface -->
+        <activity
+            android:name="ch.threema.treemalight.TreemaLightActivity"
+            android:exported="true"
+            android:label="Treema Light"
+            android:theme="@style/Theme.Threema.WithToolbar"
+            tools:replace="android:theme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Remove the default Threema launcher -->
+        <activity
+            android:name="ch.threema.app.activities.HomeActivity"
+            tools:node="merge">
+            <intent-filter tools:node="removeAll" />
+        </activity>
+
     </application>
 
 </manifest>

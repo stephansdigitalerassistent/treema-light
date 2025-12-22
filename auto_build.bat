@@ -1,5 +1,5 @@
 @echo off
-set RUN_ID=20400552669
+set RUN_ID=20401472561
 
 echo Waiting for build %RUN_ID%...
 gh run watch %RUN_ID% --exit-status
