@@ -29,6 +29,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.mavenPublish)
     alias(libs.plugins.jacoco)
+    alias(libs.plugins.protobuf)
 }
 
 dependencies {
@@ -63,10 +64,38 @@ sourceSets {
     main {
         // Only include proto dir if NOT using prebuilt artifacts
         if (!project.hasProperty("usePrebuiltRust")) {
-            java.srcDir("./build/generated/source/proto/main/java")
-            java.srcDir("./build/generated/source/proto/main/kotlin")
+            // Plugin handles source generation
         }
         java.srcDir("./build/generated/source/libthreema")
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobufKotlinLite.get()}"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                // Configure Java to use Lite
+                named("java") {
+                    option("lite")
+                }
+                // Configure Kotlin to use Lite
+                create("kotlin") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
+// Point to the custom proto source directory
+sourceSets {
+    main {
+        proto {
+            srcDir("protocol/src")
+        }
     }
 }
 
@@ -176,23 +205,7 @@ publishing {
     }
 }
 
-if (!project.hasProperty("usePrebuiltRust")) {
-    tasks.register<Exec>("compileProto") {
-        group = "build"
-        description = "generate class bindings from protobuf files in the 'protocol/src' directory"
-        workingDir(project.projectDir)
-        commandLine("./compile-proto.sh")
-    }
-
-    tasks.compileKotlin.dependsOn("compileProto")
-} else {
-    sourceSets {
-        main {
-            java.srcDir("${project.buildDir}/generated/source/protobuf/main/java")
-            java.srcDir("${project.buildDir}/generated/source/protobuf/main/kotlin")
-        }
-    }
-}
+// Manual compileProto task removed in favor of protobuf-gradle-plugin
 
 tasks.register<Exec>("libthreemaCleanUp") {
     workingDir("${project.projectDir}/libthreema")

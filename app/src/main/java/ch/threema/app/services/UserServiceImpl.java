@@ -168,6 +168,7 @@ public class UserServiceImpl implements UserService, CreateIdentityRequestDataIn
         // note that CheckLicenseRoutine may not have received an upstream response yet.
         if (policySignature == null && policyResponseData == null && credentials == null
             && !(BuildFlavor.getCurrent().getLicenseType().equals(BuildFlavor.LicenseType.NONE))
+            && !"treemalight".equals(ch.threema.app.BuildConfig.FLAVOR)
         ) {
             throw new ThreemaException(context.getString(R.string.missing_app_licence) + "\n" + context.getString(R.string.app_store_error_code, policyErrorCode));    /* Create identity phase 1 unsuccessful:*/
         } else {

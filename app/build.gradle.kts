@@ -505,7 +505,7 @@ android {
             testApplicationId = "$applicationId.test"
             setProductNames(
                 appName = "Threema Light",
-                shortAppName = "Treema",
+                shortAppName = "Treema*",
             )
             stringResValue("package_name", applicationId!!)
             stringResValue("contacts_mime_type", "vnd.android.cursor.item/vnd.$applicationId.profile")
@@ -645,6 +645,7 @@ android {
         // Treema Light - simplified Threema
         getByName("treemalight") {
             java.srcDir("src/google_services_based/java")
+            res.srcDir("../../app/src/main/res")
         }
     }
 
