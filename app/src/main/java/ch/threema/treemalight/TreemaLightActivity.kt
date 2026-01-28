@@ -1,42 +1,115 @@
 package ch.threema.treemalight
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import ch.threema.app.passphrase.PassphraseUnlockActivity
 import ch.threema.treemalight.data.Contact
 import ch.threema.treemalight.data.Message
 import ch.threema.treemalight.data.ThreemaBridge
 import ch.threema.treemalight.ui.screens.*
 import ch.threema.treemalight.ui.theme.TreemaLightTheme
-
+import ch.threema.localcrypto.MasterKeyManager
+import org.koin.android.ext.android.inject
 
 /**
  * Main activity for Treema Light - the accessible Threema interface.
  * Uses ThreemaBridge to connect to real Threema services.
  */
 class TreemaLightActivity : ComponentActivity() {
+
+    private val masterKeyManager: MasterKeyManager by inject()
+    private val userService: ch.threema.app.services.UserService by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Ensure identity exists before proceeding
+        if (!userService.hasIdentity()) {
+            val intent = Intent(this, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+        
         setContent {
             TreemaLightTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TreemaLightApp()
+                    // Check if unlocked state changes
+                    var isUnlocked by remember { mutableStateOf(isKeyUnlocked()) }
+
+                    // Resume check
+                    DisposableEffect(Unit) {
+                        val listener = androidx.core.util.Consumer<Intent> { 
+                            isUnlocked = isKeyUnlocked()
+                        }
+                        addOnNewIntentListener(listener)
+                        onDispose { removeOnNewIntentListener(listener) }
+                    }
+                    
+                    // Periodically check unlocking in lifecycle onResume
+                    LifecycleResumeEffect(Unit) {
+                        if (!isKeyUnlocked()) {
+                            // If locked, launch unlock activity
+                            val intent = Intent(this@TreemaLightActivity, PassphraseUnlockActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            isUnlocked = true
+                        }
+                    }
+
+                    if (isUnlocked) {
+                        TreemaLightApp()
+                    } else {
+                        // Loading / Locked placeholder
+                        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                            Text("Bitte entsperren...")
+                        }
+                    }
                 }
             }
         }
     }
+    
+    // Check if key is usable
+    private fun isKeyUnlocked(): Boolean {
+        return !masterKeyManager.isLocked()
+    }
 }
+
+// Helper for Lifecycle effects
+@Composable
+fun LifecycleResumeEffect(key1: Any?, onResume: () -> Unit) {
+    val lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current
+    DisposableEffect(key1, lifecycleOwner) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME) {
+                onResume()
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+}
+
 
 sealed class Screen {
     data object Home : Screen()
@@ -53,6 +126,7 @@ fun TreemaLightApp() {
     var isAdminMode by remember { mutableStateOf(false) }
     
     // Initialize ThreemaBridge
+    // We assume the app is unlocked now
     val bridge = remember { ThreemaBridge(context) }
     
     // Collect contacts from Threema

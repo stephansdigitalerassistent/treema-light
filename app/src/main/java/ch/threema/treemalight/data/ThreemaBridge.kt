@@ -142,6 +142,10 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
      * Send a text message to a contact.
      */
     suspend fun sendMessage(contactId: String, text: String): Result<Unit> = withContext(Dispatchers.IO) {
+        if (userService.getIdentity() == null) {
+             return@withContext Result.failure(Exception("Local identity not available"))
+        }
+
         try {
             val contact = contactService.getByIdentity(contactId)
             if (contact == null) {
