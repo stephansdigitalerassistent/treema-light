@@ -16,7 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import ch.threema.app.ThreemaApplication
 import ch.threema.app.passphrase.PassphraseUnlockActivity
+import ch.threema.app.services.license.LicenseService
 import ch.threema.treemalight.data.Contact
 import ch.threema.treemalight.data.Message
 import ch.threema.treemalight.data.ThreemaBridge
@@ -112,6 +114,7 @@ fun LifecycleResumeEffect(key1: Any?, onResume: () -> Unit) {
 
 
 sealed class Screen {
+    data object LicenseEntry : Screen()
     data object Home : Screen()
     data object Contacts : Screen()
     data class SendMessage(val preSelectedContact: Contact? = null) : Screen()
@@ -122,20 +125,43 @@ sealed class Screen {
 @Composable
 fun TreemaLightApp() {
     val context = LocalContext.current
-    var currentScreen by remember { mutableStateOf<Screen>(Screen.Home) }
+    
+    // Check license status
+    val serviceManager = ThreemaApplication.getServiceManager()
+    val hasValidLicense = remember {
+        serviceManager?.licenseService?.let { license ->
+            license.hasCredentials() && license.isLicensed()
+        } ?: false
+    }
+    
+    // Start on LicenseEntry if not licensed, else Home
+    var currentScreen by remember { 
+        mutableStateOf<Screen>(if (hasValidLicense) Screen.Home else Screen.LicenseEntry) 
+    }
     var isAdminMode by remember { mutableStateOf(false) }
     
-    // Initialize ThreemaBridge
-    // We assume the app is unlocked now
-    val bridge = remember { ThreemaBridge(context) }
+    // Initialize ThreemaBridge (only after licensed)
+    val bridge = remember(currentScreen) { 
+        if (currentScreen != Screen.LicenseEntry) ThreemaBridge(context) else null
+    }
     
     // Collect contacts from Threema
-    val contacts by bridge.getContacts().collectAsState(initial = emptyList())
+    val contacts by (bridge?.getContacts() ?: kotlinx.coroutines.flow.flowOf(emptyList()))
+        .collectAsState(initial = emptyList())
     
     // Collect messages from Threema
-    val messages by bridge.getMessages().collectAsState(initial = emptyList())
+    val messages by (bridge?.getMessages() ?: kotlinx.coroutines.flow.flowOf(emptyList()))
+        .collectAsState(initial = emptyList())
     
     when (val screen = currentScreen) {
+        is Screen.LicenseEntry -> {
+            LicenseEntryScreen(
+                onLicenseValid = {
+                    currentScreen = Screen.Home
+                }
+            )
+        }
+        
         is Screen.Home -> {
             HomeScreen(
                 onContactsClick = { currentScreen = Screen.Contacts },
@@ -166,7 +192,7 @@ fun TreemaLightApp() {
                 onBackClick = { currentScreen = Screen.Home },
                 onMessageSent = { currentScreen = Screen.Home },
                 onSendMessage = { contactId, message ->
-                    bridge.sendMessage(contactId, message)
+                    bridge?.sendMessage(contactId, message) ?: Result.success(Unit)
                 }
             )
         }
