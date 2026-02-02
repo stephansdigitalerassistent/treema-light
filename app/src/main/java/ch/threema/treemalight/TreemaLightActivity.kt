@@ -25,6 +25,7 @@ import ch.threema.treemalight.data.ThreemaBridge
 import ch.threema.treemalight.ui.screens.*
 import ch.threema.treemalight.ui.theme.TreemaLightTheme
 import ch.threema.localcrypto.MasterKeyManager
+import ch.threema.app.services.UserService
 import org.koin.android.ext.android.inject
 
 /**
@@ -34,13 +35,19 @@ import org.koin.android.ext.android.inject
 class TreemaLightActivity : ComponentActivity() {
 
     private val masterKeyManager: MasterKeyManager by inject()
-    private val userService: ch.threema.app.services.UserService by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
         // Ensure identity exists before proceeding
-        if (!userService.hasIdentity()) {
+        // Check license status first
+        val serviceManager = ThreemaApplication.getServiceManager()
+        val licenseService = serviceManager?.licenseService
+        val hasLicense = licenseService?.hasCredentials() == true && licenseService.isLicensed()
+        val userService = serviceManager?.userService
+        
+        // If we have a license but no identity, redirect to Wizard
+        if (hasLicense && userService?.hasIdentity() == false) {
             val intent = Intent(this, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
             startActivity(intent)
             finish()
@@ -122,12 +129,14 @@ sealed class Screen {
     data object Admin : Screen()
 }
 
+
 @Composable
 fun TreemaLightApp() {
     val context = LocalContext.current
     
     // Check license status
     val serviceManager = ThreemaApplication.getServiceManager()
+    val userService = serviceManager?.userService
     val hasValidLicense = remember {
         serviceManager?.licenseService?.let { license ->
             license.hasCredentials() && license.isLicensed()
@@ -157,7 +166,14 @@ fun TreemaLightApp() {
         is Screen.LicenseEntry -> {
             LicenseEntryScreen(
                 onLicenseValid = {
-                    currentScreen = Screen.Home
+                    // License valid, now check identity
+                    if (userService?.hasIdentity() == false) {
+                         val intent = Intent(context, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
+                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                         context.startActivity(intent)
+                    } else {
+                        currentScreen = Screen.Home
+                    }
                 }
             )
         }
