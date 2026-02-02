@@ -97,6 +97,11 @@ fun LicenseEntryScreen(
                 if (result == null) {
                     // Success - null means no error
                     Toast.makeText(context, "Lizenz aktiviert! ✓", Toast.LENGTH_LONG).show()
+                    
+                    // IMPORTANT: Explicitly set credentials on UserService so createIdentity has them
+                    val userService = serviceManager.userService
+                    userService.setCredentials(credentials)
+                    
                     onLicenseValid()
                 } else {
                     errorMessage = result

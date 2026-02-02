@@ -16,6 +16,8 @@ import ch.threema.treemalight.data.Contact
 import ch.threema.treemalight.ui.components.BigButton
 import ch.threema.treemalight.ui.components.ContactCard
 import ch.threema.treemalight.ui.theme.ButtonBlue
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.ui.platform.LocalContext
 
 /**
  * Contacts screen showing favorite people with large cards.
@@ -84,6 +86,26 @@ fun ContactsScreen(
                 )
             },
             containerColor = ButtonBlue
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        // New Contact Button
+        val context = LocalContext.current
+        BigButton(
+            text = "Neuer Kontakt",
+            onClick = { 
+                val intent = android.content.Intent(context, ch.threema.app.activities.AddContactActivity::class.java)
+                context.startActivity(intent)
+            },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null,
+                    modifier = Modifier.size(36.dp)
+                )
+            },
+            containerColor = ch.threema.treemalight.ui.theme.PrimaryGreen
         )
     }
 }

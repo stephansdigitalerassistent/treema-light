@@ -46,6 +46,14 @@ class TreemaLightActivity : ComponentActivity() {
         val hasLicense = licenseService?.hasCredentials() == true && licenseService.isLicensed()
         val userService = serviceManager?.userService
         
+        // Ensure credentials are loaded into UserService (crucial for identity creation)
+        if (hasLicense && userService != null) {
+            val credentials = licenseService?.loadCredentials()
+            if (credentials != null) {
+                 userService.setCredentials(credentials)
+            }
+        }
+        
         // If we have a license but no identity, redirect to Wizard
         if (hasLicense && userService?.hasIdentity() == false) {
             val intent = Intent(this, ch.threema.app.activities.wizard.WizardStartActivity::class.java)

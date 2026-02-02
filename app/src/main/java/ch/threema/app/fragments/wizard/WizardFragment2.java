@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.Intent;
 
 import org.slf4j.Logger;
 
@@ -47,17 +48,25 @@ import ch.threema.app.utils.RuntimeUtil;
 import ch.threema.app.utils.TestUtil;
 import static ch.threema.base.utils.LoggingKt.getThreemaLogger;
 import ch.threema.domain.protocol.csp.ProtocolDefines;
+import ch.threema.app.ui.AvatarEditView;
+import org.koin.java.KoinJavaComponent;
+import ch.threema.app.services.UserService;
 
 import static ch.threema.app.utils.ActiveScreenLoggerKt.logScreenVisibility;
 
 public class WizardFragment2 extends WizardFragment {
     private static final Logger logger = getThreemaLogger("WizardFragment2");
     private EditText nicknameText;
+    private AvatarEditView avatarEditView;
+    private UserService userService;
     public static final int PAGE_ID = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Initialize UserService via Koin
+        userService = KoinJavaComponent.get(UserService.class);
+        
         View rootView = Objects.requireNonNull(super.onCreateView(inflater, container, savedInstanceState));
 
         WizardFragment4.SettingsInterface callback = (WizardFragment4.SettingsInterface) requireActivity();
@@ -86,6 +95,16 @@ public class WizardFragment2 extends WizardFragment {
             // TODO(ANDR-3180): Consolidate nickname length
             nicknameText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(ProtocolDefines.PUSH_FROM_LEN)});
         }
+
+        avatarEditView = rootView.findViewById(R.id.avatar_edit_view);
+        avatarEditView.setFragment(this);
+        avatarEditView.setContactIdentity(userService.getIdentity());
+        avatarEditView.setIsMyProfilePicture(true);
+        avatarEditView.setEditable(true); // Always editable in wizard unless read-only, handled inside view logic potentially or we manually disable
+        if (callback.isReadOnlyProfile()) {
+            avatarEditView.setEditable(false);
+        }
+
         this.nicknameText.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 if (getActivity() != null && isAdded()) {
@@ -152,5 +171,21 @@ public class WizardFragment2 extends WizardFragment {
                 nicknameText.setSelection(nickname.length());
             }
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (avatarEditView != null) {
+            avatarEditView.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (avatarEditView != null) {
+            avatarEditView.onActivityResult(requestCode, resultCode, data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

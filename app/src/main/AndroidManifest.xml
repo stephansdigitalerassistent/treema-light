@@ -237,6 +237,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="ch.threema.treemalight.ProfileActivity"
+            android:configChanges="uiMode"
+            android:exported="false"
+            android:label="@string/title_mythreemaid"
+            android:theme="@style/Theme.Threema.WithToolbar" />
+        <activity
             android:name=".home.HomeActivity"
             android:configChanges="uiMode"
             android:launchMode="singleTask"

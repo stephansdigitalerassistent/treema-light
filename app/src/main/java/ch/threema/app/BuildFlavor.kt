@@ -170,7 +170,7 @@ sealed class BuildFlavor(
 
     data object TreemaLight : BuildFlavor(
         gradleName = "treemalight",
-        licenseType = LicenseType.NONE,
+        licenseType = LicenseType.SERIAL,  // Use SERIAL to send license key to server
         buildEnvironment = BuildEnvironment.LIVE,
         displayName = "Light",
         desktopClientFlavor = DesktopClientFlavor.Consumer,

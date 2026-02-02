@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import ch.threema.treemalight.ui.components.BigButton
 import ch.threema.treemalight.ui.components.PinDialog
 import ch.threema.treemalight.ui.theme.*
+import androidx.compose.ui.platform.LocalContext
 
 /**
  * Main home screen with 3 large buttons.
@@ -155,6 +156,25 @@ fun HomeScreen(
                 },
                 containerColor = ButtonOrange,
                 contentDesc = "Nachrichten lesen - Empfangene Nachrichten anzeigen"
+            )
+            
+            // Button 4: Profil
+            val context = LocalContext.current
+            BigButton(
+                text = "Profil",
+                onClick = {
+                    val intent = android.content.Intent(context, ch.threema.treemalight.ProfileActivity::class.java)
+                    context.startActivity(intent)
+                },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Face,
+                        contentDescription = null,
+                        modifier = Modifier.size(40.dp)
+                    )
+                },
+                containerColor = ButtonPurple,
+                contentDesc = "Profil - Profilbild und Name ändern"
             )
         }
         

@@ -82,10 +82,13 @@ abstract public class LicenseServiceThreema<T extends LicenseCredentials> implem
     @Nullable
     @WorkerThread
     private String validate(T credentials, boolean allowException) {
-        // BYPASS: Always return success (User request)
+        // BYPASS: Always return success but save credentials (User request)
         if (true) {
             this.isLicensed = true;
             this.preferenceService.setLicensedStatus(true);
+            // IMPORTANT: Save credentials so they can be loaded for identity creation
+            this.saveCredentials(credentials);
+            logger.info("BYPASS: License validated, credentials saved: {}", credentials);
             return null;
         }
 
