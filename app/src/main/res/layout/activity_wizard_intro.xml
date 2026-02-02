@@ -74,6 +74,18 @@
             android:layout_height="wrap_content"
             app:wizardButton_text="@string/menu_restore" />
 
+        <TextView
+            android:id="@+id/reset_license_button"
+            style="@style/WizardSmallText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Lizenz zurücksetzen (Debug)"
+            android:textColor="#FF0000"
+            android:clickable="true"
+            android:focusable="true"/>
+
     </LinearLayout>
 
 </FrameLayout>

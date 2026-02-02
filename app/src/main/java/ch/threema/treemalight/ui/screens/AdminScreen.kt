@@ -27,7 +27,8 @@ import ch.threema.treemalight.ui.theme.*
 fun AdminScreen(
     contacts: List<Contact>,
     onExitAdmin: () -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onResetLicense: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -122,6 +123,16 @@ fun AdminScreen(
                     description = "Version 1.0 (Threema-Backend)",
                     icon = Icons.Default.Info,
                     onClick = { /* TODO: About screen */ }
+                )
+            }
+            
+            // License Reset (Debug)
+            item {
+                AdminSettingCard(
+                    title = "Lizenz zurücksetzen",
+                    description = "Lizenz löschen & Neustart",
+                    icon = Icons.Default.Lock,
+                    onClick = onResetLicense
                 )
             }
         }
