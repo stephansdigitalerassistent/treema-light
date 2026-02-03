@@ -41,7 +41,7 @@ jobs:
       working-directory: .
 
     - name: Build with Gradle
-      run: ./gradlew assembleStore_googleDebug --stacktrace
+      run: ./gradlew assembleStore_googleDebug -PusePrebuiltRust=false --stacktrace
       env:
         ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
