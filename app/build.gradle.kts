@@ -38,6 +38,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.stem)
+    alias(libs.plugins.protobuf)
 }
 
 if (!project.hasProperty("usePrebuiltRust")) {
@@ -589,8 +590,6 @@ android {
             assets.srcDirs("assets")
             jniLibs.srcDirs("libs")
             res.srcDir("src/main/res-rendezvous")
-            java.srcDir("./build/generated/source/protobuf/main/java")
-            java.srcDir("./build/generated/source/protobuf/main/kotlin")
         }
 
         // Based on Google services
@@ -1099,17 +1098,55 @@ androidStem {
     includeLocalizedOnlyTemplates = true
 }
 
-if (!project.hasProperty("usePrebuiltRust")) {
-    tasks.register<Exec>("compileProto") {
-        group = "build"
-        description = "generate class bindings from protobuf files in the 'protobuf' directory"
-        workingDir(project.projectDir)
-        commandLine("./compile-proto.sh")
+// Protobuf configuration for app module
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobufKotlinLite.get()}"
     }
-    project.tasks.preBuild.dependsOn("compileProto")
-} else {
-    android.sourceSets["main"].java.srcDir("build/generated/source/protobuf/main/java")
-    android.sourceSets["main"].java.srcDir("build/generated/source/protobuf/main/kotlin")
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                // Create Java builtin with Lite option
+                create("java") {
+                    option("lite")
+                }
+                // Create Kotlin builtin with Lite option
+                create("kotlin") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
+// The protobuf plugin expects proto files in src/main/proto/ by default.
+// Copy them from the legacy protobuf/ directory to the standard location.
+val copyProtoFilesTask = tasks.register<Copy>("copyProtoFiles") {
+    from("protobuf")
+    into("src/main/proto")
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+// Ensure proto files are copied before any proto generation task
+tasks.withType<com.google.protobuf.gradle.GenerateProtoTask>().configureEach {
+    dependsOn(copyProtoFilesTask)
+}
+
+// Ensure KSP and Kotlin compile tasks wait for proto generation (Variant-specific)
+// This resolves the implicit dependency error
+afterEvaluate {
+    android.applicationVariants.all {
+        val variantName = name.replaceFirstChar { it.uppercase() }
+        val protoTaskName = "generate${variantName}Proto"
+        val kspTaskName = "ksp${variantName}Kotlin"
+        val compileTaskName = "compile${variantName}Kotlin"
+        
+        val protoTask = tasks.findByName(protoTaskName)
+        if (protoTask != null) {
+            tasks.findByName(kspTaskName)?.dependsOn(protoTask)
+            tasks.findByName(compileTaskName)?.dependsOn(protoTask)
+        }
+    }
 }
 
 tasks.withType<Test> {
