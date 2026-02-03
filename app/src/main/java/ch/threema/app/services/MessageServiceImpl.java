@@ -1559,6 +1559,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean processIncomingContactMessage(final AbstractMessage message, @NonNull TriggerSource triggerSource) throws Exception {
         logger.info("processIncomingContactMessage: {}", message.getMessageId());
 
@@ -1654,6 +1655,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean processIncomingGroupMessage(
         @NonNull AbstractGroupMessage message,
         @NonNull TriggerSource triggerSource

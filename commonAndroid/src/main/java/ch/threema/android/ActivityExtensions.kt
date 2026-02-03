@@ -65,6 +65,7 @@ fun Activity.disableEnterTransition() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
         overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0, Color.TRANSPARENT)
     } else {
+        @Suppress("DEPRECATION")
         overridePendingTransition(0, 0)
     }
 }
@@ -73,6 +74,7 @@ fun Activity.disableExitTransition() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
         overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, 0, Color.TRANSPARENT)
     } else {
+        @Suppress("DEPRECATION")
         overridePendingTransition(0, 0)
     }
 }

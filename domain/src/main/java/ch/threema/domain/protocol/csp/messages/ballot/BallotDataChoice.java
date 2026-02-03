@@ -132,19 +132,21 @@ public class BallotDataChoice {
                 resultArray = null;
             }
 
-            BallotDataChoice ballotDataChoice = new BallotDataChoice(resultArray != null ? resultArray.length() : 0);
-            ballotDataChoice.setId(o.getInt(KEY_CHOICES_ID));
-            ballotDataChoice.setName(o.getString(KEY_CHOICES_NAME));
-            ballotDataChoice.setOrder(o.getInt(KEY_CHOICES_ORDER));
-
-            if (o.has(KEY_TOTAL_VOTES)) {
-                ballotDataChoice.setTotalVotes(o.getInt(KEY_TOTAL_VOTES));
-            }
+            BallotDataChoiceBuilder builder = new BallotDataChoiceBuilder();
+            builder.setId(o.getInt(KEY_CHOICES_ID));
+            builder.setDescription(o.getString(KEY_CHOICES_NAME));
+            builder.setSortKey(o.getInt(KEY_CHOICES_ORDER));
 
             if (resultArray != null) {
                 for (int n = 0; n < resultArray.length(); n++) {
-                    ballotDataChoice.addResult(n, resultArray.getInt(n));
+                    builder.addVote(resultArray.getInt(n));
                 }
+            }
+
+            BallotDataChoice ballotDataChoice = builder.build();
+
+            if (o.has(KEY_TOTAL_VOTES)) {
+                ballotDataChoice.setTotalVotes(o.getInt(KEY_TOTAL_VOTES));
             }
 
             return ballotDataChoice;

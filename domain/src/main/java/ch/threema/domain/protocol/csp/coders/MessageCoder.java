@@ -356,6 +356,7 @@ public class MessageCoder {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private @NonNull AbstractMessage deserializeData(byte[] data, int realDataLength, String fromIdentity, String toIdentity) throws BadMessageException {
         /* first byte of data is type */
         int type = data[0] & 0xFF;
