@@ -63,8 +63,12 @@ class AppTaskPersistenceFactory(databaseService: DatabaseService) : ModelFactory
             .use {
                 buildSet {
                     val appTaskDataColumnIndex = it.getColumnIndex(COLUMN_APP_TASK_DATA)
-                    while (it.moveToNext()) {
-                        add(it.getString(appTaskDataColumnIndex))
+                    if (appTaskDataColumnIndex >= 0) {
+                        while (it.moveToNext()) {
+                            add(it.getString(appTaskDataColumnIndex))
+                        }
+                    } else {
+                        // Column missing, likely due to migration issue
                     }
                 }
             }
