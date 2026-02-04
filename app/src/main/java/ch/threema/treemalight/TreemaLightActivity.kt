@@ -27,6 +27,8 @@ import ch.threema.treemalight.ui.theme.TreemaLightTheme
 import ch.threema.localcrypto.MasterKeyManager
 import ch.threema.app.services.UserService
 import org.koin.android.ext.android.inject
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.GlobalScope
 
 /**
  * Main activity for Treema Light - the accessible Threema interface.
@@ -131,9 +133,7 @@ fun LifecycleResumeEffect(key1: Any?, onResume: () -> Unit) {
 sealed class Screen {
     data object LicenseEntry : Screen()
     data object Home : Screen()
-    data object Contacts : Screen()
-    data class SendMessage(val preSelectedContact: Contact? = null) : Screen()
-    data object ReadMessages : Screen()
+    data class Chat(val entry: ThreemaBridge.ChatEntry) : Screen()
     data object Admin : Screen()
 }
 
@@ -162,19 +162,23 @@ fun TreemaLightApp() {
         if (currentScreen != Screen.LicenseEntry) ThreemaBridge(context) else null
     }
     
-    // Collect contacts from Threema
-    val contacts by (bridge?.getContacts() ?: kotlinx.coroutines.flow.flowOf(emptyList()))
+    // Collect unified chat entries (Contacts + Groups)
+    val chatEntries by (bridge?.getChatEntries() ?: kotlinx.coroutines.flow.flowOf(emptyList()))
         .collectAsState(initial = emptyList())
-    
-    // Collect messages from Threema
-    val messages by (bridge?.getMessages() ?: kotlinx.coroutines.flow.flowOf(emptyList()))
-        .collectAsState(initial = emptyList())
+        
+    // Collect messages if in Chat Screen
+    val activeChatEntry = (currentScreen as? Screen.Chat)?.entry
+    val messages by (if (activeChatEntry != null && bridge != null) {
+        val isGroup = activeChatEntry is ThreemaBridge.ChatEntry.GroupEntry
+        bridge.getMessages(activeChatEntry.id, isGroup)
+    } else {
+        kotlinx.coroutines.flow.flowOf(emptyList())
+    }).collectAsState(initial = emptyList())
     
     when (val screen = currentScreen) {
         is Screen.LicenseEntry -> {
             LicenseEntryScreen(
                 onLicenseValid = {
-                    // License valid, now check identity
                     if (userService?.hasIdentity() == false) {
                          val intent = Intent(context, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
                          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -188,9 +192,8 @@ fun TreemaLightApp() {
         
         is Screen.Home -> {
             HomeScreen(
-                onContactsClick = { currentScreen = Screen.Contacts },
-                onSendMessageClick = { currentScreen = Screen.SendMessage() },
-                onReadMessagesClick = { currentScreen = Screen.ReadMessages },
+                chatEntries = chatEntries,
+                onChatClick = { entry -> currentScreen = Screen.Chat(entry) },
                 onAdminClick = { 
                     isAdminMode = true
                     currentScreen = Screen.Admin 
@@ -199,38 +202,34 @@ fun TreemaLightApp() {
             )
         }
         
-        is Screen.Contacts -> {
-            ContactsScreen(
-                contacts = contacts,
-                onContactClick = { contact ->
-                    currentScreen = Screen.SendMessage(contact)
-                },
-                onBackClick = { currentScreen = Screen.Home }
-            )
-        }
-        
-        is Screen.SendMessage -> {
-            SendMessageScreen(
-                contacts = contacts,
-                preSelectedContact = screen.preSelectedContact,
-                onBackClick = { currentScreen = Screen.Home },
-                onMessageSent = { currentScreen = Screen.Home },
-                onSendMessage = { contactId, message ->
-                    bridge?.sendMessage(contactId, message) ?: Result.success(Unit)
-                }
-            )
-        }
-        
-        is Screen.ReadMessages -> {
-            ReadMessagesScreen(
+        is Screen.Chat -> {
+            val entry = screen.entry
+            val isGroup = entry is ThreemaBridge.ChatEntry.GroupEntry
+            
+            ChatScreen(
+                chatId = entry.id,
+                isGroup = isGroup,
+                chatName = entry.name,
                 messages = messages,
+                onSendMessage = { text ->
+                    kotlinx.coroutines.GlobalScope.launch {
+                        bridge?.sendMessage(entry.id, text, isGroup)
+                    }
+                },
                 onBackClick = { currentScreen = Screen.Home }
             )
         }
         
         is Screen.Admin -> {
             AdminScreen(
-                contacts = contacts,
+                contacts = chatEntries.filterIsInstance<ThreemaBridge.ChatEntry.ContactEntry>().map { 
+                    // Convert back to simple Contact for Admin legacy support if needed, or update AdminScreen later.
+                    // For now, let's just pass empty or refactor AdminScreen if it breaks.
+                    // Assuming AdminScreen takes List<Contact>... checking imports...
+                    // AdminScreen expects List<Contact>. We need to map it or we might break it.
+                    // Let's rely on ThreemaBridge.getContacts() for legacy if needed, or map here.
+                    ch.threema.treemalight.data.Contact(it.id, it.name, "", it.isFavorite, it.avatarColor)
+                },
                 onExitAdmin = {
                     isAdminMode = false
                     currentScreen = Screen.Home

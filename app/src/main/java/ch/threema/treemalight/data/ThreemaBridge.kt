@@ -4,6 +4,7 @@ import android.content.Context
 import ch.threema.app.ThreemaApplication
 import ch.threema.app.managers.ServiceManager
 import ch.threema.app.services.ContactService
+import ch.threema.app.services.GroupService
 import ch.threema.app.services.MessageService
 import ch.threema.storage.models.ContactModel
 import ch.threema.storage.models.MessageModel
@@ -22,14 +23,16 @@ import ch.threema.app.asynctasks.ContactCreated
 import ch.threema.app.asynctasks.ContactAvailable
 import ch.threema.domain.protocol.connection.ConnectionState
 import ch.threema.storage.models.AbstractMessageModel
+import ch.threema.storage.models.GroupModel
 
 /**
  * Bridge between Treema Light's simple UI and the full Threema services.
- * Provides a simplified facade for contacts and messaging.
+ * Now supports unified Chat Entries (Contacts & Groups).
  */
 class ThreemaBridge(private val context: Context) : KoinComponent {
 
     private val contactService: ContactService by inject()
+    private val groupService: GroupService by inject()
     private val messageService: MessageService by inject()
     private val serviceManager: ServiceManager by inject()
     private val userService: UserService by inject()
@@ -37,45 +40,78 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     private val contactModelRepository: ContactModelRepository by inject()
 
     // =========================================================================
-    // CONTACTS
+    // UNIFIED CHAT ENTRIES
     // =========================================================================
 
     /**
-     * Get all contacts as a Flow for reactive updates.
-     * Converts Threema's ContactModel to our simple Contact data class.
+     * Represents a chat target (either a 1:1 Contact or a Group).
      */
-    fun getContacts(): Flow<List<Contact>> = flow {
-        val contacts = withContext(Dispatchers.IO) {
-            contactService.getAll().map { it.toSimpleContact() }
-        }
-        emit(contacts)
+    sealed class ChatEntry {
+        abstract val id: String
+        abstract val name: String
+        abstract val avatarColor: Long
+        
+        data class ContactEntry(
+            override val id: String,
+            override val name: String,
+            override val avatarColor: Long,
+            val isFavorite: Boolean
+        ) : ChatEntry()
+        
+        data class GroupEntry(
+            override val id: String, // Group ID (api id or local id string)
+            override val name: String,
+            override val avatarColor: Long,
+            val memberCount: Int
+        ) : ChatEntry()
     }
+
+    /**
+     * Get all chat entries (Contacts + Groups) as a Flow.
+     * Sorted alphabetically by name.
+     */
+    fun getChatEntries(): Flow<List<ChatEntry>> = flow {
+        val entries = withContext(Dispatchers.IO) {
+            val allEntries = mutableListOf<ChatEntry>()
+            
+            // 1. Fetch Contacts
+            val contacts = contactService.getAll().map { it.toContactEntry() }
+            allEntries.addAll(contacts)
+            
+            // 2. Fetch Groups
+            val groups = groupService.getAll().map { it.toGroupEntry() }
+            allEntries.addAll(groups)
+            
+            // 3. Sort by Name
+            allEntries.sortedBy { it.name.lowercase() }
+        }
+        emit(entries)
+    }
+
+    // =========================================================================
+    // CONTACTS (Legacy / Specific)
+    // =========================================================================
 
     /**
      * Get a single contact by Threema ID.
      */
-    suspend fun getContact(threemaId: String): Contact? = withContext(Dispatchers.IO) {
-        contactService.getByIdentity(threemaId)?.toSimpleContact()
+    suspend fun getContact(threemaId: String): ChatEntry.ContactEntry? = withContext(Dispatchers.IO) {
+        contactService.getByIdentity(threemaId)?.toContactEntry()
     }
 
     /**
      * Add a new contact by Threema ID.
-     * Returns the created Contact or null if failed.
      */
-    suspend fun addContact(threemaId: String): Result<Contact> = withContext(Dispatchers.IO) {
+    suspend fun addContact(threemaId: String): Result<ChatEntry.ContactEntry> = withContext(Dispatchers.IO) {
         try {
-            // Check if exists first
             val existing = contactService.getByIdentity(threemaId)
             if (existing != null) {
-                return@withContext Result.success(existing.toSimpleContact())
+                return@withContext Result.success(existing.toContactEntry())
             }
 
             val myIdentity = userService.getIdentity()
-            if (myIdentity == null) {
-                return@withContext Result.failure(Exception("Local identity not available"))
-            }
+                ?: return@withContext Result.failure(Exception("Local identity not available"))
 
-            // Use Threema's background task to create contact
             val task = BasicAddOrUpdateContactBackgroundTask(
                 threemaId,
                 ContactModel.AcquaintanceLevel.DIRECT,
@@ -92,7 +128,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             if (result is ContactCreated || result is ContactAvailable) {
                 val newContact = contactService.getByIdentity(threemaId)
                 if (newContact != null) {
-                    Result.success(newContact.toSimpleContact())
+                    Result.success(newContact.toContactEntry())
                 } else {
                     Result.failure(Exception("Contact created but not found"))
                 }
@@ -109,85 +145,77 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     // =========================================================================
 
     /**
-     * Get all messages (simplified - inbox only).
-     * In real implementation, this would filter by conversation.
+     * Get messages for a specific chat (Contact or Group).
      */
-    fun getMessages(): Flow<List<Message>> = flow {
+    fun getMessages(chatId: String, isGroup: Boolean): Flow<List<Message>> = flow {
         val messages = withContext(Dispatchers.IO) {
-            // Get messages from all 1:1 conversations
-            val allMessages = mutableListOf<Message>()
+            val simpleMessages = mutableListOf<Message>()
             
-            contactService.getAll().forEach { contact ->
-                try {
-                    // Get the message receiver for this contact
+            if (isGroup) {
+                // Determine if chatId is integer group ID or API ID? 
+                // GroupService usually uses integer internal ID for getting model
+                // We'll try to find the group first
+                val group = try {
+                    // Try parsing as int (local ID) first, if fails assume it's API ID (rare for groups in this context)
+                    groupService.getById(chatId.toInt()) 
+                } catch (e: NumberFormatException) {
+                    null 
+                }
+                
+                if (group != null) {
+                    val receiver = groupService.createReceiver(group)
+                     messageService.getMessagesForReceiver(receiver)?.mapNotNull { 
+                        // For groups, we need sender info which might be complex to resolve fully here
+                        // For now simplified
+                        it.toSimpleMessage() 
+                    }?.let { simpleMessages.addAll(it) }
+                }
+            } else {
+                // 1:1 Contact
+                val contact = contactService.getByIdentity(chatId)
+                if (contact != null) {
                     val receiver = contactService.createReceiver(contact)
                     if (receiver != null) {
-                        val recentMessages = messageService.getMessagesForReceiver(receiver)
-                        recentMessages?.mapNotNull { it.toSimpleMessage(contact) }?.let {
-                            allMessages.addAll(it)
-                        }
+                        messageService.getMessagesForReceiver(receiver)?.mapNotNull { it.toSimpleMessage() }
+                            ?.let { simpleMessages.addAll(it) }
                     }
-                } catch (e: Exception) {
-                    // Skip this contact if we can't get messages
                 }
             }
             
             // Sort by timestamp, newest first
-            allMessages.sortedByDescending { it.timestamp }
+            simpleMessages.sortedByDescending { it.timestamp }
         }
         emit(messages)
     }
 
     /**
-     * Send a text message to a contact.
+     * Send a text message to a contact or group.
      */
-    suspend fun sendMessage(contactId: String, text: String): Result<Unit> = withContext(Dispatchers.IO) {
+    suspend fun sendMessage(chatId: String, text: String, isGroup: Boolean): Result<Unit> = withContext(Dispatchers.IO) {
         if (userService.getIdentity() == null) {
              return@withContext Result.failure(Exception("Local identity not available"))
         }
 
         try {
-            val contact = contactService.getByIdentity(contactId)
-            if (contact == null) {
-                return@withContext Result.failure(Exception("Contact not found: $contactId"))
+            if (isGroup) {
+                val group = try { groupService.getById(chatId.toInt()) } catch (e: NumberFormatException) { null }
+                    ?: return@withContext Result.failure(Exception("Group not found: $chatId"))
+                
+                val receiver = groupService.createReceiver(group)
+                messageService.sendText(text, receiver)
+                Result.success(Unit)
+            } else {
+                val contact = contactService.getByIdentity(chatId)
+                    ?: return@withContext Result.failure(Exception("Contact not found: $chatId"))
+                
+                val receiver = contactService.createReceiver(contact)
+                    ?: return@withContext Result.failure(Exception("Could not create message receiver"))
+                
+                messageService.sendText(text, receiver)
+                Result.success(Unit)
             }
-            
-            val receiver = contactService.createReceiver(contact)
-            if (receiver == null) {
-                return@withContext Result.failure(Exception("Could not create message receiver"))
-            }
-            
-            messageService.sendText(text, receiver)
-            Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
-        }
-    }
-
-    /**
-     * Mark a message as read.
-     */
-    suspend fun markAsRead(messageId: String): Result<Unit> = withContext(Dispatchers.IO) {
-        try {
-            // Implementation would find and mark the message as read
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-    // =========================================================================
-    // CONNECTION
-    // =========================================================================
-
-    /**
-     * Check if we're connected to Threema servers.
-     */
-    fun isConnected(): Boolean {
-        return try {
-             serviceManager.connection.connectionState == ConnectionState.LOGGEDIN
-        } catch (e: Exception) {
-            false
         }
     }
 
@@ -195,24 +223,40 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     // HELPERS
     // =========================================================================
 
-    private fun ContactModel.toSimpleContact(): Contact {
-        return Contact(
+    private fun ContactModel.toContactEntry(): ChatEntry.ContactEntry {
+        return ChatEntry.ContactEntry(
             id = identity ?: "",
             name = getDisplayName() ?: identity ?: "Unknown",
-            phoneNumber = "", // Could be fetched from linked contact
-            isFavorite = true, // All contacts shown in simplified UI
-            avatarColor = this.idColor.colorIndex.toLong()
+            avatarColor = this.idColor.colorIndex.toLong(),
+            isFavorite = true // Simplified
+        )
+    }
+    
+    private fun GroupModel.toGroupEntry(): ChatEntry.GroupEntry {
+        return ChatEntry.GroupEntry(
+            id = this.id.toString(), // Use local ID for easier retrieval
+            name = this.name ?: "Unbenannte Gruppe",
+            avatarColor = 0xFF6200EE, // Use a distinct color for groups if no image
+            memberCount = groupService.countMembers(this)
         )
     }
 
-    private fun AbstractMessageModel.toSimpleMessage(contact: ContactModel): Message? {
-        if (this !is MessageModel) return null // Only handle text messages for now
-        
+    private fun AbstractMessageModel.toSimpleMessage(): Message? {
+        if (this !is MessageModel) return null
         val body = this.body ?: return null
+        
+        // Simplified sender resolution
+        val senderId = if (this.isOutbox) "self" else this.identity?.toString() ?: "unknown"
+        val senderName = if (this.isOutbox) "Ich" else {
+            this.identity?.let { id ->
+                contactService.getByIdentity(id.toString())?.firstName ?: "Jemand"
+            } ?: "Jemand"
+        }
+        
         return Message(
             id = this.uid ?: "",
-            senderId = if (this.isOutbox) "self" else contact.identity ?: "",
-            senderName = if (this.isOutbox) "Ich" else contact.getDisplayName() ?: "Unknown",
+            senderId = senderId,
+            senderName = senderName,
             content = body,
             timestamp = this.createdAt?.time ?: System.currentTimeMillis(),
             isRead = this.isRead,
@@ -222,7 +266,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
 
     private fun ContactModel.getDisplayName(): String? {
         return when {
-            !firstName.isNullOrBlank() -> "$firstName $lastName" // Simplification
+            !firstName.isNullOrBlank() -> "$firstName $lastName"
             !firstName.isNullOrBlank() -> firstName
             !lastName.isNullOrBlank() -> lastName
             else -> identity

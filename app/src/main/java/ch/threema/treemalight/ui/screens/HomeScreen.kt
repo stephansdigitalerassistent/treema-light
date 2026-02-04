@@ -1,35 +1,39 @@
 package ch.threema.treemalight.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ch.threema.treemalight.ui.components.BigButton
+import ch.threema.treemalight.data.ThreemaBridge.ChatEntry
 import ch.threema.treemalight.ui.components.PinDialog
 import ch.threema.treemalight.ui.theme.*
-import androidx.compose.ui.platform.LocalContext
 
 /**
- * Main home screen with 3 large buttons.
- * Admin mode activated by long-pressing the title.
+ * Unified Home Screen displaying all Contacts and Groups.
+ * Acts like a simple phone book / chat list.
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
-    onContactsClick: () -> Unit,
-    onSendMessageClick: () -> Unit,
-    onReadMessagesClick: () -> Unit,
+    chatEntries: List<ChatEntry>,
+    onChatClick: (ChatEntry) -> Unit,
     onAdminClick: () -> Unit,
     isAdminMode: Boolean = false,
     adminPin: String = "1234"
@@ -59,17 +63,15 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(MaterialTheme.colorScheme.background)
     ) {
-        // Title - long press for admin mode
+        // Simple Header
         Box(
             modifier = Modifier
-                .combinedClickable(
-                    onClick = { },
-                    onLongClick = { }
-                )
-                .semantics { contentDescription = "Treema Light - Halte gedrückt für Einstellungen" }
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,112 +81,119 @@ fun HomeScreen(
                 )
             ) {
                 Text(
-                    text = "Treema Light",
-                    style = MaterialTheme.typography.displayLarge,
-                    fontSize = 42.sp,
+                    text = "Treema",
+                    style = MaterialTheme.typography.displayMedium,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
-                    textAlign = TextAlign.Center
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
-                
                 if (isAdminMode) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Surface(
-                        color = AdminYellow,
-                        shape = MaterialTheme.shapes.small
-                    ) {
-                        Text(
-                            text = "⚙️ Admin-Modus",
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
+                    Text(
+                        text = "Admin Modus",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
                 }
             }
         }
-        
-        Spacer(modifier = Modifier.height(48.dp))
-        
-        // Main buttons - equally spaced
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            verticalArrangement = Arrangement.SpaceEvenly
+
+        // Combined List
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Button 1: Meine Leute (Contacts)
-            BigButton(
-                text = "Meine Leute",
-                onClick = onContactsClick,
-                icon = {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = null,
-                        modifier = Modifier.size(40.dp)
-                    )
-                },
-                containerColor = ButtonBlue,
-                contentDesc = "Meine Leute - Zeige Kontakte"
-            )
+            items(chatEntries) { entry ->
+                ChatListItem(
+                    entry = entry,
+                    onClick = { onChatClick(entry) }
+                )
+            }
             
-            // Button 2: Nachricht senden
-            BigButton(
-                text = "Nachricht senden",
-                onClick = onSendMessageClick,
-                icon = {
-                    Icon(
-                        imageVector = Icons.Default.Edit,
-                        contentDescription = null,
-                        modifier = Modifier.size(40.dp)
-                    )
-                },
-                containerColor = PrimaryGreen,
-                contentDesc = "Nachricht senden - Neue Nachricht schreiben"
-            )
-            
-            // Button 3: Nachrichten lesen
-            BigButton(
-                text = "Nachrichten lesen",
-                onClick = onReadMessagesClick,
-                icon = {
-                    Icon(
-                        imageVector = Icons.Default.Email,
-                        contentDescription = null,
-                        modifier = Modifier.size(40.dp)
-                    )
-                },
-                containerColor = ButtonOrange,
-                contentDesc = "Nachrichten lesen - Empfangene Nachrichten anzeigen"
-            )
-            
-            // Button 4: Profil
-            val context = LocalContext.current
-            BigButton(
-                text = "Profil",
-                onClick = {
-                    val intent = android.content.Intent(context, ch.threema.treemalight.ProfileActivity::class.java)
-                    context.startActivity(intent)
-                },
-                icon = {
-                    Icon(
-                        imageVector = Icons.Default.Face,
-                        contentDescription = null,
-                        modifier = Modifier.size(40.dp)
-                    )
-                },
-                containerColor = ButtonPurple,
-                contentDesc = "Profil - Profilbild und Name ändern"
-            )
+            item {
+                Spacer(modifier = Modifier.height(60.dp)) // Bottom padding
+            }
         }
-        
-        // Tiny admin hint (barely visible)
-        if (!isAdminMode) {
-            Text(
-                text = "Titel lange drücken für Einstellungen",
-                fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f),
-                modifier = Modifier.padding(top = 16.dp)
+    }
+}
+
+@Composable
+fun ChatListItem(
+    entry: ChatEntry,
+    onClick: () -> Unit
+) {
+    val isGroup = entry is ChatEntry.GroupEntry
+    
+    // DISTINCT VISUALS
+    // Groups: Purple Card
+    // Contacts: Teal Card (or Surface)
+    
+    val containerColor = if (isGroup) {
+         MaterialTheme.colorScheme.primaryContainer // Purple 200 equivalent
+    } else {
+        MaterialTheme.colorScheme.secondaryContainer // Teal equivalent
+    }
+    
+    val contentColor = if (isGroup) {
+        MaterialTheme.colorScheme.onPrimaryContainer
+    } else {
+        MaterialTheme.colorScheme.onSecondaryContainer
+    }
+
+    Card(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth().height(80.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = containerColor
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Avatar
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFFEEEEEE)), // Placeholder grey
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = if (isGroup) Icons.Default.Face else Icons.Default.Person,
+                    contentDescription = null,
+                    tint = Color.Gray,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+            
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = entry.name,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = contentColor
+                )
+                
+                if (isGroup) {
+                    val groupEntry = entry as ChatEntry.GroupEntry
+                    Text(
+                        text = "${groupEntry.memberCount} Teilnehmer",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = contentColor.copy(alpha = 0.8f)
+                    )
+                }
+            }
+            
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowRight,
+                contentDescription = null,
+                tint = contentColor.copy(alpha = 0.5f)
             )
         }
     }
