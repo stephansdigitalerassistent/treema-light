@@ -87,6 +87,7 @@ import ch.threema.app.webclient.services.SessionWakeUpServiceImpl
 import ch.threema.app.workers.AutoDeleteWorker
 import ch.threema.app.workers.ContactUpdateWorker
 import ch.threema.app.workers.GatewayProfilePicturesWorker
+import ch.threema.app.workers.ContactBookSyncWorker
 import ch.threema.app.workers.ShareTargetUpdateWorker
 import ch.threema.app.workers.WorkSyncWorker
 import ch.threema.base.ThreemaException
@@ -544,6 +545,7 @@ class ThreemaApplication : Application() {
             preferenceService: PreferenceService,
             preferenceStore: PreferenceStore,
         ) {
+            ContactBookSyncWorker.schedulePeriodicSync(context)
             WorkSyncWorker.schedulePeriodicWorkSync(context, preferenceService)
             ContactUpdateWorker.schedulePeriodicSync(context, preferenceService)
             if (preferenceStore.getBoolean(context.getString(R.string.preferences__direct_share))) {

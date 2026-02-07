@@ -71,6 +71,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.slf4j.Logger;
 
+import ch.threema.domain.models.VerificationLevel;
+import java.time.Instant;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
@@ -480,6 +482,14 @@ public class ContactsSectionFragment
         logger.debug("onResume");
         if (this.resumePauseHandler != null) {
             this.resumePauseHandler.onResume();
+        }
+
+        if (preferenceService != null && synchronizeContactsService != null) {
+            final Instant lastSync = preferenceService.getTimeOfLastContactSync();
+            if (lastSync == null || lastSync.getEpochSecond() == 0) {
+                logger.info("No successful contact sync yet, triggering now.");
+                synchronizeContactsService.instantiateSynchronizationAndRun();
+            }
         }
 
         if (this.swipeRefreshLayout != null) {

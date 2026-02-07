@@ -24,6 +24,7 @@ import ch.threema.app.asynctasks.ContactAvailable
 import ch.threema.domain.protocol.connection.ConnectionState
 import ch.threema.storage.models.AbstractMessageModel
 import ch.threema.storage.models.GroupModel
+import ch.threema.domain.models.IdentityState
 
 /**
  * Bridge between Treema Light's simple UI and the full Threema services.
@@ -75,14 +76,18 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             val allEntries = mutableListOf<ChatEntry>()
             
             // 1. Fetch Contacts
-            val contacts = contactService.getAll().map { it.toContactEntry() }
+            // Filter: Show only Active contacts that are NOT hidden (e.g. not just group members)
+            // Note: identity is already a Threema ID here.
+            val contacts = contactService.getAll()
+                .filter { it.state == IdentityState.ACTIVE && !it.isHidden() }
+                .map { it.toContactEntry() }
             allEntries.addAll(contacts)
             
             // 2. Fetch Groups
             val groups = groupService.getAll().map { it.toGroupEntry() }
             allEntries.addAll(groups)
             
-            // 3. Sort by Name
+            // 3. Sort by Name and return
             allEntries.sortedBy { it.name.lowercase() }
         }
         emit(entries)
