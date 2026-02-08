@@ -505,7 +505,7 @@ android {
             applicationId = "ch.heuscher.gentlemessaging"
             testApplicationId = "$applicationId.test"
             setProductNames(
-                appName = "gentle messaging",
+                appName = "gentle messages",
                 shortAppName = "gentle",
             )
             stringResValue("package_name", applicationId!!)
