@@ -1,62 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:installLocation="internalOnly"
-    android:testOnly="false">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <application 
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher"
-        tools:ignore="GoogleAppIndexingWarning"
-        tools:replace="android:icon,android:roundIcon">
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.gms.car.application"
-            android:resource="@xml/automotive_app_desc" />
-        <meta-data
-            android:name="firebase_analytics_collection_deactivated"
-            android:value="true" />
-        <meta-data
-            android:name="google_analytics_adid_collection_enabled"
-            android:value="false" />
-        <meta-data
-            android:name="google_analytics_ssaid_collection_enabled"
-            android:value="false" />
-        <meta-data
-            android:name="firebase_messaging_auto_init_enabled"
-            android:value="false" />
-
-        <service
-            android:name="ch.threema.app.push.PushService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <!-- Treema Light launcher activity - simplified accessible interface -->
-        <activity
-            android:name="ch.threema.treemalight.TreemaLightActivity"
-            android:exported="true"
-            android:label="Treema Light"
-            android:theme="@style/Theme.Threema.WithToolbar"
-            tools:replace="android:theme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!-- Remove the default Threema launcher -->
-        <activity
-            android:name="ch.threema.app.activities.HomeActivity"
-            tools:node="merge">
-            <intent-filter tools:node="removeAll" />
-        </activity>
-
+    <application
+        android:icon="@drawable/gentle_threema"
+        android:roundIcon="@drawable/gentle_threema"
+        android:label="@string/app_name"
+        tools:replace="android:icon,android:roundIcon,android:label">
     </application>
 
 </manifest>

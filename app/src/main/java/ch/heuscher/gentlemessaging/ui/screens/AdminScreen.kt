@@ -1,4 +1,4 @@
-package ch.threema.treemalight.ui.screens
+package ch.heuscher.gentlemessaging.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ch.threema.treemalight.data.Contact
-import ch.threema.treemalight.ui.components.BigButton
-import ch.threema.treemalight.ui.theme.*
+import ch.heuscher.gentlemessaging.data.Contact
+import ch.heuscher.gentlemessaging.ui.components.BigButton
+import ch.heuscher.gentlemessaging.ui.theme.*
 
 /**
  * Admin settings screen - only accessible with PIN.

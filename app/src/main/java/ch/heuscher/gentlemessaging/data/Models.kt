@@ -1,4 +1,4 @@
-package ch.threema.treemalight.data
+package ch.heuscher.gentlemessaging.data
 
 /**
  * Simplified Contact model for Treema Light UI.

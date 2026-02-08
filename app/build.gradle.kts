@@ -502,26 +502,26 @@ android {
         }
         create("treemalight") {
             versionName = "${appVersion}t$betaSuffix"
-            applicationId = "ch.heuscher.threemalight"
+            applicationId = "ch.heuscher.gentlemessaging"
             testApplicationId = "$applicationId.test"
             setProductNames(
-                appName = "Threema Light",
-                shortAppName = "Treema*",
+                appName = "gentle messaging",
+                shortAppName = "gentle",
             )
             stringResValue("package_name", applicationId!!)
-            stringResValue("contacts_mime_type", "vnd.android.cursor.item/vnd.$applicationId.profile")
-            stringResValue("call_mime_type", "vnd.android.cursor.item/vnd.$applicationId.call")
-            stringBuildConfigField("MEDIA_PATH", "ThreemaLight")
-            stringBuildConfigField("LOG_TAG", "3malight")
+            stringResValue("contacts_mime_type", "vnd.android.cursor.item/vnd.ch.heuscher.gentlemessaging.profile")
+            stringResValue("call_mime_type", "vnd.android.cursor.item/vnd.ch.heuscher.gentlemessaging.call")
+            stringBuildConfigField("MEDIA_PATH", "GentleMessaging")
+            stringBuildConfigField("LOG_TAG", "gentmes")
 
             // config fields for action URLs / deep links
-            stringBuildConfigField("uriScheme", "treemalight")
-            stringBuildConfigField("actionUrl", "light.threema.ch")
+            stringBuildConfigField("uriScheme", "gentmes")
+            stringBuildConfigField("actionUrl", "gentmes.heuscher.ch")
 
             with(manifestPlaceholders) {
-                put("uriScheme", "treemalight")
-                put("actionUrl", "light.threema.ch")
-                put("callMimeType", "vnd.android.cursor.item/vnd.$applicationId.call")
+                put("uriScheme", "gentmes")
+                put("actionUrl", "gentmes.heuscher.ch")
+                put("callMimeType", "vnd.android.cursor.item/vnd.ch.heuscher.gentlemessaging.call")
             }
         }
     }

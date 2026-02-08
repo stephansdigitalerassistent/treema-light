@@ -1,4 +1,4 @@
-package ch.threema.treemalight.ui.screens
+package ch.heuscher.gentlemessaging.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,8 +19,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import ch.threema.treemalight.data.Message
-import ch.threema.treemalight.data.ThreemaBridge
+import ch.heuscher.gentlemessaging.data.Message
+import ch.heuscher.gentlemessaging.data.ThreemaBridge
 import java.text.SimpleDateFormat
 import java.util.*
 

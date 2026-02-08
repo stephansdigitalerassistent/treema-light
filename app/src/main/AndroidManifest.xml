@@ -226,7 +226,7 @@
         </activity>
 
         <activity
-            android:name="ch.threema.treemalight.TreemaLightActivity"
+            android:name="ch.heuscher.gentlemessaging.TreemaLightActivity"
             android:configChanges="uiMode"
             android:exported="true"
             android:label="Treema Light"
@@ -237,7 +237,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ch.threema.treemalight.ProfileActivity"
+            android:name="ch.heuscher.gentlemessaging.ProfileActivity"
             android:configChanges="uiMode"
             android:exported="false"
             android:label="@string/title_mythreemaid"

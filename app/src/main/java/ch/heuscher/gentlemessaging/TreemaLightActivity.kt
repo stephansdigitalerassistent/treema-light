@@ -1,4 +1,4 @@
-package ch.threema.treemalight
+package ch.heuscher.gentlemessaging
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,11 +19,11 @@ import androidx.compose.ui.unit.dp
 import ch.threema.app.ThreemaApplication
 import ch.threema.app.passphrase.PassphraseUnlockActivity
 import ch.threema.app.services.license.LicenseService
-import ch.threema.treemalight.data.Contact
-import ch.threema.treemalight.data.Message
-import ch.threema.treemalight.data.ThreemaBridge
-import ch.threema.treemalight.ui.screens.*
-import ch.threema.treemalight.ui.theme.TreemaLightTheme
+import ch.heuscher.gentlemessaging.data.Contact
+import ch.heuscher.gentlemessaging.data.Message
+import ch.heuscher.gentlemessaging.data.ThreemaBridge
+import ch.heuscher.gentlemessaging.ui.screens.*
+import ch.heuscher.gentlemessaging.ui.theme.TreemaLightTheme
 import ch.threema.localcrypto.MasterKeyManager
 import ch.threema.app.services.UserService
 import org.koin.android.ext.android.inject

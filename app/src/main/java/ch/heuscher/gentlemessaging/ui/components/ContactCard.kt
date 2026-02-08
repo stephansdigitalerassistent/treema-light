@@ -1,4 +1,4 @@
-package ch.threema.treemalight.ui.components
+package ch.heuscher.gentlemessaging.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ch.threema.treemalight.data.Contact
+import ch.heuscher.gentlemessaging.data.Contact
 
 /**
  * Large contact card for easy tapping and reading.

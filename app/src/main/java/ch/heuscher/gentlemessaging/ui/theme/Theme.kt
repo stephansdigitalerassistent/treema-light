@@ -1,4 +1,4 @@
-package ch.threema.treemalight.ui.theme
+package ch.heuscher.gentlemessaging.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

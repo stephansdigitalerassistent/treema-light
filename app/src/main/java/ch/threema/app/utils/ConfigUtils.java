@@ -616,7 +616,7 @@ public class ConfigUtils {
         Class<?> activityClass = HomeActivity.class;
         if ("treemalight".equals(BuildConfig.FLAVOR)) {
             try {
-                activityClass = Class.forName("ch.threema.treemalight.TreemaLightActivity");
+                activityClass = Class.forName("ch.heuscher.gentlemessaging.TreemaLightActivity");
             } catch (ClassNotFoundException e) {
                 logger.error("TreemaLightActivity not found", e);
             }

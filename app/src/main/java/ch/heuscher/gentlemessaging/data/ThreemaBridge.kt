@@ -1,4 +1,4 @@
-package ch.threema.treemalight.data
+package ch.heuscher.gentlemessaging.data
 
 import android.content.Context
 import ch.threema.app.ThreemaApplication

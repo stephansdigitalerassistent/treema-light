@@ -1,4 +1,4 @@
-package ch.threema.treemalight.ui.components
+package ch.heuscher.gentlemessaging.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

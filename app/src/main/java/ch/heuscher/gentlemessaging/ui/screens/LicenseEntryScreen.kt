@@ -1,4 +1,4 @@
-package ch.threema.treemalight.ui.screens
+package ch.heuscher.gentlemessaging.ui.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ch.threema.app.ThreemaApplication
 import ch.threema.domain.models.SerialCredentials
-import ch.threema.treemalight.ui.components.BigButton
-import ch.threema.treemalight.ui.theme.*
+import ch.heuscher.gentlemessaging.ui.components.BigButton
+import ch.heuscher.gentlemessaging.ui.theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

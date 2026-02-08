@@ -1,4 +1,4 @@
-package ch.threema.treemalight
+package ch.heuscher.gentlemessaging
 
 import android.os.Bundle
 import android.view.MenuItem

@@ -1,4 +1,4 @@
-package ch.threema.treemalight.ui.components
+package ch.heuscher.gentlemessaging.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,7 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import ch.threema.treemalight.ui.theme.ErrorRed
+import ch.heuscher.gentlemessaging.ui.theme.ErrorRed
 
 /**
  * PIN entry dialog with large number buttons for accessibility.
