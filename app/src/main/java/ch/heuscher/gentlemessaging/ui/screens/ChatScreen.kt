@@ -1,6 +1,7 @@
 package ch.heuscher.gentlemessaging.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,31 +20,101 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import ch.heuscher.gentlemessaging.data.Message
 import ch.heuscher.gentlemessaging.data.ThreemaBridge
+import ch.threema.app.R
+import ch.threema.app.compose.common.AvatarAsync
+import ch.threema.storage.models.ContactModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 /**
  * Unified Chat Screen.
  * Shows message history and input field.
+ * Avatar in header is clickable to open profile.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
-    chatId: String,
-    isGroup: Boolean,
-    chatName: String,
+    chatEntry: ThreemaBridge.ChatEntry,
     messages: List<Message>,
     onSendMessage: (String) -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onAvatarClick: () -> Unit
 ) {
     var inputText by remember { mutableStateOf("") }
+    val isGroup = chatEntry is ThreemaBridge.ChatEntry.GroupEntry
     
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = chatName) },
+                title = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { onAvatarClick() }
+                    ) {
+                        // Avatar(s)
+                        if (isGroup) {
+                            val groupEntry = chatEntry as ThreemaBridge.ChatEntry.GroupEntry
+                            // Stacked avatars for group
+                            Box(modifier = Modifier.width(56.dp).height(40.dp)) {
+                                // Group avatar first (background)
+                                Box(
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clip(CircleShape)
+                                        .align(Alignment.CenterStart)
+                                        .zIndex(1f)
+                                ) {
+                                    AvatarAsync(
+                                        modifier = Modifier.fillMaxSize(),
+                                        receiverModel = groupEntry.receiverModel,
+                                        contentDescription = groupEntry.name,
+                                        fallbackIcon = R.drawable.ic_group,
+                                        showWorkBadge = false
+                                    )
+                                }
+                                // Show first member avatar offset (if available)
+                                if (groupEntry.members.isNotEmpty()) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(28.dp)
+                                            .clip(CircleShape)
+                                            .align(Alignment.BottomEnd)
+                                            .zIndex(2f)
+                                    ) {
+                                        AvatarAsync(
+                                            modifier = Modifier.fillMaxSize(),
+                                            receiverModel = groupEntry.members.first(),
+                                            contentDescription = null,
+                                            fallbackIcon = R.drawable.ic_contact,
+                                            showWorkBadge = false
+                                        )
+                                    }
+                                }
+                            }
+                        } else {
+                            // Single contact avatar
+                            Box(
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(CircleShape)
+                            ) {
+                                AvatarAsync(
+                                    modifier = Modifier.fillMaxSize(),
+                                    receiverModel = chatEntry.receiverModel,
+                                    contentDescription = chatEntry.name,
+                                    fallbackIcon = R.drawable.ic_contact,
+                                    showWorkBadge = false
+                                )
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(text = chatEntry.name)
+                    }
+                },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
@@ -183,3 +254,4 @@ fun formatTime(timestamp: Long): String {
     val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
     return sdf.format(Date(timestamp))
 }
+

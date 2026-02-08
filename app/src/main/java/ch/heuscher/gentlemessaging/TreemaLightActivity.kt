@@ -134,6 +134,7 @@ sealed class Screen {
     data object LicenseEntry : Screen()
     data object Home : Screen()
     data class Chat(val entry: ThreemaBridge.ChatEntry) : Screen()
+    data class Profile(val entry: ThreemaBridge.ChatEntry, val returnToChat: Boolean = true) : Screen()
     data object Admin : Screen()
 }
 
@@ -207,16 +208,24 @@ fun TreemaLightApp() {
             val isGroup = entry is ThreemaBridge.ChatEntry.GroupEntry
             
             ChatScreen(
-                chatId = entry.id,
-                isGroup = isGroup,
-                chatName = entry.name,
+                chatEntry = entry,
                 messages = messages,
                 onSendMessage = { text ->
                     kotlinx.coroutines.GlobalScope.launch {
                         bridge?.sendMessage(entry.id, text, isGroup)
                     }
                 },
-                onBackClick = { currentScreen = Screen.Home }
+                onBackClick = { currentScreen = Screen.Home },
+                onAvatarClick = { currentScreen = Screen.Profile(entry, returnToChat = true) }
+            )
+        }
+        
+        is Screen.Profile -> {
+            ProfileScreen(
+                chatEntry = screen.entry,
+                onBackClick = { 
+                    currentScreen = if (screen.returnToChat) Screen.Chat(screen.entry) else Screen.Home
+                }
             )
         }
         
@@ -228,7 +237,7 @@ fun TreemaLightApp() {
                     // Assuming AdminScreen takes List<Contact>... checking imports...
                     // AdminScreen expects List<Contact>. We need to map it or we might break it.
                     // Let's rely on ThreemaBridge.getContacts() for legacy if needed, or map here.
-                    ch.threema.treemalight.data.Contact(it.id, it.name, "", it.isFavorite, it.avatarColor)
+                    ch.heuscher.gentlemessaging.data.Contact(it.id, it.name, "", it.isFavorite, it.avatarColor)
                 },
                 onExitAdmin = {
                     isAdminMode = false
@@ -239,3 +248,4 @@ fun TreemaLightApp() {
         }
     }
 }
+

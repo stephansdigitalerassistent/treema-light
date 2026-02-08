@@ -24,6 +24,7 @@ import ch.threema.app.asynctasks.ContactAvailable
 import ch.threema.domain.protocol.connection.ConnectionState
 import ch.threema.storage.models.AbstractMessageModel
 import ch.threema.storage.models.GroupModel
+import ch.threema.storage.models.ReceiverModel
 import ch.threema.domain.models.IdentityState
 
 /**
@@ -51,11 +52,13 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
         abstract val id: String
         abstract val name: String
         abstract val avatarColor: Long
+        abstract val receiverModel: ReceiverModel
         
         data class ContactEntry(
             override val id: String,
             override val name: String,
             override val avatarColor: Long,
+            override val receiverModel: ReceiverModel,
             val isFavorite: Boolean
         ) : ChatEntry()
         
@@ -63,7 +66,9 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             override val id: String, // Group ID (api id or local id string)
             override val name: String,
             override val avatarColor: Long,
-            val memberCount: Int
+            override val receiverModel: ReceiverModel,
+            val memberCount: Int,
+            val members: List<ContactModel> = emptyList()
         ) : ChatEntry()
     }
 
@@ -233,16 +238,20 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             id = identity ?: "",
             name = getDisplayName() ?: identity ?: "Unknown",
             avatarColor = this.idColor.colorIndex.toLong(),
+            receiverModel = this,
             isFavorite = true // Simplified
         )
     }
     
     private fun GroupModel.toGroupEntry(): ChatEntry.GroupEntry {
+        val memberModels = groupService.getMembers(this).take(3) // First 3 members for avatars
         return ChatEntry.GroupEntry(
             id = this.id.toString(), // Use local ID for easier retrieval
             name = this.name ?: "Unbenannte Gruppe",
             avatarColor = 0xFF6200EE, // Use a distinct color for groups if no image
-            memberCount = groupService.countMembers(this)
+            receiverModel = this,
+            memberCount = groupService.countMembers(this),
+            members = memberModels
         )
     }
 

@@ -24,6 +24,9 @@ import androidx.compose.ui.unit.sp
 import ch.heuscher.gentlemessaging.data.ThreemaBridge.ChatEntry
 import ch.heuscher.gentlemessaging.ui.components.PinDialog
 import ch.heuscher.gentlemessaging.ui.theme.*
+import ch.threema.app.R
+import ch.threema.app.compose.common.AvatarAsync
+import ch.threema.storage.models.GroupModel
 
 /**
  * Unified Home Screen displaying all Contacts and Groups.
@@ -81,7 +84,7 @@ fun HomeScreen(
                 )
             ) {
                 Text(
-                    text = "Treema",
+                    text = "gentle messages",
                     style = MaterialTheme.typography.displayMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -154,19 +157,19 @@ fun ChatListItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Avatar
+            // Avatar - using real Threema avatar
             Box(
                 modifier = Modifier
                     .size(48.dp)
-                    .clip(CircleShape)
-                    .background(Color(0xFFEEEEEE)), // Placeholder grey
+                    .clip(CircleShape),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(
-                    imageVector = if (isGroup) Icons.Default.Face else Icons.Default.Person,
-                    contentDescription = null,
-                    tint = Color.Gray,
-                    modifier = Modifier.size(24.dp)
+                AvatarAsync(
+                    modifier = Modifier.fillMaxSize(),
+                    receiverModel = entry.receiverModel,
+                    contentDescription = entry.name,
+                    fallbackIcon = if (isGroup) R.drawable.ic_group else R.drawable.ic_contact,
+                    showWorkBadge = false
                 )
             }
             
@@ -198,3 +201,4 @@ fun ChatListItem(
         }
     }
 }
+
