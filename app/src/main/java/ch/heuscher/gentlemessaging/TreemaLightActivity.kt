@@ -17,14 +17,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import ch.threema.app.ThreemaApplication
+import ch.threema.app.listeners.MessageListener
+import ch.threema.app.managers.ListenerManager
 import ch.threema.app.passphrase.PassphraseUnlockActivity
+import ch.threema.app.services.ContactService
 import ch.threema.app.services.license.LicenseService
 import ch.heuscher.gentlemessaging.data.Contact
 import ch.heuscher.gentlemessaging.data.Message
 import ch.heuscher.gentlemessaging.data.ThreemaBridge
+import ch.heuscher.gentlemessaging.notifications.GentleNotificationHelper
 import ch.heuscher.gentlemessaging.ui.screens.*
 import ch.heuscher.gentlemessaging.ui.theme.TreemaLightTheme
 import ch.threema.localcrypto.MasterKeyManager
+import ch.threema.storage.models.AbstractMessageModel
+import ch.threema.storage.models.MessageModel
 import ch.threema.app.services.UserService
 import org.koin.android.ext.android.inject
 import kotlinx.coroutines.launch
@@ -37,9 +43,39 @@ import kotlinx.coroutines.GlobalScope
 class TreemaLightActivity : ComponentActivity() {
 
     private val masterKeyManager: MasterKeyManager by inject()
+    private val contactService: ContactService by inject()
+    
+    // Notification listener — registered in onCreate, removed in onDestroy
+    private val notificationMessageListener = object : MessageListener {
+        override fun onNew(newMessage: AbstractMessageModel) {
+            if (newMessage is MessageModel && !newMessage.isOutbox) {
+                val senderId = newMessage.identity?.toString() ?: return
+                val senderName = contactService.getByIdentity(senderId)?.let { contact ->
+                    val first = contact.firstName
+                    val last = contact.lastName
+                    when {
+                        !first.isNullOrBlank() && !last.isNullOrBlank() -> "$first $last"
+                        !first.isNullOrBlank() -> first
+                        !last.isNullOrBlank() -> last
+                        else -> senderId
+                    }
+                } ?: senderId
+                val body = newMessage.body ?: "Neue Nachricht"
+                GentleNotificationHelper.showMessageNotification(
+                    this@TreemaLightActivity, senderName, body, senderId
+                )
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Initialize notification channel
+        GentleNotificationHelper.createNotificationChannel(this)
+        
+        // Register notification listener
+        ListenerManager.messageListeners.add(notificationMessageListener)
         
         // Ensure identity exists before proceeding
         // Check license status first
@@ -104,6 +140,11 @@ class TreemaLightActivity : ComponentActivity() {
                 }
             }
         }
+    }
+    
+    override fun onDestroy() {
+        ListenerManager.messageListeners.remove(notificationMessageListener)
+        super.onDestroy()
     }
     
     // Check if key is usable
@@ -194,7 +235,11 @@ fun TreemaLightApp() {
         is Screen.Home -> {
             HomeScreen(
                 chatEntries = chatEntries,
-                onChatClick = { entry -> currentScreen = Screen.Chat(entry) },
+                onChatClick = { entry ->
+                    // Cancel notification for this chat when opening it
+                    GentleNotificationHelper.cancelNotification(context, entry.id)
+                    currentScreen = Screen.Chat(entry)
+                },
                 onAdminClick = { 
                     isAdminMode = true
                     currentScreen = Screen.Admin 

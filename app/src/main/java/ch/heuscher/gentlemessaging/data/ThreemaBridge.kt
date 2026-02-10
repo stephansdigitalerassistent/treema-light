@@ -2,13 +2,18 @@ package ch.heuscher.gentlemessaging.data
 
 import android.content.Context
 import ch.threema.app.ThreemaApplication
+import ch.threema.app.managers.ListenerManager
 import ch.threema.app.managers.ServiceManager
+import ch.threema.app.listeners.ContactListener
+import ch.threema.app.listeners.MessageListener
 import ch.threema.app.services.ContactService
 import ch.threema.app.services.GroupService
 import ch.threema.app.services.MessageService
 import ch.threema.storage.models.ContactModel
 import ch.threema.storage.models.MessageModel
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -76,26 +81,61 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
      * Get all chat entries (Contacts + Groups) as a Flow.
      * Sorted alphabetically by name.
      */
-    fun getChatEntries(): Flow<List<ChatEntry>> = flow {
-        val entries = withContext(Dispatchers.IO) {
-            val allEntries = mutableListOf<ChatEntry>()
-            
-            // 1. Fetch Contacts
-            // Filter: Show only Active contacts that are NOT hidden (e.g. not just group members)
-            // Note: identity is already a Threema ID here.
-            val contacts = contactService.getAll()
-                .filter { it.state == IdentityState.ACTIVE && !it.isHidden() }
-                .map { it.toContactEntry() }
-            allEntries.addAll(contacts)
-            
-            // 2. Fetch Groups
-            val groups = groupService.getAll().map { it.toGroupEntry() }
-            allEntries.addAll(groups)
-            
-            // 3. Sort by Name and return
-            allEntries.sortedBy { it.name.lowercase() }
+    private suspend fun fetchChatEntries(): List<ChatEntry> = withContext(Dispatchers.IO) {
+        val allEntries = mutableListOf<ChatEntry>()
+        
+        // 1. Fetch Contacts
+        val contacts = contactService.getAll()
+            .filter { it.state == IdentityState.ACTIVE && !it.isHidden() }
+            .map { it.toContactEntry() }
+        allEntries.addAll(contacts)
+        
+        // 2. Fetch Groups
+        val groups = groupService.getAll().map { it.toGroupEntry() }
+        allEntries.addAll(groups)
+        
+        // 3. Sort by Name and return
+        allEntries.sortedBy { it.name.lowercase() }
+    }
+
+    fun getChatEntries(): Flow<List<ChatEntry>> = callbackFlow {
+        // Emit initial list
+        trySend(fetchChatEntries())
+        
+        // Re-emit on new/modified/removed messages (updates last message etc.)
+        val messageListener = object : MessageListener {
+            override fun onNew(newMessage: AbstractMessageModel) {
+                trySend(emptyList()) // trigger recomposition; actual data follows
+                kotlinx.coroutines.runBlocking { trySend(fetchChatEntries()) }
+            }
+            override fun onModified(modifiedMessageModel: MutableList<AbstractMessageModel>) {
+                kotlinx.coroutines.runBlocking { trySend(fetchChatEntries()) }
+            }
+            override fun onRemoved(removedMessageModel: AbstractMessageModel) {
+                kotlinx.coroutines.runBlocking { trySend(fetchChatEntries()) }
+            }
         }
-        emit(entries)
+        
+        // Re-emit on contact changes
+        val contactListener = object : ContactListener {
+            override fun onNew(identity: String) {
+                kotlinx.coroutines.runBlocking { trySend(fetchChatEntries()) }
+            }
+            override fun onModified(identity: String) {
+                kotlinx.coroutines.runBlocking { trySend(fetchChatEntries()) }
+            }
+            override fun onRemoved(identity: String) {
+                kotlinx.coroutines.runBlocking { trySend(fetchChatEntries()) }
+            }
+        }
+        
+        ListenerManager.messageListeners.add(messageListener)
+        ListenerManager.contactListeners.add(contactListener)
+        
+        awaitClose {
+            ListenerManager.messageListeners.remove(messageListener)
+            ListenerManager.contactListeners.remove(contactListener)
+        }
     }
 
     // =========================================================================
@@ -157,45 +197,58 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     /**
      * Get messages for a specific chat (Contact or Group).
      */
-    fun getMessages(chatId: String, isGroup: Boolean): Flow<List<Message>> = flow {
-        val messages = withContext(Dispatchers.IO) {
-            val simpleMessages = mutableListOf<Message>()
-            
-            if (isGroup) {
-                // Determine if chatId is integer group ID or API ID? 
-                // GroupService usually uses integer internal ID for getting model
-                // We'll try to find the group first
-                val group = try {
-                    // Try parsing as int (local ID) first, if fails assume it's API ID (rare for groups in this context)
-                    groupService.getById(chatId.toInt()) 
-                } catch (e: NumberFormatException) {
-                    null 
-                }
-                
-                if (group != null) {
-                    val receiver = groupService.createReceiver(group)
-                     messageService.getMessagesForReceiver(receiver)?.mapNotNull { 
-                        // For groups, we need sender info which might be complex to resolve fully here
-                        // For now simplified
-                        it.toSimpleMessage() 
-                    }?.let { simpleMessages.addAll(it) }
-                }
-            } else {
-                // 1:1 Contact
-                val contact = contactService.getByIdentity(chatId)
-                if (contact != null) {
-                    val receiver = contactService.createReceiver(contact)
-                    if (receiver != null) {
-                        messageService.getMessagesForReceiver(receiver)?.mapNotNull { it.toSimpleMessage() }
-                            ?.let { simpleMessages.addAll(it) }
-                    }
-                }
+    private suspend fun fetchMessages(chatId: String, isGroup: Boolean): List<Message> = withContext(Dispatchers.IO) {
+        val simpleMessages = mutableListOf<Message>()
+        
+        if (isGroup) {
+            val group = try {
+                groupService.getById(chatId.toInt()) 
+            } catch (e: NumberFormatException) {
+                null 
             }
             
-            // Sort by timestamp, newest first
-            simpleMessages.sortedByDescending { it.timestamp }
+            if (group != null) {
+                val receiver = groupService.createReceiver(group)
+                messageService.getMessagesForReceiver(receiver)?.mapNotNull { 
+                    it.toSimpleMessage() 
+                }?.let { simpleMessages.addAll(it) }
+            }
+        } else {
+            val contact = contactService.getByIdentity(chatId)
+            if (contact != null) {
+                val receiver = contactService.createReceiver(contact)
+                if (receiver != null) {
+                    messageService.getMessagesForReceiver(receiver)?.mapNotNull { it.toSimpleMessage() }
+                        ?.let { simpleMessages.addAll(it) }
+                }
+            }
         }
-        emit(messages)
+        
+        simpleMessages.sortedByDescending { it.timestamp }
+    }
+
+    fun getMessages(chatId: String, isGroup: Boolean): Flow<List<Message>> = callbackFlow {
+        // Emit initial messages
+        trySend(fetchMessages(chatId, isGroup))
+        
+        // Listen for real-time message updates
+        val listener = object : MessageListener {
+            override fun onNew(newMessage: AbstractMessageModel) {
+                kotlinx.coroutines.runBlocking { trySend(fetchMessages(chatId, isGroup)) }
+            }
+            override fun onModified(modifiedMessageModel: MutableList<AbstractMessageModel>) {
+                kotlinx.coroutines.runBlocking { trySend(fetchMessages(chatId, isGroup)) }
+            }
+            override fun onRemoved(removedMessageModel: AbstractMessageModel) {
+                kotlinx.coroutines.runBlocking { trySend(fetchMessages(chatId, isGroup)) }
+            }
+        }
+        
+        ListenerManager.messageListeners.add(listener)
+        
+        awaitClose {
+            ListenerManager.messageListeners.remove(listener)
+        }
     }
 
     /**
@@ -280,7 +333,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
 
     private fun ContactModel.getDisplayName(): String? {
         return when {
-            !firstName.isNullOrBlank() -> "$firstName $lastName"
+            !firstName.isNullOrBlank() && !lastName.isNullOrBlank() -> "$firstName $lastName"
             !firstName.isNullOrBlank() -> firstName
             !lastName.isNullOrBlank() -> lastName
             else -> identity
