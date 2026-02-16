@@ -47,7 +47,7 @@ object GentleNotificationHelper {
         val notificationId = chatId.hashCode()
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notification)
+            .setSmallIcon(R.drawable.ic_notification_small)
             .setContentTitle(senderName)
             .setContentText(messageText)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
