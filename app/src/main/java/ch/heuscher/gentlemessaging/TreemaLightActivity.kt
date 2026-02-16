@@ -92,13 +92,10 @@ class TreemaLightActivity : ComponentActivity() {
             }
         }
         
-        // If we have a license but no identity, redirect to Wizard
-        if (hasLicense && userService?.hasIdentity() == false) {
-            val intent = Intent(this, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
-            startActivity(intent)
-            finish()
-            return
-        }
+        // LOGGING: Check status
+        android.util.Log.d("TreemaLight", "onCreate: hasLicense=$hasLicense, hasIdentity=${userService?.hasIdentity()}")
+
+
         
         setContent {
             TreemaLightTheme {
@@ -193,9 +190,13 @@ fun TreemaLightApp() {
         } ?: false
     }
     
-    // Start on LicenseEntry if not licensed, else Home
+    // Start on LicenseEntry if not licensed OR if identity is missing, else Home
+    // This ensures that even if we have a "ghost" license, we force the user through the license screen
+    // if they haven't set up an identity yet.
+    val hasIdentity = remember { userService?.hasIdentity() == true }
+    
     var currentScreen by remember { 
-        mutableStateOf<Screen>(if (hasValidLicense) Screen.Home else Screen.LicenseEntry) 
+        mutableStateOf<Screen>(if (hasValidLicense && hasIdentity) Screen.Home else Screen.LicenseEntry) 
     }
     var isAdminMode by remember { mutableStateOf(false) }
     
