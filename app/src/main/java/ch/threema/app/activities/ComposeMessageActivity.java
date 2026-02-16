@@ -169,12 +169,24 @@ public class ComposeMessageActivity extends ThreemaToolbarActivity implements Ge
         }
         if (composeMessageFragment != null) {
             if (!composeMessageFragment.onBackPressed()) {
+                // If we are the root of the task (e.g. opened via notification), we want to go back
+                // to the conversation list instead of closing the app.
+                if (isTaskRoot()) {
+                    Intent intent = new Intent(this, ch.heuscher.gentlemessaging.TreemaLightActivity.class);
+                    startActivity(intent);
+                }
                 finish();
                 if (ConfigUtils.isTabletLayout()) {
                     overridePendingTransition(0, 0);
                 }
             }
             return;
+        }
+        // If we are the root of the task (e.g. opened via notification), we want to go back
+        // to the conversation list instead of closing the app.
+        if (isTaskRoot()) {
+            Intent intent = new Intent(this, ch.heuscher.gentlemessaging.TreemaLightActivity.class);
+            startActivity(intent);
         }
         finish();
     }

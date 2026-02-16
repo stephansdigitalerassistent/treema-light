@@ -24,6 +24,7 @@ package ch.threema.app.activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -261,6 +262,15 @@ public abstract class ThreemaToolbarActivity extends ThreemaActivity implements 
         for (OnSoftKeyboardChangedListener listener : listeners) {
             listener.onKeyboardShown();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onSoftKeyboardOpened(int softKeyboardHeight) {
