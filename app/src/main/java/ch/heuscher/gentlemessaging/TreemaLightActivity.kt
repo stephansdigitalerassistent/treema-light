@@ -23,6 +23,7 @@ import ch.threema.app.passphrase.PassphraseUnlockActivity
 import ch.threema.app.services.ContactService
 import ch.threema.app.services.license.LicenseService
 import ch.heuscher.gentlemessaging.data.Contact
+import ch.heuscher.gentlemessaging.data.GentlePreferences
 import ch.heuscher.gentlemessaging.data.Message
 import ch.heuscher.gentlemessaging.data.ThreemaBridge
 import ch.heuscher.gentlemessaging.notifications.GentleNotificationHelper
@@ -37,7 +38,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.GlobalScope
 
 /**
- * Main activity for Treema Light - the accessible Threema interface.
+ * Main activity for gentle messaging - the accessible Threema interface.
  * Uses ThreemaBridge to connect to real Threema services.
  */
 class TreemaLightActivity : ComponentActivity() {
@@ -98,7 +99,8 @@ class TreemaLightActivity : ComponentActivity() {
 
         
         setContent {
-            TreemaLightTheme {
+            val fontSizeLevel = remember { GentlePreferences.getInstance(applicationContext).getFontSizeLevel() }
+            TreemaLightTheme(fontSizeLevel = fontSizeLevel) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -170,10 +172,12 @@ fun LifecycleResumeEffect(key1: Any?, onResume: () -> Unit) {
 
 sealed class Screen {
     data object LicenseEntry : Screen()
+    data object Welcome : Screen()
     data object Home : Screen()
     data class Chat(val entry: ThreemaBridge.ChatEntry) : Screen()
     data class Profile(val entry: ThreemaBridge.ChatEntry, val returnToChat: Boolean = true) : Screen()
     data object Admin : Screen()
+    data object ContactManagement : Screen()
 }
 
 
@@ -199,10 +203,13 @@ fun TreemaLightApp() {
         mutableStateOf<Screen>(if (hasValidLicense && hasIdentity) Screen.Home else Screen.LicenseEntry) 
     }
     var isAdminMode by remember { mutableStateOf(false) }
+
+    // GentlePreferences for all settings
+    val gentlePrefs = remember { GentlePreferences.getInstance(context) }
     
     // Initialize ThreemaBridge (only after licensed)
     val bridge = remember(currentScreen) { 
-        if (currentScreen != Screen.LicenseEntry) ThreemaBridge(context) else null
+        if (currentScreen != Screen.LicenseEntry && currentScreen != Screen.Welcome) ThreemaBridge(context) else null
     }
     
     // Collect unified chat entries (Contacts + Groups)
@@ -226,9 +233,20 @@ fun TreemaLightApp() {
                          val intent = Intent(context, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
                          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                          context.startActivity(intent)
+                    } else if (!gentlePrefs.hasSeenWelcome()) {
+                        currentScreen = Screen.Welcome
                     } else {
                         currentScreen = Screen.Home
                     }
+                }
+            )
+        }
+
+        is Screen.Welcome -> {
+            WelcomeScreen(
+                onContinue = {
+                    gentlePrefs.setHasSeenWelcome(true)
+                    currentScreen = Screen.Home
                 }
             )
         }
@@ -245,7 +263,8 @@ fun TreemaLightApp() {
                     isAdminMode = true
                     currentScreen = Screen.Admin 
                 },
-                isAdminMode = isAdminMode
+                isAdminMode = isAdminMode,
+                adminPin = gentlePrefs.getAdminPin()
             )
         }
         
@@ -256,6 +275,7 @@ fun TreemaLightApp() {
             ChatScreen(
                 chatEntry = entry,
                 messages = messages,
+                quickReplies = gentlePrefs.getQuickReplies(),
                 onSendMessage = { text ->
                     kotlinx.coroutines.GlobalScope.launch {
                         bridge?.sendMessage(entry.id, text, isGroup)
@@ -277,19 +297,23 @@ fun TreemaLightApp() {
         
         is Screen.Admin -> {
             AdminScreen(
-                contacts = chatEntries.filterIsInstance<ThreemaBridge.ChatEntry.ContactEntry>().map { 
-                    // Convert back to simple Contact for Admin legacy support if needed, or update AdminScreen later.
-                    // For now, let's just pass empty or refactor AdminScreen if it breaks.
-                    // Assuming AdminScreen takes List<Contact>... checking imports...
-                    // AdminScreen expects List<Contact>. We need to map it or we might break it.
-                    // Let's rely on ThreemaBridge.getContacts() for legacy if needed, or map here.
-                    ch.heuscher.gentlemessaging.data.Contact(it.id, it.name, "", it.isFavorite, it.avatarColor)
-                },
+                gentlePrefs = gentlePrefs,
                 onExitAdmin = {
                     isAdminMode = false
                     currentScreen = Screen.Home
                 },
+                onManageContacts = {
+                    currentScreen = Screen.ContactManagement
+                },
                 onBackClick = { currentScreen = Screen.Home }
+            )
+        }
+
+        is Screen.ContactManagement -> {
+            ContactManagementScreen(
+                chatEntries = chatEntries,
+                gentlePrefs = gentlePrefs,
+                onBackClick = { currentScreen = Screen.Admin }
             )
         }
     }

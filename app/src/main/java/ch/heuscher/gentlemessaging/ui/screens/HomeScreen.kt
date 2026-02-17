@@ -3,6 +3,7 @@ package ch.heuscher.gentlemessaging.ui.screens
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -68,20 +69,23 @@ fun HomeScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        // Simple Header
+        // Simple Header — long-press anywhere in header to open admin
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.primaryContainer)
+                .combinedClickable(
+                    onClick = { },
+                    onLongClick = { showPinDialog = true },
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() }
+                )
                 .padding(16.dp),
             contentAlignment = Alignment.Center
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.combinedClickable(
-                    onClick = { },
-                    onLongClick = { showPinDialog = true }
-                )
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "gentle messages",
@@ -99,17 +103,75 @@ fun HomeScreen(
             }
         }
 
-        // Combined List
+        // Split into favorites and others
+        val favorites = chatEntries.filter { entry ->
+            when (entry) {
+                is ChatEntry.ContactEntry -> entry.isFavorite
+                is ChatEntry.GroupEntry -> entry.isFavorite
+            }
+        }
+        val others = chatEntries.filter { entry ->
+            when (entry) {
+                is ChatEntry.ContactEntry -> !entry.isFavorite
+                is ChatEntry.GroupEntry -> !entry.isFavorite
+            }
+        }
+
+        // Combined List: Favorites first, then divider, then the rest
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(chatEntries) { entry ->
-                ChatListItem(
-                    entry = entry,
-                    onClick = { onChatClick(entry) }
-                )
+            // Favorites section
+            if (favorites.isNotEmpty()) {
+                items(favorites) { entry ->
+                    ChatListItem(
+                        entry = entry,
+                        onClick = { onChatClick(entry) },
+                        showStar = true
+                    )
+                }
+            } else {
+                item {
+                    Text(
+                        text = "Noch keine Favoriten ⭐\nBitte einen Betreuer bitten, Kontakte einzurichten.",
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 24.dp)
+                    )
+                }
+            }
+
+            // Divider between favorites and others
+            if (others.isNotEmpty()) {
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        HorizontalDivider(modifier = Modifier.weight(1f))
+                        Text(
+                            text = "  Weitere Kontakte  ",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        HorizontalDivider(modifier = Modifier.weight(1f))
+                    }
+                }
+
+                items(others) { entry ->
+                    ChatListItem(
+                        entry = entry,
+                        onClick = { onChatClick(entry) },
+                        showStar = false
+                    )
+                }
             }
             
             item {
@@ -122,7 +184,8 @@ fun HomeScreen(
 @Composable
 fun ChatListItem(
     entry: ChatEntry,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    showStar: Boolean = false
 ) {
     val isGroup = entry is ChatEntry.GroupEntry
     
@@ -144,7 +207,7 @@ fun ChatListItem(
 
     Card(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth().height(80.dp),
+        modifier = Modifier.fillMaxWidth().height(100.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = containerColor
@@ -157,10 +220,21 @@ fun ChatListItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Star indicator for favorites
+            if (showStar) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "Favorit",
+                    tint = Color(0xFFFFD600),
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+
             // Avatar - using real Threema avatar
             Box(
                 modifier = Modifier
-                    .size(48.dp)
+                    .size(56.dp)
                     .clip(CircleShape),
                 contentAlignment = Alignment.Center
             ) {

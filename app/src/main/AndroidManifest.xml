@@ -229,7 +229,7 @@
             android:name="ch.heuscher.gentlemessaging.TreemaLightActivity"
             android:configChanges="uiMode"
             android:exported="true"
-            android:label="Treema Light"
+            android:label="@string/app_name"
             android:theme="@style/Theme.Threema.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

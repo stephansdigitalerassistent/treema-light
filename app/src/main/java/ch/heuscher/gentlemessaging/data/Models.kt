@@ -1,7 +1,7 @@
 package ch.heuscher.gentlemessaging.data
 
 /**
- * Simplified Contact model for Treema Light UI.
+ * Simplified Contact model for gentle messaging UI.
  * Maps from Threema's ContactModel.
  */
 data class Contact(
@@ -13,7 +13,7 @@ data class Contact(
 )
 
 /**
- * Simplified Message model for Treema Light UI.
+ * Simplified Message model for gentle messaging UI.
  * Maps from Threema's MessageModel.
  */
 data class Message(

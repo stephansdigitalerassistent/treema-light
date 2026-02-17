@@ -8,7 +8,7 @@ import ch.threema.app.R
 
 /**
  * Simple container activity for the MyIDFragment to allow profile editing
- * within the Treema Light context.
+ * within the gentle messaging context.
  */
 class ProfileActivity : AppCompatActivity() {
 

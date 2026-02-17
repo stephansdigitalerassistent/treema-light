@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,6 +40,7 @@ import java.util.*
 fun ChatScreen(
     chatEntry: ThreemaBridge.ChatEntry,
     messages: List<Message>,
+    quickReplies: List<String> = emptyList(),
     onSendMessage: (String) -> Unit,
     onBackClick: () -> Unit,
     onAvatarClick: () -> Unit
@@ -149,6 +151,30 @@ fun ChatScreen(
                     MessageBubble(message = message)
                 }
             }
+
+            // Quick Reply Strip
+            if (quickReplies.isNotEmpty()) {
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(quickReplies) { reply ->
+                        SuggestionChip(
+                            onClick = { onSendMessage(reply) },
+                            label = {
+                                Text(
+                                    text = reply,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            },
+                            modifier = Modifier.heightIn(min = 48.dp),
+                            shape = RoundedCornerShape(24.dp)
+                        )
+                    }
+                }
+            }
             
             // Input Area
             Row(
@@ -186,11 +212,12 @@ fun ChatScreen(
                             inputText = ""
                         }
                     },
-                    modifier = Modifier.size(50.dp)
+                    modifier = Modifier.size(64.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Default.Send,
-                        contentDescription = "Senden"
+                        contentDescription = "Senden",
+                        modifier = Modifier.size(28.dp)
                     )
                 }
             }

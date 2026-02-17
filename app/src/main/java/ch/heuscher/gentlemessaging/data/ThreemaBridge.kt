@@ -33,7 +33,7 @@ import ch.threema.storage.models.ReceiverModel
 import ch.threema.domain.models.IdentityState
 
 /**
- * Bridge between Treema Light's simple UI and the full Threema services.
+ * Bridge between gentle messaging's simple UI and the full Threema services.
  * Now supports unified Chat Entries (Contacts & Groups).
  */
 class ThreemaBridge(private val context: Context) : KoinComponent {
@@ -45,6 +45,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     private val userService: UserService by inject()
     private val apiConnector: APIConnector by inject()
     private val contactModelRepository: ContactModelRepository by inject()
+    private val gentlePrefs = GentlePreferences.getInstance(context)
 
     // =========================================================================
     // UNIFIED CHAT ENTRIES
@@ -73,7 +74,8 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             override val avatarColor: Long,
             override val receiverModel: ReceiverModel,
             val memberCount: Int,
-            val members: List<ContactModel> = emptyList()
+            val members: List<ContactModel> = emptyList(),
+            val isFavorite: Boolean = false
         ) : ChatEntry()
     }
 
@@ -286,25 +288,33 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     // HELPERS
     // =========================================================================
 
+    /** Toggle favorite status for a contact or group */
+    fun toggleFavorite(id: String): Boolean {
+        return gentlePrefs.toggleFavorite(id)
+    }
+
     private fun ContactModel.toContactEntry(): ChatEntry.ContactEntry {
+        val contactId = identity ?: ""
         return ChatEntry.ContactEntry(
-            id = identity ?: "",
+            id = contactId,
             name = getDisplayName() ?: identity ?: "Unknown",
             avatarColor = this.idColor.colorIndex.toLong(),
             receiverModel = this,
-            isFavorite = true // Simplified
+            isFavorite = gentlePrefs.isFavorite(contactId)
         )
     }
     
     private fun GroupModel.toGroupEntry(): ChatEntry.GroupEntry {
+        val groupId = this.id.toString()
         val memberModels = groupService.getMembers(this).take(3) // First 3 members for avatars
         return ChatEntry.GroupEntry(
-            id = this.id.toString(), // Use local ID for easier retrieval
+            id = groupId, // Use local ID for easier retrieval
             name = this.name ?: "Unbenannte Gruppe",
             avatarColor = 0xFF6200EE, // Use a distinct color for groups if no image
             receiverModel = this,
             memberCount = groupService.countMembers(this),
-            members = memberModels
+            members = memberModels,
+            isFavorite = gentlePrefs.isFavorite(groupId)
         )
     }
 

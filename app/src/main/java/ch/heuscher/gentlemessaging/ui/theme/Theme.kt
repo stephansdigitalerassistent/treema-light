@@ -44,6 +44,7 @@ private val DarkColorScheme = darkColorScheme(
 @Composable
 fun TreemaLightTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    fontSizeLevel: Int = 1,
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
@@ -59,7 +60,7 @@ fun TreemaLightTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = AccessibleTypography,
+        typography = scaledTypography(fontSizeLevel),
         content = content
     )
 }

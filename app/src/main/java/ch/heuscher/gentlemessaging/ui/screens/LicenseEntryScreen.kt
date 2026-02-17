@@ -165,7 +165,7 @@ fun LicenseEntryScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 Text(
-                    text = "Treema Light",
+                    text = "gentle messaging",
                     style = MaterialTheme.typography.displayLarge,
                     fontSize = 42.sp,
                     fontWeight = FontWeight.Bold,
