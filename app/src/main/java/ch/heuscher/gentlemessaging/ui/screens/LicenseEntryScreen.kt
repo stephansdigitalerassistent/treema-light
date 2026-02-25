@@ -38,7 +38,7 @@ import kotlinx.coroutines.withContext
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LicenseEntryScreen(
-    onLicenseValid: () -> Unit
+    onLicenseValid: (isEasterEgg: Boolean) -> Unit
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -51,6 +51,9 @@ fun LicenseEntryScreen(
     // UI state
     var isLoading by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    
+    // Tracks whether the easter egg was used to fill the key
+    var isEasterEgg by remember { mutableStateOf(false) }
     
     // Easter egg tap counter
     var tapCount by remember { mutableStateOf(0) }
@@ -102,7 +105,7 @@ fun LicenseEntryScreen(
                     val userService = serviceManager.userService
                     userService.setCredentials(credentials)
                     
-                    onLicenseValid()
+                    onLicenseValid(isEasterEgg)
                 } else {
                     errorMessage = result
                 }
@@ -130,6 +133,7 @@ fun LicenseEntryScreen(
                 // Easter egg activated!
                 keyPart1 = hiddenKey1
                 keyPart2 = hiddenKey2
+                isEasterEgg = true
                 tapCount = 0
                 Toast.makeText(context, "🔓 Lizenz erkannt", Toast.LENGTH_SHORT).show()
             }

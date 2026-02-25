@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -32,6 +33,7 @@ import ch.heuscher.gentlemessaging.ui.theme.TreemaLightTheme
 import ch.threema.localcrypto.MasterKeyManager
 import ch.threema.storage.models.AbstractMessageModel
 import ch.threema.storage.models.MessageModel
+import ch.threema.storage.models.MessageType
 import ch.threema.app.services.UserService
 import org.koin.android.ext.android.inject
 import kotlinx.coroutines.launch
@@ -50,6 +52,14 @@ class TreemaLightActivity : ComponentActivity() {
     private val notificationMessageListener = object : MessageListener {
         override fun onNew(newMessage: AbstractMessageModel) {
             if (newMessage is MessageModel && !newMessage.isOutbox) {
+                // Skip internal status types — no notification needed
+                when (newMessage.type) {
+                    MessageType.STATUS, MessageType.VOIP_STATUS, MessageType.DATE_SEPARATOR,
+                    MessageType.GROUP_CALL_STATUS, MessageType.FORWARD_SECURITY_STATUS,
+                    MessageType.GROUP_STATUS -> return
+                    else -> { /* continue */ }
+                }
+
                 val senderId = newMessage.identity?.toString() ?: return
                 val senderName = contactService.getByIdentity(senderId)?.let { contact ->
                     val first = contact.firstName
@@ -61,7 +71,19 @@ class TreemaLightActivity : ComponentActivity() {
                         else -> senderId
                     }
                 } ?: senderId
-                val body = newMessage.body ?: "Neue Nachricht"
+
+                // Use readable text instead of raw body for non-text types
+                val body = when (newMessage.type) {
+                    MessageType.TEXT -> newMessage.body ?: "Neue Nachricht"
+                    MessageType.IMAGE -> "📷 Bild"
+                    MessageType.VIDEO -> "🎬 Video"
+                    MessageType.VOICEMESSAGE -> "🎤 Sprachnachricht"
+                    MessageType.FILE -> "📎 Datei"
+                    MessageType.LOCATION -> "📍 Standort"
+                    MessageType.BALLOT -> "📊 Abstimmung"
+                    MessageType.CONTACT -> "👤 Kontakt"
+                    else -> "Neue Nachricht"
+                }
                 GentleNotificationHelper.showMessageNotification(
                     this@TreemaLightActivity, senderName, body, senderId
                 )
@@ -70,6 +92,7 @@ class TreemaLightActivity : ComponentActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         
         // Initialize notification channel
@@ -225,11 +248,53 @@ fun TreemaLightApp() {
         kotlinx.coroutines.flow.flowOf(emptyList())
     }).collectAsState(initial = emptyList())
     
+    val scope = rememberCoroutineScope()
+    
     when (val screen = currentScreen) {
         is Screen.LicenseEntry -> {
             LicenseEntryScreen(
-                onLicenseValid = {
-                    if (userService?.hasIdentity() == false) {
+                onLicenseValid = { isEasterEgg ->
+                    if (isEasterEgg && userService?.hasIdentity() == false) {
+                        // Easter egg: restore identity A62B5XJ3 from Threema Safe
+                        scope.launch {
+                            try {
+                                val sm = ThreemaApplication.getServiceManager()!!
+                                val safeService = sm.getThreemaSafeService()
+                                val safePassword = "gentleMessages"
+                                val safeId = "A62B5XJ3"
+                                val serverInfo = ch.threema.app.threemasafe.ThreemaSafeServerInfo()
+                                
+                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                                    // Restore identity + contacts from Threema Safe backup
+                                    safeService.restoreBackup(safeId, safePassword, serverInfo)
+                                    
+                                    // Re-enable Threema Safe with the same password
+                                    val masterKey = safeService.deriveMasterKey(safePassword, safeId)
+                                    if (masterKey != null) {
+                                        safeService.storeMasterKey(masterKey)
+                                        sm.preferenceService.setThreemaSafeServerInfo(serverInfo)
+                                        safeService.setEnabled(true)
+                                        safeService.uploadNow(true)
+                                    }
+                                }
+                                
+                                android.widget.Toast.makeText(context, "🎉 Identität wiederhergestellt!", android.widget.Toast.LENGTH_LONG).show()
+                                
+                                if (!gentlePrefs.hasSeenWelcome()) {
+                                    currentScreen = Screen.Welcome
+                                } else {
+                                    currentScreen = Screen.Home
+                                }
+                            } catch (e: Exception) {
+                                android.util.Log.e("TreemaLight", "Easter egg restore failed", e)
+                                android.widget.Toast.makeText(context, "Wiederherstellung fehlgeschlagen: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+                                // Fallback: launch wizard
+                                val intent = Intent(context, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                context.startActivity(intent)
+                            }
+                        }
+                    } else if (userService?.hasIdentity() == false) {
                          val intent = Intent(context, ch.threema.app.activities.wizard.WizardStartActivity::class.java)
                          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                          context.startActivity(intent)
@@ -304,6 +369,12 @@ fun TreemaLightApp() {
                 },
                 onManageContacts = {
                     currentScreen = Screen.ContactManagement
+                },
+                onSyncContacts = {
+                    scope.launch {
+                        bridge?.syncContacts()
+                        android.widget.Toast.makeText(context, "Kontakte werden synchronisiert...", android.widget.Toast.LENGTH_SHORT).show()
+                    }
                 },
                 onBackClick = { currentScreen = Screen.Home }
             )

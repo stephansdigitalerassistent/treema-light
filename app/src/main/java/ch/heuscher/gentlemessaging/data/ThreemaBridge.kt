@@ -11,6 +11,7 @@ import ch.threema.app.services.GroupService
 import ch.threema.app.services.MessageService
 import ch.threema.storage.models.ContactModel
 import ch.threema.storage.models.MessageModel
+import ch.threema.app.services.SynchronizeContactsService
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -31,6 +32,7 @@ import ch.threema.storage.models.AbstractMessageModel
 import ch.threema.storage.models.GroupModel
 import ch.threema.storage.models.ReceiverModel
 import ch.threema.domain.models.IdentityState
+import ch.threema.storage.models.MessageType
 
 /**
  * Bridge between gentle messaging's simple UI and the full Threema services.
@@ -45,6 +47,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     private val userService: UserService by inject()
     private val apiConnector: APIConnector by inject()
     private val contactModelRepository: ContactModelRepository by inject()
+    private val synchronizeContactsService: SynchronizeContactsService by inject()
     private val gentlePrefs = GentlePreferences.getInstance(context)
 
     // =========================================================================
@@ -285,6 +288,21 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     }
 
     // =========================================================================
+    // SYNC
+    // =========================================================================
+
+    /**
+     * Helper to manually trigger Threema's address book synchronization
+     */
+    suspend fun syncContacts(): Boolean = withContext(Dispatchers.IO) {
+        try {
+            synchronizeContactsService.instantiateSynchronizationAndRun()
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    // =========================================================================
     // HELPERS
     // =========================================================================
 
@@ -320,8 +338,34 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
 
     private fun AbstractMessageModel.toSimpleMessage(): Message? {
         if (this !is MessageModel) return null
-        val body = this.body ?: return null
-        
+
+        // Skip internal status / separator types — they have no user-facing value
+        when (this.type) {
+            MessageType.STATUS,
+            MessageType.VOIP_STATUS,
+            MessageType.DATE_SEPARATOR,
+            MessageType.GROUP_CALL_STATUS,
+            MessageType.FORWARD_SECURITY_STATUS,
+            MessageType.GROUP_STATUS -> return null
+            else -> { /* continue */ }
+        }
+
+        // Map body based on message type — non-TEXT types store protocol data in body
+        val content = when (this.type) {
+            MessageType.TEXT -> this.body ?: return null
+            MessageType.IMAGE -> "📷 Bild"
+            MessageType.VIDEO -> "🎬 Video"
+            MessageType.VOICEMESSAGE -> "🎤 Sprachnachricht"
+            MessageType.FILE -> {
+                val caption = this.fileData.caption
+                if (!caption.isNullOrBlank()) caption else "📎 Datei"
+            }
+            MessageType.LOCATION -> "📍 Standort"
+            MessageType.BALLOT -> "📊 Abstimmung"
+            MessageType.CONTACT -> "👤 Kontakt"
+            else -> return null
+        }
+
         // Simplified sender resolution
         val senderId = if (this.isOutbox) "self" else this.identity?.toString() ?: "unknown"
         val senderName = if (this.isOutbox) "Ich" else {
@@ -334,7 +378,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             id = this.uid ?: "",
             senderId = senderId,
             senderName = senderName,
-            content = body,
+            content = content,
             timestamp = this.createdAt?.time ?: System.currentTimeMillis(),
             isRead = this.isRead,
             isOutgoing = this.isOutbox

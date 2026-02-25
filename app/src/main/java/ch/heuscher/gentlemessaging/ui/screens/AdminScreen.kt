@@ -40,6 +40,7 @@ fun AdminScreen(
     gentlePrefs: GentlePreferences,
     onExitAdmin: () -> Unit,
     onManageContacts: () -> Unit,
+    onSyncContacts: () -> Unit,
     onBackClick: () -> Unit
 ) {
     var showPinChangeDialog by remember { mutableStateOf(false) }
@@ -101,6 +102,14 @@ fun AdminScreen(
                 description = "Favoriten festlegen (⭐)",
                 icon = Icons.Default.Person,
                 onClick = onManageContacts
+            )
+            
+            // ── Contact Sync ──
+            AdminSettingCard(
+                title = "Kontakte synchronisieren",
+                description = "Telefonbuch mit Threema abgleichen",
+                icon = Icons.Default.Refresh,
+                onClick = onSyncContacts
             )
 
             // ── PIN Change ──

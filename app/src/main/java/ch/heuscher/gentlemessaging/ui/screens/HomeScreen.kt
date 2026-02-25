@@ -2,7 +2,7 @@ package ch.heuscher.gentlemessaging.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -64,19 +64,38 @@ fun HomeScreen(
         )
     }
     
+    // Tap counter for admin mode bypass
+    var tapCount by remember { mutableStateOf(0) }
+    var lastTapTime by remember { mutableStateOf(0L) }
+    
+    fun handleHeaderTap() {
+        val now = System.currentTimeMillis()
+        if (now - lastTapTime > 1500) {
+            tapCount = 1
+        } else {
+            tapCount++
+        }
+        lastTapTime = now
+        
+        if (tapCount >= 3) {
+            showPinDialog = true
+            tapCount = 0
+        }
+    }
+    
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .systemBarsPadding()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        // Simple Header — long-press anywhere in header to open admin
+        // Simple Header — tap 3 times anywhere in header to open admin
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.primaryContainer)
-                .combinedClickable(
-                    onClick = { },
-                    onLongClick = { showPinDialog = true },
+                .clickable(
+                    onClick = { handleHeaderTap() },
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() }
                 )
