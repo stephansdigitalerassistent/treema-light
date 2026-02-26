@@ -8,6 +8,7 @@ import ch.threema.app.listeners.ContactListener
 import ch.threema.app.listeners.MessageListener
 import ch.threema.app.services.ContactService
 import ch.threema.app.services.GroupService
+import ch.threema.app.services.FileService
 import ch.threema.app.services.MessageService
 import ch.threema.storage.models.ContactModel
 import ch.threema.storage.models.MessageModel
@@ -43,6 +44,7 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
     private val contactService: ContactService by inject()
     private val groupService: GroupService by inject()
     private val messageService: MessageService by inject()
+    private val fileService: FileService by inject()
     private val serviceManager: ServiceManager by inject()
     private val userService: UserService by inject()
     private val apiConnector: APIConnector by inject()
@@ -350,14 +352,36 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             else -> { /* continue */ }
         }
 
+        // Try to load thumbnail for image-bearing message types
+        var thumbnail: android.graphics.Bitmap? = null
+        var caption: String? = null
+
+        when (this.type) {
+            MessageType.IMAGE -> {
+                thumbnail = try {
+                    fileService.getMessageThumbnailBitmap(this, null)
+                } catch (e: Exception) { null }
+                caption = this.caption
+            }
+            MessageType.FILE -> {
+                val mime = this.fileData?.mimeType ?: ""
+                caption = this.fileData?.caption
+                if (mime.startsWith("image/")) {
+                    thumbnail = try {
+                        fileService.getMessageThumbnailBitmap(this, null)
+                    } catch (e: Exception) { null }
+                }
+            }
+            else -> { /* no thumbnail */ }
+        }
+
         // Map body based on message type — non-TEXT types store protocol data in body
         val content = when (this.type) {
             MessageType.TEXT -> this.body ?: return null
-            MessageType.IMAGE -> "📷 Bild"
+            MessageType.IMAGE -> caption ?: "📷 Bild"
             MessageType.VIDEO -> "🎬 Video"
             MessageType.VOICEMESSAGE -> "🎤 Sprachnachricht"
             MessageType.FILE -> {
-                val caption = this.fileData.caption
                 if (!caption.isNullOrBlank()) caption else "📎 Datei"
             }
             MessageType.LOCATION -> "📍 Standort"
@@ -381,7 +405,9 @@ class ThreemaBridge(private val context: Context) : KoinComponent {
             content = content,
             timestamp = this.createdAt?.time ?: System.currentTimeMillis(),
             isRead = this.isRead,
-            isOutgoing = this.isOutbox
+            isOutgoing = this.isOutbox,
+            thumbnailBitmap = thumbnail,
+            caption = caption
         )
     }
 

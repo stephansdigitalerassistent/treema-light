@@ -1,5 +1,6 @@
 package ch.heuscher.gentlemessaging.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -229,6 +232,10 @@ fun ChatScreen(
 @Composable
 fun MessageBubble(message: Message) {
     val isMe = message.isOutgoing
+    val hasImage = message.thumbnailBitmap != null
+    // Hide text content if it's just an emoji placeholder and we have a thumbnail
+    val isPlaceholder = message.content.startsWith("📷") || message.content.startsWith("📎")
+    val showText = !hasImage || !isPlaceholder
     
     Box(
         modifier = Modifier.fillMaxWidth(),
@@ -257,21 +264,43 @@ fun MessageBubble(message: Message) {
                 ),
                 tonalElevation = 2.dp
             ) {
-                Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-                    Text(
-                        text = message.content,
-                        color = if (isMe) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    
-                    Text(
-                        text = formatTime(message.timestamp),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = (if (isMe) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant).copy(alpha = 0.7f),
-                        modifier = Modifier
-                            .align(Alignment.End)
-                            .padding(top = 4.dp)
-                    )
+                Column {
+                    // Inline image thumbnail
+                    if (hasImage) {
+                        Image(
+                            bitmap = message.thumbnailBitmap!!.asImageBitmap(),
+                            contentDescription = message.caption ?: "Bild",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(
+                                    topStart = 16.dp,
+                                    topEnd = 16.dp,
+                                    bottomStart = if (showText) 0.dp else if (isMe) 16.dp else 4.dp,
+                                    bottomEnd = if (showText) 0.dp else if (isMe) 4.dp else 16.dp
+                                )),
+                            contentScale = ContentScale.FillWidth
+                        )
+                    }
+
+                    // Text content + timestamp
+                    Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
+                        if (showText) {
+                            Text(
+                                text = message.content,
+                                color = if (isMe) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                        
+                        Text(
+                            text = formatTime(message.timestamp),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = (if (isMe) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant).copy(alpha = 0.7f),
+                            modifier = Modifier
+                                .align(Alignment.End)
+                                .padding(top = 4.dp)
+                        )
+                    }
                 }
             }
         }

@@ -1,5 +1,7 @@
 package ch.heuscher.gentlemessaging.data
 
+import android.graphics.Bitmap
+
 /**
  * Simplified Contact model for gentle messaging UI.
  * Maps from Threema's ContactModel.
@@ -15,6 +17,9 @@ data class Contact(
 /**
  * Simplified Message model for gentle messaging UI.
  * Maps from Threema's MessageModel.
+ *
+ * thumbnailBitmap: inline image preview for IMAGE / FILE (image) messages.
+ * caption: optional text caption (e.g. from file attachments with captions).
  */
 data class Message(
     val id: String,
@@ -23,5 +28,7 @@ data class Message(
     val content: String,
     val timestamp: Long,
     val isRead: Boolean = false,
-    val isOutgoing: Boolean = false
+    val isOutgoing: Boolean = false,
+    val thumbnailBitmap: Bitmap? = null,
+    val caption: String? = null
 )
