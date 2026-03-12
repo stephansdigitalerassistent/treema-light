@@ -19,9 +19,8 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-include(":app")
 include(":domain")
 include(":common")
-include(":commonAndroid")
 include(":test-helpers")
 include(":lint-rules")
+include(":cli")

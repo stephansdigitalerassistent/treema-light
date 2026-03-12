@@ -22,3 +22,4 @@ reproduce/
 **/.DS_Store
 .kotlin
 /app/lint-report.xml
+*.log
