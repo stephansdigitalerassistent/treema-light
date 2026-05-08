@@ -23,3 +23,4 @@ reproduce/
 .kotlin
 /app/lint-report.xml
 /app/src/main/proto/
+run_output*.log
