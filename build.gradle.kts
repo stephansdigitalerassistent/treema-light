@@ -49,6 +49,7 @@ plugins {
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.ktlint)
     alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.versions)
 }
 
 allprojects {

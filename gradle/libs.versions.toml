@@ -86,6 +86,7 @@ uiautomator = "2.3.0"
 webrtcAndroid = "134.0.0"
 zip4j = "2.11.5"
 zxing = "3.5.3"
+versionsPlugin = "0.51.0"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
@@ -220,3 +221,4 @@ rust-android = { id = "org.mozilla.rust-android-gradle.rust-android", version.re
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 stem = { id = "com.likethesalad.stem", version.ref = "stem" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+versions = { id = "com.github.ben-manes.versions", version.ref = "versionsPlugin" }
