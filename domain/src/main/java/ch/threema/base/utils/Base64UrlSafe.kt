@@ -27,6 +27,14 @@ package ch.threema.base.utils
 object Base64UrlSafe {
     /**
      * Encode with a url safe base 64 alphabet. Padding characters are stripped.
+     *
+     * @example
+     * ```kotlin
+     * import ch.threema.base.utils.Base64UrlSafe
+     *
+     * val bytes = byteArrayOf(1, 2, 3)
+     * val encoded = Base64UrlSafe.encode(bytes) // "AQID"
+     * ```
      */
     fun encode(bytes: ByteArray): String {
         return Base64.encodeBytes(bytes)
