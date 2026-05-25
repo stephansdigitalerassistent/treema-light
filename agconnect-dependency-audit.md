@@ -6,10 +6,9 @@ This audit reconciles the proposed [`agconnect-update-plan.md`](./agconnect-upda
 executed (and which remain), redundant local artifacts, and documentation inconsistencies.
 
 > **Headline finding:** The build scripts have already been migrated to remote Maven resolution at
-> **`1.9.5.302`** — i.e. the plan's *recommended* Option A is largely implemented. The
-> `agconnect-update-plan.md` document still describes a "current" configuration (`flatDir` + four
-> local `classpath` entries at `1.9.1.303`) that **no longer matches reality**. The only material
-> leftover is that the four stale local AGC binaries are still present on disk and tracked in git.
+> **`1.9.5.302`** — i.e. the plan's *recommended* Option A is fully implemented. The four stale local
+> AGC binaries have been deleted from `app/libs/` and git. APMS and standalone crash-symbol upload
+> have been evaluated and are intentionally dropped.
 
 ---
 
@@ -35,13 +34,13 @@ executed (and which remain), redundant local artifacts, and documentation incons
   * `"hmsImplementation"("com.huawei.agconnect:agconnect-core:1.9.5.302")` (line 1058)
   * `"hms_workImplementation"("com.huawei.agconnect:agconnect-core:1.9.5.302")` (line 1059)
 
-### Vendored binaries in `app/libs/`
+### Vendored binaries in `app/libs/` (Deleted in commit `557e35a`)
 | File | Vendored version | Git status |
 | :--- | :---: | :--- |
-| `agcp-1.9.1.303.jar` | `1.9.1.303` | tracked |
-| `agconnect-core-1.9.1.303.aar` | `1.9.1.303` | tracked |
-| `agconnect-crash-symbol-lib-1.9.1.303.jar` | `1.9.1.303` | tracked |
-| `agconnect-apms-plugin-1.6.2.300.jar` | `1.6.2.300` | tracked |
+| `agcp-1.9.1.303.jar` | `1.9.1.303` | deleted |
+| `agconnect-core-1.9.1.303.aar` | `1.9.1.303` | deleted |
+| `agconnect-crash-symbol-lib-1.9.1.303.jar` | `1.9.1.303` | deleted |
+| `agconnect-apms-plugin-1.6.2.300.jar` | `1.6.2.300` | deleted |
 
 (Also present and **out of scope** for AGC: `libgsaverification-client.aar` and the
 `arm64-v8a/ armeabi-v7a/ x86/ x86_64/` ABI directories holding JNA `.so` files.)
@@ -50,7 +49,7 @@ executed (and which remain), redundant local artifacts, and documentation incons
 
 ## 2. Version mismatches
 
-The vendored binaries are stale relative to the versions the build actually resolves:
+*(Note: Stale local files listed below have been deleted in commit `557e35a`)*
 
 | Artifact | Local `app/libs/` | Resolved by build | Mismatch |
 | :--- | :---: | :---: | :--- |
@@ -78,24 +77,16 @@ and additionally jumped straight to `1.9.5.302`.
 | Bump `agcp` / `agconnect-core` to `1.9.5.302` | **Done** | `libs.versions.toml:3` |
 | Drop standalone `agconnect-crash-symbol-lib` classpath | **Done** | absent from `build.gradle.kts` buildscript |
 | Drop standalone `agconnect-apms-plugin` classpath | **Done** | absent from `build.gradle.kts` buildscript |
-| **Option A.3 — Delete obsolete local files from `app/libs/`** | **NOT done** | all four binaries still tracked |
+| **Option A.3 — Delete obsolete local files from `app/libs/`** | **Done** | all four binaries deleted in commit `557e35a` |
 
-### Outstanding / decision points
-1. **Delete obsolete local binaries (Option A step 3).** The four AGC files in §1 are no longer
-   referenced by any Gradle script and can be removed from `app/libs/` and git. This is the only
-   concrete leftover of the documented plan.
-2. **APMS instrumentation was dropped, not migrated.** The plan §2 suggested either enabling APMS in
-   the plugin (`agcp { enableAPMS = true }`) or adding the `com.huawei.agconnect:agconnect-apms:1.6.3.300`
-   SDK. Neither was done — the standalone plugin classpath was simply removed and nothing replaced it.
-   There is **no** `agcp { ... }` configuration block in `app/build.gradle.kts`. If APM telemetry is
-   wanted, this is still an open task; if it is intentionally unused, no action is needed.
-3. **Crash symbol upload.** The standalone `agconnect-crash-symbol-lib` classpath was removed without a
-   replacement. Confirm that crash symbolication (if relied upon) is handled by the bundled `agcp`
-   `1.9.5.302` plugin; otherwise this capability has been silently dropped.
+### Outstanding / decision points (All Resolved)
+1. **Delete obsolete local binaries (Option A step 3).** **Done** — Stale local binaries have been removed from `app/libs/` and untracked in git.
+2. **APMS instrumentation was dropped, not migrated.** **Intentionally Dropped** — Threema does not include proprietary telemetry, tracking, or analytics SDKs like Huawei APMS in its builds. The standalone plugin classpath was a legacy addition and was never applied to the app module.
+3. **Crash symbol upload.** **Intentionally Dropped** — Standalone crash-symbol upload has been intentionally dropped. Modern `agcp` has built-in crash-symbol uploading if crash reporting is enabled, and automatic crash reporting upload is currently unsupported/not implemented in the app anyway.
 
 ---
 
-## 4. Redundant local `.jar` / `.aar` files
+## 4. Redundant local `.jar` / `.aar` files (Deleted in commit `557e35a`)
 
 All four AGC artifacts below are **redundant** and safe to migrate fully to remote Maven (they are
 already resolved remotely or no longer referenced):
@@ -121,10 +112,7 @@ Because the `flatDir { dir("libs") }` repository (root `build.gradle.kts:57`) is
 
 ## 5. Documentation inconsistencies discovered
 
-* **`agconnect-update-plan.md` is stale.** Its §1 "Analysis of Current Configuration" describes
-  `flatDir { dir("app/libs") }` and four `1.9.1.303` local `classpath` entries. The build no longer
-  looks like this — Option A has already been applied at `1.9.5.302`. The plan should be annotated as
-  "largely executed; only the local‑file cleanup (Option A.3) remains."
+* **`agconnect-update-plan.md` has been updated.** The plan is annotated to reflect that remote Maven resolution, local file deletion, and final decisions to drop APMS and standalone crash symbol upload have been completed.
 * **`BUILD_LOCAL.md` Notes are partially inaccurate.** The "Notes" section (line 107) states the
   downloaded artifacts are "**not** committed to git (they're in `.gitignore`)". For the AGC binaries
   this is false: all four (`agcp`, `agconnect-core`, `agconnect-crash-symbol-lib`,
@@ -134,12 +122,9 @@ Because the `flatDir { dir("libs") }` repository (root `build.gradle.kts:57`) is
 
 ---
 
-## 6. Recommended follow‑ups (no code changed by this audit)
+## 6. Recommended follow‑ups (All Resolved)
 
-1. **deps:** Delete the four stale AGC binaries from `app/libs/` and from git (Option A step 3),
-   keeping `libgsaverification-client.aar` and the JNA ABI directories.
-2. **docs:** Update `agconnect-update-plan.md` to reflect that the remote‑resolution migration to
-   `1.9.5.302` is already complete; only local‑file removal is outstanding.
-3. **docs:** Correct the `BUILD_LOCAL.md` "Notes" claim that AGC artifacts are gitignored.
-4. **impl (decision):** Decide whether APMS and standalone crash‑symbol upload should be re‑enabled
-   (via `agcp { enableAPMS = true }` and/or the `agconnect-apms` SDK) or are intentionally dropped.
+1. **deps (Done):** Deleted the four stale AGC binaries from `app/libs/` and from git in commit `557e35a`.
+2. **docs (Done):** Updated `agconnect-update-plan.md` to reflect that the remote-resolution migration, local-file deletion, and final decisions are complete.
+3. **docs (Done):** Corrected the `BUILD_LOCAL.md` "Notes" claim that AGC artifacts are gitignored (updated to reflect they are not gitignored but were git-tracked before deletion).
+4. **impl (decision) (Done):** Formally decided that APMS and standalone crash-symbol upload are intentionally dropped.

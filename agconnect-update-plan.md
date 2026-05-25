@@ -3,7 +3,7 @@
 This document evaluates the current Huawei AppGallery Connect dependencies, details available upgrades, reviews security implications, and proposes a path forward.
 
 > [!NOTE]
-> The remote-resolution migration to 1.9.5.302 is already done and only the local-file cleanup remains.
+> The remote-resolution migration to 1.9.5.302 and local-file cleanup (Option A.3) have been completed. Furthermore, APMS and standalone crash-symbol upload have been intentionally dropped.
 
 ---
 
@@ -62,13 +62,8 @@ Local dependency references are declared under the `hms` and `hms_work` configur
 | **`agconnect-apms-plugin`** | `1.6.2.300` | — | — | **Deprecated** (Integrated into main `agcp` plugin) |
 
 ### Key Update & Integration Changes
-*   **Deprecation of `agconnect-apms-plugin`**: The standalone APMS plugin is obsolete. Huawei has merged APM instrumentation directly into the main `agcp` plugin. To use it in newer versions, the standalone classpath dependency should be removed, and APMS should be enabled within the `agcp` configuration block in `app/build.gradle.kts`:
-    ```kotlin
-    agcp {
-        enableAPMS = true
-    }
-    ```
-*   **APMS SDK dependency**: The actual SDK itself is now `com.huawei.agconnect:agconnect-apms:1.6.3.300`. Note that the project currently does not depend on the APMS SDK directly in the `dependencies` block, indicating the plugin classpath is likely a legacy addition.
+*   **APMS (Dropped)**: APMS (App Performance Management) has been intentionally dropped because Threema does not include proprietary tracking, telemetry, or analytics SDKs. The standalone `agconnect-apms-plugin` was a legacy classpath dependency that was never applied as a plugin or implementation dependency in the app module.
+*   **Standalone Crash-Symbol Upload (Dropped)**: Standalone crash-symbol upload has been intentionally dropped. Modern `agcp` has built-in crash-symbol uploading if crash reporting is enabled, and automatic crash reporting upload is currently unsupported/not implemented in the app anyway.
 
 ---
 
@@ -145,8 +140,8 @@ This approach removes local binary maintenance in `app/libs/`, resolving the Gra
     +    "hms_workImplementation"("com.huawei.agconnect:agconnect-core:1.9.5.302")
     ```
 
-3.  **Delete Obsolete Local Files**:
-    Remove `agcp-1.9.1.303.jar`, `agconnect-core-1.9.1.303.aar`, `agconnect-crash-symbol-lib-1.9.1.303.jar`, and `agconnect-apms-plugin-1.6.2.300.jar` from `app/libs/`.
+3.  **Delete Obsolete Local Files (Completed)**:
+    Remove `agcp-1.9.1.303.jar`, `agconnect-core-1.9.1.303.aar`, `agconnect-crash-symbol-lib-1.9.1.303.jar`, and `agconnect-apms-plugin-1.6.2.300.jar` from `app/libs/` (this was done in commit `557e35a`).
 
 ---
 
