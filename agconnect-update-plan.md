@@ -2,6 +2,9 @@
 
 This document evaluates the current Huawei AppGallery Connect dependencies, details available upgrades, reviews security implications, and proposes a path forward.
 
+> [!NOTE]
+> The remote-resolution migration to 1.9.5.302 is already done and only the local-file cleanup remains.
+
 ---
 
 ## 1. Analysis of Current Configuration
