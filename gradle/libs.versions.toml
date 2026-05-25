@@ -1,5 +1,6 @@
 [versions]
 activityCompose = "1.10.1"
+agconnectAgcp = "1.9.5.302"
 androidGradle = "8.12.3"
 androidImageCropper = "4.6.0"
 androidx_activity = "1.10.1"
@@ -89,6 +90,7 @@ zxing = "3.5.3"
 versionsPlugin = "0.51.0"
 
 [libraries]
+agconnect-agcp = { module = "com.huawei.agconnect:agcp", version.ref = "agconnectAgcp" }
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradle" }
 androidImageCropper = { module = "com.vanniktech:android-image-cropper", version.ref = "androidImageCropper" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx_activity" }

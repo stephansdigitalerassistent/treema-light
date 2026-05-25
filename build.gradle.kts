@@ -37,7 +37,7 @@ buildscript {
         classpath(libs.android.gradle)
 
         // Huawei agconnect plugin
-        classpath("com.huawei.agconnect:agcp:1.9.5.302")
+        classpath(libs.agconnect.agcp)
     }
 }
 
