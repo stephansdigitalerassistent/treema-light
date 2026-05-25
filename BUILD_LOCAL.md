@@ -87,6 +87,21 @@ If you want to build everything from scratch (requires Rust, NDK, protoc):
 
 (Without the `-PusePrebuiltRust` flag)
 
+## Huawei AGConnect Dependencies
+
+The project relies on Huawei AppGallery Connect (AGC) dependencies for the HMS (Huawei Mobile Services) build variants. These dependencies must be present locally under `app/libs/` (e.g., `app/libs/agconnect-core-1.9.1.303.aar` and `app/libs/agconnect-crash-symbol-lib-1.9.1.303.jar`) for offline builds and local vendoring support.
+
+### Version Discrepancy
+
+There is a version discrepancy between the local vendored files and the Gradle build configuration:
+- The local files in `app/libs/` are currently at version **`1.9.1.303`**.
+- The root `build.gradle.kts` and `app/build.gradle.kts` files reference version **`1.9.5.302`** for the AGCP plugin and core runtime libraries (resolving remotely via the Huawei Maven Repository).
+
+### Managing the Dependencies
+
+- **Online Builds**: During normal online builds, Gradle will automatically fetch and resolve version `1.9.5.302` from the Huawei Maven repository (`https://developer.huawei.com/repo/`), ignoring the older local versions.
+- **Offline / Vendored Builds**: If you need to build the HMS variant offline, or if you prefer to have matching local/vendored dependencies, you must manually manage these. You should download the `1.9.5.302` (and related `1.9.5.301` crash symbol lib) artifacts from the Huawei Maven repository and replace the older files in `app/libs/`. See [agconnect-update-plan.md](file:///home/ubuntu/treema-light/agconnect-update-plan.md) for more details.
+
 ## Notes
 
 - The downloaded artifacts are **not** committed to git (they're in `.gitignore`)
