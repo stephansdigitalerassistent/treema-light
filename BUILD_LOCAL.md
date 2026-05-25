@@ -104,6 +104,7 @@ There is a version discrepancy between the local vendored files and the Gradle b
 
 ## Notes
 
-- The downloaded artifacts are **not** committed to git (they're in `.gitignore`)
-- You must re-download after pulling changes that affect Rust or Protobuf
-- The artifacts are architecture-specific and match what GitHub Actions builds
+- The downloaded pre-built Rust and Protobuf artifacts are **not** committed to git (they're in `.gitignore`).
+- The four Huawei AGConnect artifacts are **not** gitignored (and were git-tracked prior to their removal as obsolete).
+- You must re-download the pre-built Rust/Protobuf artifacts after pulling changes that affect Rust or Protobuf.
+- The pre-built artifacts are architecture-specific and match what GitHub Actions builds.
