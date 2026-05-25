@@ -51,16 +51,35 @@ cp compile-proto.sh "$TEST_WS/"
 
 # 4. Invoke the compile script and assert it exits with 0
 echo "Running compile-proto.sh against the test schemas..."
+EXIT_CODE=0
 (
     cd "$TEST_WS"
     ./compile-proto.sh
-)
-EXIT_CODE=$?
+) || EXIT_CODE=$?
 
-if [ $EXIT_CODE -eq 0 ]; then
-    echo "Test passed: compile-proto.sh successfully compiled the schemas and exited with 0."
-    exit 0
-else
+if [ $EXIT_CODE -ne 0 ]; then
     echo "Test failed: compile-proto.sh exited with non-zero status code: $EXIT_CODE" >&2
     exit 1
 fi
+
+echo "Test passed: compile-proto.sh successfully compiled the schemas and exited with 0."
+
+# 5. Assert that the expected generated files exist
+echo "Checking generated files..."
+EXPECTED_FILES=(
+    "build/generated/source/proto/main/java/ch/threema/localcrypto/protobuf/InnerKeyStorage.java"
+    "build/generated/source/proto/main/kotlin/ch/threema/localcrypto/protobuf/InnerKeyStorageKt.kt"
+    "build/generated/source/proto/main/java/ch/threema/protobuf/EncryptedDataWithNonceAhead.java"
+    "build/generated/source/proto/main/kotlin/ch/threema/protobuf/EncryptedDataWithNonceAheadKt.kt"
+)
+
+for file in "${EXPECTED_FILES[@]}"; do
+    if [ ! -f "$TEST_WS/$file" ]; then
+        echo "Error: Expected generated file does not exist: $TEST_WS/$file" >&2
+        exit 1
+    fi
+    echo "Verified: $file exists."
+done
+
+echo "All assertions passed!"
+exit 0
