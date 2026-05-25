@@ -1,24 +1,24 @@
-# Huawei AppGallery Connect Dependency Evaluation and Proposed Update Plan
+# Huawei AppGallery Connect Dependency Evaluation and Completed Update Plan
 
-This document evaluates the current Huawei AppGallery Connect dependencies, details available upgrades, reviews security implications, and proposes a path forward.
+This document evaluates the Huawei AppGallery Connect dependencies, details the upgrades that were available, reviews security implications, and documents the completed migration path.
 
 > [!NOTE]
 > The remote-resolution migration to 1.9.5.302 and local-file cleanup (Option A.3) have been completed. Furthermore, APMS and standalone crash-symbol upload have been intentionally dropped.
 
 ---
 
-## 1. Analysis of Current Configuration
+## 1. Analysis of Prior Configuration (Before Migration)
 
-Currently, the AppGallery Connect (AGC) plugin and SDK dependencies are integrated as local binary assets (JAR/AAR) rather than remote Gradle coordinates.
+Previously, the AppGallery Connect (AGC) plugin and SDK dependencies were integrated as local binary assets (JAR/AAR) rather than remote Gradle coordinates.
 
-### Local Artifacts in [app/libs/](file:///home/ubuntu/treema-light/app/libs)
-*   **`agcp-1.9.1.303.jar`**: The AppGallery Connect Gradle plugin.
-*   **`agconnect-core-1.9.1.303.aar`**: The core runtime library for Huawei mobile services integration.
-*   **`agconnect-crash-symbol-lib-1.9.1.303.jar`**: Symbolication tool for crash reports.
-*   **`agconnect-apms-plugin-1.6.2.300.jar`**: The standalone APM (App Performance Management) plugin.
+### Local Artifacts in [app/libs/](file:///home/ubuntu/treema-light/app/libs) (Prior to Migration)
+*   **`agcp-1.9.1.303.jar`**: The AppGallery Connect Gradle plugin (deleted).
+*   **`agconnect-core-1.9.1.303.aar`**: The core runtime library for Huawei mobile services integration (deleted).
+*   **`agconnect-crash-symbol-lib-1.9.1.303.jar`**: Symbolication tool for crash reports (deleted).
+*   **`agconnect-apms-plugin-1.6.2.300.jar`**: The standalone APM (App Performance Management) plugin (deleted).
 
-### Integration in [build.gradle.kts](file:///home/ubuntu/treema-light/build.gradle.kts)
-The buildscript dependencies block references these files using a local repository:
+### Integration in [build.gradle.kts](file:///home/ubuntu/treema-light/build.gradle.kts) (Prior to Migration)
+The buildscript dependencies block previously referenced these files using a local repository:
 ```kotlin
 buildscript {
     repositories {
@@ -39,15 +39,15 @@ buildscript {
 }
 ```
 
-### Integration in [app/build.gradle.kts](file:///home/ubuntu/treema-light/app/build.gradle.kts)
-Local dependency references are declared under the `hms` and `hms_work` configurations:
+### Integration in [app/build.gradle.kts](file:///home/ubuntu/treema-light/app/build.gradle.kts) (Prior to Migration)
+Local dependency references were previously declared under the `hms` and `hms_work` configurations:
 ```kotlin
 "hmsImplementation"(group = "", name = "agconnect-core-1.9.1.303", ext = "aar")
 "hms_workImplementation"(group = "", name = "agconnect-core-1.9.1.303", ext = "aar")
 ```
 
 > [!NOTE]
-> Using `flatDir` for local dependency resolution prompts the following build configuration warning:
+> Using `flatDir` for local dependency resolution previously prompted the following build configuration warning (now resolved):
 > `WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.`
 
 ---
@@ -56,10 +56,10 @@ Local dependency references are declared under the `hms` and `hms_work` configur
 
 | Dependency | Current Version | Latest Stable Version | Release Date | Upgrade Status |
 | :--- | :---: | :---: | :---: | :--- |
-| **`agcp`** | `1.9.1.303` | `1.9.5.302` | March 2026 | **Available** |
-| **`agconnect-core`** | `1.9.1.303` | `1.9.5.302` | March 2026 | **Available** |
-| **`agconnect-crash-symbol-lib`** | `1.9.1.303` | `1.9.5.301` | February 2026 | **Available** |
-| **`agconnect-apms-plugin`** | `1.6.2.300` | — | — | **Deprecated** (Integrated into main `agcp` plugin) |
+| **`agcp`** | `1.9.1.303` | `1.9.5.302` | March 2026 | **Completed** |
+| **`agconnect-core`** | `1.9.1.303` | `1.9.5.302` | March 2026 | **Completed** |
+| **`agconnect-crash-symbol-lib`** | `1.9.1.303` | `1.9.5.301` | February 2026 | **Dropped** |
+| **`agconnect-apms-plugin`** | `1.6.2.300` | — | — | **Dropped** (Integrated/dropped) |
 
 ### Key Update & Integration Changes
 *   **APMS (Dropped)**: APMS (App Performance Management) has been intentionally dropped because Threema does not include proprietary tracking, telemetry, or analytics SDKs. The standalone `agconnect-apms-plugin` was a legacy classpath dependency that was never applied as a plugin or implementation dependency in the app module.
@@ -78,14 +78,14 @@ Local dependency references are declared under the `hms` and `hms_work` configur
 
 ---
 
-## 4. Proposed Update Plan
+## 4. Completed Update Plan
 
-We propose two options to execute this upgrade:
+The migration has been successfully executed using **Option A (Transition to Remote Repository Resolution)**, upgrading dependencies to version `1.9.5.302`. Option B is retained below solely for historical reference.
 
-### Option A: Transition to Remote Repository Resolution (Recommended)
+### Option A: Transition to Remote Repository Resolution (Completed)
 This approach removes local binary maintenance in `app/libs/`, resolving the Gradle metadata warnings and ensuring dependencies resolve correctly transitively.
 
-1.  **Modify Project-Level `build.gradle.kts`**:
+1.  **Modify Project-Level `build.gradle.kts`** (Completed):
     Add the developer repository to the buildscript and project repositories, and update the coordinates:
     ```diff
      buildscript {
@@ -131,7 +131,7 @@ This approach removes local binary maintenance in `app/libs/`, resolving the Gra
      }
     ```
 
-2.  **Modify App-Level `app/build.gradle.kts`**:
+2.  **Modify App-Level `app/build.gradle.kts`** (Completed):
     Update the implementation dependency definition to pull from the repository:
     ```diff
     -    "hmsImplementation"(group = "", name = "agconnect-core-1.9.1.303", ext = "aar")
