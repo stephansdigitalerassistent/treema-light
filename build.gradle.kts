@@ -30,17 +30,14 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        flatDir { dir("app/libs") }
+        maven { url = uri("https://developer.huawei.com/repo/") }
     }
     dependencies {
         classpath(libs.kotlin.gradle)
         classpath(libs.android.gradle)
 
         // Huawei agconnect plugin
-        classpath("com.huawei.agconnect:agcp-1.9.1.303")
-        classpath("com.huawei.agconnect:agconnect-crash-symbol-lib-1.9.1.301")
-        classpath("com.huawei.agconnect:agconnect-apms-plugin-1.6.2.300")
-        classpath("com.huawei.agconnect:agconnect-core-1.9.1.301@aar")
+        classpath("com.huawei.agconnect:agcp:1.9.5.302")
     }
 }
 
@@ -69,6 +66,7 @@ allprojects {
                 includeGroup("com.huawei.hms")
                 includeGroup("com.huawei.android.hms")
                 includeGroup("com.huawei.hmf")
+                includeGroup("com.huawei.agconnect")
             }
         }
     }

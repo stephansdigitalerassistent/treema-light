@@ -1055,8 +1055,8 @@ dependencies {
     "hms_workImplementation"(libs.hmsPush) {
         exclude(group = "com.huawei.agconnect")
     }
-    "hmsImplementation"(group = "", name = "agconnect-core-1.9.1.301", ext = "aar")
-    "hms_workImplementation"(group = "", name = "agconnect-core-1.9.1.301", ext = "aar")
+    "hmsImplementation"("com.huawei.agconnect:agconnect-core:1.9.5.302")
+    "hms_workImplementation"("com.huawei.agconnect:agconnect-core:1.9.5.302")
 }
 
 // Define the cargo attributes. These will be used by the rust-android plugin that will create the
