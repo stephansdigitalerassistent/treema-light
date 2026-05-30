@@ -613,7 +613,16 @@ public class ConfigUtils {
     public static void recreateActivity(Activity activity) {
         activity.finish();
 
-        final Intent intent = new Intent(activity, HomeActivity.class);
+        Class<?> activityClass = HomeActivity.class;
+        if ("treemalight".equals(BuildConfig.FLAVOR)) {
+            try {
+                activityClass = Class.forName("ch.heuscher.gentlemessaging.TreemaLightActivity");
+            } catch (ClassNotFoundException e) {
+                logger.error("TreemaLightActivity not found", e);
+            }
+        }
+
+        final Intent intent = new Intent(activity, activityClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         activity.startActivity(intent);
     }

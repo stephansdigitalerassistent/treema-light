@@ -63,9 +63,7 @@ sourceSets {
 
     main {
         // Only include proto dir if NOT using prebuilt artifacts
-        if (!project.hasProperty("usePrebuiltRust")) {
-            // Plugin handles source generation
-        }
+        // Plugin handles source generation when usePrebuiltRust is false or not set
         java.srcDir("./build/generated/source/libthreema")
     }
 }
@@ -129,8 +127,12 @@ sonarqube {
     }
 }
 
+// Check if we should use prebuilt Rust artifacts (default: false for CI, true for local)
+// Pass -PusePrebuiltRust=false on GitHub to compile Rust, or true locally to skip
+val usePrebuiltRust = project.findProperty("usePrebuiltRust")?.toString()?.toBoolean() ?: false
+
 afterEvaluate {
-    if (!project.hasProperty("usePrebuiltRust")) {
+    if (!usePrebuiltRust) {
         val bindingsDirectory = "${project.buildDir}/generated/source/libthreema"
         file(bindingsDirectory).mkdirs()
 

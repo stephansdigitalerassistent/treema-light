@@ -29,6 +29,13 @@ import ch.threema.common.secureContentEquals
  * 1. since it implements its own equality, it can be used in data classes without needing to override their equals and hashCode, as would be
  * the case with a plain ByteArray
  * 2. protects the actual bytes from being accidentally logged or otherwise printed, due to the custom toString implementation
+ * @example
+ * ```kotlin
+ * import ch.threema.common.models.CryptographicByteArray
+ *
+ * val secureData = CryptographicByteArray(byteArrayOf(1, 2, 3, 4))
+ * println(secureData.toString()) // "[4 bytes: 01,02,03,...]"
+ * ```
  */
 open class CryptographicByteArray(val value: ByteArray) {
     final override fun equals(other: Any?): Boolean {

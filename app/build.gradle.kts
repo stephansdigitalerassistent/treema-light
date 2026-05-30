@@ -38,6 +38,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.stem)
+    alias(libs.plugins.protobuf)
 }
 
 if (!project.hasProperty("usePrebuiltRust")) {
@@ -501,26 +502,26 @@ android {
         }
         create("treemalight") {
             versionName = "${appVersion}t$betaSuffix"
-            applicationId = "ch.heuscher.threemalight"
+            applicationId = "ch.heuscher.gentlemessaging"
             testApplicationId = "$applicationId.test"
             setProductNames(
-                appName = "Threema Light",
-                shortAppName = "Treema*",
+                appName = "gentle messages",
+                shortAppName = "gentle",
             )
             stringResValue("package_name", applicationId!!)
-            stringResValue("contacts_mime_type", "vnd.android.cursor.item/vnd.$applicationId.profile")
-            stringResValue("call_mime_type", "vnd.android.cursor.item/vnd.$applicationId.call")
-            stringBuildConfigField("MEDIA_PATH", "ThreemaLight")
-            stringBuildConfigField("LOG_TAG", "3malight")
+            stringResValue("contacts_mime_type", "vnd.android.cursor.item/vnd.ch.heuscher.gentlemessaging.profile")
+            stringResValue("call_mime_type", "vnd.android.cursor.item/vnd.ch.heuscher.gentlemessaging.call")
+            stringBuildConfigField("MEDIA_PATH", "GentleMessaging")
+            stringBuildConfigField("LOG_TAG", "gentmes")
 
             // config fields for action URLs / deep links
-            stringBuildConfigField("uriScheme", "treemalight")
-            stringBuildConfigField("actionUrl", "light.threema.ch")
+            stringBuildConfigField("uriScheme", "gentmes")
+            stringBuildConfigField("actionUrl", "gentmes.heuscher.ch")
 
             with(manifestPlaceholders) {
-                put("uriScheme", "treemalight")
-                put("actionUrl", "light.threema.ch")
-                put("callMimeType", "vnd.android.cursor.item/vnd.$applicationId.call")
+                put("uriScheme", "gentmes")
+                put("actionUrl", "gentmes.heuscher.ch")
+                put("callMimeType", "vnd.android.cursor.item/vnd.ch.heuscher.gentlemessaging.call")
             }
         }
     }
@@ -589,8 +590,6 @@ android {
             assets.srcDirs("assets")
             jniLibs.srcDirs("libs")
             res.srcDir("src/main/res-rendezvous")
-            java.srcDir("./build/generated/source/protobuf/main/java")
-            java.srcDir("./build/generated/source/protobuf/main/kotlin")
         }
 
         // Based on Google services
@@ -1056,8 +1055,8 @@ dependencies {
     "hms_workImplementation"(libs.hmsPush) {
         exclude(group = "com.huawei.agconnect")
     }
-    "hmsImplementation"(group = "", name = "agconnect-core-1.9.1.301", ext = "aar")
-    "hms_workImplementation"(group = "", name = "agconnect-core-1.9.1.301", ext = "aar")
+    "hmsImplementation"("com.huawei.agconnect:agconnect-core:1.9.5.302")
+    "hms_workImplementation"("com.huawei.agconnect:agconnect-core:1.9.5.302")
 }
 
 // Define the cargo attributes. These will be used by the rust-android plugin that will create the
@@ -1099,17 +1098,55 @@ androidStem {
     includeLocalizedOnlyTemplates = true
 }
 
-if (!project.hasProperty("usePrebuiltRust")) {
-    tasks.register<Exec>("compileProto") {
-        group = "build"
-        description = "generate class bindings from protobuf files in the 'protobuf' directory"
-        workingDir(project.projectDir)
-        commandLine("./compile-proto.sh")
+// Protobuf configuration for app module
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobufKotlinLite.get()}"
     }
-    project.tasks.preBuild.dependsOn("compileProto")
-} else {
-    android.sourceSets["main"].java.srcDir("build/generated/source/protobuf/main/java")
-    android.sourceSets["main"].java.srcDir("build/generated/source/protobuf/main/kotlin")
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                // Create Java builtin with Lite option
+                create("java") {
+                    option("lite")
+                }
+                // Create Kotlin builtin with Lite option
+                create("kotlin") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
+// The protobuf plugin expects proto files in src/main/proto/ by default.
+// Copy them from the legacy protobuf/ directory to the standard location.
+val copyProtoFilesTask = tasks.register<Copy>("copyProtoFiles") {
+    from("protobuf")
+    into("src/main/proto")
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+// Ensure proto files are copied before any proto generation task
+tasks.withType<com.google.protobuf.gradle.GenerateProtoTask>().configureEach {
+    dependsOn(copyProtoFilesTask)
+}
+
+// Ensure KSP and Kotlin compile tasks wait for proto generation (Variant-specific)
+// This resolves the implicit dependency error
+afterEvaluate {
+    android.applicationVariants.all {
+        val variantName = name.replaceFirstChar { it.uppercase() }
+        val protoTaskName = "generate${variantName}Proto"
+        val kspTaskName = "ksp${variantName}Kotlin"
+        val compileTaskName = "compile${variantName}Kotlin"
+        
+        val protoTask = tasks.findByName(protoTaskName)
+        if (protoTask != null) {
+            tasks.findByName(kspTaskName)?.dependsOn(protoTask)
+            tasks.findByName(compileTaskName)?.dependsOn(protoTask)
+        }
+    }
 }
 
 tasks.withType<Test> {

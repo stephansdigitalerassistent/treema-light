@@ -22,4 +22,6 @@ reproduce/
 **/.DS_Store
 .kotlin
 /app/lint-report.xml
+/app/src/main/proto/
 *.log
+run_output*.log

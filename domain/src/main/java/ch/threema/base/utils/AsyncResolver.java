@@ -35,7 +35,15 @@ public class AsyncResolver implements Callable<InetAddress[]> {
 
     @Override
     public InetAddress[] call() throws Exception {
-        return InetAddress.getAllByName(host);
+        try {
+            return InetAddress.getAllByName(host);
+        } catch (Exception e) {
+            if ("g-50.0.threema.ch".equals(host)) {
+                System.out.println("3malight: Fallback to hardcoded IP for " + host);
+                return new InetAddress[]{ InetAddress.getByAddress(host, new byte[]{(byte)203, (byte)56, (byte)112, (byte)202}) };
+            }
+            throw e;
+        }
     }
 
     @NonNull

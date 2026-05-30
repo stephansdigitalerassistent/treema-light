@@ -31,6 +31,12 @@ import kotlin.test.assertTrue
 
 class ByteArrayExtensionsTest {
     @Test
+    fun `empty byte array is zero length`() {
+        val bytes = emptyByteArray()
+        assertEquals(0, bytes.size)
+    }
+
+    @Test
     fun `build byte array`() {
         val bytes = buildByteArray {
             write(0x12)

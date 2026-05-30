@@ -31,4 +31,5 @@ object WorkerNames {
     const val WORKER_AUTO_DELETE = "AutoDelete"
     const val WORKER_AUTOSTART = "Autostart"
     const val WORKER_GATEWAY_PROFILE_PICTURES = "GatewayProfilePictures"
+    const val WORKER_CONTACT_BOOK_SYNC = "ContactBookSync"
 }

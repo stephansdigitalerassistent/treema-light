@@ -59,6 +59,13 @@ fun ByteArray.chunked(size: Int): List<ByteArray> = asIterable()
  *
  * @param maxBytes if set to a positive value smaller than the size of the array only [maxBytes] bytes
  *  will be visible in the string representation followed by an ellipsis character.
+ * @example
+ * ```kotlin
+ * import ch.threema.common.toHexString
+ *
+ * val bytes = byteArrayOf(0x01, 0x02, 0x03, 0x04)
+ * val hex = bytes.toHexString(maxBytes = 2) // "0102…"
+ * ```
  */
 @OptIn(ExperimentalStdlibApi::class)
 fun ByteArray.toHexString(maxBytes: Int = 0): String =

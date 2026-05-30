@@ -79,6 +79,7 @@ class ChatServerAddressProviderImpl(
     )
     override fun update(): Unit = lock.withLock {
         val serverHost = getServerHost()
+        println("3malight: Resolving chat server host: '$serverHost'")
 
         val ports = serverAddressProvider.getChatServerPorts()
         val addresses = if (ProxyAwareSocketFactory.shouldUseProxy(serverHost, ports[0])) {
