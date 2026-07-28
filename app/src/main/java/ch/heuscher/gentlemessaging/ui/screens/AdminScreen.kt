@@ -41,6 +41,7 @@ fun AdminScreen(
     onExitAdmin: () -> Unit,
     onManageContacts: () -> Unit,
     onSyncContacts: () -> Unit,
+    onOpenBackup: () -> Unit = {},
     onBackClick: () -> Unit
 ) {
     var showPinChangeDialog by remember { mutableStateOf(false) }
@@ -110,6 +111,14 @@ fun AdminScreen(
                 description = "Telefonbuch mit Threema abgleichen",
                 icon = Icons.Default.Refresh,
                 onClick = onSyncContacts
+            )
+
+            // ── Backup Management ──
+            AdminSettingCard(
+                title = "Backup erstellen / verwalten",
+                description = "Daten-Backup (ZIP) & Threema Safe",
+                icon = Icons.Default.Share,
+                onClick = onOpenBackup
             )
 
             // ── PIN Change ──

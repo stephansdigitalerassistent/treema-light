@@ -376,6 +376,10 @@ fun TreemaLightApp() {
                         android.widget.Toast.makeText(context, "Kontakte werden synchronisiert...", android.widget.Toast.LENGTH_SHORT).show()
                     }
                 },
+                onOpenBackup = {
+                    val intent = Intent(context, ch.threema.app.activities.BackupAdminActivity::class.java)
+                    context.startActivity(intent)
+                },
                 onBackClick = { currentScreen = Screen.Home }
             )
         }
